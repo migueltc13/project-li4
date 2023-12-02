@@ -6,9 +6,13 @@
 <form method="post">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>
+    <br />
 
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required>
+    <br />
+
+    <div asp-validation-summary="All" class="text-danger"></div>
 
     <button type="submit">Login</button>
 </form>
