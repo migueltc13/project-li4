@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/lt9wPCQvF0JEhk5kWFDDhFtzBfSc1dgdb4o0qhU0tTc5qf2xLlu9F9Kr93Metm59NMwXP/Cx+50/ZEN8hOq5Q==",
+  "dgSpecHash": "1HldREAm9h5XawPgF+0sOdxvaINrLvQKwW8aECWH8fd8wzUDo7vCAy02RUkcGxnRYA4JLIRZkvDCNv7QKRYx6Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\migue\\Desktop\\BetterFinds\\BetterFinds.csproj",
+  "projectFilePath": "C:\\Users\\migue\\Desktop\\project-li4\\BetterFinds\\BetterFinds.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\migue\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\migue\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
