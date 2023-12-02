@@ -23,7 +23,9 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore ./BetterFinds.sln
+      run:
+        pwd
+        dotnet restore ./BetterFinds/BetterFinds.sln
     - name: Build
       run: dotnet build --no-restore
     - name: Test
