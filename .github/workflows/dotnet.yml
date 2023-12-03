@@ -27,8 +27,6 @@ jobs:
     - name: Restore dependencies
       run: |
         ls -la
-        cd ./BetterFinds
-        ls -la
         dotnet restore ./BetterFinds/BetterFinds.sln
     - name: Build
       run: |
