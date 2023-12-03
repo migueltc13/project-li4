@@ -8,6 +8,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
   
 defaults:
   run:
@@ -25,14 +26,8 @@ jobs:
       with:
         dotnet-version: 8.0.100
     - name: Restore dependencies
-      run: |
-        ls -la
-        dotnet restore
+      run: dotnet restore
     - name: Build
-      run: |
-        ls -la
-        dotnet build --no-restore
+      run: dotnet build --no-restore
     - name: Test
-      run: |
-        ls -la
-        dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal
