@@ -23,15 +23,15 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 8.0.100
     - name: Restore dependencies
       run: |
         ls -la
-        dotnet restore ./BetterFinds/BetterFinds.sln
+        dotnet restore
     - name: Build
       run: |
         ls -la
-        dotnet build --no-restore ./BetterFinds/BetterFinds.sln
+        dotnet build --no-restore
     - name: Test
       run: |
         ls -la
