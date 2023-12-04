@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BetterFinds.Pages
 {
+    // [Authorize]
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
@@ -14,7 +16,6 @@ namespace BetterFinds.Pages
 
         public void OnGet()
         {
-
         }
     }
 }
