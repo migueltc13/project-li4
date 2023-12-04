@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BetterFinds")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d57dee1fe126a38b2b49614f5127e405ff2230fb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0437cc95eee3d64cbf91f5ed907a23d1e9b8eef9")]
 [assembly: System.Reflection.AssemblyProductAttribute("BetterFinds")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BetterFinds")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
