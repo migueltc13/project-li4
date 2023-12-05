@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
+using System.Security.Claims;
 
 namespace BetterFinds.Pages
 {
@@ -12,19 +15,38 @@ namespace BetterFinds.Pages
         [BindProperty]
         public string Password { get; set; } = "";
 
+        [BindProperty]
+        public bool RememberMe { get; set; } = false;
+
         private readonly IConfiguration _configuration;
-        public LoginModel(IConfiguration configuration)
+        public LoginModel(
+            IConfiguration configuration)
         {
             _configuration = configuration;
         }
-        public void OnGet()
+
+        public IActionResult OnGet()
         {
-            // Executed when the page is requested using an HTTP GET request
+            if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                // User is logged in
+                Console.WriteLine($"User is logged in as {User.Identity.Name}"); // TODO: Remove this
+                return RedirectToPage("/Index");
+            }
+            else
+            {
+                // User is not logged in
+                Console.WriteLine("User is not logged in"); // TODO: Remove this
+                return Page();
+            }
         }
-        public Task<IActionResult> OnPostAsync()
+
+        // [HttpPost]
+        public async Task<IActionResult> OnPostAsync()
         {
-            Console.WriteLine($"Username: {Username}"); // TODO: Remove this
-            Console.WriteLine($"Password: {Password}"); // TODO: Remove this
+            Console.WriteLine($"Username: {Username}");     // TODO: Remove this
+            Console.WriteLine($"Password: {Password}");     // TODO: Remove this
+            Console.WriteLine($"RememberMe: {RememberMe}"); // TODO: Remove this
 
             string connectionString = _configuration.GetConnectionString("DefaultConnection") ?? "";
             SqlConnection con = new SqlConnection(connectionString);
@@ -41,26 +63,47 @@ namespace BetterFinds.Pages
                 cmd.Parameters.AddWithValue("@Password", Password);
 
                 using SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                if (reader.HasRows)
                 {
-                    // Login successful. TODO: Store user ID in session cookie
-                    return Task.FromResult<IActionResult>(RedirectToPage("/Index"));
+                    // Login successful. Manually create the cookie
+                    List <Claim> claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, Username),
+                        new Claim(ClaimTypes.NameIdentifier, Username),
+                        // new Claim("OtherProperties", "Example Role")
+                    };
+
+                    ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims,
+                        CookieAuthenticationDefaults.AuthenticationScheme);
+
+                    AuthenticationProperties authProperties = new AuthenticationProperties()
+                    {
+                        AllowRefresh = true,
+                        IsPersistent = RememberMe,
+                    };
+
+                    await HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme,
+                        new ClaimsPrincipal(claimsIdentity),
+                        authProperties);
+
+                    return RedirectToPage("/Index");
                 }
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid username or password.");
-                    return Task.FromResult<IActionResult>(Page());
+                    return Page();
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return Task.FromResult<IActionResult>(RedirectToPage("/Login"));
+                return RedirectToPage("/Login");
             }
             finally
             {
                 con.Close();
             }
-        }
+        } 
     }
 }
