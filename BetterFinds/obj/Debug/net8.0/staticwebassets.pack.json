@@ -5,12 +5,16 @@
       "PackagePath": "staticwebassets\\BetterFinds.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\migue\\Desktop\\project-li4\\BetterFinds\\wwwroot\\css\\site.css",
-      "PackagePath": "staticwebassets\\css\\site.css"
+      "Id": "C:\\Users\\migue\\Desktop\\project-li4\\BetterFinds\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
     },
     {
       "Id": "C:\\Users\\migue\\Desktop\\project-li4\\BetterFinds\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\migue\\Desktop\\project-li4\\BetterFinds\\wwwroot\\img\\moroccan.jpg",
+      "PackagePath": "staticwebassets\\img\\moroccan.jpg"
     },
     {
       "Id": "C:\\Users\\migue\\Desktop\\project-li4\\BetterFinds\\wwwroot\\js\\site.js",
