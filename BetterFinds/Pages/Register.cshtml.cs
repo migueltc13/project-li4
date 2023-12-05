@@ -7,6 +7,9 @@ namespace BetterFinds.Pages
     public class RegisterModel : PageModel
     {
         [BindProperty]
+        public string FullName { get; set; } = "";
+
+        [BindProperty]
         public string Username { get; set; } = "";
 
         [BindProperty]
@@ -18,6 +21,9 @@ namespace BetterFinds.Pages
         [BindProperty]
         public string ConfirmPassword { get; set; } = "";
 
+        [BindProperty]
+        public bool OptNewsletter { get; set; } = false;
+
         private readonly IConfiguration _configuration;
         public RegisterModel(IConfiguration configuration)
         {
@@ -26,15 +32,19 @@ namespace BetterFinds.Pages
 
         public void OnGet()
         {
+            // Set page title
+            ViewData["Title"] = "Register";
         }
 
         public Task<IActionResult> OnPostAsync()
         {
             // For debugging purposes
+            Console.WriteLine($"FullName: {FullName}");                 // TODO: Remove this
             Console.WriteLine($"Username: {Username}");                 // TODO: Remove this
             Console.WriteLine($"Email: {Email}");                       // TODO: Remove this
             Console.WriteLine($"Password: {Password}");                 // TODO: Remove this
             Console.WriteLine($"ConfirmPassword: {ConfirmPassword}");   // TODO: Remove this
+            Console.WriteLine($"OptNewsletter: {OptNewsletter}");       // TODO: Remove this
 
             // Check if passwords match
             if (Password != ConfirmPassword)
@@ -62,7 +72,7 @@ namespace BetterFinds.Pages
 
             try
             { 
-                // DUVIDA: É necessário con.Close() antes de returns?
+                // TODO DUVIDA: É necessário con.Close() antes de returns?
                 con.Open();
 
                 // Check if username already exists
@@ -94,19 +104,21 @@ namespace BetterFinds.Pages
 
                 Console.WriteLine($"Id: {id}"); // TODO: Remove this
 
-                string query = "INSERT INTO Users (Id, Username, Email, Password) VALUES (@id, @Username, @Email, @Password)";
+                string query = "INSERT INTO Users (Id, FullName, Username, Email, Password, OptNewsletter) VALUES (@id, @FullName, @Username, @Email, @Password, @OptNewsletter)";
                 SqlCommand cmd = new SqlCommand(query, con);
 
                 cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@FullName", FullName);
                 cmd.Parameters.AddWithValue("@Username", Username);
                 cmd.Parameters.AddWithValue("@Email", Email);
                 cmd.Parameters.AddWithValue("@Password", Password);
+                cmd.Parameters.AddWithValue("@OptNewsletter", OptNewsletter);
 
                 int result = cmd.ExecuteNonQuery();
                 if (result == 1)
                 {
                     Console.WriteLine("User created"); // TODO: Remove this
-                    return Task.FromResult<IActionResult>(RedirectToPage("/Index"));
+                    return Task.FromResult<IActionResult>(RedirectToPage("/Login"));
                 }
                 else
                 {
