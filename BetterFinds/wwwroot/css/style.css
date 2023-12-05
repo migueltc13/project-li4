@@ -1,0 +1,221 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+/* TODO change this to own rule instead of body */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(/img/moroccan.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* margin-bottom: 60px; */
+}
+
+header {
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 380px; /* TODO: dynamic instead of 380px */
+    background: transparent;
+    border: 2px solid rgba(255,255,255,.2);
+    backdrop-filter: blur(20px);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+    padding: 25px 30px;
+}
+
+    .wrapper h1 {
+        font-size: 36px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .wrapper .input-box {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        margin: 30px 0;
+    }
+
+.wrappper .remember-me {
+    display: flex;
+    align-items: center;
+    font-size: 14.5px;
+}
+
+.wrapper .btn {
+    display: block;
+    width: 100%;
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    background-image: linear-gradient(to right, rgb(48, 102, 55), #967b46);
+    background-size: 200%;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    transition: .5s;
+}
+
+    .wrapper .btn:hover {
+        background-position: right;
+    }
+
+.wrapper .register-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-box {
+    width: 380px;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,.2);
+    backdrop-filter: blur(20px);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+    padding: 25px 30px;
+}
+
+    .form-box h1 {
+        font-size: 36px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-box .input-box {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        margin: 30px 0;
+    }
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255,255,255,.2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: white;
+    padding: 20px 45px 20px 20px;
+}
+
+    .input-box input::placeholder {
+        color: white;
+    }
+
+.input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+.register-link p a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+    .register-link p a:hover {
+        text-decoration: underline;
+    }
+
+.two-col {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-box .btn {
+    display: block;
+    width: 100%;
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    background-image: linear-gradient(to right, rgb(48, 102, 55), rgb(156, 127, 68));
+    background-size: 200%;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    transition: .5s;
+}
+
+    .form-box .btn:hover {
+        background-position: right;
+    }
+
+.form-box .login-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-link p a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+    .login-link p a:hover {
+        text-decoration: underline;
+    }
+
+/* text-danger */
+.text-danger {
+    color: #dc3545 !important;
+    /* horizontal aling */
+    text-align: center;
+}
