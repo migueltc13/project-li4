@@ -9,12 +9,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatiable" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BetterFinds</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/BetterFinds.styles.css" asp-append-version="true" />
+    <title>@ViewData["Title"] | BetterFinds</title>
+    <!--
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/BetterFinds.styles.css" asp-append-version="true" />
+    -->
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 <body>
     @if (LoadHeader)
@@ -63,11 +68,14 @@
         </main>
     </div>
 
+    <!-- TODO Add footer -->
+    <!--
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 | BetterFinds
         </div>
     </footer>
+    -->
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

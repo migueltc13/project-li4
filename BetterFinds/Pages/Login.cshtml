@@ -1,25 +1,36 @@
 ﻿@page
 @model BetterFinds.Pages.LoginModel
 
-<h1>Login</h1>
+<!--
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatiable" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BetterFinds | Login</title>
+</head>
+-->
 
-<form method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
-    <br />
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <br />
-
-    <div class="form-group">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="rememberMe" asp-for="RememberMe">
-            <label class="form-check-label" for="rememberMe">Remember me</label>
+<div class="wrapper">
+    <form method="post">
+        <h1>Login</h1>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="input-box">
+        <input type="text" asp-for="Username" placeholder="Username" required>
+            <i class='bx bxs-user'></i>
         </div>
-    </div>
-
-    <div asp-validation-summary="All" class="text-danger"></div>
-
-    <button type="submit">Login</button>
-</form>
+        <div class="input-box">
+            <input type="password" asp-for="Password" placeholder="Password" required>
+            <i class='bx bxs-lock-alt'></i>
+        </div>
+        <div class="remember-me">
+            <label><input type="checkbox" asp-for="RememberMe"> Remember me</label>
+        </div>
+        <br />
+        <button type="submit" class="btn">Login</button>
+        <div class="register-link">
+            <p>
+                Don't have an account? <a href="/register">Register</a>
+            </p>
+        </div>
+    </form>
+</div>
