@@ -1,8 +1,8 @@
 # Ignore compiled binaries
-bin/*
+BetterFinds/bin/*
 
 # Ignore object files
-obj/*
+BetterFinds/obj/*
 
 # Ignore Visual Studio solution and project files
-# .vs/
+# BetterFinds/.vs/
