@@ -1,3 +1,8 @@
-bin
-obj
-.vs
+# Ignore compiled binaries
+bin/
+
+# Ignore object files
+obj/
+
+# Ignore Visual Studio solution and project files
+# .vs/
