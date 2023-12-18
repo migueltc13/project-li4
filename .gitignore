@@ -5,5 +5,4 @@ BetterFinds/bin/*
 BetterFinds/obj/*
 
 # Ignore Visual Studio solution and project files
-# BetterFinds/.vs/
-# BetterFinds/*.sln
+BetterFinds/.vs/
