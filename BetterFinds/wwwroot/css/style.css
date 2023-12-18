@@ -28,9 +28,11 @@ html {
 
 /* TODO change this to own rule instead of body */
 body {
+    /*
     display: flex;
     justify-content: center;
     align-items: center;
+    */
     min-height: 100vh;
     background: url(/img/moroccan.jpg) no-repeat;
     background-size: cover;
@@ -42,9 +44,17 @@ header {
     font-size: 36px;
     font-weight: 600;
     letter-spacing: 1px;
-    text-align: center;
     margin-bottom: 20px;
+    /* Flex container properties for horizontal alignment */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Background properties */
+    background: transparent;
+    border: 2px solid rgba(255,255,255,.2);
+    backdrop-filter: blur(20px);
 }
+
 
 .wrapper {
     display: flex;
