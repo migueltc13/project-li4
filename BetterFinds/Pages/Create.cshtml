@@ -1,0 +1,31 @@
+﻿@page
+@model BetterFinds.Pages.CreateModel
+@{
+    ViewData["Title"] = "Create Auction";
+}
+
+<div class="main-wrapper">
+    <form method="post">
+        <div class="text-center">
+            <h3>Create an auction</h3>
+        </div>
+
+        <!-- <div asp-validation-summary="All" class="text-danger"></div> -->
+        
+        <div class="input-box">
+            <input type="text" asp-for="Title" placeholder="Title" required>
+        </div>
+        <div class="input-box">
+            <input type="text" asp-for="Descrition" placeholder="Description" required>
+        </div>
+        <div class="input-box">
+            <input type="number" asp-for="Price" placeholder="Initial price" required>
+        </div>
+        <div class="input-box">
+            <input type="datetime-local" asp-for="Date" placeholder="_Ending_ date" required>
+        </div>
+
+        <br />
+        <button type="submit" class="btn">Create</button>
+    </form>
+</div>
