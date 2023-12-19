@@ -1,0 +1,62 @@
+﻿@page
+@model BetterFinds.Pages.AuctionModel
+
+<div class="main-wrapper">
+    <h1>Auction Details</h1>
+
+    <p>Start Time: @ViewData["StartTime"]</p>
+    <p>End Time: @ViewData["EndTime"]</p>
+    <p></p>
+    <p>Seller info: @@@ViewData["Username"] - @ViewData["FullName"]</p>
+    <p></p>
+    <p>Product info:</p>
+    <p>@ViewData["ProductName"]</p>
+    <p>@ViewData["ProductDesc"]</p>
+    <p>@ViewData["ProductPrice"]€</p>
+
+    <!-- Countdown timer -->
+    <div id="countdown"></div>
+</div>
+
+<!-- JavaScript for the countdown timer -->
+<script>
+    // Set the end time for the countdown (replace with actual end time from the server)
+    var endTime = new Date("@ViewData["EndTime"]").getTime();
+
+    // Update the countdown every second
+    var x = setInterval(function () {
+        // Get the current time
+        var now = new Date().getTime();
+
+        // Calculate the remaining time in milliseconds
+        var distance = endTime - now;
+
+        // Calculate days, hours, minutes, and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Format the countdown for display
+        var countdownText = '';
+        if (days > 0) {
+            countdownText += days + "d ";
+        }
+        if (hours > 0 || days > 0) {
+            countdownText += hours + "h ";
+        }
+        if (minutes > 0 || hours > 0 || days > 0) {
+            countdownText += minutes + "m ";
+        }
+        countdownText += seconds + "s ";
+
+        // Display the countdown in the "countdown" div
+        document.getElementById("countdown").innerHTML = countdownText;
+
+        // If the countdown is over, display a message
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("countdown").innerHTML = "Auction has ended!";
+        }
+    }, 1000); // Update every 1000 milliseconds (1 second)
+</script>
