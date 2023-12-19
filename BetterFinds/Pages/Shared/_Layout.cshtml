@@ -1,7 +1,7 @@
 ﻿@{
     // Get the page name from PageContext
     var pageName = Context.GetRouteValue("page");
-    Console.WriteLine(pageName);
+    // Console.WriteLine(pageName); // TODO remove this
     // Don't load header in /Login and /Register pages
     bool LoadHeader = (pageName != null) ? !(pageName.ToString() == "/Login" || pageName.ToString() == "/Register") : true;
 }
@@ -18,18 +18,36 @@
 </head>
 <body>
     @if (LoadHeader) {
-        <header>   
-            <nav>
-                <a href="">BetterFinds</a>
+        <nav>
+            <ul class="sidebar">
+                <li onclick=hideSidebar()><a href="#"><strong>X</strong></a></li>
+                <li><a href="/account">My Account</a></li>
+                <li><a href="/todo">My Auctions</a></li> <!--TODO auctions page-->
                 @if (User.Identity != null && User.Identity.IsAuthenticated) {
-                    <a href="/logout">Logout</a> 
+                    <li><a href="/create">Create Auction</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 }
                 else {
-                    <a href="/login">Login</a>
-                    <a href="/register">Register</a>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
                 }
-            </nav>
-        </header>
+            </ul>
+            <ul>
+                <li><a href="/">BetterFinds</a></li>
+                <li onclick=showSidebar()><a href="#"><img style="width: 50%" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAQ0lEQVR4nO3WoREAIAwEQfovKyksSAQimrDbwc2bXwsAOKoq6z05JSSuEAAAaD36fnNKSPQTAQDAkPebU0LiCgGAn21ViEka78Lu0AAAAABJRU5ErkJggg==" /></a></li>
+            </ul>
+        </nav>
+        <script>
+            function showSidebar() {
+                const sidebar = document.querySelector('.sidebar')
+                sidebar.style.display = 'flex'
+            }
+            function hideSidebar() {
+                const sidebar = document.querySelector('.sidebar')
+                sidebar.style.display = 'none'
+            }
+            hideSidebar()
+        </script>
     }
     else {
         <style>
