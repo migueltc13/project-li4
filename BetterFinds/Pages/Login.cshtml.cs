@@ -27,10 +27,6 @@ namespace BetterFinds.Pages
 
         public IActionResult OnGet()
         {
-            // Set page title
-            ViewData["Title"] = "Login";
-
-
             // If user is already logged in, redirect to index
             if (User.Identity != null && User.Identity.IsAuthenticated)
             {
