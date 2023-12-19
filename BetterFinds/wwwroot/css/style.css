@@ -37,7 +37,7 @@ body {
     background: url(/img/moroccan.jpg) no-repeat;
     background-size: cover;
     background-position: center;
-    /* margin-bottom: 60px; */
+    color: white;
 }
 
 header {
@@ -55,6 +55,17 @@ header {
     backdrop-filter: blur(20px);
 }
 
+.main-wrapper {
+    width: 70%;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,.2);
+    backdrop-filter: blur(20px);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+    padding: 25px 30px;
+    margin: 20px auto;
+}
 
 .wrapper {
     display: flex;
@@ -78,6 +89,7 @@ header {
         margin-bottom: 20px;
     }
 
+    .main-wrapper .input-box,
     .wrapper .input-box {
         position: relative;
         width: 100%;
@@ -91,6 +103,7 @@ header {
     font-size: 14.5px;
 }
 
+.main-wrapper .btn,
 .wrapper .btn {
     display: block;
     width: 100%;
@@ -109,6 +122,7 @@ header {
     transition: .5s;
 }
 
+    .main-wrapper .btn:hover,
     .wrapper .btn:hover {
         background-position: right;
     }
@@ -229,3 +243,70 @@ header {
     /* horizontal aling */
     text-align: center;
 }
+
+.text-center {
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: white;
+    text-align: center;
+}
+
+nav {
+    background-color: rgb(2, 66, 66);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+    nav ul {
+        width: 100%;
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    nav li {
+        height: 50px;
+    }
+
+    nav a {
+        height: 100%;
+        font-weight: 400;
+        padding: 0 30px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        color: white;
+    }
+
+        nav a:hover {
+            background-color: rgba(1, 29, 29, 0.842);
+        }
+
+    nav li:first-child {
+        margin-right: auto;
+    }
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    z-index: 999;
+    background-color: rgba(100, 100, 100, .2);
+    backdrop-filter: blur(10px);
+    box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+    .sidebar li {
+        width: 100%;
+    }
+
+    .sidebar a {
+        width: 100%;
+    }
