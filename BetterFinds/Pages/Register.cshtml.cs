@@ -32,8 +32,6 @@ namespace BetterFinds.Pages
 
         public void OnGet()
         {
-            // Set page title
-            ViewData["Title"] = "Register";
         }
 
         public Task<IActionResult> OnPostAsync()
@@ -98,13 +96,13 @@ namespace BetterFinds.Pages
                 }
 
                 // Get id of last user
-                string queryId = "SELECT MAX(Id) FROM Users";
+                string queryId = "SELECT MAX(UserId) FROM Users";
                 SqlCommand cmdId = new SqlCommand(queryId, con);
                 int id = Convert.ToInt32(cmdId.ExecuteScalar()) + 1;
 
                 Console.WriteLine($"Id: {id}"); // TODO: Remove this
 
-                string query = "INSERT INTO Users (Id, FullName, Username, Email, Password, OptNewsletter) VALUES (@id, @FullName, @Username, @Email, @Password, @OptNewsletter)";
+                string query = "INSERT INTO Users (UserId, FullName, Username, Email, Password, OptNewsletter) VALUES (@id, @FullName, @Username, @Email, @Password, @OptNewsletter)";
                 SqlCommand cmd = new SqlCommand(query, con);
 
                 cmd.Parameters.AddWithValue("@id", id);
