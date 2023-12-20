@@ -5,7 +5,7 @@
 }
 
 <div class="main-wrapper">
-    @if (Model.MyAuctions != null)
+    @if (Model.MyAuctions != null && Model.MyAuctions.Count > 0)
     {
         <div>
             <h2>My Auctions</h2>
@@ -26,6 +26,14 @@
                     }
                 }
             </ul>
+        </div>
+    }
+    else
+    {
+        <div>
+            <h2>You have no auctions</h2>
+            <br />
+            <p>Go to the <a href="/create">Create Auction</a> page to create one.</p>
         </div>
     }
 </div>
