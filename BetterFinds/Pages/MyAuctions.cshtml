@@ -1,0 +1,31 @@
+﻿@page
+@model BetterFinds.Pages.MyAuctionsModel
+@{
+    ViewData["Title"] = "My Auctions";
+}
+
+<div class="main-wrapper">
+    @if (Model.MyAuctions != null)
+    {
+        <div>
+            <h2>My Auctions</h2>
+
+            <ul>
+                @foreach (var auction in Model.MyAuctions)
+                {
+                    var auctionDictionary = auction as Dictionary<string, object>;
+                    if (auctionDictionary != null)
+                    {
+                        <li>
+                            <p>
+                                <a href="/auction?id=@auctionDictionary["AuctionId"]">@auctionDictionary["ProductName"]</a>
+                                - @auctionDictionary["ProductPrice"]€
+                                - @auctionDictionary["EndTime"]
+                            </p>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    }
+</div>
