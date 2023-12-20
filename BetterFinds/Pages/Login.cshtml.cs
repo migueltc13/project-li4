@@ -64,13 +64,20 @@ namespace BetterFinds.Pages
                 cmd.Parameters.AddWithValue("@Password", Password);
 
                 using SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
+
+                // Retrieve ClientId from database to store in session
+                string? clientId = null; // Initialize clientId
+
+                if (reader.HasRows && reader.Read())
                 {
+                    clientId = reader["ClientId"].ToString();
+
                     // Login successful. Manually create the cookie
                     List <Claim> claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, Username),
                         new Claim(ClaimTypes.NameIdentifier, Username),
+                        new Claim("ClientId", clientId ?? ""), // save ClientId in session
                         // new Claim("OtherProperties", "Example Role")
                     };
 
@@ -87,6 +94,8 @@ namespace BetterFinds.Pages
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         new ClaimsPrincipal(claimsIdentity),
                         authProperties);
+
+                    HttpContext.Session.SetString("ClientId", clientId ?? "");
 
                     return RedirectToPage("/Index");
                 }
