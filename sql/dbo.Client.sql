@@ -1,9 +1,10 @@
-﻿CREATE TABLE [dbo].[User] (
-    [UserId]        INT            NOT NULL,
+﻿CREATE TABLE [dbo].[Client] (
+    [ClientId]      INT            NOT NULL,
     [FullName]      NVARCHAR (MAX) NOT NULL,
     [Username]      NVARCHAR (MAX) NOT NULL,
     [Email]         NVARCHAR (MAX) NOT NULL,
     [Password]      NVARCHAR (MAX) NOT NULL,
     [OptNewsletter] BIT            DEFAULT ((0)) NOT NULL,
-    PRIMARY KEY CLUSTERED ([UserId] ASC)
+    PRIMARY KEY CLUSTERED ([ClientId] ASC)
 );
+
