@@ -71,6 +71,15 @@ header {
     margin: 20px auto;
 }
 
+/* Media query for screens with a maximum width of 767px (typical for mobile devices) */
+@media only screen and (max-width: 767px) {
+    .main-wrapper {
+        background: rgb(2, 66, 66); /* Solid color */
+        backdrop-filter: none; /* Remove backdrop filter for solid color */
+        box-shadow: none; /* Remove box shadow for solid color */
+    }
+}
+
 .wrapper {
     display: flex;
     justify-content: center;
@@ -84,6 +93,14 @@ header {
     border-radius: 10px;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
     padding: 25px 30px;
+}
+
+@media only screen and (max-width: 767px) {
+    .wrapper {
+        background: rgb(2, 66, 66); /* Solid color */
+        backdrop-filter: none; /* Remove backdrop filter for solid color */
+        box-shadow: none; /* Remove box shadow for solid color */
+    }
 }
 
 .wrapper h1 {
@@ -147,6 +164,14 @@ header {
     border-radius: 10px;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
     padding: 25px 30px;
+}
+
+@media only screen and (max-width: 767px) {
+    .form-box {
+        background: rgb(2, 66, 66);
+        backdrop-filter: none;
+        box-shadow: none;
+    }
 }
 
 .form-box h1 {
@@ -314,6 +339,14 @@ nav {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+}
+
+@media only screen and (max-width: 767px) {
+    .sidebar {
+        background-color: rgb(2, 40, 40);
+        backdrop-filter: none;
+        box-shadow: none;
+    }
 }
 
     .sidebar li {
