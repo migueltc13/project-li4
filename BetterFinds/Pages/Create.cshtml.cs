@@ -17,6 +17,9 @@ namespace BetterFinds.Pages
         public double Price { get; set; } = 0;
 
         [BindProperty]
+        public double MinimumBid { get; set; } = 0;
+
+        [BindProperty]
         public string Date { get; set; } = "";
 
         private readonly IConfiguration _configuration;
@@ -34,9 +37,17 @@ namespace BetterFinds.Pages
             Console.WriteLine($"Title: {Title}");
             Console.WriteLine($"Descrition: {Descrition}");
             Console.WriteLine($"Price: {Price}");
+            Console.WriteLine($"MinimumBid: {MinimumBid}");
             Console.WriteLine($"Date: {Date}");
 
-            // TODO
+            // Check price >= 0
+            // Get ClientId from session cookie
+            // Get current datetime
+
+            // string? connectionString = _configuration.GetConnectionString("DefaultConnection");
+            // SqlConnection con = new SqlConnection(connectionString);
+            // con.Open();
+            // con.Close();
 
             return Task.FromResult<IActionResult>(Page());
         }
