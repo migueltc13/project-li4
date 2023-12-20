@@ -21,9 +21,9 @@
         <nav>
             <ul class="sidebar">
                 <li onclick=hideSidebar()><a href="#"><strong>X</strong></a></li>
-                <li><a href="/account">My Account</a></li>
-                <li><a href="/myauctions">My Auctions</a></li>
                 @if (User.Identity != null && User.Identity.IsAuthenticated) {
+                    <li><a href="/account">My Account</a></li>
+                    <li><a href="/myauctions">My Auctions</a></li>
                     <li><a href="/create">Create Auction</a></li>
                     <li><a href="/logout">Logout</a></li>
                 }
