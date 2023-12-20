@@ -56,7 +56,7 @@ namespace BetterFinds.Pages
             {
                 con.Open();
 
-                string query = "SELECT * FROM User WHERE Username = @Username AND Password = @Password";
+                string query = "SELECT * FROM Client WHERE Username = @Username AND Password = @Password";
                 SqlCommand cmd = new SqlCommand(query, con);
 
                 // Use parameters to avoid SQL injection

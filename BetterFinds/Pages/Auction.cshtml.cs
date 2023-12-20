@@ -40,7 +40,7 @@ namespace BetterFinds.Pages
                     {
                         DateTime startTime = reader.GetDateTime(reader.GetOrdinal("StartTime"));
                         DateTime endTime = reader.GetDateTime(reader.GetOrdinal("EndTime"));
-                        int userId = reader.GetInt32(reader.GetOrdinal("UserId"));
+                        int clientId = reader.GetInt32(reader.GetOrdinal("ClientId"));
                         int productId = reader.GetInt32(reader.GetOrdinal("ProductId"));
 
                         // Values to be used in the cshtml page
@@ -52,17 +52,17 @@ namespace BetterFinds.Pages
                         // Get seller username (NOTE no exections are being made)
                         string fullName = string.Empty;
                         string username = string.Empty;
-                        string queryUser = "SELECT FullName, Username FROM User WHERE UserId = @UserId";
-                        SqlCommand cmdUser = new SqlCommand(queryUser, con);
-                        cmdUser.Parameters.AddWithValue("@UserId", userId);
-                        using (SqlDataReader readerUser = cmdUser.ExecuteReader())
+                        string queryClient = "SELECT FullName, Username FROM Client WHERE ClientId = @ClientId";
+                        SqlCommand cmdClient = new SqlCommand(queryClient, con);
+                        cmdClient.Parameters.AddWithValue("@ClientId", clientId);
+                        using (SqlDataReader readerClient = cmdClient.ExecuteReader())
                         {
-                            if (readerUser.Read())
+                            if (readerClient.Read())
                             {
-                                fullName = readerUser.GetString(readerUser.GetOrdinal("FullName"));
-                                username = readerUser.GetString(readerUser.GetOrdinal("Username"));
+                                fullName = readerClient.GetString(readerClient.GetOrdinal("FullName"));
+                                username = readerClient.GetString(readerClient.GetOrdinal("Username"));
                             }
-                            readerUser.Close();
+                            readerClient.Close();
                         }
 
                         ViewData["FullName"] = fullName;

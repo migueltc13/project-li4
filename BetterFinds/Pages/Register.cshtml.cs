@@ -74,7 +74,7 @@ namespace BetterFinds.Pages
                 con.Open();
 
                 // Check if username already exists
-                string queryCheckUser = "SELECT * FROM User WHERE Username = @Username";
+                string queryCheckUser = "SELECT * FROM Client WHERE Username = @Username";
                 SqlCommand cmdCheckUser = new SqlCommand(queryCheckUser, con);
                 cmdCheckUser.Parameters.AddWithValue("@Username", Username);
                 int usernameCount = Convert.ToInt32(cmdCheckUser.ExecuteScalar());
@@ -85,7 +85,7 @@ namespace BetterFinds.Pages
                 }
 
                 // Check if email already exists
-                string queryCheckEmail = "SELECT * FROM User WHERE Email = @Email";
+                string queryCheckEmail = "SELECT * FROM Client WHERE Email = @Email";
                 SqlCommand cmdCheckEmail = new SqlCommand(queryCheckEmail, con);
                 cmdCheckEmail.Parameters.AddWithValue("@Email", Email);
                 int emailCount = Convert.ToInt32(cmdCheckEmail.ExecuteScalar());
@@ -96,13 +96,13 @@ namespace BetterFinds.Pages
                 }
 
                 // Get id of last user
-                string queryId = "SELECT MAX(UserId) FROM User";
+                string queryId = "SELECT MAX(ClientId) FROM Client";
                 SqlCommand cmdId = new SqlCommand(queryId, con);
                 int id = Convert.ToInt32(cmdId.ExecuteScalar()) + 1;
 
                 Console.WriteLine($"Id: {id}"); // TODO: Remove this
 
-                string query = "INSERT INTO User (UserId, FullName, Username, Email, Password, OptNewsletter) VALUES (@id, @FullName, @Username, @Email, @Password, @OptNewsletter)";
+                string query = "INSERT INTO Client (ClientId, FullName, Username, Email, Password, OptNewsletter) VALUES (@id, @FullName, @Username, @Email, @Password, @OptNewsletter)";
                 SqlCommand cmd = new SqlCommand(query, con);
 
                 cmd.Parameters.AddWithValue("@id", id);
