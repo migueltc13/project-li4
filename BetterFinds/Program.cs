@@ -8,10 +8,17 @@ builder.Services.AddRazorPages();
 builder.Services.AddAuthentication(
     CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => {
-        // options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
         options.LoginPath = "/login";
         options.AccessDeniedPath = "/AccessDenied"; // TODO: Adjust the access denied path
     });
+
+builder.Services.AddSession(options =>
+{
+    options.Cookie.HttpOnly = false;
+    options.Cookie.IsEssential = true;
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
 
 var app = builder.Build();
 
@@ -33,6 +40,8 @@ app.UseAuthentication();
 // app.UseCookiePolicy();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapRazorPages();
 
