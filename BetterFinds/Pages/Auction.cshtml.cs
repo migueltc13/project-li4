@@ -52,7 +52,7 @@ namespace BetterFinds.Pages
                         // Get seller username (NOTE no exections are being made)
                         string fullName = string.Empty;
                         string username = string.Empty;
-                        string queryUser = "SELECT FullName, Username FROM Users WHERE UserId = @UserId";
+                        string queryUser = "SELECT FullName, Username FROM User WHERE UserId = @UserId";
                         SqlCommand cmdUser = new SqlCommand(queryUser, con);
                         cmdUser.Parameters.AddWithValue("@UserId", userId);
                         using (SqlDataReader readerUser = cmdUser.ExecuteReader())
