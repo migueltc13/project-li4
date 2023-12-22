@@ -10,7 +10,13 @@
             <h3>Create an auction</h3>
         </div>
 
-        <!-- <div asp-validation-summary="All" class="text-danger"></div> -->
+        <div asp-validation-summary="All" class="text-danger"></div>
+        @if (ViewData["Success"] != null)
+        {
+            <div class="text-success">
+                <p>@ViewData["Success"]<a style="margin-left: 0px" href="/auction?id=@ViewData["AuctionId"]">@ViewData["AuctionTitle"]</a></p>
+            </div>
+        }
 
         <style>
             a {
@@ -40,7 +46,7 @@
 
         <div class="input-box">
             <a>Ending date:</a>
-            <input type="datetime-local" asp-for="Date" placeholder="Ending date" required>
+            <input type="datetime-local" asp-for="EndTime" placeholder="Ending date" required>
         </div>
 
         <br>

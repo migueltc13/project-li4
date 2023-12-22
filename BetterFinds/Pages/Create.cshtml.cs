@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace BetterFinds.Pages
 {
@@ -20,7 +22,8 @@ namespace BetterFinds.Pages
         public double MinimumBid { get; set; } = 0;
 
         [BindProperty]
-        public string Date { get; set; } = "";
+        // public DateTime EndTime { get; set; } = DateTime.Now;
+        public string EndTime { get; set; } = "";
 
         private readonly IConfiguration _configuration;
         public CreateModel(IConfiguration configuration)
@@ -32,24 +35,126 @@ namespace BetterFinds.Pages
         {
         }
 
-        public Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
+            // For debugging purposes
             Console.WriteLine($"Title: {Title}");
             Console.WriteLine($"Descrition: {Descrition}");
             Console.WriteLine($"Price: {Price}");
             Console.WriteLine($"MinimumBid: {MinimumBid}");
-            Console.WriteLine($"Date: {Date}");
+            Console.WriteLine($"EndTime: {EndTime}");
 
             // Check price >= 0
+            if (Price < 0)
+            {
+                ModelState.AddModelError(string.Empty, "Starting price must be greater than or equal to 0.");
+                return Page();
+            }
+
+            // Check minimum bid >= 0
+            if (MinimumBid < 0)
+            {
+                ModelState.AddModelError(string.Empty, "Minimum bid must be greater than or equal to 0.");
+                return Page();
+            }
+
+            // Check if title is 64 characters or less
+            if (Title.Length > 64)
+            {
+                ModelState.AddModelError(string.Empty, "Title must be 64 characters or less.");
+                return Page();
+            }
+
+            // Check if description is 2048 characters or less
+            if (Descrition.Length > 2048)
+            {
+                ModelState.AddModelError(string.Empty, "Description must be 2048 characters or less.");
+                return Page();
+            }
+
+            // Check if EndTime is greater than current time
+            if (EndTime.CompareTo(DateTime.Now.ToString()) > 0) // (EndTime > DateTime.Now)
+            {
+                ModelState.AddModelError(string.Empty, "End time must be greater than current time.");
+                return Page();
+            }
+
+            string connectionString = _configuration.GetConnectionString("DefaultConnection") ?? "";
+
             // Get ClientId from session cookie
-            // Get current datetime
+            int ClientId = 0;
+            try
+            {
+                ClientId = int.Parse(HttpContext.Session.GetString("ClientId") ?? "");
+            }
+            catch (FormatException)
+            {
+                // Unable to parse the string to an integer, set default value: 0
+                ClientId = 0;
+                // Get ClientId from database with User.Identity.Name
+                // TODO add this as function to Utils/Client.cs
+                if (User.Identity?.Name != null)
+                {
+                    using (SqlConnection con = new SqlConnection(connectionString))
+                    {
+                        con.Open();
+                        string query = "SELECT ClientId FROM Client WHERE Username = @Username";
+                        using (SqlCommand cmd = new SqlCommand(query, con))
+                        {
+                            cmd.Parameters.AddWithValue("@Username", User.Identity.Name);
+                            ClientId = Convert.ToInt32(cmd.ExecuteScalar());
+                        }
+                        con.Close();
+                    }
+                }
+            }
 
-            // string? connectionString = _configuration.GetConnectionString("DefaultConnection");
-            // SqlConnection con = new SqlConnection(connectionString);
-            // con.Open();
-            // con.Close();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
 
-            return Task.FromResult<IActionResult>(Page());
+                // Get AuctionId from database
+                string queryAuctionId = "SELECT MAX(AuctionId) FROM Auction";
+                SqlCommand cmdId = new SqlCommand(queryAuctionId, con);
+                int AuctionId = Convert.ToInt32(cmdId.ExecuteScalar()) + 1;
+
+                // Get ProductId from database
+                string queryProductId = "SELECT MAX(ProductId) FROM Product";
+                SqlCommand cmdProductId = new SqlCommand(queryProductId, con);
+                int ProductId = Convert.ToInt32(cmdProductId.ExecuteScalar()) + 1;
+
+                // Insert into Auction table
+                string queryAuction = "INSERT INTO Auction (AuctionId, StartTime, EndTime, ClientId, ProductId, MinimumBid) VALUES (@AuctionId, @StartTime, @EndTime, @ClientId, @ProductId, @MinimumBid)";
+                using (SqlCommand cmd = new SqlCommand(queryAuction, con))
+                {
+                    cmd.Parameters.AddWithValue("@AuctionId", AuctionId);
+                    cmd.Parameters.AddWithValue("@StartTime", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@EndTime", DateTime.Parse(EndTime));
+                    cmd.Parameters.AddWithValue("@ClientId", ClientId);
+                    cmd.Parameters.AddWithValue("@ProductId", ProductId);
+                    cmd.Parameters.AddWithValue("@MinimumBid", MinimumBid);
+                    cmd.ExecuteNonQuery();
+                }
+
+                // Insert into Product table
+                string queryProduct = "INSERT INTO Product (ProductId, Name, Description, Price, AuctionId, ClientId) VALUES (@ProductId, @Name, @Description, @Price, @AuctionId, @ClientId)";
+                using (SqlCommand cmdProduct = new SqlCommand(queryProduct, con))
+                {
+                    cmdProduct.Parameters.AddWithValue("@ProductId", ProductId);
+                    cmdProduct.Parameters.AddWithValue("@Name", Title);
+                    cmdProduct.Parameters.AddWithValue("@Description", Descrition);
+                    cmdProduct.Parameters.AddWithValue("@Price", Price * 100);
+                    cmdProduct.Parameters.AddWithValue("@AuctionId", AuctionId);
+                    cmdProduct.Parameters.AddWithValue("@ClientId", ClientId);
+                    cmdProduct.ExecuteNonQuery();
+                }
+
+                con.Close();
+                ViewData["Success"] = "Auction created successfully: ";
+                ViewData["AuctionId"] = AuctionId;
+                ViewData["AuctionTitle"] = Title;
+            }
+            return Page();
         }
     }
 }
