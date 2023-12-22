@@ -71,7 +71,7 @@ namespace BetterFinds.Pages
             }
 
             // Check if EndTime is greater than current time
-            if (EndTime.CompareTo(DateTime.Now.ToString()) > 0) // (EndTime > DateTime.Now)
+            if (DateTime.Parse(EndTime) < DateTime.Now)
             {
                 ModelState.AddModelError(string.Empty, "End time must be greater than current time.");
                 return Page();
