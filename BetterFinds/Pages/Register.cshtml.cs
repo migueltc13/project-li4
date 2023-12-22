@@ -58,10 +58,24 @@ namespace BetterFinds.Pages
                 return Task.FromResult<IActionResult>(Page());
             }
 
+            // Check if password is 64 characters or fewer
+            if (Password.Length > 64)
+            {
+                ModelState.AddModelError(string.Empty, "Password must be 64 characters or fewer.");
+                return Task.FromResult<IActionResult>(Page());
+            }
+
             // Check if username is at least 3 characters long
             if (Username.Length < 3)
             {
                 ModelState.AddModelError(string.Empty, "Username must be at least 3 characters long.");
+                return Task.FromResult<IActionResult>(Page());
+            }
+
+            // Check if username is 32 characters or fewer
+            if (Username.Length > 32)
+            {
+                ModelState.AddModelError(string.Empty, "Username must be 32 characters or fewer.");
                 return Task.FromResult<IActionResult>(Page());
             }
 
@@ -70,7 +84,6 @@ namespace BetterFinds.Pages
 
             try
             { 
-                // TODO DUVIDA: É necessário con.Close() antes de returns?
                 con.Open();
 
                 // Check if username already exists
@@ -81,6 +94,7 @@ namespace BetterFinds.Pages
                 if (usernameCount > 0)
                 {
                     ModelState.AddModelError(string.Empty, "Username already exists.");
+                    con.Close();
                     return Task.FromResult<IActionResult>(Page());
                 }
 
@@ -92,10 +106,11 @@ namespace BetterFinds.Pages
                 if (emailCount > 0)
                 {
                     ModelState.AddModelError(string.Empty, "Email already exists.");
+                    con.Close();
                     return Task.FromResult<IActionResult>(Page());
                 }
 
-                // Get id of last user
+                // Get clientId
                 string queryId = "SELECT MAX(ClientId) FROM Client";
                 SqlCommand cmdId = new SqlCommand(queryId, con);
                 int id = Convert.ToInt32(cmdId.ExecuteScalar()) + 1;
@@ -116,18 +131,21 @@ namespace BetterFinds.Pages
                 if (result == 1)
                 {
                     Console.WriteLine("User created"); // TODO: Remove this
-                    return Task.FromResult<IActionResult>(RedirectToPage("/Login"));
+                    con.Close();
+                    // TODO sleep 2 seconds and show success message
+                    return Task.FromResult<IActionResult>(RedirectToPage("/login"));
                 }
                 else
                 {
                     Console.WriteLine("User not created"); // TODO: Remove this
-                    return Task.FromResult<IActionResult>(RedirectToPage("/Register"));
+                    con.Close();
+                    return Task.FromResult<IActionResult>(RedirectToPage("/register"));
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return Task.FromResult<IActionResult>(RedirectToPage("/Register"));
+                return Task.FromResult<IActionResult>(RedirectToPage("/register"));
             }
             finally
             {
