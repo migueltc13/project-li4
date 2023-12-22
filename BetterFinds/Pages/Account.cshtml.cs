@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
-using System;
 
 namespace BetterFinds.Pages
 {
@@ -17,15 +15,16 @@ namespace BetterFinds.Pages
 
         public void OnGet()
         {
-            // Get username from User.Identity.Name
-            string username = User.Identity?.Name ?? "";
+            // Get ClientId
+            var clientUtils = new Utils.Client(_configuration);
+            int ClientId = clientUtils.GetClientId(HttpContext, User);
 
             // Get user info from database
             string connectionString = _configuration.GetConnectionString("DefaultConnection") ?? "";
             SqlConnection con = new SqlConnection(connectionString);
-            string query = "SELECT * FROM Client WHERE Username = @Username";
+            string query = "SELECT * FROM Client WHERE ClientId = @ClientId";
             SqlCommand cmd = new SqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@Username", username);
+            cmd.Parameters.AddWithValue("@ClientId", ClientId);
 
             con.Open();
             SqlDataReader reader = cmd.ExecuteReader();
