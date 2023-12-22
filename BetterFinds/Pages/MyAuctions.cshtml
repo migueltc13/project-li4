@@ -13,14 +13,14 @@
             <ul>
                 @foreach (var auction in Model.MyAuctions)
                 {
-                    var auctionDictionary = auction as Dictionary<string, object>;
-                    if (auctionDictionary != null)
+                    var auctionDict = auction as Dictionary<string, object>;
+                    if (auctionDict != null)
                     {
                         <li>
                             <p>
-                                <a href="/auction?id=@auctionDictionary["AuctionId"]">@auctionDictionary["ProductName"]</a>
-                                - @auctionDictionary["ProductPrice"]€
-                                - @auctionDictionary["EndTime"]
+                                <a href="/auction?id=@auctionDict["AuctionId"]">@auctionDict["ProductName"]</a>
+                                - @($"{auctionDict["ProductPrice"]:0.00}€")
+                                - @auctionDict["EndTime"]
                             </p>
                         </li>
                     }

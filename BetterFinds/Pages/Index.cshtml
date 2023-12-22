@@ -14,27 +14,31 @@
         </h3>
     </div>
 
-    @if (Model.Auctions != null)
+    @if (Model.Auctions != null && Model.Auctions.Count > 0)
     {
         <div>
-            <h2>Auctions decurring</h2>
+            <h2>Auctions occurring</h2>
 
             <ul>
                 @foreach (var auction in Model.Auctions)
                 {
-                    var auctionDictionary = auction as Dictionary<string, object>;
-                    if (auctionDictionary != null)
+                    var auctionDict = auction as Dictionary<string, object>;
+                    if (auctionDict != null)
                     {
                         <li>
                             <p>
-                                <a href="/auction?id=@auctionDictionary["AuctionId"]">@auctionDictionary["ProductName"]</a>
-                                - @auctionDictionary["ProductPrice"]€
-                                - @auctionDictionary["EndTime"]
+                                <a href="/auction?id=@auctionDict["AuctionId"]">@auctionDict["ProductName"]</a>
+                                - @($"{auctionDict["ProductPrice"]:0.00}€")
+                                - @auctionDict["EndTime"]
                             </p>
                         </li>
                     }
                 }
             </ul>
         </div>
+    }
+    else
+    {
+        <h2>No auctions to display.</h2>
     }
 </div>

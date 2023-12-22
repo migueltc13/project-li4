@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Http;
 using System.Text;
+using BetterFinds.Utils;
 
 namespace BetterFinds.Pages
 {
@@ -16,78 +17,34 @@ namespace BetterFinds.Pages
             _configuration = configuration;
         }
 
-        public List<object>? MyAuctions { get; set; }
+        public List<Dictionary<string, object>>? MyAuctions { get; set; }
 
         public void OnGet()
         {
-            List<object> auctions = new List<object>();
-
             // Get ClientId from session
-            string clientId = HttpContext.Session.GetString("ClientId") ?? "";
+            int clientId = 0; 
+            try
+            {
+                clientId = int.Parse(HttpContext.Session.GetString("ClientId") ?? "");
+            }
+            catch (FormatException)
+            {
+                // Unable to parse the string to an integer, set default value: 0
+                clientId = 0;
+            }
 
             Console.WriteLine($"ClientId: {clientId}"); // TODO: Remove this
-            if (clientId == "")
+            if (clientId == 0)
             {
                 Console.WriteLine("ClientId is empty");
+                // TODO get ClientId from database with User.Identity.Name
                 return;
             }
 
-            // Define the SQL query to select ProductId and EndTime from Auction and order by EndTime
-            string query = "SELECT AuctionId, ProductId, EndTime FROM Auction WHERE ClientId = @ClientId ORDER BY EndTime";
+            var auctionsUtils = new Auctions(_configuration);
 
-            using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
-            {
-                con.Open();
-
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@ClientId", clientId);
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            int productId = reader.GetInt32(reader.GetOrdinal("ProductId"));
-
-                            // Get product name and price
-                            string queryProduct = "SELECT Name, Price FROM Product WHERE ProductId = @ProductId";
-
-                            using (SqlConnection conProduct = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
-                            {
-                                conProduct.Open();
-
-                                using (SqlCommand cmdProduct = new SqlCommand(queryProduct, conProduct))
-                                {
-                                    cmdProduct.Parameters.AddWithValue("@ProductId", productId);
-
-                                    using (SqlDataReader readerProduct = cmdProduct.ExecuteReader())
-                                    {
-                                        if (readerProduct.Read())
-                                        {
-                                            // Convert and format the price
-                                            double productPrice = Convert.ToDouble(readerProduct["Price"]);
-                                            string formattedPrice = ((double)productPrice / 100).ToString("0.00");
-
-                                            // Create a dictionary to store each row
-                                            Dictionary<string, object> auctionRow = new Dictionary<string, object>
-                                            {
-                                                {"AuctionId", reader["AuctionId"]},
-                                                {"EndTime", reader["EndTime"]},
-                                                {"ProductName", readerProduct["Name"]},
-                                                {"ProductPrice", formattedPrice}
-                                            };
-                                            auctions.Add(auctionRow);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            // TODO con.Close(); and conProduct.Close()
-            MyAuctions = auctions;
+            // TODO get order/reverse methods on the frontend
+            MyAuctions = auctionsUtils.GetAuctions(clientId: clientId, order: 0, reversed: false);
         }
     }
 }
