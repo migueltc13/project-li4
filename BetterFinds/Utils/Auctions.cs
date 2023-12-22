@@ -23,7 +23,6 @@ namespace BetterFinds.Utils
          *     
          * bool reversed: Reverses the auction list if true
          */
-
         public List<Dictionary<string, object>> GetAuctions(int clientId, int order, bool reversed)
         {
             List<Dictionary<string, object>> auctions = new List<Dictionary<string, object>>();
