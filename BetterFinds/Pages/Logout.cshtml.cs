@@ -11,7 +11,7 @@ namespace BetterFinds.Pages
         {
             Console.WriteLine("Logging out"); // TODO: Remove this
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToPage("/Login");
+            return RedirectToPage("/login");
         }
     }
 }
