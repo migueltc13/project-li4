@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
-using System.Data;
 
 namespace BetterFinds.Pages
 {
@@ -22,7 +21,6 @@ namespace BetterFinds.Pages
         public double MinimumBid { get; set; } = 0;
 
         [BindProperty]
-        // public DateTime EndTime { get; set; } = DateTime.Now;
         public string EndTime { get; set; } = "";
 
         private readonly IConfiguration _configuration;
@@ -81,33 +79,9 @@ namespace BetterFinds.Pages
 
             string connectionString = _configuration.GetConnectionString("DefaultConnection") ?? "";
 
-            // Get ClientId from session cookie
-            int ClientId = 0;
-            try
-            {
-                ClientId = int.Parse(HttpContext.Session.GetString("ClientId") ?? "");
-            }
-            catch (FormatException)
-            {
-                // Unable to parse the string to an integer, set default value: 0
-                ClientId = 0;
-                // Get ClientId from database with User.Identity.Name
-                // TODO add this as function to Utils/Client.cs
-                if (User.Identity?.Name != null)
-                {
-                    using (SqlConnection con = new SqlConnection(connectionString))
-                    {
-                        con.Open();
-                        string query = "SELECT ClientId FROM Client WHERE Username = @Username";
-                        using (SqlCommand cmd = new SqlCommand(query, con))
-                        {
-                            cmd.Parameters.AddWithValue("@Username", User.Identity.Name);
-                            ClientId = Convert.ToInt32(cmd.ExecuteScalar());
-                        }
-                        con.Close();
-                    }
-                }
-            }
+            // Get ClientId
+            var clientUtils = new Utils.Client(_configuration);
+            int ClientId = clientUtils.GetClientId(HttpContext, User);
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
