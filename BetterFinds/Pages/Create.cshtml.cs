@@ -18,7 +18,7 @@ namespace BetterFinds.Pages
         public double Price { get; set; } = 0;
 
         [BindProperty]
-        public double MinimumBid { get; set; } = 0;
+        public decimal MinimumBid { get; set; } = 0;
 
         [BindProperty]
         public string EndTime { get; set; } = "";
@@ -106,7 +106,7 @@ namespace BetterFinds.Pages
                     cmd.Parameters.AddWithValue("@EndTime", DateTime.Parse(EndTime));
                     cmd.Parameters.AddWithValue("@ClientId", ClientId);
                     cmd.Parameters.AddWithValue("@ProductId", ProductId);
-                    cmd.Parameters.AddWithValue("@MinimumBid", MinimumBid);
+                    cmd.Parameters.AddWithValue("@MinimumBid", MinimumBid * 100);
                     cmd.ExecuteNonQuery();
                 }
 
@@ -119,7 +119,7 @@ namespace BetterFinds.Pages
                     cmdProduct.Parameters.AddWithValue("@Description", Descrition);
                     cmdProduct.Parameters.AddWithValue("@Price", Price * 100);
                     cmdProduct.Parameters.AddWithValue("@AuctionId", AuctionId);
-                    cmdProduct.Parameters.AddWithValue("@ClientId", ClientId);
+                    cmdProduct.Parameters.AddWithValue("@ClientId", 0); // 0: default value no buyer
                     cmdProduct.ExecuteNonQuery();
                 }
 
