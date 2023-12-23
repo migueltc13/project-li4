@@ -4,10 +4,20 @@
 <div class="main-wrapper">
     <h1>Auction Details</h1>
 
+    <div asp-validation-summary="All" class="text-danger"></div>
+
     <p>Start Time: @ViewData["StartTime"]</p>
     <p>End Time: @ViewData["EndTime"]</p>
     <p></p>
-    <p>Seller info: @@@ViewData["Username"] - @ViewData["FullName"]</p>
+    <p>Seller info: @@@ViewData["SellerUsername"] - @ViewData["SellerFullName"]</p>
+    @if (ViewData["BuyerUsername"] != null && ViewData["BuyerFullName"] != null)
+    {
+        <p>Buyer info: @@@ViewData["BuyerUsername"] - @ViewData["BuyerFullName"]</p>
+    }
+    else
+    {
+        <p>Buyer info: No buyer yet</p>
+    }
     <p></p>
     <p>Product info:</p>
     <p>@ViewData["ProductName"]</p>
@@ -16,6 +26,19 @@
 
     <!-- Countdown timer -->
     <div id="countdown"></div>
+
+    <!-- Bid form -->
+    @if ((bool?) ViewData["AuctionEnded"] == false)
+    {
+        <form method="post">
+            <div class="input-box">
+                <a style="margin-left: 20px">Bit amount:</a>
+                <input type="number" asp-for="BidAmount" value="" placeholder="@ViewData["BidPlaceholder"]" required>
+                <!-- <i class="bx></i> Euro -->
+            </div>
+            <button type="submit" class="btn btn-primary">Bid</button>
+        </form>
+    }
 </div>
 
 <!-- JavaScript for the countdown timer -->
