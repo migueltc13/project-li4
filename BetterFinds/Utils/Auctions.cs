@@ -22,8 +22,10 @@ namespace BetterFinds.Utils
          *     - 2 -> by product name
          *     
          * bool reversed: Reverses the auction list if true
+         * 
+         * bool ocurring: Shows only auctions that are ocurring if true
          */
-        public List<Dictionary<string, object>> GetAuctions(int clientId, int order, bool reversed)
+        public List<Dictionary<string, object>> GetAuctions(int clientId, int order, bool reversed, bool occurring)
         {
             List<Dictionary<string, object>> auctions = new List<Dictionary<string, object>>();
 
@@ -33,6 +35,16 @@ namespace BetterFinds.Utils
 
             if (clientId != 0)
                 query += $" WHERE ClientId = {clientId}";
+
+            if (occurring)
+            {
+                if (clientId != 0)
+                    query += " AND";
+                else
+                    query += " WHERE";
+
+                query += " EndTime > GETDATE()";
+            }
 
             switch (order) {
                 case 0:
