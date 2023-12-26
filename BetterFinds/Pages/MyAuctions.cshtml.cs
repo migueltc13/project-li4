@@ -23,7 +23,7 @@ namespace BetterFinds.Pages
             // Get user's auctions from database
             var auctionsUtils = new Utils.Auctions(_configuration);
             // TODO get order/reverse methods on the frontend
-            MyAuctions = auctionsUtils.GetAuctions(clientId: clientId, order: 0, reversed: false);
+            MyAuctions = auctionsUtils.GetAuctions(clientId: clientId, order: 0, reversed: true, occurring: false);
         }
     }
 }
