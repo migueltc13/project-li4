@@ -122,5 +122,72 @@ namespace BetterFinds.Utils
 
             return auctions;
         }
+
+        private static List<DateTime> auctionEndTimes = new();
+
+        public void CreateAuctionsToCheck()
+        {
+            try
+            {
+                Console.WriteLine("Creating auctionEndTimes list to check in auction background service...");
+
+                string query = "SELECT AuctionId, EndTime, IsCompleted FROM Auction";
+                string? conString = _configuration.GetConnectionString("DefaultConnection");
+                using (SqlConnection con = new SqlConnection(conString))
+                {
+                    con.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        using (SqlDataReader readerProduct = cmd.ExecuteReader())
+                        {
+                            while (readerProduct.Read())
+                            {
+                                int auctionId = readerProduct.GetInt32(readerProduct.GetOrdinal("AuctionId"));
+                                DateTime endTime = readerProduct.GetDateTime(readerProduct.GetOrdinal("EndTime"));
+                                bool isCompleted = readerProduct.GetBoolean(readerProduct.GetOrdinal("IsCompleted"));
+                                if (!isCompleted)
+                                    auctionEndTimes.Add(endTime);
+                            }
+                        }
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error create auctions to check: {ex.Message}");
+            }
+        }
+
+        public void AddAuction(DateTime endTime) => auctionEndTimes.Add(endTime);
+
+        // TODO: Remove auction from auctionEndTimes list when the auction is completed
+        public void RemoveAuction(DateTime endTime) => auctionEndTimes.Remove(endTime);
+
+        public async Task CheckAuctionsAsync()
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    DateTime currentTime = DateTime.UtcNow;
+
+                    for (int i = 0; i < auctionEndTimes.Count; i++)
+                    {
+                        if (currentTime >= auctionEndTimes[i])
+                        {
+                            Console.WriteLine($"auctionEndTimes[{i}] has ended");
+                            // TODO: If there's an auction buyer
+                            // then notify buyer to buy the product (when buyer completes the purchase notify the seller)
+                            // else notify the seller
+                        }
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error checking auctions: {ex.Message}");
+            }
+        }
     }
 }
