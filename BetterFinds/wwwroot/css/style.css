@@ -59,6 +59,16 @@ body a:hover {
     color: transparent;
 }
 
+footer {
+    background-color: transparent;
+    color: #fff; 
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    bottom: 0;
+    width: 100%;
+}
+
 header {
     font-size: 20px;
     font-weight: 600;
