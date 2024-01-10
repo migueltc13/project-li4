@@ -4,6 +4,6 @@
     [Description] VARCHAR (MAX) NOT NULL,
     [Price]       INT           NOT NULL,
     [AuctionId]   INT           NOT NULL,
-    [ClientId]    INT           NOT NULL,
+    [ClientId]    INT           NOT NULL DEFAULT 0,
     PRIMARY KEY CLUSTERED ([ProductId] ASC)
 );

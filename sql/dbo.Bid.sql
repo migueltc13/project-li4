@@ -4,7 +4,6 @@
     [Status]    VARCHAR (MAX) NOT NULL,
     [Time]      DATETIME      NOT NULL,
     [ClientId]  INT           NOT NULL,
-    [AuctionID] INT           NOT NULL,
+    [AuctionId] INT           NOT NULL,
     PRIMARY KEY CLUSTERED ([BidId] ASC)
 );
-
