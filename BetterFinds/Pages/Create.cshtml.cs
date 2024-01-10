@@ -98,7 +98,7 @@ namespace BetterFinds.Pages
                 int ProductId = Convert.ToInt32(cmdProductId.ExecuteScalar()) + 1;
 
                 // Insert into Auction table
-                string queryAuction = "INSERT INTO Auction (AuctionId, StartTime, EndTime, ClientId, ProductId, MinimumBid) VALUES (@AuctionId, @StartTime, @EndTime, @ClientId, @ProductId, @MinimumBid)";
+                string queryAuction = "INSERT INTO Auction (AuctionId, StartTime, EndTime, ClientId, ProductId, MinimumBid, IsCompleted) VALUES (@AuctionId, @StartTime, @EndTime, @ClientId, @ProductId, @MinimumBid, 0)";
                 using (SqlCommand cmd = new SqlCommand(queryAuction, con))
                 {
                     cmd.Parameters.AddWithValue("@AuctionId", AuctionId);
@@ -107,11 +107,12 @@ namespace BetterFinds.Pages
                     cmd.Parameters.AddWithValue("@ClientId", ClientId);
                     cmd.Parameters.AddWithValue("@ProductId", ProductId);
                     cmd.Parameters.AddWithValue("@MinimumBid", MinimumBid * 100);
+                    // IsCompleted => 0: default value auction is not completed
                     cmd.ExecuteNonQuery();
                 }
 
                 // Insert into Product table
-                string queryProduct = "INSERT INTO Product (ProductId, Name, Description, Price, AuctionId, ClientId) VALUES (@ProductId, @Name, @Description, @Price, @AuctionId, @ClientId)";
+                string queryProduct = "INSERT INTO Product (ProductId, Name, Description, Price, AuctionId, ClientId) VALUES (@ProductId, @Name, @Description, @Price, @AuctionId, 0)";
                 using (SqlCommand cmdProduct = new SqlCommand(queryProduct, con))
                 {
                     cmdProduct.Parameters.AddWithValue("@ProductId", ProductId);
@@ -119,11 +120,17 @@ namespace BetterFinds.Pages
                     cmdProduct.Parameters.AddWithValue("@Description", Descrition);
                     cmdProduct.Parameters.AddWithValue("@Price", Price * 100);
                     cmdProduct.Parameters.AddWithValue("@AuctionId", AuctionId);
-                    cmdProduct.Parameters.AddWithValue("@ClientId", 0); // 0: default value no buyer
+                    // ClientId => 0: default value no buyer
                     cmdProduct.ExecuteNonQuery();
                 }
 
                 con.Close();
+
+                // Add auction to background service to check for ending
+                var auctionsUtils = new Utils.Auctions(_configuration);
+                auctionsUtils.AddAuction(DateTime.Parse(EndTime));
+
+                // Display success message
                 ViewData["Success"] = "Auction created successfully: ";
                 ViewData["AuctionId"] = AuctionId;
                 ViewData["AuctionTitle"] = Title;
