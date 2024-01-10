@@ -13,12 +13,20 @@
     <meta http-equiv="X-UA-Compatiable" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] | BetterFinds</title>
-    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="stylesheet" href="/css/style.css" asp-append-version="true" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 <body>
     @if (LoadHeader) {
         <nav>
+            <div class="logo">
+                <a href="#">
+                    <img src="/img/logo.png" alt="logo" x="0px" y="0px" width="70px">
+                </a>
+            </div>
             <ul class="sidebar">
                 <li onclick=hideSidebar()><a href="#"><strong>X</strong></a></li>
                 <li><a href="/">Home</a></li>
@@ -34,7 +42,6 @@
                 }
             </ul>
             <ul>
-                <li><a href="/">BetterFinds</a></li>
                 <li onclick=showSidebar()><a href="#"><img style="width: 50%" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAQ0lEQVR4nO3WoREAIAwEQfovKyksSAQimrDbwc2bXwsAOKoq6z05JSSuEAAAaD36fnNKSPQTAQDAkPebU0LiCgGAn21ViEka78Lu0AAAAABJRU5ErkJggg==" /></a></li>
             </ul>
         </nav>
