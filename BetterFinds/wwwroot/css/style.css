@@ -44,6 +44,21 @@ body {
     color: white;
 }
 
+body a {
+    text-decoration: underline;
+    color: rgb(233, 175, 30);
+    font-weight: 600;
+}
+
+body a:hover {
+    text-decoration: underline;
+    background: rgb(223, 199, 64);
+    background: linear-gradient(to right, rgb(233, 175, 30), gold);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
 header {
     font-size: 20px;
     font-weight: 600;
