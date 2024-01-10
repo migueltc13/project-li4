@@ -298,6 +298,12 @@ header {
     text-align: center;
 }
 
+.text-info {
+    font-weight: bold;
+    color: #fcfcad; 
+    text-align: center;
+}
+
 .text-center {
     font-size: 30px;
     font-weight: 600;
