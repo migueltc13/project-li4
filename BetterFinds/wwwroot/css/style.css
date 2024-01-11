@@ -61,7 +61,8 @@ body a:hover {
 
 footer {
     background-color: transparent;
-    color: #fff; 
+    color: #fff;
+    position:absolute;
     font-weight: bold;
     text-align: center;
     padding: 10px;
@@ -239,6 +240,21 @@ header {
     font-size: 20px;
 }
 
+.input-box-text-area textarea {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: white;
+    padding: 20px 45px 20px 20px;
+    resize: vertical;
+    overflow: hidden;
+}
+
 .register-link p a {
     color: #fff;
     text-decoration: none;
@@ -300,15 +316,7 @@ header {
 
 .text-info {
     font-weight: bold;
-    color: #fcfcad; 
-    text-align: center;
-}
-
-.text-center {
-    font-size: 30px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    color: white;
+    color: #fcfcad;
     text-align: center;
 }
 
