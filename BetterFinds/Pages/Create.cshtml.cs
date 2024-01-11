@@ -12,7 +12,7 @@ namespace BetterFinds.Pages
         public string Title { get; set; } = "";
 
         [BindProperty]
-        public string Descrition { get; set; } = "";
+        public string Description { get; set; } = "";
 
         [BindProperty]
         public double Price { get; set; } = 0;
@@ -40,7 +40,7 @@ namespace BetterFinds.Pages
         {
             // For debugging purposes
             Console.WriteLine($"Title: {Title}");
-            Console.WriteLine($"Descrition: {Descrition}");
+            Console.WriteLine($"Descrition: {Description}");
             Console.WriteLine($"Price: {Price}");
             Console.WriteLine($"MinimumBid: {MinimumBid}");
             Console.WriteLine($"EndTime: {EndTime}");
@@ -68,7 +68,7 @@ namespace BetterFinds.Pages
             }
 
             // Check if description is 2048 characters or less
-            if (Descrition.Length > 2048)
+            if (Description.Length > 2048)
             {
                 ModelState.AddModelError(string.Empty, "Description must be 2048 characters or less.");
                 return Page();
@@ -133,7 +133,7 @@ namespace BetterFinds.Pages
                     {
                         cmdProduct.Parameters.AddWithValue("@ProductId", ProductId);
                         cmdProduct.Parameters.AddWithValue("@Name", Title);
-                        cmdProduct.Parameters.AddWithValue("@Description", Descrition);
+                        cmdProduct.Parameters.AddWithValue("@Description", Description);
                         cmdProduct.Parameters.AddWithValue("@Price", Price * 100);
                         cmdProduct.Parameters.AddWithValue("@AuctionId", AuctionId);
                         cmdProduct.Parameters.AddWithValue("@Images", Images != null ? Images : DBNull.Value);
