@@ -30,19 +30,18 @@
         </div>
 
         <div class="input-box">
-            <a>Description:</a>
-            <input type="text" asp-for="Descrition" placeholder="Description" required>
-            <!-- <textarea class="input-box" asp-for="Descrition" placeholder="Description" required style="resize: vertical; min-height: 100px;"></textarea>-->
+            <a>Initial price:</a>
+            <input type="number" asp-for="Price" placeholder="Initial price" value="" oninput="this.value = Math.max(0, this.value);" required>
         </div>
 
-        <div class="input-box">
-            <a>Initial price:</a>
-            <input type="number" asp-for="Price" placeholder="Initial price" value="" required>
+        <div class="input-box-text-area">
+            <a>Description:</a>
+            <textarea asp-for="Description" placeholder="Description" required></textarea>
         </div>
 
         <div class="input-box">
             <a>Minimum bid increment:</a>
-            <input type="number" asp-for="MinimumBid" placeholder="Minimum bid increment" value="" required>
+            <input type="number" asp-for="MinimumBid" placeholder="Minimum bid increment" value="" oninput="this.value = Math.max(0, this.value);" required>
         </div>
 
         <div class="input-box">
@@ -50,7 +49,6 @@
             <input type="datetime-local" asp-for="EndTime" placeholder="Ending date" required>
         </div>
 
-        <br>
         <button type="submit" class="btn">Create</button>
     </form>
 </div>
