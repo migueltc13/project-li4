@@ -20,8 +20,8 @@ namespace BetterFinds.Pages
                 return NotFound();
             }
             
-            // Check if bid amount is less than zero
-            if (BidAmount < 0)
+            // Check if bid amount is greater than zero
+            if (BidAmount <= 0)
             {
                 ModelState.AddModelError(string.Empty, "Your bid amount must be greater than zero.");
                 return OnGet();
@@ -188,19 +188,13 @@ namespace BetterFinds.Pages
                         int productId = reader.GetInt32(reader.GetOrdinal("ProductId"));
                         int minimumBid = reader.GetInt32(reader.GetOrdinal("MinimumBid"));
 
+
                         // Values to be used in the cshtml page
                         ViewData["StartTime"] = startTime.ToString("yyyy-MM-dd HH:mm:ss");
                         ViewData["EndTime"] = endTime.ToString("yyyy-MM-dd HH:mm:ss");
 
                         // Check if auction has ended
-                        if (DateTime.Now > endTime)
-                        {
-                            ViewData["AuctionEnded"] = true;
-                        }
-                        else
-                        {
-                            ViewData["AuctionEnded"] = false;
-                        }
+                        ViewData["AuctionEnded"] = (DateTime.Now >= endTime);
 
                         reader.Close();
 
@@ -229,7 +223,10 @@ namespace BetterFinds.Pages
                         int productPrice = 0;
                         int BuyerId = 0;
 
-                        string productQuery = "SELECT Name, Description, Price, ClientId FROM Product WHERE ProductId = @ProductId";
+                        var imageUtils = new Utils.Images(_configuration);
+                        List<string> Images = new List<string>();
+
+                        string productQuery = "SELECT Name, Description, Price, ClientId, Images FROM Product WHERE ProductId = @ProductId";
                         SqlCommand cmdProduct = new SqlCommand(productQuery, con);
                         cmdProduct.Parameters.AddWithValue("@ProductId", productId);
                         using (SqlDataReader readerProduct = cmdProduct.ExecuteReader())
@@ -241,6 +238,13 @@ namespace BetterFinds.Pages
                                 productPrice = readerProduct.GetInt32(readerProduct.GetOrdinal("Price"));
                                 BuyerId = readerProduct.GetInt32(readerProduct.GetOrdinal("ClientId"));
 
+                                // Check for null before calling GetString
+                                var Imagestmp = readerProduct.IsDBNull(readerProduct.GetOrdinal("Images"))
+                                    ? null
+                                    : readerProduct.GetString(readerProduct.GetOrdinal("Images"));
+
+                                // Check if Imagestmp is not null before parsing
+                                Images = Imagestmp != null ? imageUtils.ParseImagesList(Imagestmp) : [];
                             }
                             readerProduct.Close();
                         }
@@ -249,6 +253,8 @@ namespace BetterFinds.Pages
                         ViewData["ProductDesc"] = productDesc;
                         ViewData["ProductPrice"] = ((decimal)productPrice / 100).ToString("0.00");
                         ViewData["BidPlaceholder"] = ((decimal)(productPrice + minimumBid) / 100).ToString("0.00");
+                        ViewData["Images"] = Images;
+                        // Console.WriteLine($"Images: {string.Join(", ", Images)}");
 
                         // Get buyer info
                         query = "SELECT FullName, Username FROM Client WHERE ClientId = @ClientId";
@@ -281,7 +287,6 @@ namespace BetterFinds.Pages
             {
                 con.Close();
             }
-
 
             return Page();
         }
