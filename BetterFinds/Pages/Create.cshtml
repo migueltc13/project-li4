@@ -29,18 +29,18 @@
             <input type="text" asp-for="Title" placeholder="Title" required>
         </div>
 
-        <div class="input-box">
-            <a>Initial price:</a>
-            <input type="number" asp-for="Price" placeholder="Initial price" value="" oninput="this.value = Math.max(0, this.value);" required>
-        </div>
-
         <div class="input-box-text-area">
-            <a>Description:</a>
+            <p>Description:</p>
             <textarea asp-for="Description" placeholder="Description" required></textarea>
         </div>
 
         <div class="input-box">
-            <a>Minimum bid increment:</a>
+            <p>Initial price:</p>
+            <input type="number" asp-for="Price" placeholder="Initial price" value="" oninput="this.value = Math.max(0, this.value);" required>
+        </div>
+
+        <div class="input-box">
+            <p>Minimum bid increment:</p>
             <input type="number" asp-for="MinimumBid" placeholder="Minimum bid increment" value="" oninput="this.value = Math.max(0, this.value);" required>
         </div>
 
