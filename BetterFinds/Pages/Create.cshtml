@@ -19,35 +19,40 @@
         }
 
         <style>
-            a {
+            p {
                 margin-left: 20px;
             }
         </style>
 
         <div class="input-box">
-            <a>Title:</a>
+            <p>Title:</p>
             <input type="text" asp-for="Title" placeholder="Title" required>
         </div>
 
         <div class="input-box">
-            <a>Description:</a>
+            <p>Description:</p>
             <input type="text" asp-for="Descrition" placeholder="Description" required>
             <!-- <textarea class="input-box" asp-for="Descrition" placeholder="Description" required style="resize: vertical; min-height: 100px;"></textarea>-->
         </div>
 
         <div class="input-box">
-            <a>Initial price:</a>
+            <p>Initial price:</p>
             <input type="number" asp-for="Price" placeholder="Initial price" value="" required>
         </div>
 
         <div class="input-box">
-            <a>Minimum bid increment:</a>
+            <p>Minimum bid increment:</p>
             <input type="number" asp-for="MinimumBid" placeholder="Minimum bid increment" value="" required>
         </div>
 
         <div class="input-box">
-            <a>Ending date:</a>
+            <p>Ending date:</p>
             <input type="datetime-local" asp-for="EndTime" placeholder="Ending date" required>
+        </div>
+
+        <div class="input-box">
+            <p>Images links (maximum 10):</p>
+            <input type="text" asp-for="Images" placeholder="image_link_1,image_link_2,...,image_link_10" value="">
         </div>
 
         <br>
