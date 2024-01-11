@@ -76,7 +76,7 @@ namespace BetterFinds.Utils
                         {
                             // Get product name and price
                             int productId = reader.GetInt32(reader.GetOrdinal("ProductId"));
-                            string queryProduct = "SELECT Name, Price FROM Product WHERE ProductId = @ProductId";
+                            string queryProduct = "SELECT Name, Description, Price FROM Product WHERE ProductId = @ProductId";
                             using (SqlConnection conProduct = new SqlConnection(conString))
                             {
                                 conProduct.Open();
@@ -99,6 +99,7 @@ namespace BetterFinds.Utils
                                                 {"AuctionId", reader["AuctionId"]},
                                                 {"EndTime", reader["EndTime"]},
                                                 {"ProductName", readerProduct["Name"]},
+                                                {"ProductDescription", readerProduct["Description"]},
                                                 {"ProductPrice", formattedPrice}
                                             };
                                             auctions.Add(auctionRow);
