@@ -38,9 +38,7 @@ body {
     align-items: center;
     */
     min-height: 100vh;
-    background: url(/img/moroccan.jpg) no-repeat;
-    background-size: cover;
-    background-position: center;
+    background: url(/img/moroccan.jpg) repeat-y;
     color: white;
 }
 
@@ -62,7 +60,7 @@ body a:hover {
 footer {
     background-color: transparent;
     color: #fff;
-    position:absolute;
+    position: absolute;
     font-weight: bold;
     text-align: center;
     padding: 10px;
@@ -314,6 +312,11 @@ header {
     text-align: center;
 }
 
+    .text-danger li {
+        /* no list style */
+        list-style: none;
+    }
+
 .text-info {
     font-weight: bold;
     color: #fcfcad;
@@ -423,4 +426,13 @@ nav {
     margin-left: auto;
     margin-right: auto;
     width: 150px;
+}
+
+.product-images img {
+    display: block; /* Ensures that the image is treated as a block element */
+    width: 100%;
+    /* round corners */
+    border-radius: 20px;
+    /* shadow */
+    box-shadow: 10px 15px 50px rgba(0, 0, 0, .7);
 }

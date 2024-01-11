@@ -1,14 +1,79 @@
 ﻿@page
 @model BetterFinds.Pages.AuctionModel
+@{
+    ViewData["Title"] = ViewData["ProductName"];
+}
 
 <div class="main-wrapper">
-    <h1>Auction Details</h1>
-
     <div asp-validation-summary="All" class="text-danger"></div>
 
+    <h1 style="padding-bottom: 10px">@ViewData["ProductName"]</h1>
+
+    <p>@ViewData["ProductPrice"]€</p>
+    <!-- Countdown timer -->
+    <div id="countdown"></div>
+
+    @if (ViewData["Images"] is List<string> images && images != null && images.Any())
+    {
+        <br />
+        <div class="product-images">
+            @foreach (var image in images)
+            {
+                <img class="slider-image" src="@image" alt="Images" />
+            }
+        </div>
+        <div id="imageInfo">
+           <p style="text-align: center" id="imageCounter"></p>
+        </div>
+        <br />
+        <script>
+            // image slider
+            document.addEventListener("DOMContentLoaded", function () {
+                var images = document.querySelectorAll(".slider-image");
+                var currentIndex = 0;
+
+                function showImage(index) {
+                    images.forEach(function (image, i) {
+                        image.style.display = i === index ? "block" : "none";
+                    });
+
+                    // Update current index and total images
+                    var imageCounter = document.getElementById("imageCounter");
+                    imageCounter.textContent = "Image: " + (index + 1) + "/" + images.length;
+                }
+
+                function nextImage() {
+                    currentIndex = (currentIndex + 1) % images.length;
+                    showImage(currentIndex);
+                }
+
+                function prevImage() {
+                    currentIndex = (currentIndex - 1 + images.length) % images.length;
+                    showImage(currentIndex);
+                }
+
+                // Initial display
+                showImage(currentIndex);
+
+                // Add event listeners for navigation
+                document.querySelector(".product-images").addEventListener("click", function (e) {
+                    if (e.target.classList.contains("slider-image")) {
+                        nextImage();
+                    }
+                });
+
+                document.querySelector(".product-images").addEventListener("contextmenu", function (e) {
+                    e.preventDefault();
+                    prevImage();
+                });
+            });
+        </script>
+    }
+    <p>@ViewData["ProductDesc"]</p>
+    <br />
     <p>Start Time: @ViewData["StartTime"]</p>
     <p>End Time: @ViewData["EndTime"]</p>
-    <p></p>
+    <br />
     <p>Seller info: @@@ViewData["SellerUsername"] - @ViewData["SellerFullName"]</p>
     @if (ViewData["BuyerUsername"] != null && ViewData["BuyerFullName"] != null)
     {
@@ -16,23 +81,15 @@
     }
     else
     {
-        <p>Buyer info: No buyer yet</p>
+        <p>No bids were made</p>
     }
-    <p></p>
-    <p>Product info:</p>
-    <p>@ViewData["ProductName"]</p>
-    <p>@ViewData["ProductDesc"]</p>
-    <p>@ViewData["ProductPrice"]€</p>
-
-    <!-- Countdown timer -->
-    <div id="countdown"></div>
 
     <!-- Bid form -->
     @if ((bool?) ViewData["AuctionEnded"] == false)
     {
         <form method="post">
             <div class="input-box">
-                <a style="margin-left: 20px">Bit amount:</a>
+                <p style="margin-left: 20px">Bid amount:</p>
                 <input type="number" asp-for="BidAmount" value="" placeholder="@ViewData["BidPlaceholder"]" required>
                 <!-- <i class="bx></i> Euro -->
             </div>
@@ -61,7 +118,7 @@
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // Format the countdown for display
-        var countdownText = '';
+        var countdownText = 'Ends in: ';
         if (days > 0) {
             countdownText += days + "d ";
         }
@@ -71,7 +128,7 @@
         if (minutes > 0 || hours > 0 || days > 0) {
             countdownText += minutes + "m ";
         }
-        countdownText += seconds + "s ";
+        countdownText += seconds + "s";
 
         // Display the countdown in the "countdown" div
         document.getElementById("countdown").innerHTML = countdownText;

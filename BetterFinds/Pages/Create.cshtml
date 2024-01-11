@@ -19,13 +19,13 @@
         }
 
         <style>
-            a {
+            p {
                 margin-left: 20px;
             }
         </style>
 
         <div class="input-box">
-            <a>Title:</a>
+            <p>Title:</p>
             <input type="text" asp-for="Title" placeholder="Title" required>
         </div>
 
@@ -45,10 +45,16 @@
         </div>
 
         <div class="input-box">
-            <a>Ending date:</a>
+            <p>Ending date:</p>
             <input type="datetime-local" asp-for="EndTime" placeholder="Ending date" required>
         </div>
 
+        <div class="input-box">
+            <p>Images links (maximum 10):</p>
+            <input type="text" asp-for="Images" placeholder="image_link_1,image_link_2,...,image_link_10" value="">
+        </div>
+
+        <br>
         <button type="submit" class="btn">Create</button>
     </form>
 </div>

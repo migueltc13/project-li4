@@ -1,0 +1,35 @@
+﻿@page
+@model BetterFinds.Pages.SearchModel
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="main-wrapper">
+    @if (Model.SearchResults != null && Model.SearchResults.Count > 0)
+    {
+        <div>
+            <h3>Search results</h3>
+
+            <ul>
+                @foreach (var auction in Model.SearchResults)
+                {
+                    var auctionDict = auction as Dictionary<string, object>;
+                    if (auctionDict != null)
+                    {
+                        <li>
+                            <p>
+                                <a href="/auction?id=@auctionDict["AuctionId"]">@auctionDict["ProductName"]</a>
+                                - @($"{auctionDict["ProductPrice"]:0.00}€")
+                                - @auctionDict["EndTime"]
+                            </p>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    }
+    else
+    {
+        <h3>No search results were found.</h3>
+    }
+<div/>
