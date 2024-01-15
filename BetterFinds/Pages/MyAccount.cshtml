@@ -1,0 +1,81 @@
+﻿@page
+@model BetterFinds.Pages.MyAccountModel
+@{
+    ViewData["Title"] = "My Account";
+}
+
+<div class="main-wrapper">
+    <h2 style="padding-bottom: 10px">My Account</h2>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @if (ViewData["Message"] != null)
+    {
+        <div class="text-info" style="text-align: left">
+            @ViewData["Message"]
+        </div>
+    }
+    <div>
+        <p>Username: @@@ViewData["Username"]</p>
+        <p>Full Name: @ViewData["FullName"]</p>
+        <p>Email: @ViewData["Email"]</p>
+        <p>Subscribed to our newsletter: @ViewData["OptNewsletter"]</p>
+        <br />
+        @if (ViewData["NumAuctions"] != null && ViewData["NumAuctions"] is int numAuctions && numAuctions != 0)
+        {
+            <p><a href="/myauctions?id=@ViewData["ClientId"]">My Auctions</a> (Total: @numAuctions)</p>
+        }
+        else
+        {
+            <p>You haven't created any auctions yet.</p>
+        }
+        @if (ViewData["NumBids"] != null && ViewData["NumBids"] is int numBids && numBids != 0)
+        {
+            <p><a href="/mybids?id=@ViewData["ClientId"]">My Bids</a> (Total: @numBids)</p>
+        }
+        else
+        {
+            <p>You haven't placed any bids yet.</p>
+        }
+    </div>
+    <br />
+    <details>
+        <summary>
+            Update personal information
+        </summary>
+
+        <form method="post">
+            <div class="input-box">
+                <input type="text" asp-for="Username" value="@ViewData["Username"]" placeholder="Username">
+                <i class='bx bxs-user'></i>
+            </div>
+
+            <div class="input-box">
+                <input type="text" asp-for="FullName" value="@ViewData["FullName"]" placeholder="Full Name">
+                <i class='bx bxs-face'></i>
+            </div>
+
+            <div class="input-box">
+                <input type="email" asp-for="Email" value="@ViewData["Email"]" placeholder="Email">
+                <i class='bx bxs-envelope'></i>
+            </div>
+
+            <div class="input-box">
+                <input type="password" asp-for="Password" class="input-field" placeholder="Password">
+                <i class="bx bxs-lock-alt"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" asp-for="ConfirmPassword" class="input-field" placeholder="Confirm Password">
+                <i class="bx bxs-lock-alt"></i>
+            </div>
+
+            <div class="remember-me">
+                <label><input type="checkbox" asp-for="OptNewsletter"> @ViewData["SubscribeMessage"]</label>
+            </div>
+            <br />
+
+            <!-- TODO: Change profile picture -->
+            <!-- TODO: Delete auccount : check for current auctions if possible then deactivate account -->
+
+            <button type="submit" class="btn">Save changes</button>
+        </form>
+    </details>
+</div>
