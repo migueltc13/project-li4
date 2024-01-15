@@ -32,6 +32,12 @@ public class Program
         // Register the AuctionBackgroundService as a hosted service
         builder.Services.AddHostedService<AuctionBackgroundService>();
 
+        // Register the Bidders groups service
+        builder.Services.AddSingleton<Bids>();
+
+        // Register SignalR
+        builder.Services.AddSignalR();
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -60,6 +66,13 @@ public class Program
         // Initialize Auctions
         var auctions = app.Services.GetRequiredService<Auctions>();
         auctions.CreateAuctionsToCheck();
+
+        // Initialize Bidder Groups
+        var bids = app.Services.GetRequiredService<Bids>();
+        bids.CreateBidderGroup().Wait();
+
+        // Map SignalR hub
+        app.MapHub<NotificationHub>("/notificationHub");
 
         Console.WriteLine("Application started.");
 
