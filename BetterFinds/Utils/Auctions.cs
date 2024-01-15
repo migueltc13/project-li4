@@ -10,7 +10,7 @@ namespace BetterFinds.Utils
             _configuration = configuration;
         }
 
-        /* Function to show auctions with the following parameters
+        /* Function to show auctions with the following parameters options
          * 
          * int clientId:
          *     - 0    -> All clients auctions
