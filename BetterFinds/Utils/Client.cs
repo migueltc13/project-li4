@@ -42,5 +42,34 @@ namespace BetterFinds.Utils
             }
             return ClientId;
         }
+
+        public List<Dictionary<string, object>> GetClients()
+        {
+            List<Dictionary<string, object>> clients = new List<Dictionary<string, object>>();
+            string? connectionString = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                string query = "SELECT ClientId, FullName, Username FROM Client";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Dictionary<string, object> client = new Dictionary<string, object>
+                            {
+                                { "ClientId", reader.GetInt32(0) },
+                                { "FullName", reader.GetString(1) },
+                                { "Username", reader.GetString(2) }
+                            };
+                            clients.Add(client);
+                        }
+                    }
+                }
+                con.Close();
+            }
+            return clients;
+        }
     }
 }
