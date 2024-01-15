@@ -1,20 +1,46 @@
 ﻿@page
 @model BetterFinds.Pages.AccountModel
 @{
-    ViewData["Title"] = "My Account";
+    ViewData["Title"] = $"@{ViewData["Username"]}";
 }
 
 <div class="main-wrapper">
-    <div class="text-center">
-        <h3>My Account</h3>
-    </div>
-    <br />
-    <div>
-        <p>Username: @ViewData["Username"]</p>
-        <p>Full Name: @ViewData["FullName"]</p>
-        <p>Email: @ViewData["Email"]</p>
-        <p>Subscribed to our newsletter: @ViewData["OptNewsletter"]</p>
-        <p>Number of auctions created: TODO</p>
-        <p>Number of bids: TODO</p>
-    </div>
+    @if (ViewData["Edit"] != null && ViewData["Edit"] is bool edit && edit)
+    {
+        <div class="text-info" style="text-align: left">
+            You can edit your profile information at <a href="/myaccount">my account</a> page.
+        </div>
+    }
+    <h2 style ="padding-bottom: 10px"> @@@ViewData["Username"] public profile</h2>
+    <p>Full name: @ViewData["FullName"]</p>
+    @if (ViewData["NumBids"] != null && ViewData["NumBids"] is int numBids && numBids != 0)
+    {
+        string bidsPlural = numBids == 1 ? "bid" : "bids";
+        <p><strong>@@@ViewData["Username"]</strong> has made @numBids @bidsPlural in total.</p>
+    }
+    else
+    {
+        <p><strong>@@@ViewData["Username"]</strong> didn't place any bids.</p>
+    }
+    @if (Model.AuctionsList != null && Model.AuctionsList.Count() > 0)
+    {
+        string auctionsPlural = Model.AuctionsList.Count() == 1 ? "auction" : "auctions";
+        <p><strong>@@@ViewData["Username"]</strong> has made @Model.AuctionsList.Count() @auctionsPlural:</p>
+        @foreach (var auction in Model.AuctionsList)
+        {
+            var auctionDict = auction as Dictionary<string, object>;
+            if (auctionDict != null)
+            {
+                <p>
+                    <a href="/auction?id=@auctionDict["AuctionId"]">@auctionDict["ProductName"]</a>
+                    - @($"{auctionDict["ProductPrice"]:0.00}€")
+                    - @auctionDict["EndTime"]
+                </p>
+            }
+        }
+    }
+    else
+    {
+        <p><strong>@@@ViewData["Username"]</strong> didn't create any auctions.</p>
+    }
 </div>
