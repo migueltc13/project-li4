@@ -1,0 +1,38 @@
+﻿@page
+@model BetterFinds.Pages.MyBidsModel
+@{
+    ViewData["Title"] = "My Bids";
+}
+
+<div class="main-wrapper">
+    @if (Model.ClientBids != null && Model.ClientBids.Count > 0)
+    {
+        <h2 style="padding-bottom: 10px">My Bids</h2>
+        foreach (var auctionDictionary in Model.ClientBids)
+        {
+            foreach (var (auctionId, bids) in auctionDictionary)
+            {
+                string productName = bids.FirstOrDefault()?.GetValueOrDefault("ProductName")?.ToString() ?? $"Auction {auctionId.ToString()}";
+
+                <details>
+                    <summary>
+                        Auction: <a href="/auction?id=@auctionId">@productName</a>
+                    </summary>
+                    <ul style ="margin-left: 20px">
+                        @foreach (var bid in bids)
+                        {
+                            <li>
+                                <strong>Time:</strong> @bid["BidTime"]<br />
+                                <strong>Amount:</strong> @((int)bid["BidValue"] / 100)€<br />
+                            </li>
+                        }
+                    </ul>
+                </details>
+            }
+        }
+    }
+    else
+    {
+        <h2>No bids available.</h2>
+    }
+</div>
