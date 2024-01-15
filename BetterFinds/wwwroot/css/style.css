@@ -36,10 +36,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white;
     */
     min-height: 100vh;
-    background: url(/img/moroccan.jpg) repeat-y;
-    color: white;
+    background: url(/img/background.jpg) repeat;
+    background-color: rgb(2, 66, 66);
 }
 
 body a {
@@ -59,8 +60,10 @@ body a:hover {
 
 footer {
     background-color: transparent;
-    color: #fff; 
+    color: #fff;
     font-weight: bold;
+    text-shadow: 0 0 20px rgb(0, 0, 0);
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
     text-align: center;
     padding: 10px;
     bottom: 0;
@@ -427,4 +430,41 @@ nav {
     border-radius: 20px;
     /* shadow */
     box-shadow: 10px 15px 50px rgba(0, 0, 0, .7);
+}
+
+.icon-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    color: rgb(2, 66, 66);
+    background: #eeeeee;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+}
+
+    .icon-button:hover {
+        cursor: pointer;
+        background: #dddddd;
+    }
+
+    .icon-button:active {
+        background: #cccccc;
+    }
+
+.icon-button__badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 15px;
+    height: 15px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
 }
