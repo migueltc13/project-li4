@@ -9,7 +9,7 @@ namespace BetterFinds.Pages
     {
         public async Task<IActionResult> OnGet()
         {
-            Console.WriteLine("Logging out"); // TODO: Remove this
+            Console.WriteLine($"User @{User?.Identity?.Name} logged out.");
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToPage("/login");
         }
