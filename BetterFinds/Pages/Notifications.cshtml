@@ -1,0 +1,27 @@
+﻿@page
+@model BetterFinds.Pages.NotificationsModel
+@{
+    ViewData["Title"] = "Notifications";
+}
+
+<div class="main-wrapper">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @if (Model.Notifications != null && Model.Notifications.Count > 0)
+    {
+        <h2 style="padding-bottom: 10px">Notifications</h2>
+        @foreach (var notification in Model.Notifications)
+        {
+            <div>
+                <p>
+                    <a href="/auction?id=@notification["AuctionId"]">@notification["ProductName"]</a>
+                    - @notification["Message"]
+                    - @notification["Timestamp"]
+                </p>
+            </div>
+        }
+    }
+    else
+    {
+        <h2>You have no notifications.</h2>
+    }
+</div>
