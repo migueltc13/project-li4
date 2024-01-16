@@ -124,7 +124,7 @@ namespace BetterFinds.Utils
             return notificationsCount;
         }
 
-        public void MarkAsRead(int clientId)
+        public void MarkAllAsRead(int clientId)
         {
             string? connectionString = _configuration.GetConnectionString("DefaultConnection");
             using (SqlConnection con = new(connectionString))
@@ -133,6 +133,23 @@ namespace BetterFinds.Utils
                 string query = "UPDATE Notification SET IsRead = 1 WHERE ClientId = @ClientId";
                 using (SqlCommand cmd = new(query, con))
                 {
+                    cmd.Parameters.AddWithValue("@ClientId", clientId);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+
+        public void MarkAsRead(int clientId, int notificationId)
+        {
+            string? connectionString = _configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection con = new(connectionString))
+            {
+                con.Open();
+                string query = "UPDATE Notification SET IsRead = 1 WHERE NotificationId = @NotificationId AND ClientId = @ClientId";
+                using (SqlCommand cmd = new(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@NotificationId", notificationId);
                     cmd.Parameters.AddWithValue("@ClientId", clientId);
                     cmd.ExecuteNonQuery();
                 }
