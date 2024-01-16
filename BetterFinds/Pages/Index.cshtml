@@ -18,7 +18,14 @@
     {
         <div>
             <h2 style="padding-bottom: 10px">Auctions occurring</h2>
-
+            <div class="sort-container">
+                <label for="sort">Sort By: </label>
+                <select id="sort">
+                    <option value="date">Ending Time</option>
+                    <option value="name">Product Name</option>
+                    <option value="price">Product Price</option>
+                </select>
+            </div>
             <ul>
                 @foreach (var auction in Model.Auctions)
                 {
