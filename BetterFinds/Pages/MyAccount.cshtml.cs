@@ -150,12 +150,12 @@ namespace BetterFinds.Pages
             else
                 updateFullName = true;
 
-            // Check if email is at least 3 characters long and 320 characters or fewer
+            // Check if email is at least 5 characters long and 320 characters or fewer
             if (Email == null || Email == "")
             {
                 updateEmail = false;
             }
-            else if (Email.Length < 3 || Email.Length > 320)
+            else if (Email.Length < 5 || Email.Length > 320)
             {
                 ModelState.AddModelError(string.Empty, "Email must be at least 3 characters long and 320 characters or fewer.");
                 return Page();
