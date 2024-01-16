@@ -30,11 +30,16 @@ namespace BetterFinds.Pages
             _configuration = configuration;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            // If user is already logged in, redirect to index page
+            if (User.Identity != null && User.Identity.IsAuthenticated)
+                return RedirectToPage("/");
+
+            return Page();
         }
 
-        public Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             // For debugging purposes
             Console.WriteLine($"FullName: {FullName}");                 // TODO: Remove this
@@ -44,39 +49,67 @@ namespace BetterFinds.Pages
             Console.WriteLine($"ConfirmPassword: {ConfirmPassword}");   // TODO: Remove this
             Console.WriteLine($"OptNewsletter: {OptNewsletter}");       // TODO: Remove this
 
-            // Check if passwords match
-            if (Password != ConfirmPassword)
-            {
-                ModelState.AddModelError(string.Empty, "Passwords do not match.");
-                return Task.FromResult<IActionResult>(Page());
-            }
-
-            // Check if password is at least 8 characters long
-            if (Password.Length < 8)
-            {
-                ModelState.AddModelError(string.Empty, "Password must be at least 8 characters long.");
-                return Task.FromResult<IActionResult>(Page());
-            }
-
-            // Check if password is 64 characters or fewer
-            if (Password.Length > 64)
-            {
-                ModelState.AddModelError(string.Empty, "Password must be 64 characters or fewer.");
-                return Task.FromResult<IActionResult>(Page());
-            }
-
             // Check if username is at least 3 characters long
             if (Username.Length < 3)
             {
                 ModelState.AddModelError(string.Empty, "Username must be at least 3 characters long.");
-                return Task.FromResult<IActionResult>(Page());
+                return Page();
             }
 
             // Check if username is 32 characters or fewer
             if (Username.Length > 32)
             {
                 ModelState.AddModelError(string.Empty, "Username must be 32 characters or fewer.");
-                return Task.FromResult<IActionResult>(Page());
+                return Page();
+            }
+
+            // Check if passwords match
+            if (Password != ConfirmPassword)
+            {
+                ModelState.AddModelError(string.Empty, "Passwords do not match.");
+                return Page();
+            }
+
+            // Check if password is at least 8 characters long
+            if (Password.Length < 8)
+            {
+                ModelState.AddModelError(string.Empty, "Password must be at least 8 characters long.");
+                return Page();
+            }
+
+            // Check if password is 64 characters or fewer
+            if (Password.Length > 64)
+            {
+                ModelState.AddModelError(string.Empty, "Password must be 64 characters or fewer.");
+                return Page();
+            }
+
+            // Check if email is at least 5 characters long
+            if (Email.Length < 5)
+            {
+                ModelState.AddModelError(string.Empty, "Email must be at least 5 characters long.");
+                return Page();
+            }
+
+            // Check if email is 320 characters or fewer
+            if (Email.Length > 320)
+            {
+                ModelState.AddModelError(string.Empty, "Email must be 320 characters or fewer.");
+                return Page();
+            }
+
+            // Check if full name is at least 3 characters long
+            if (FullName.Length < 3)
+            {
+                ModelState.AddModelError(string.Empty, "Full name must be at least 3 characters long.");
+                return Page();
+            }
+
+            // Check if full name is 64 characters or fewer
+            if (FullName.Length > 64)
+            {
+                ModelState.AddModelError(string.Empty, "Full name must be 64 characters or fewer.");
+                return Page();
             }
 
             string connectionString = _configuration.GetConnectionString("DefaultConnection") ?? "";
@@ -95,7 +128,7 @@ namespace BetterFinds.Pages
                 {
                     ModelState.AddModelError(string.Empty, "Username already exists.");
                     con.Close();
-                    return Task.FromResult<IActionResult>(Page());
+                    return Page();
                 }
 
                 // Check if email already exists
@@ -107,7 +140,7 @@ namespace BetterFinds.Pages
                 {
                     ModelState.AddModelError(string.Empty, "Email already exists.");
                     con.Close();
-                    return Task.FromResult<IActionResult>(Page());
+                    return Page();
                 }
 
                 // Get clientId
@@ -117,6 +150,7 @@ namespace BetterFinds.Pages
 
                 Console.WriteLine($"Id: {id}"); // TODO: Remove this
 
+                // Insert new user into database
                 string query = "INSERT INTO Client (ClientId, FullName, Username, Email, Password, OptNewsletter) VALUES (@id, @FullName, @Username, @Email, @Password, @OptNewsletter)";
                 SqlCommand cmd = new SqlCommand(query, con);
 
@@ -131,21 +165,21 @@ namespace BetterFinds.Pages
                 if (result == 1)
                 {
                     Console.WriteLine("User created"); // TODO: Remove this
+                    ViewData["RegisterMessage"] = "Account created successfully.";
                     con.Close();
-                    // TODO sleep 2 seconds and show success message
-                    return Task.FromResult<IActionResult>(RedirectToPage("/login"));
+                    return Page();
                 }
                 else
                 {
                     Console.WriteLine("User not created"); // TODO: Remove this
                     con.Close();
-                    return Task.FromResult<IActionResult>(RedirectToPage("/register"));
+                    return RedirectToPage("/register");
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return Task.FromResult<IActionResult>(RedirectToPage("/register"));
+                return RedirectToPage("/register");
             }
             finally
             {
