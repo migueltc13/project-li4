@@ -8,15 +8,30 @@
     @if (Model.MyAuctions != null && Model.MyAuctions.Count > 0)
     {
         <div>
+            <form id="filterForm" asp-page="/myauctions" method="get">
+                <div class="sort-container" style="padding-bottom: 10px">
+                    <label for="sort">Sort By: </label>
+                    <select id="sort" name="sort" style="width: 200px; text-align: center">
+                        <option value="date" selected="@(Model.CurrentSort == "date")">Ending Time (Ascending)</option>
+                        <option value="dateRev" selected="@(Model.CurrentSort == "dateRev")">Ending Time (Descending)</option>
+                        <option value="name" selected="@(Model.CurrentSort == "name")">Product Name (A-Z)</option>
+                        <option value="nameRev" selected="@(Model.CurrentSort == "nameRev")">Product Name (Z-A)</option>
+                        <option value="price" selected="@(Model.CurrentSort == "price")">Product Price (Lowest first)</option>
+                        <option value="priceRev" selected="@(Model.CurrentSort == "priceRev")">Product Price (Highest first)</option>
+                    </select>
+                </div>
+
+                <div class="sort-container">
+                    <label for="occurring">Show: </label>
+                    <select id="occurring" name="occurring" style="width: 100px; text-align: center">
+                        <option value="0" selected="@(Model.CurrentOccurring == 0)">All</option>
+                        <option value="1" selected="@(Model.CurrentOccurring == 1)">Occurring</option>
+                    </select>
+                </div>
+            </form>
+
             <h2 style="padding-bottom: 10px">My Auctions</h2>
-            <div class="sort-container">
-                <label for="sort">Sort By: </label>
-                <select id="sort">
-                    <option value="date">Ending Time</option>
-                    <option value="name">Product Name</option>
-                    <option value="price">Product Price</option>
-                </select>
-            </div>
+
             <ul>
                 @foreach (var auction in Model.MyAuctions)
                 {
@@ -44,3 +59,28 @@
         </div>
     }
 </div>
+<script>
+    document.getElementById('sort').addEventListener('change', function () {
+        submitForm();
+    });
+
+    document.getElementById('occurring').addEventListener('change', function () {
+        submitForm();
+    });
+
+    function submitForm() {
+        var sortValue = document.getElementById('sort').value;
+        var occuringValue = document.getElementById('occurring').value;
+
+        // Create a URLSearchParams object to handle parameters
+        var params = new URLSearchParams();
+        params.append('sort', sortValue);
+        params.append('occurring', occuringValue);
+
+        // Set the form action URL with the parameters
+        document.getElementById('filterForm').action = '/myauctions?' + params.toString();
+
+        // Submit the form
+        document.getElementById('filterForm').submit();
+    }
+</script>

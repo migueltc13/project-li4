@@ -1,6 +1,6 @@
-using BetterFinds.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BetterFinds.Pages
 {
@@ -12,6 +12,11 @@ namespace BetterFinds.Pages
             _configuration = configuration;
             SearchResults = new List<Dictionary<string, object>>();
         }
+
+        public string Query { get; set; } = "";
+        public string CurrentSort { get; set; } = "";
+        public int CurrentOccurring { get; set; } = 0;
+
         public List<Dictionary<string, object>> SearchResults { get; set; }
         public IActionResult OnGet()
         {
@@ -27,14 +32,36 @@ namespace BetterFinds.Pages
                 return Page();
             }
 
+            // Save the query to the model
+            Query = query.ToString();
+
             // convert the query to a lowercase string
             query = query.ToString().ToLower();
 
-            // Search for products and retrieve the matching auction page
-            // TODO: optional add users profile pages as results
-            var auctionsUtils = new Auctions(_configuration);
+            // Define default values
+            int order = 0;
+            bool reversed = false;
+            // Get occurring from resquest query string
+            if (!int.TryParse(HttpContext.Request.Query["occurring"], out int occurring))
+            {
+                occurring = 1; // Default value: true
+            }
 
-            List<Dictionary<string, object>>? Auctions = auctionsUtils.GetAuctions(clientId: 0, order: 0, reversed: false, occurring: true);
+            var auctionsUtils = new Utils.Auctions(_configuration);
+
+            // Get string sort from url
+            if (!Request.Query.TryGetValue("sort", out var sortVar))
+            {
+                sortVar = "date"; // Default value: date
+            }
+            string sort = sortVar.ToString();
+
+            auctionsUtils.ParseAuctionsOptions(sort, ref order, ref reversed);
+
+            var Auctions = auctionsUtils.GetAuctions(clientId: 0, order, reversed, occurring == 1);
+
+            CurrentSort = sort;
+            CurrentOccurring = occurring;
 
             // Iterate through the auctions and check if the product name or description contains the query
             for (int i = 0; i < Auctions.Count; i++)
@@ -43,8 +70,8 @@ namespace BetterFinds.Pages
                 string productName = ((string) auction["ProductName"]).ToLower();
                 string productDescription = ((string) auction["ProductDescription"]).ToLower();
 
-                Console.WriteLine(productName);
-                Console.WriteLine(productDescription);
+                // Console.WriteLine(productName);
+                // Console.WriteLine(productDescription);
 
                 if (productName.ToString().Contains(value: query!))
                 {

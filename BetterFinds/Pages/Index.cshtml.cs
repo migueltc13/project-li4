@@ -1,4 +1,3 @@
-using BetterFinds.Utils;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BetterFinds.Pages
@@ -11,14 +10,24 @@ namespace BetterFinds.Pages
             _configuration = configuration;
         }
 
+        public string CurrentSort { get; set; } = "";
+
         public List<Dictionary<string, object>>? Auctions { get; set; }
 
-        public void OnGet()
+        public void OnGet(string sort)
         {
-            var auctionsUtils = new Auctions(_configuration);
+            // Define default values
+            int order = 0;
+            bool reversed = false;
+            bool occurring = true;
 
-            // TODO get order/reverse methods on the frontend
-            Auctions = auctionsUtils.GetAuctions(clientId: 0, order: 0, reversed: false, occurring: true);
+            var auctionsUtils = new Utils.Auctions(_configuration);
+
+            auctionsUtils.ParseAuctionsOptions(sort, ref order, ref reversed);
+
+            Auctions = auctionsUtils.GetAuctions(clientId: 0, order, reversed, occurring);
+
+            CurrentSort = sort;
         }
     }
 }

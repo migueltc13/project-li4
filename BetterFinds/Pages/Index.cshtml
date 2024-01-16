@@ -8,24 +8,34 @@
     <div class="text-center">
         <h3>Welcome
         @if (User.Identity != null && User.Identity.IsAuthenticated)
-            { @User.Identity.Name }
+        {
+            <span>@@@User.Identity.Name</span>
+        }
         else
-            { <span>guest</span> }
+        {
+            <span>guest</span>
+        }
         </h3>
     </div>
 
     @if (Model.Auctions != null && Model.Auctions.Count > 0)
     {
         <div>
+            <form id="sortForm" asp-page="/" method="get">
+                <div class="sort-container">
+                    <label for="sort">Sort By: </label>
+                    <select id="sort" name="sort" style="width: 200px; text-align: center">
+                        <option value="date" selected="@(Model.CurrentSort == "date")">Ending Time (Ascending)</option>
+                        <option value="dateRev" selected="@(Model.CurrentSort == "dateRev")">Ending Time (Descending)</option>
+                        <option value="name" selected="@(Model.CurrentSort == "name")">Product Name (A-Z)</option>
+                        <option value="nameRev" selected="@(Model.CurrentSort == "nameRev")">Product Name (Z-A)</option>
+                        <option value="price" selected="@(Model.CurrentSort == "price")">Product Price (Lowest first)</option>
+                        <option value="priceRev" selected="@(Model.CurrentSort == "priceRev")">Product Price (Highest first)</option>
+                    </select>
+                </div>
+            </form>
+
             <h2 style="padding-bottom: 10px">Auctions occurring</h2>
-            <div class="sort-container">
-                <label for="sort">Sort By: </label>
-                <select id="sort">
-                    <option value="date">Ending Time</option>
-                    <option value="name">Product Name</option>
-                    <option value="price">Product Price</option>
-                </select>
-            </div>
             <ul>
                 @foreach (var auction in Model.Auctions)
                 {
@@ -49,3 +59,8 @@
         <h2>No auctions to display.</h2>
     }
 </div>
+<script>
+    document.getElementById('sort').addEventListener('change', function () {
+        document.getElementById('sortForm').submit();
+    });
+</script>
