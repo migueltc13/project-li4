@@ -8,4 +8,3 @@
     [IsCompleted] BIT      DEFAULT ((0)) NOT NULL,
     PRIMARY KEY CLUSTERED ([AuctionId] ASC)
 );
-

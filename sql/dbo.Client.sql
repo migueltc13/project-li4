@@ -1,10 +1,9 @@
 ﻿CREATE TABLE [dbo].[Client] (
     [ClientId]      INT            NOT NULL,
-    [FullName]      NVARCHAR (MAX) NOT NULL,
-    [Username]      NVARCHAR (MAX) NOT NULL,
-    [Email]         NVARCHAR (MAX) NOT NULL,
-    [Password]      NVARCHAR (MAX) NOT NULL,
+    [FullName]      NVARCHAR (64)  NOT NULL,
+    [Username]      NVARCHAR (32)  NOT NULL,
+    [Email]         NVARCHAR (320) NOT NULL,
+    [Password]      NVARCHAR (64)  NOT NULL,
     [OptNewsletter] BIT            DEFAULT ((0)) NOT NULL,
     PRIMARY KEY CLUSTERED ([ClientId] ASC)
 );
-
