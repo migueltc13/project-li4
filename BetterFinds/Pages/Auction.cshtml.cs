@@ -203,7 +203,7 @@ namespace BetterFinds.Pages
             List<int> biddersGroup = bidsUtils.GetBiddersFromAuction(auctionId);
             ViewData["BiddersGroup"] = biddersGroup;
 
-            Console.WriteLine($"Auction id requested: {auctionId}"); // TODO remove this
+            Console.WriteLine($"Auction id requested: {auctionId}");
 
             ViewData["AuctionId"] = auctionId;
 
