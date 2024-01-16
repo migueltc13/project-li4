@@ -482,17 +482,41 @@ nav {
     align-items: center; 
     flex-wrap: wrap;
  }
- 
- label {
+
+label {
     margin-left: auto;
     margin-right: 10px;
- }
-  
-  select {
+}
+
+select {
     padding: 3px;    
     font-size: 12px; 
     width: 120px;
     border-radius: 40px;
-    
-    
-  }
+}
+
+.notification {
+    display: flex;
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+    .notification a {
+        margin-left: auto;
+        margin-right: auto;
+        text-decoration: none;
+    }
+
+    .notification span {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+.notification-unread {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: rgb(2, 88, 88);
+    background-color: rgba(2, 88, 88, 0.3);
+    /* round corners */
+    border-radius: 20px;
+}
