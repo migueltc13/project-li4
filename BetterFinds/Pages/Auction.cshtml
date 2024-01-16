@@ -7,12 +7,12 @@
 <div class="main-wrapper">
     <div asp-validation-summary="All" class="text-danger"></div>
 
-    <h1 style="padding-bottom: 10px">@ViewData["ProductName"]</h1>
+    <h2 style="padding-bottom: 10px">@ViewData["ProductName"]</h2>
 
     <p>@ViewData["ProductPrice"]€</p>
+    <p>Minimum bid: @ViewData["MinimumBid"]€</p>
     <!-- Countdown timer -->
     <div id="countdown"></div>
-
     @if (ViewData["Images"] is List<string> images && images != null && images.Any())
     {
         <br />
@@ -74,10 +74,29 @@
     <p>Start Time: @ViewData["StartTime"]</p>
     <p>End Time: @ViewData["EndTime"]</p>
     <br />
-    <p>Seller info: @@@ViewData["SellerUsername"] - @ViewData["SellerFullName"]</p>
+    <p>Seller info: <a href="/account?id=@ViewData["SellerId"]">@@@ViewData["SellerUsername"]</a> - @ViewData["SellerFullName"]</p>
     @if (ViewData["BuyerUsername"] != null && ViewData["BuyerFullName"] != null)
     {
-        <p>Buyer info: @@@ViewData["BuyerUsername"] - @ViewData["BuyerFullName"]</p>
+        <p>Buyer info: <a href="/account?id=@ViewData["BuyerId"]">@@@ViewData["BuyerUsername"]</a> - @ViewData["BuyerFullName"]</p>
+        <br />
+        <details>
+            <summary>
+                Bid history
+            </summary>
+            @if (ViewData["Bids"] is List<Dictionary<string, object>> bids && bids != null && bids.Any())
+            {
+                <ul style="margin-left: 20px">
+                    @foreach (var bid in bids)
+                    {
+                        <li>
+                            <p>
+                                <a href="/account?id=@bid["BidderId"]">@@@bid["Username"]</a> - @bid["Value"]€ - @bid["Time"]
+                            </p>
+                        </li>
+                    }
+                </ul>
+            }
+        </details>
     }
     else
     {
