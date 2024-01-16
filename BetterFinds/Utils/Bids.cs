@@ -8,7 +8,6 @@ namespace BetterFinds.Utils
         public Bids(IConfiguration configuration)
         {
             _configuration = configuration;
-            CreateBidderGroup().Wait();
         }
 
         public Dictionary<int, List<int>> BiddersGroup { get; set; } = new Dictionary<int, List<int>>();
@@ -57,6 +56,14 @@ namespace BetterFinds.Utils
                 }
                 con.Close();
             }
+
+            // Print the biddersGroup dictionary
+            Console.WriteLine("biddersGroup contents:");
+            foreach (var entry in BiddersGroup)
+            {
+                Console.WriteLine($"AuctionId: {entry.Key}, Bidders: {string.Join(", ", entry.Value)}");
+            }
+
             await Task.CompletedTask;
         }
 
@@ -76,18 +83,21 @@ namespace BetterFinds.Utils
                 // Add the auction to the dictionary
                 BiddersGroup.Add(auctionId, auctionBidders);
             }
-            await Task.CompletedTask;
-        }
 
-        public List<int> GetBiddersFromAuction(int auctionId)
-        {
             // Print the biddersGroup dictionary
+            /*
             Console.WriteLine("biddersGroup contents:");
             foreach (var entry in BiddersGroup)
             {
                 Console.WriteLine($"AuctionId: {entry.Key}, Bidders: {string.Join(", ", entry.Value)}");
             }
+            */
 
+            await Task.CompletedTask;
+        }
+
+        public List<int> GetBiddersFromAuction(int auctionId)
+        {
             if (BiddersGroup != null && BiddersGroup.ContainsKey(auctionId))
             {
                 return BiddersGroup[auctionId];
