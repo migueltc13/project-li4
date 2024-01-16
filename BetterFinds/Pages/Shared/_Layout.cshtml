@@ -1,9 +1,29 @@
 ﻿@{
     // Get the page name from PageContext
     var pageName = Context.GetRouteValue("page");
-    // Console.WriteLine(pageName); // TODO remove this
     // Don't load header in /Login and /Register pages
     bool LoadHeader = (pageName != null) ? !(pageName.ToString() == "/Login" || pageName.ToString() == "/Register") : true;
+
+    // biddersGroup is a list of client IDs that are allowed to receive notifications only used in auction page
+    List<int>? biddersGroup = ViewData["BiddersGroup"] as List<int>;
+
+    // Get the user's notifications
+    IConfiguration configuration = new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory()) // Set the base path as needed
+        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true) // Adjust the file name and path
+        .Build();
+
+    // Simulate getting HttpContext (replace with actual HttpContext if possible)
+    HttpContext httpContext = Context.Request.HttpContext;
+    var clientUtils = new Utils.Client(configuration);
+    int clientId = clientUtils.GetClientId(httpContext, User);
+
+    // Simulate getting notifications count
+    var notificationUtils = new Utils.Notification(configuration);
+    int notificationCount = notificationUtils.GetNotificationsCount(clientId);
+
+    // Get current ClientId
+    int currentClientId = clientUtils.GetClientId(httpContext, User);
 }
 
 <!DOCTYPE html>
@@ -14,34 +34,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] | BetterFinds</title>
 
-    <!-- Primary Favicon Images -->
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="512x512" href="/img/favicon/android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/favicon/android-chrome-192x192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
     <link rel="icon" type="image/x-icon" href="/img/favicon/favicon.ico">
 
-    <!-- Additional Favicon Images -->
-    <link rel="icon" type="image/png" sizes="192x192" href="/img/favicon/android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/img/favicon/android-chrome-512x512.png">
-
     <!-- Style css -->
     <link rel="stylesheet" href="/css/style.css" asp-append-version="true" />
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@@2.1.4/css/boxicons.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+    <!-- SignalR -->
+    <script src="/lib/signalr/dist/signalr.js"></script>
 </head>
 <body>
     @if (LoadHeader) {
         <nav>
-            <ul>
-                <a href="/">
-                    <img src="/img/logo.png" alt="BetterFinds" x="0px" y="0px" width="70px" />
-                </a>
-            </ul>
+            <a href="/">
+                <img src="/img/logo.png" alt="BetterFinds" x="0px" y="0px" style="width: 70px" />
+            </a>
             <ul class="sidebar">
                 <li onclick=hideSidebar()><a href="#"><strong>X</strong></a></li>
                 <li><a href="/">Home</a></li>
                 @if (User.Identity != null && User.Identity.IsAuthenticated) {
-                    <li><a href="/account">My Account</a></li>
+                    <li><a href="/myaccount">My Account</a></li>
                     <li><a href="/myauctions">My Auctions</a></li>
+                    <li><a href="/mybids">My Bids</a></li>
                     <li><a href="/create">Create Auction</a></li>
                     <li><a href="/logout">Logout</a></li>
                 }
@@ -55,10 +76,18 @@
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="13px" height="13px" viewBox="0 0 50 50" style="fill:#FFFFFF;"><path d="M 21 4 C 11.082241 4 3 12.082241 3 22 C 3 31.917759 11.082241 40 21 40 C 24.62177 40 27.99231 38.91393 30.820312 37.0625 L 43.378906 49.621094 L 47.621094 45.378906 L 35.224609 32.982422 C 37.581469 29.938384 39 26.13473 39 22 C 39 12.082241 30.917759 4 21 4 z M 21 8 C 28.756241 8 35 14.243759 35 22 C 35 29.756241 28.756241 36 21 36 C 13.243759 36 7 29.756241 7 22 C 7 14.243759 13.243759 8 21 8 z"></path></svg>
                     <input class="search-input" type="search" placeholder="What are you looking for?" id="searchBar">
                 </div>
+                @if (User.Identity != null && User.Identity.IsAuthenticated)
+                {
+                    <button type="button" class="icon-button" id="notificationsButton">
+                        <span class="material-icons">notifications</span>
+                        <span id="notificationCount" class="icon-button__badge">@notificationCount</span>
+                    </button>
+                }
                 <li onclick=showSidebar()><a href="#"><img style="width: 25px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAQ0lEQVR4nO3WoREAIAwEQfovKyksSAQimrDbwc2bXwsAOKoq6z05JSSuEAAAaD36fnNKSPQTAQDAkPebU0LiCgGAn21ViEka78Lu0AAAAABJRU5ErkJggg==" /></a></li
             </ul>
         </nav>
         <script>
+            // Sidebar functions
             function showSidebar() {
                 const sidebar = document.querySelector('.sidebar')
                 sidebar.style.display = 'flex'
@@ -67,8 +96,9 @@
                 const sidebar = document.querySelector('.sidebar')
                 sidebar.style.display = 'none'
             }
-            hideSidebar()
+            hideSidebar();
 
+            // Add an event listener to the search bar
             document.getElementById('searchBar').addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
                     // Get the user-typed query
@@ -81,7 +111,66 @@
                     e.preventDefault();
                 }
             });
+
+            // Add an event listener to the notifications button
+            document.getElementById('notificationsButton').addEventListener('click', function() {
+                window.location.href = '/notifications';
+            });
+
         </script>
+        @if (ViewData["auctionId"] != null)
+        {
+            <script>
+                // SignalR
+            
+                // Refresh the page when someone bids
+                // TODO when auction page is updated also needs refresh
+                const connection = new signalR.HubConnectionBuilder()
+                .withUrl("/notificationHub")
+                .build();
+
+                connection.start().then(() => {
+                    console.log("Connected to notification hub");
+                }).catch(err => console.error(err));
+
+                connection.on("UpdatePrice", (clientId, auctionId, message) => {
+                    var biddersGroup = @Html.Raw("[" + string.Join(", ", biddersGroup ?? []) + "]");
+                    if (biddersGroup?.includes(clientId)) {
+                        // console.log("Send notification:", message);
+                        // TODO: Add notification logic here
+                        // document.getElementById("Notification").innerHTML = message;
+                        // alert(message);
+                        // connection.invoke("RefreshNotifications", clientId, auctionId, message).catch(err => console.error(err));
+                    }
+
+                    currentAuctionId = @ViewData["auctionId"];
+                    if (currentAuctionId == auctionId)
+                        window.location.href = window.location.href;
+                });
+            </script>
+        }
+        else
+        {
+            <script>
+                // SignalR
+            
+                // Refresh the page when someone bids
+                // TODO when auction page is updated also needs refresh
+                const connection = new signalR.HubConnectionBuilder()
+                .withUrl("/notificationHub")
+                .build();
+
+                connection.start().then(() => {
+                    console.log("Connected to notification hub");
+                }).catch(err => console.error(err));
+                
+                connection.on("ReceiveNotificationCount", (newCount, bidderClientId) => {
+                    // Update the notification count in the UI
+                    if (bidderClientId == @currentClientId)
+                        document.getElementById("notificationCount").innerText = newCount;
+                });
+            </script>
+        }
     }
     else {
         <style>
@@ -101,20 +190,18 @@
         </main>
     </div>
 
-
     @if (LoadHeader){
-        <footer class="border-top footer text-muted">
+        <footer class="footer">
             <div>   
-                &copy;2024 | BetterFinds
+                &copy;@DateTime.Now.Year.ToString() | BetterFinds
             </div>
         </footer>
     }
-
-
+    <!--
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
+    -->
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
