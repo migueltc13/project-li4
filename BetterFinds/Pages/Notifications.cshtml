@@ -8,20 +8,107 @@
     <div asp-validation-summary="All" class="text-danger"></div>
     @if (Model.Notifications != null && Model.Notifications.Count > 0)
     {
-        <h2 style="padding-bottom: 10px">Notifications</h2>
-        @foreach (var notification in Model.Notifications)
+        @if (Model.ShowAll)
         {
-            <div>
-                <p>
-                    <a href="/auction?id=@notification["AuctionId"]">@notification["ProductName"]</a>
-                    - @notification["Message"]
-                    - @notification["Timestamp"]
-                </p>
+            <div style="text-align: right">
+                <button id="notifications-link" class="btn btn-primary" style="width: 200px; display: inline-block; margin-right: 50px">Show Unread</button>
+                @if (ViewData["NUnreadMessages"] != null && (int?)ViewData["NUnreadMessages"] > 0) 
+                {
+                    <button id="notifications-link-showall-markall" class="btn btn-primary" style="width: 200px; display: inline-block; margin-right: 50px">Mark All As Read</button>
+                }
             </div>
+            <h2 style="padding-bottom: 10px; padding-top: 10px; text-align: center">Notifications</h2>
+            @foreach (var notification in Model.Notifications)
+            {
+                @if ((bool)notification["IsRead"] == false)
+                {
+                    <p class="notification notification-unread">
+                        <a href="/auction?id=@notification["AuctionId"]">@notification["ProductName"]</a>
+                        <span>@notification["Message"]</span>
+                        <span>@notification["Timestamp"]</span>
+                        <a href="/notifications?ShowAll=1&MarkAsRead=@notification["NotificationId"]">&#x2713;</a>
+                    </p>
+                }
+                else
+                {
+                    <p class="notification">
+                        <a href="/auction?id=@notification["AuctionId"]">@notification["ProductName"]</a>
+                        <span>@notification["Message"]</span>
+                        <span>@notification["Timestamp"]</span>
+                    </p>
+                }
+            }
+        }
+        else
+        {
+            @if (ViewData["NUnreadMessages"] != null && (int?)ViewData["NUnreadMessages"] > 0)
+            {
+                <div style="text-align: right">
+                    <button id="notifications-link-showall" class="btn btn-primary" style="width: 200px; display: inline-block; margin-right: 50px">Show All</button>
+                    <button id="notifications-link-markall" class="btn btn-primary" style="width: 200px; display: inline-block; margin-right: 50px">Mark All As Read</button>
+                </div>
+                <h2 style="padding-bottom: 10px; padding-top: 10px; text-align: center">Notifications</h2>
+                @foreach (var notification in Model.Notifications)
+                {
+                    @if ((bool)notification["IsRead"] == false)
+                    {
+                        <p class="notification notification-unread">
+                            <a href="/auction?id=@notification["AuctionId"]">@notification["ProductName"]</a>
+                            <span>@notification["Message"]</span>
+                            <span>@notification["Timestamp"]</span>
+                            <a href="/notifications?MarkAsRead=@notification["NotificationId"]">&#x2713;</a>
+                        </p>
+                    }
+                }
+            }
+            else
+            {
+                <div style="text-align: right">
+                    <button id="notifications-link-showall" class="btn btn-primary" style="width: 200px; display: inline-block; margin-right: 50px">Show All</button>
+                </div>
+                <h2 style="padding-top: 10px;">You have no unread notifications.</h2>
+            }
         }
     }
     else
     {
         <h2>You have no notifications.</h2>
     }
+    <script>
+        // href="/notifications" id="notifications-link"
+        // href="/notifications?ShowAll=1&MarkAllAsRead=1" id="notifications-link-showall-markall"
+        // href="/notifications?ShowAll=1" id="notifications-link-showall"
+        // href="/notifications?MarkAllAsRead=1" id="notifications-link-markall"
+
+        // Get the button elements by their IDs
+        var notificationsLink = document.getElementById("notifications-link");
+        var notificationsLinkShowAllMarkAll = document.getElementById("notifications-link-showall-markall");
+        var notificationsLinkShowAll = document.getElementById("notifications-link-showall");
+        var notificationsLinkMarkAll = document.getElementById("notifications-link-markall");
+
+        // Check if the button elements exist and add click event listeners
+        if (notificationsLink) {
+            notificationsLink.addEventListener("click", function () {
+                window.location.href = "/notifications";
+            });
+        }
+
+        if (notificationsLinkShowAllMarkAll) {
+            notificationsLinkShowAllMarkAll.addEventListener("click", function () {
+                window.location.href = "/notifications?ShowAll=1&MarkAllAsRead=1";
+            });
+        }
+
+        if (notificationsLinkShowAll) {
+            notificationsLinkShowAll.addEventListener("click", function () {
+                window.location.href = "/notifications?ShowAll=1";
+            });
+        }
+
+        if (notificationsLinkMarkAll) {
+            notificationsLinkMarkAll.addEventListener("click", function () {
+                window.location.href = "/notifications?MarkAllAsRead=1";
+            });
+        }
+    </script>
 </div>
