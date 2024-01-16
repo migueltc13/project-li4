@@ -27,101 +27,115 @@ namespace BetterFinds.Utils
          */
         public List<Dictionary<string, object>> GetAuctions(int clientId, int order, bool reversed, bool occurring)
         {
-            List<Dictionary<string, object>> auctions = new List<Dictionary<string, object>>();
+            List<Dictionary<string, object>> auctions = new();
 
-            // Sorting method
-            string query = "SELECT AuctionId, ProductId, EndTime FROM Auction";
-            string sortBy = "";
+            string query = "SELECT A.AuctionId, A.ProductId, A.EndTime, P.Name AS ProductName, P.Description AS ProductDescription, P.Price AS ProductPrice " +
+                           "FROM Auction A " +
+                           "JOIN Product P ON A.ProductId = P.ProductId";
 
             if (clientId != 0)
-                query += $" WHERE ClientId = {clientId}";
+            {
+                query += " WHERE A.ClientId = @ClientId";
+            }
 
             if (occurring)
             {
-                if (clientId != 0)
-                    query += " AND";
-                else
-                    query += " WHERE";
-
-                query += " EndTime > GETDATE()";
+                query += (clientId != 0) ? " AND A.EndTime > GETDATE()" : " WHERE A.EndTime > GETDATE()";
             }
 
-            switch (order) {
+            switch (order)
+            {
                 case 0:
-                    query += " ORDER BY EndTime";
+                    query += " ORDER BY A.EndTime";
                     break;
                 case 1:
-                    sortBy = "ProductPrice";
+                    query += " ORDER BY P.Price";
                     break;
                 case 2:
-                    sortBy = "ProductName";
+                    query += " ORDER BY P.Name";
                     break;
             }
 
             if (reversed)
+            {
                 query += " DESC";
+            }
 
             Console.WriteLine($"{query}");
 
-            // Retrieve auctions and rescpective products from database
-            string? conString = _configuration.GetConnectionString("DefaultConnection");
-            using (SqlConnection con = new SqlConnection(conString))
+            string? connectionString = _configuration.GetConnectionString("DefaultConnection");
+
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
+
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
+                    cmd.Parameters.AddWithValue("@ClientId", clientId);
+
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            // Get product name and price
-                            int productId = reader.GetInt32(reader.GetOrdinal("ProductId"));
-                            string queryProduct = "SELECT Name, Description, Price FROM Product WHERE ProductId = @ProductId";
-                            using (SqlConnection conProduct = new SqlConnection(conString))
+                            double productPrice = Convert.ToDouble(reader["ProductPrice"]);
+                            string formattedPrice = (productPrice / 100).ToString("0.00");
+
+                            Dictionary<string, object> auctionRow = new Dictionary<string, object>
                             {
-                                conProduct.Open();
+                                {"AuctionId", reader["AuctionId"]},
+                                {"EndTime", reader["EndTime"]},
+                                {"ProductName", reader["ProductName"]},
+                                {"ProductDescription", reader["ProductDescription"]},
+                                {"ProductPrice", formattedPrice}
+                            };
 
-                                using (SqlCommand cmdProduct = new SqlCommand(queryProduct, conProduct))
-                                {
-                                    cmdProduct.Parameters.AddWithValue("@ProductId", productId);
-
-                                    using (SqlDataReader readerProduct = cmdProduct.ExecuteReader())
-                                    {
-                                        if (readerProduct.Read())
-                                        {
-                                            // Convert and format the price
-                                            double productPrice = Convert.ToDouble(readerProduct["Price"]);
-                                            string formattedPrice = ((double)productPrice / 100).ToString("0.00");
-
-                                            // Create a dictionary to store each row
-                                            Dictionary<string, object> auctionRow = new Dictionary<string, object>
-                                            {
-                                                {"AuctionId", reader["AuctionId"]},
-                                                {"EndTime", reader["EndTime"]},
-                                                {"ProductName", readerProduct["Name"]},
-                                                {"ProductDescription", readerProduct["Description"]},
-                                                {"ProductPrice", formattedPrice}
-                                            };
-                                            auctions.Add(auctionRow);
-                                        }
-                                    }
-                                }
-                                conProduct.Close();
-                            }
+                            auctions.Add(auctionRow);
                         }
                     }
-                    con.Close();
                 }
             }
-
-            if (order != 0)
-            {
-                auctions = auctions.OrderBy(auction => auction[sortBy]).ToList();
-                if (reversed)
-                    auctions.Reverse();
-            }
-
             return auctions;
+        }
+
+        public void ParseAuctionsOptions(string sort, ref int order, ref bool reversed)
+        {
+            // Update order and reversed based on the selected sort option
+            switch (sort)
+            {
+                case "date":
+                    order = 0;
+                    reversed = false;
+                    break;
+
+                case "dateRev":
+                    order = 0;
+                    reversed = true;
+                    break;
+
+                case "price":
+                    order = 1;
+                    reversed = false;
+                    break;
+
+                case "priceRev":
+                    order = 1;
+                    reversed = true;
+                    break;
+
+                case "name":
+                    order = 2;
+                    reversed = false;
+                    break;
+
+                case "nameRev":
+                    order = 2;
+                    reversed = true;
+                    break;
+
+                default:
+                    // Handle the case where an invalid or no option is selected, default values are used
+                    break;
+            }
         }
 
         private static List<DateTime> auctionEndTimes = new();
