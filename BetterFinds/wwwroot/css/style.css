@@ -475,3 +475,24 @@ nav {
     align-items: center;
     border-radius: 50%;
 }
+
+.sort-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    flex-wrap: wrap;
+ }
+ 
+ label {
+    margin-left: auto;
+    margin-right: 10px;
+ }
+  
+  select {
+    padding: 3px;    
+    font-size: 12px; 
+    width: 120px;
+    border-radius: 40px;
+    
+    
+  }
