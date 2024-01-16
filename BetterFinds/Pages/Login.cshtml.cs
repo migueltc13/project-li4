@@ -19,8 +19,7 @@ namespace BetterFinds.Pages
         public bool RememberMe { get; set; } = false;
 
         private readonly IConfiguration _configuration;
-        public LoginModel(
-            IConfiguration configuration)
+        public LoginModel(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -29,17 +28,9 @@ namespace BetterFinds.Pages
         {
             // If user is already logged in, redirect to index
             if (User.Identity != null && User.Identity.IsAuthenticated)
-            {
-                // User is logged in
-                Console.WriteLine($"User is logged in as {User.Identity.Name}"); // TODO: Remove this
                 return RedirectToPage("/Index");
-            }
-            else
-            {
-                // User is not logged in
-                Console.WriteLine("User is not logged in"); // TODO: Remove this
-                return Page();
-            }
+
+            return Page();
         }
 
         // [HttpPost]
@@ -65,19 +56,17 @@ namespace BetterFinds.Pages
 
                 using SqlDataReader reader = cmd.ExecuteReader();
 
-                // Retrieve ClientId from database to store in session
-                string? clientId = null; // Initialize clientId
-
                 if (reader.HasRows && reader.Read())
                 {
-                    clientId = reader["ClientId"].ToString();
+                    // Retrieve ClientId from database to store in session
+                    string clientId = reader["ClientId"].ToString() ?? "";
 
                     // Login successful. Manually create the cookie
                     List <Claim> claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, Username),
                         new Claim(ClaimTypes.NameIdentifier, Username),
-                        new Claim("ClientId", clientId ?? ""), // save ClientId in session
+                        new Claim("ClientId", clientId), // save ClientId in session
                         // new Claim("OtherProperties", "Example Role")
                     };
 
@@ -95,7 +84,7 @@ namespace BetterFinds.Pages
                         new ClaimsPrincipal(claimsIdentity),
                         authProperties);
 
-                    HttpContext.Session.SetString("ClientId", clientId ?? "");
+                    HttpContext.Session.SetString("ClientId", clientId);
 
                     return RedirectToPage("/Index");
                 }
@@ -114,6 +103,6 @@ namespace BetterFinds.Pages
             {
                 con.Close();
             }
-        } 
+        }
     }
 }
