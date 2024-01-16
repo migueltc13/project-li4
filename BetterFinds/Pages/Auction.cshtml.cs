@@ -164,25 +164,20 @@ namespace BetterFinds.Pages
                 string message = $"A new bid has been placed on the amount of {BidAmount}€";
 
                 // Create notification for each bidder except the current one
+                // Refresh notifications count for all these clients
                 var notificationUtils = new Utils.Notification(_configuration);
                 List<int> bidders = bidsUtils.GetBiddersFromAuction(auctionId);
-                foreach (int bidder in bidders)
-                {
-                    if (bidder != ClientId)
-                    {
-                        notificationUtils.CreateNotification(bidder, auctionId, message);
-                    }
-                }
-
-                // Refresh notifications count for all clients
-                // calculate number of unread messages for each client that is member of the bidders group
                 int notificationCount = 0;
                 for (int i = 0; i < bidders.Count; i++)
                 {
-                    notificationCount = notificationUtils.GetNUnreadMessages(bidders[i]);
-                    _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidders[i]).Wait();
+                    if (bidders[i] != ClientId)
+                    {
+                        notificationUtils.CreateNotification(bidders[i], auctionId, message);
+                        notificationCount = notificationUtils.GetNUnreadMessages(bidders[i]);
+                        _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidders[i]).Wait();
+                    }
                 }
-                
+
                 // Refresh auction page for all clients located that page
                 _hubContext.Clients.All.SendAsync("UpdatePrice", ClientId, auctionId, message).Wait();
 
