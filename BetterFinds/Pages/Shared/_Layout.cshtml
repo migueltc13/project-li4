@@ -53,16 +53,16 @@
 <body>
     @if (LoadHeader) {
         <nav>
-            <a href="/">
-                <img src="/img/logo.png" alt="BetterFinds" x="0px" y="0px" style="width: 70px" />
+            <a href="/" style="padding: 0 20px 0 0">
+                <img src="/img/logo.png" alt="BetterFinds" style="width: 70px" />
             </a>
             <ul class="sidebar">
                 <li onclick=hideSidebar()><a href="#"><strong>X</strong></a></li>
                 <li><a href="/">Home</a></li>
                 @if (User.Identity != null && User.Identity.IsAuthenticated) {
                     <li><a href="/myaccount">My Account</a></li>
-                    <li><a href="/myauctions">My Auctions</a></li>
                     <li><a href="/mybids">My Bids</a></li>
+                    <li><a href="/myauctions">My Auctions</a></li>
                     <li><a href="/create">Create Auction</a></li>
                     <li><a href="/logout">Logout</a></li>
                 }
@@ -144,8 +144,9 @@
                     }
 
                     currentAuctionId = @ViewData["auctionId"];
-                    if (currentAuctionId == auctionId)
+                    if (currentAuctionId == auctionId) {
                         window.location.href = window.location.href;
+                    }
                 });
             </script>
         }
@@ -153,9 +154,6 @@
         {
             <script>
                 // SignalR
-            
-                // Refresh the page when someone bids
-                // TODO when auction page is updated also needs refresh
                 const connection = new signalR.HubConnectionBuilder()
                 .withUrl("/notificationHub")
                 .build();
@@ -166,8 +164,9 @@
                 
                 connection.on("ReceiveNotificationCount", (newCount, bidderClientId) => {
                     // Update the notification count in the UI
-                    if (bidderClientId == @currentClientId)
+                    if (bidderClientId == @currentClientId) {
                         document.getElementById("notificationCount").innerText = newCount;
+                    }
                 });
             </script>
         }
