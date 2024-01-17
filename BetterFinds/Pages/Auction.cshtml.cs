@@ -16,8 +16,8 @@ namespace BetterFinds.Pages
         }
         
         [BindProperty]
-        public int BidAmount { get; set; } = 0;
-        public IActionResult OnPostAsync()
+        public decimal BidAmount { get; set; } = 0;
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!int.TryParse(HttpContext.Request.Query["id"], out int auctionId))
             {
@@ -31,7 +31,7 @@ namespace BetterFinds.Pages
                 return OnGet();
             }
 
-            int MinimumBid = 0;
+            decimal MinimumBid = 0;
             DateTime EndTime;
             int SellerId = 0;
 
@@ -48,7 +48,7 @@ namespace BetterFinds.Pages
                     {
                         if (reader.Read())
                         {
-                            MinimumBid = reader.GetInt32(reader.GetOrdinal("MinimumBid"));
+                            MinimumBid = reader.GetDecimal(reader.GetOrdinal("MinimumBid"));
                             EndTime = reader.GetDateTime(reader.GetOrdinal("EndTime"));
                             SellerId = reader.GetInt32(reader.GetOrdinal("ClientId"));
                         }
@@ -59,7 +59,7 @@ namespace BetterFinds.Pages
                     }
                 }
 
-                int Price = 0;
+                decimal Price = 0;
                 int BuyerId = 0;
 
                 query = "SELECT Price, ClientId FROM Product WHERE AuctionId = @AuctionId";
@@ -71,7 +71,7 @@ namespace BetterFinds.Pages
                     {
                         if (reader.Read())
                         {
-                            Price = reader.GetInt32(reader.GetOrdinal("Price"));
+                            Price = reader.GetDecimal(reader.GetOrdinal("Price"));
                             BuyerId = reader.GetInt32(reader.GetOrdinal("ClientId"));
                         }
                         else
@@ -96,7 +96,7 @@ namespace BetterFinds.Pages
                 }
 
                 // Check if bid amount is less than current price plus minimum bid
-                if (Price + MinimumBid > BidAmount * 100)
+                if (Price + MinimumBid > BidAmount)
                 {
                     ModelState.AddModelError(string.Empty, "Your bid amount is too low.");
                     return OnGet();
@@ -124,7 +124,7 @@ namespace BetterFinds.Pages
                 query = "UPDATE Product SET Price = @Price, ClientId = @ClientId WHERE AuctionId = @AuctionId";
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
-                    cmd.Parameters.AddWithValue("@Price", BidAmount * 100);
+                    cmd.Parameters.AddWithValue("@Price", BidAmount);
                     cmd.Parameters.AddWithValue("@ClientId", ClientId);
                     cmd.Parameters.AddWithValue("@AuctionId", auctionId);
 
@@ -148,7 +148,7 @@ namespace BetterFinds.Pages
                 using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     cmd.Parameters.AddWithValue("@BidId", BidId);
-                    cmd.Parameters.AddWithValue("@Value", BidAmount * 100);
+                    cmd.Parameters.AddWithValue("@Value", BidAmount);
                     cmd.Parameters.AddWithValue("@Time", DateTime.Now);
                     cmd.Parameters.AddWithValue("@ClientId", ClientId);
                     cmd.Parameters.AddWithValue("@AuctionId", auctionId);
@@ -161,25 +161,31 @@ namespace BetterFinds.Pages
                 bidsUtils.AddBidderToBidderGroup(ClientId, auctionId).Wait();
 
                 // Notification message
-                string message = $"A new bid has been placed on the amount of {BidAmount}€";
+                string message = $"A new bid has been placed on the amount of {Utils.Currency.FormatDecimal(BidAmount)}€";
 
                 // Create notification for each bidder except the current one
-                // Refresh notifications count for all these clients
                 var notificationUtils = new Utils.Notification(_configuration);
                 List<int> bidders = bidsUtils.GetBiddersFromAuction(auctionId);
-                int notificationCount = 0;
-                for (int i = 0; i < bidders.Count; i++)
+                foreach (int bidder in bidders)
                 {
-                    if (bidders[i] != ClientId)
+                    if (bidder != ClientId)
                     {
-                        notificationUtils.CreateNotification(bidders[i], auctionId, message);
-                        notificationCount = notificationUtils.GetNUnreadMessages(bidders[i]);
-                        _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidders[i]).Wait();
+                        notificationUtils.CreateNotification(bidder, auctionId, message);
                     }
                 }
 
+                // Refresh notifications count for all clients
+                // calculate number of unread messages for each client that is member of the bidders group
+                int notificationCount = 0;
+                foreach (int bidder in bidders)
+                {
+                    notificationCount = notificationUtils.GetNUnreadMessages(bidder);
+                    Console.WriteLine($"Bidder: {bidder} - Auction: {auctionId} - notificationCount: {notificationCount}");
+                    await _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidder);
+                }
+
                 // Refresh auction page for all clients located that page
-                _hubContext.Clients.All.SendAsync("UpdatePrice", ClientId, auctionId, message).Wait();
+                await _hubContext.Clients.All.SendAsync("UpdatePrice", ClientId, auctionId, message);
 
                 Console.WriteLine("Send notification to clients");
             }
@@ -227,13 +233,13 @@ namespace BetterFinds.Pages
                         DateTime endTime = reader.GetDateTime(reader.GetOrdinal("EndTime"));
                         int clientId = reader.GetInt32(reader.GetOrdinal("ClientId"));
                         int productId = reader.GetInt32(reader.GetOrdinal("ProductId"));
-                        int minimumBid = reader.GetInt32(reader.GetOrdinal("MinimumBid"));
+                        decimal minimumBid = reader.GetDecimal(reader.GetOrdinal("MinimumBid"));
 
 
                         // Values to be used in the cshtml page
                         ViewData["StartTime"] = startTime.ToString("yyyy-MM-dd HH:mm:ss");
                         ViewData["EndTime"] = endTime.ToString("yyyy-MM-dd HH:mm:ss");
-                        ViewData["MinimumBid"] = ((int)minimumBid / 100).ToString("0.00");
+                        ViewData["MinimumBid"] = minimumBid;
                         ViewData["SellerId"] = clientId;
 
                         // Check if auction has ended
@@ -263,11 +269,11 @@ namespace BetterFinds.Pages
                         // Get Product info: name, description and price
                         string productName = string.Empty;
                         string productDesc = string.Empty;
-                        int productPrice = 0;
+                        decimal productPrice = 0;
                         int BuyerId = 0;
 
                         var imageUtils = new Utils.Images(_configuration);
-                        List<string> Images = new List<string>();
+                        List<string> Images = [];
 
                         string productQuery = "SELECT Name, Description, Price, ClientId, Images FROM Product WHERE ProductId = @ProductId";
                         SqlCommand cmdProduct = new SqlCommand(productQuery, con);
@@ -278,7 +284,7 @@ namespace BetterFinds.Pages
                             {
                                 productName = readerProduct.GetString(readerProduct.GetOrdinal("Name"));
                                 productDesc = readerProduct.GetString(readerProduct.GetOrdinal("Description"));
-                                productPrice = readerProduct.GetInt32(readerProduct.GetOrdinal("Price"));
+                                productPrice = readerProduct.GetDecimal(readerProduct.GetOrdinal("Price"));
                                 BuyerId = readerProduct.GetInt32(readerProduct.GetOrdinal("ClientId"));
 
                                 // Check for null before calling GetString
@@ -295,8 +301,8 @@ namespace BetterFinds.Pages
                         ViewData["BuyerId"] = BuyerId;
                         ViewData["ProductName"] = productName;
                         ViewData["ProductDesc"] = productDesc;
-                        ViewData["ProductPrice"] = ((decimal)productPrice / 100).ToString("0.00");
-                        ViewData["BidPlaceholder"] = ((decimal)(productPrice + minimumBid) / 100).ToString("0.00");
+                        ViewData["ProductPrice"] = productPrice;
+                        ViewData["BidPlaceholder"] = (decimal) productPrice + minimumBid;
                         ViewData["Images"] = Images;
                         // Console.WriteLine($"Images: {string.Join(", ", Images)}");
 
@@ -331,7 +337,7 @@ namespace BetterFinds.Pages
                                 while (readerBids.Read())
                                 {
                                     Dictionary<string, object> Bid = new Dictionary<string, object>();
-                                    Bid["Value"] = ((decimal)readerBids.GetInt32(readerBids.GetOrdinal("Value")) / 100).ToString("0.00");
+                                    Bid["Value"] = readerBids.GetDecimal(readerBids.GetOrdinal("Value"));
                                     Bid["Time"] = readerBids.GetDateTime(readerBids.GetOrdinal("Time")).ToString("yyyy-MM-dd HH:mm:ss");
 
                                     // Get bidder username using ClientId
