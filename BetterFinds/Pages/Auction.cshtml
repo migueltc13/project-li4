@@ -6,6 +6,12 @@
 
 <div class="main-wrapper">
     <div asp-validation-summary="All" class="text-danger"></div>
+    @if (ViewData["Edit"] != null && ViewData["Edit"] is bool edit && edit)
+    {
+        <div class="text-info" style="text-align: left">
+            You can edit your auction at <a href="/edit?id=@(ViewData["AuctionId"])">edit auction</a> page.
+        </div>
+    }
 
     <h2 style="padding-bottom: 10px">@ViewData["ProductName"]</h2>
 
@@ -113,6 +119,36 @@
                 <input type="number" asp-for="BidAmount" value="@placeholder" placeholder="@($"{placeholder}€")" min="0.00" step="0.01" lang="en" required>
             </div>
             <button type="submit" class="btn btn-primary">Bid</button>
+        </form>
+    }
+    else if (ViewData["BuyerId"] != null && (int?)ViewData["CurrentClientId"] == (int?)ViewData["BuyerId"])
+    {
+        <br />
+        <strong>You won the auction!</strong>
+
+        @if ((bool?)ViewData["IsCompleted"] == false)
+        {
+            <form method="post">
+                <div class="input-box">
+                    <p>Payment method:</p>
+                    <select asp-for="PaymentMethod" required>
+                        <option value="CreditCard">Credit Card</option>
+                        <option value="PayPal">PayPal</option>
+                        <option value="ApplePay">Apple Pay</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Pay</button>
+            </form>
+        }
+    }
+
+    <!-- Early sell -->
+    @if (ViewData["SellerId"] != null && (int?)ViewData["CurrentClientId"] == (int?)ViewData["SellerId"])
+    {
+        <br />
+        <form method="post">
+            <input hidden asp-for="EarlySell" value="true" />
+            <button type="submit" class="btn btn-primary">Sell now</button>
         </form>
     }
 </div>
