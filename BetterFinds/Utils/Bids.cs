@@ -8,6 +8,7 @@ namespace BetterFinds.Utils
         public Bids(IConfiguration configuration)
         {
             _configuration = configuration;
+            CreateBidderGroup().Wait();
         }
 
         public Dictionary<int, List<int>> BiddersGroup { get; set; } = new Dictionary<int, List<int>>();
@@ -58,11 +59,13 @@ namespace BetterFinds.Utils
             }
 
             // Print the biddersGroup dictionary
+            
             Console.WriteLine("biddersGroup contents:");
             foreach (var entry in BiddersGroup)
             {
                 Console.WriteLine($"AuctionId: {entry.Key}, Bidders: {string.Join(", ", entry.Value)}");
             }
+            /**/
 
             await Task.CompletedTask;
         }
@@ -72,6 +75,12 @@ namespace BetterFinds.Utils
             // Check if the auctionId already exists in the dictionary
             if (BiddersGroup.ContainsKey(auctionId))
             {
+                // Check if the clientId is not already in the list for this auction
+                if (BiddersGroup[auctionId].Contains(clientId))
+                {
+                    // Console.WriteLine($"Skipped clientId: {clientId} for auctionId: {auctionId} (already exists)");
+                    return;
+                }
                 // Add the clientId to the existing auction
                 BiddersGroup[auctionId].Add(clientId);
             }
@@ -134,11 +143,11 @@ namespace BetterFinds.Utils
                     {
                         int auctionId = reader.GetInt32(reader.GetOrdinal("AuctionId"));
                         DateTime bidTime = reader.GetDateTime(reader.GetOrdinal("Time"));
-                        int bidValue = reader.GetInt32(reader.GetOrdinal("Value"));
+                        decimal bidValue = reader.GetDecimal(reader.GetOrdinal("Value"));
                         DateTime auctionStartTime = reader.GetDateTime(reader.GetOrdinal("AuctionStartTime"));
                         DateTime auctionEndTime = reader.GetDateTime(reader.GetOrdinal("AuctionEndTime"));
                         int productId = reader.GetInt32(reader.GetOrdinal("ProductId"));
-                        int minimumBid = reader.GetInt32(reader.GetOrdinal("MinimumBid"));
+                        decimal minimumBid = reader.GetDecimal(reader.GetOrdinal("MinimumBid"));
                         bool isCompleted = reader.GetBoolean(reader.GetOrdinal("IsCompleted"));
                         string productName = reader.GetString(reader.GetOrdinal("ProductName"));
 
