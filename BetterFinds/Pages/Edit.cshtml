@@ -1,0 +1,52 @@
+﻿@page
+@model BetterFinds.Pages.EditModel
+@{
+    ViewData["Title"] = $"Edit {ViewData["Name"]}";
+}
+
+<div class="main-wrapper">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @if (ViewData["Message"] != null)
+    {
+        <div class="text-info" style="text-align: left">
+            @ViewData["Message"]
+        </div>
+    }
+    <div class="text-info" style="text-align: left">
+        <span>You can view your public auction page at <a href="/auction?id=@ViewData["AuctionId"]">@ViewData["Name"]</a></span>
+    </div>
+
+    <h2 style="padding: 10px 0">Edit auction: @ViewData["Name"]</h2>
+
+    <style>
+        p {
+            margin-left: 20px;
+        }
+    </style>
+
+    <form method="post">
+        <div class="input-box" style="margin-top: 0">
+            <p>Title:</p>
+            <input type="text" asp-for="Title" placeholder="@ViewData["Name"]" value="@ViewData["Name"]" required>
+        </div>
+
+        <div class="input-box-text-area">
+            <p>Description:</p>
+            <textarea asp-for="Description" placeholder="@ViewData["Description"]" required></textarea>
+        </div>
+
+        <div class="input-box" style="margin-top: 10px">
+            <p>Minimum bid increment:</p>
+            @{string minimumBid = Utils.Currency.FormatDecimalObject(ViewData["MinimumBid"]);}
+            <input type="number" asp-for="MinimumBid" placeholder="@minimumBid" value="@minimumBid" oninput="this.value = Math.max(0, this.value);" required>
+        </div>
+
+        <div class="input-box">
+            <p>Images links (maximum 10):</p>
+            <input type="text" asp-for="Images" placeholder="@ViewData["Images"]" value="@ViewData["Images"]">
+        </div>
+
+        <br>
+        <button type="submit" class="btn">Edit auction</button>
+    </form>
+</div>
