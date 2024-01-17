@@ -41,7 +41,7 @@
                         <li>
                             <p>
                                 <a href="/auction?id=@auctionDict["AuctionId"]">@auctionDict["ProductName"]</a>
-                                - @($"{auctionDict["ProductPrice"]:0.00}€")
+                                - @($"{Utils.Currency.FormatDecimalObject(auctionDict["ProductPrice"])}€")
                                 - @auctionDict["EndTime"]
                             </p>
                         </li>

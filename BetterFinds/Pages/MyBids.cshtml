@@ -21,9 +21,10 @@
                     <ul style ="margin-left: 20px">
                         @foreach (var bid in bids)
                         {
+                            <br />
                             <li>
                                 <strong>Time:</strong> @bid["BidTime"]<br />
-                                <strong>Amount:</strong> @((int)bid["BidValue"] / 100)€<br />
+                                <strong>Amount:</strong> @($"{Utils.Currency.FormatDecimalObject(bid["BidValue"])}€")<br />
                             </li>
                         }
                     </ul>

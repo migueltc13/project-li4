@@ -16,11 +16,11 @@ namespace BetterFinds.Utils
 
             // Get NotificationId
             int notificationId = 1; // Default value
-            using (SqlConnection con = new(connectionString))
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
                 string query = "SELECT MAX(NotificationId) FROM Notification";
-                using (SqlCommand cmd = new(query, con))
+                using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     // Check if there are any notifications
                     if (cmd.ExecuteScalar() != DBNull.Value)
@@ -31,11 +31,11 @@ namespace BetterFinds.Utils
                 con.Close();
             }
 
-            using (SqlConnection con = new(connectionString))
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
                 string query = "INSERT INTO Notification (NotificationId, Message, Timestamp, ClientId, AuctionId) VALUES (@NotificationId, @Message, @Timestamp, @ClientId, @AuctionId)";
-                using (SqlCommand cmd = new(query, con))
+                using (SqlCommand cmd = new SqlCommand(query, con))
                 {
                     cmd.Parameters.AddWithValue("@NotificationId", notificationId);
                     cmd.Parameters.AddWithValue("@Message", message);
@@ -94,7 +94,7 @@ namespace BetterFinds.Utils
                                 { "IsRead", reader.GetBoolean(reader.GetOrdinal("IsRead")) },
                                 { "AuctionId", reader.GetInt32(reader.GetOrdinal("AuctionId")) },
                                 { "ProductName", reader.GetString(reader.GetOrdinal("Name")) },
-                                { "ProductPrice", reader.GetInt32(reader.GetOrdinal("Price")) }
+                                { "ProductPrice", reader.GetDecimal(reader.GetOrdinal("Price")) }
                             };
                             notifications.Add(notification);
                         }

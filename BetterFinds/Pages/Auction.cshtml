@@ -9,8 +9,8 @@
 
     <h2 style="padding-bottom: 10px">@ViewData["ProductName"]</h2>
 
-    <p>@ViewData["ProductPrice"]€</p>
-    <p>Minimum bid: @ViewData["MinimumBid"]€</p>
+    <p>@($"{Utils.Currency.FormatDecimalObject(ViewData["ProductPrice"])}€")</p>
+    <p>Minimum bid: @($"{Utils.Currency.FormatDecimalObject(ViewData["MinimumBid"])}€")</p>
     <!-- Countdown timer -->
     <div id="countdown"></div>
     @if (ViewData["Images"] is List<string> images && images != null && images.Any())
@@ -25,7 +25,6 @@
         <div id="imageInfo">
            <p style="text-align: center" id="imageCounter"></p>
         </div>
-        <br />
         <script>
             // image slider
             document.addEventListener("DOMContentLoaded", function () {
@@ -69,6 +68,7 @@
             });
         </script>
     }
+    <br />
     <p>@ViewData["ProductDesc"]</p>
     <br />
     <p>Start Time: @ViewData["StartTime"]</p>
@@ -90,7 +90,7 @@
                     {
                         <li>
                             <p>
-                                <a href="/account?id=@bid["BidderId"]">@@@bid["Username"]</a> - @bid["Value"]€ - @bid["Time"]
+                                <a href="/account?id=@bid["BidderId"]">@@@bid["Username"]</a> - @($"{Utils.Currency.FormatDecimalObject(bid["Value"])}€") - @bid["Time"]
                             </p>
                         </li>
                     }
@@ -109,8 +109,8 @@
         <form method="post">
             <div class="input-box">
                 <p style="margin-left: 20px">Bid amount:</p>
-                <input type="number" asp-for="BidAmount" value="" placeholder="@ViewData["BidPlaceholder"]" required>
-                <!-- <i class="bx></i> Euro -->
+                @{string placeholder = Utils.Currency.FormatDecimalObject(ViewData["BidPlaceholder"]);}
+                <input type="number" asp-for="BidAmount" value="@placeholder" placeholder="@($"{placeholder}€")" min="0.00" step="0.01" lang="en" required>
             </div>
             <button type="submit" class="btn btn-primary">Bid</button>
         </form>
