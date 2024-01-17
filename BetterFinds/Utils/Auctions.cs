@@ -77,16 +77,13 @@ namespace BetterFinds.Utils
                     {
                         while (reader.Read())
                         {
-                            double productPrice = Convert.ToDouble(reader["ProductPrice"]);
-                            string formattedPrice = (productPrice / 100).ToString("0.00");
-
-                            Dictionary<string, object> auctionRow = new Dictionary<string, object>
+                            Dictionary<string, object> auctionRow = new()
                             {
                                 {"AuctionId", reader["AuctionId"]},
                                 {"EndTime", reader["EndTime"]},
                                 {"ProductName", reader["ProductName"]},
                                 {"ProductDescription", reader["ProductDescription"]},
-                                {"ProductPrice", formattedPrice}
+                                {"ProductPrice", reader["ProductPrice"]}
                             };
 
                             auctions.Add(auctionRow);
@@ -138,13 +135,13 @@ namespace BetterFinds.Utils
             }
         }
 
-        private static List<DateTime> auctionEndTimes = new();
+        private static List<DateTime> AuctionEndTimes = new();
 
         public void CreateAuctionsToCheck()
         {
             try
             {
-                Console.WriteLine("Creating auctionEndTimes list to check in auction background service...");
+                Console.WriteLine("Creating AuctionEndTimes list to check in auction background service...");
 
                 string query = "SELECT AuctionId, EndTime, IsCompleted FROM Auction";
                 string? conString = _configuration.GetConnectionString("DefaultConnection");
@@ -161,7 +158,7 @@ namespace BetterFinds.Utils
                                 DateTime endTime = readerProduct.GetDateTime(readerProduct.GetOrdinal("EndTime"));
                                 bool isCompleted = readerProduct.GetBoolean(readerProduct.GetOrdinal("IsCompleted"));
                                 if (!isCompleted)
-                                    auctionEndTimes.Add(endTime);
+                                    AuctionEndTimes.Add(endTime);
                             }
                         }
                     }
@@ -174,10 +171,10 @@ namespace BetterFinds.Utils
             }
         }
 
-        public void AddAuction(DateTime endTime) => auctionEndTimes.Add(endTime);
+        public void AddAuction(DateTime endTime) => AuctionEndTimes.Add(endTime);
 
-        // TODO: Remove auction from auctionEndTimes list when the auction is completed
-        public void RemoveAuction(DateTime endTime) => auctionEndTimes.Remove(endTime);
+        // TODO: Remove auction from AuctionEndTimes list when the auction is completed
+        public void RemoveAuction(DateTime endTime) => AuctionEndTimes.Remove(endTime);
 
         public async Task CheckAuctionsAsync()
         {
@@ -187,11 +184,11 @@ namespace BetterFinds.Utils
                 {
                     DateTime currentTime = DateTime.UtcNow;
 
-                    for (int i = 0; i < auctionEndTimes.Count; i++)
+                    for (int i = 0; i < AuctionEndTimes.Count; i++)
                     {
-                        if (currentTime >= auctionEndTimes[i])
+                        if (currentTime >= AuctionEndTimes[i])
                         {
-                            Console.WriteLine($"auctionEndTimes[{i}] has ended");
+                            Console.WriteLine($"AuctionEndTimes[{i}] has ended");
                             // TODO: If there's an auction buyer
                             // then notify buyer to buy the product (when buyer completes the purchase notify the seller)
                             // else notify the seller
