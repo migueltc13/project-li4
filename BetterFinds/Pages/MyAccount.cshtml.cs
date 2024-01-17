@@ -48,7 +48,7 @@ namespace BetterFinds.Pages
 
             // Get user info from database
             string connectionString = _configuration.GetConnectionString("DefaultConnection") ?? "";
-            string query = "SELECT * FROM Client WHERE ClientId = @ClientId";
+            string query = "SELECT Username, FullName, Email, OptNewsletter FROM Client WHERE ClientId = @ClientId";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
