@@ -10,11 +10,11 @@
     {
         @if (Model.ShowAll)
         {
-            <div style="text-align: right">
-                <button id="notifications-link" class="btn btn-primary" style="width: 200px; display: inline-block; margin-right: 50px">Show Unread</button>
+            <div style="text-align: center">
+                <button id="notifications-link" class="btn btn-primary" style="width: 200px; display: inline-block; margin-right: auto">Show Unread</button>
                 @if (ViewData["NUnreadMessages"] != null && (int?)ViewData["NUnreadMessages"] > 0) 
                 {
-                    <button id="notifications-link-showall-markall" class="btn btn-primary" style="width: 200px; display: inline-block; margin-right: 50px">Mark All As Read</button>
+                    <button id="notifications-link-showall-markall" class="btn btn-primary" style="width: 200px; display: inline-block; margin: 10px auto 0 0">Mark All As Read</button>
                 }
             </div>
             <h2 style="padding-bottom: 10px; padding-top: 10px; text-align: center">Notifications</h2>
@@ -43,9 +43,9 @@
         {
             @if (ViewData["NUnreadMessages"] != null && (int?)ViewData["NUnreadMessages"] > 0)
             {
-                <div style="text-align: right">
-                    <button id="notifications-link-showall" class="btn btn-primary" style="width: 200px; display: inline-block; margin-right: 50px">Show All</button>
-                    <button id="notifications-link-markall" class="btn btn-primary" style="width: 200px; display: inline-block; margin-right: 50px">Mark All As Read</button>
+                <div style="text-align: center">
+                    <button id="notifications-link-showall" class="btn btn-primary" style="width: 200px; display: inline-block; margin-right: auto">Show All</button>
+                    <button id="notifications-link-markall" class="btn btn-primary" style="width: 200px; display: inline-block; margin: 10px auto 0 0">Mark All As Read</button>
                 </div>
                 <h2 style="padding-bottom: 10px; padding-top: 10px; text-align: center">Notifications</h2>
                 @foreach (var notification in Model.Notifications)
@@ -63,10 +63,10 @@
             }
             else
             {
-                <div style="text-align: right">
-                    <button id="notifications-link-showall" class="btn btn-primary" style="width: 200px; display: inline-block; margin-right: 50px">Show All</button>
+                <div style="text-align: center">
+                    <button id="notifications-link-showall" class="btn btn-primary" style="width: 200px; display: inline-block">Show All</button>
                 </div>
-                <h2 style="padding-top: 10px;">You have no unread notifications.</h2>
+                <h2 style="padding-top: 10px; text-align: center">You have no unread notifications.</h2>
             }
         }
     }
