@@ -40,10 +40,17 @@ public class Program
 
         var app = builder.Build();
 
+        app.UseStatusCodePages();
+        app.UseExceptionHandler("/error");
+        // app.UseStatusCodePagesWithRedirects("/errors/{0}");
+        app.UseStatusCodePagesWithReExecute("/errors/{0}");
+
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
         {
-            app.UseExceptionHandler("/Error");
+            // Use HTTPS
+            app.UseHttpsRedirection();
+
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
