@@ -34,7 +34,7 @@
             <textarea asp-for="Description" placeholder="Description" required></textarea>
         </div>
 
-        <div class="input-box">
+        <div class="input-box" style="margin-top: 10px">
             <p>Initial price:</p>
             <input type="number" asp-for="Price" placeholder="Initial price" value="" oninput="this.value = Math.max(0, this.value);" required>
         </div>
