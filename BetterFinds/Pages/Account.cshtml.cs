@@ -52,8 +52,8 @@ namespace BetterFinds.Pages
                 con.Close();
             }
 
-            // Get client info: full name and username
-            query = "SELECT FullName, Username FROM Client WHERE ClientId = @ClientId";
+            // Get client info: full name, username and profile picture
+            query = "SELECT FullName, Username, ProfilePic FROM Client WHERE ClientId = @ClientId";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
@@ -66,6 +66,7 @@ namespace BetterFinds.Pages
                     {
                         ViewData["FullName"] = reader.GetString(reader.GetOrdinal("FullName"));
                         ViewData["Username"] = reader.GetString(reader.GetOrdinal("Username"));
+                        ViewData["ProfilePic"] = reader.IsDBNull(reader.GetOrdinal("ProfilePic")) ? null : reader.GetString(reader.GetOrdinal("ProfilePic"));
                     }
                     reader.Close();
                 }

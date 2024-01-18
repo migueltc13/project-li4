@@ -14,7 +14,15 @@
         </div>
     }
     <div>
-        <p>Username: @@@ViewData["Username"]</p>
+        @if (ViewData["ProfilePic"] != null)
+        {
+            <img src="@ViewData["ProfilePic"]" alt="Profile Picture" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; display: block;" />
+        }
+        else
+        {
+            <img src="/img/default-profile.jpg" alt="Profile Picture" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; display: block;" />
+        }
+        <p style="margin-top: 10px">Username: @@@ViewData["Username"]</p>
         <p>Full Name: @ViewData["FullName"]</p>
         <p>Email: @ViewData["Email"]</p>
         <p>Subscribed to our newsletter: @ViewData["OptNewsletter"]</p>
@@ -65,6 +73,11 @@
             <div class="input-box">
                 <input type="password" asp-for="ConfirmPassword" class="input-field" placeholder="Confirm Password">
                 <i class="bx bxs-lock-alt"></i>
+            </div>
+
+            <div class="input-box">
+                <input type="text" asp-for="ProfilePic" value="@ViewData["ProfilePic"]" class="input-field" placeholder="Profile Picture link">
+                <i class="bx bxs-face"></i>
             </div>
 
             <div class="remember-me">

@@ -12,7 +12,15 @@
         </div>
     }
     <h2 style ="padding-bottom: 10px"> @@@ViewData["Username"] public profile</h2>
-    <p>Full name: @ViewData["FullName"]</p>
+    @if (ViewData["ProfilePic"] != null)
+    {
+        <img src="@ViewData["ProfilePic"]" alt="Profile Picture" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; display: block;" />
+    }
+    else
+    {
+        <img src="/img/default-profile.jpg" alt="Profile Picture" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; display: block;" />
+    }
+    <p style="margin-top: 10px">Full name: @ViewData["FullName"]</p>
     @if (ViewData["NumBids"] != null && ViewData["NumBids"] is int numBids && numBids != 0)
     {
         string bidsPlural = numBids == 1 ? "bid" : "bids";

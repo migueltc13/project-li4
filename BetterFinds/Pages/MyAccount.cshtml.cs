@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace BetterFinds.Pages
 {
@@ -22,6 +23,9 @@ namespace BetterFinds.Pages
 
         [BindProperty]
         public string ConfirmPassword { get; set; } = "";
+
+        [BindProperty]
+        public string? ProfilePic { get; set; }
 
         [BindProperty]
         public bool OptNewsletter { get; set; } = false;
@@ -48,7 +52,7 @@ namespace BetterFinds.Pages
 
             // Get user info from database
             string connectionString = _configuration.GetConnectionString("DefaultConnection") ?? "";
-            string query = "SELECT Username, FullName, Email, OptNewsletter FROM Client WHERE ClientId = @ClientId";
+            string query = "SELECT Username, FullName, Email, ProfilePic, OptNewsletter FROM Client WHERE ClientId = @ClientId";
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
@@ -62,6 +66,7 @@ namespace BetterFinds.Pages
                     ViewData["Username"] = reader.GetString(reader.GetOrdinal("Username"));
                     ViewData["FullName"] = reader.GetString(reader.GetOrdinal("FullName"));
                     ViewData["Email"] = reader.GetString(reader.GetOrdinal("Email"));
+                    ViewData["ProfilePic"] = reader.IsDBNull(reader.GetOrdinal("ProfilePic")) ? null : reader.GetString(reader.GetOrdinal("ProfilePic"));
                     ViewData["OptNewsletter"] = reader.GetBoolean(reader.GetOrdinal("OptNewsletter")) ? "Yes" : "No";
                     ViewData["SubscribeMessage"] = reader.GetBoolean(reader.GetOrdinal("OptNewsletter")) ? "Unsubscribe from our newsletter" : "Subscribe to our newsletter";
                     reader.Close();
@@ -113,6 +118,7 @@ namespace BetterFinds.Pages
             Console.WriteLine("Email: " + Email);
             Console.WriteLine("Password: " + Password);
             Console.WriteLine("ConfirmPassword: " + ConfirmPassword);
+            Console.WriteLine("ProfilePic: " + ProfilePic);
             Console.WriteLine("OptNewsletter: " + OptNewsletter);
 
             ModelState.Clear();
@@ -122,6 +128,7 @@ namespace BetterFinds.Pages
             bool updateFullName = false;
             bool updateEmail = false;
             bool updatePassword = false;
+            bool updateProfilePic = false;
             bool updateOptNewsletter = false;
 
             // Check if username is at least 3 characters long and 32 characters or fewer
@@ -132,6 +139,11 @@ namespace BetterFinds.Pages
             else if (Username.Length < 3 || Username.Length > 32)
             {
                 ModelState.AddModelError(string.Empty, "Username must be at least 3 characters long and 32 characters or fewer.");
+                return Page();
+            }
+            else if (!Regex.IsMatch(Username, @"^[a-zA-Z0-9]+$"))
+            {
+                ModelState.AddModelError(string.Empty, "Username must only contain alphanumeric characters.");
                 return Page();
             }
             else
@@ -145,6 +157,11 @@ namespace BetterFinds.Pages
             else if (FullName.Length < 3 || FullName.Length > 64)
             {
                 ModelState.AddModelError(string.Empty, "Full name must be at least 3 characters long and 64 characters or fewer.");
+                return Page();
+            }
+            else if (!Regex.IsMatch(FullName, @"^[a-zA-Z]+$"))
+            {
+                ModelState.AddModelError(string.Empty, "Full name must only contain aplhabetic characters.");
                 return Page();
             }
             else
@@ -188,6 +205,20 @@ namespace BetterFinds.Pages
             }
             else if (!updatePassword)
                 updatePassword = true;
+
+            // Check if profile picture is 256 characters or fewer (if not null)
+            if (ProfilePic == null || ProfilePic == "")
+            {
+                updateProfilePic = false;
+            }
+            else if (ProfilePic.Length > 256)
+            {
+                ModelState.AddModelError(string.Empty, "Profile picture must be 256 characters or fewer.");
+                return Page();
+            }
+            else
+                updateProfilePic = true;
+
 
             // Check if optNewsletter needs to be updated
             if (OptNewsletter)
@@ -263,6 +294,8 @@ namespace BetterFinds.Pages
                     query += "Email = @Email, ";
                 if (updatePassword)
                     query += "Password = @Password, ";
+                if (updateProfilePic)
+                    query += "ProfilePic = @ProfilePic, ";
                 if (updateOptNewsletter)
                     query += "OptNewsletter = @OptNewsletter, ";
                 query = query.Remove(query.Length - 2); // Remove last comma and space
@@ -273,6 +306,7 @@ namespace BetterFinds.Pages
                 Console.WriteLine("updateFullName: " + updateFullName);
                 Console.WriteLine("updateEmail: " + updateEmail);
                 Console.WriteLine("updatePassword: " + updatePassword);
+                Console.WriteLine("updateProfilePic: " + updateProfilePic);
                 Console.WriteLine("updateOptNewsletter: " + updateOptNewsletter);
 
                 // Update user info
@@ -286,7 +320,9 @@ namespace BetterFinds.Pages
                         cmdUpdateUser.Parameters.AddWithValue("@Email", Email);
                     if (updatePassword)
                         cmdUpdateUser.Parameters.AddWithValue("@Password", Password);
-                    if (updateOptNewsletter) // Todo toggle newsletter if OptNewsletter is true
+                    if (updateProfilePic)
+                        cmdUpdateUser.Parameters.AddWithValue("@ProfilePic", ProfilePic);
+                    if (updateOptNewsletter)
                         cmdUpdateUser.Parameters.AddWithValue("@OptNewsletter", !currentOptNewsletter);
                     cmdUpdateUser.Parameters.AddWithValue("@ClientId", ClientId);
                     cmdUpdateUser.ExecuteNonQuery();

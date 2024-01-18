@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace BetterFinds.Pages
 {
@@ -20,6 +21,9 @@ namespace BetterFinds.Pages
 
         [BindProperty]
         public string ConfirmPassword { get; set; } = "";
+
+        [BindProperty]
+        public string? ProfilePic { get; set; }
 
         [BindProperty]
         public bool OptNewsletter { get; set; } = false;
@@ -42,12 +46,13 @@ namespace BetterFinds.Pages
         public IActionResult OnPost()
         {
             // For debugging purposes
-            Console.WriteLine($"FullName: {FullName}");                 // TODO: Remove this
-            Console.WriteLine($"Username: {Username}");                 // TODO: Remove this
-            Console.WriteLine($"Email: {Email}");                       // TODO: Remove this
-            Console.WriteLine($"Password: {Password}");                 // TODO: Remove this
-            Console.WriteLine($"ConfirmPassword: {ConfirmPassword}");   // TODO: Remove this
-            Console.WriteLine($"OptNewsletter: {OptNewsletter}");       // TODO: Remove this
+            Console.WriteLine($"FullName: {FullName}");
+            Console.WriteLine($"Username: {Username}");
+            Console.WriteLine($"Email: {Email}");
+            Console.WriteLine($"Password: {Password}");
+            Console.WriteLine($"ConfirmPassword: {ConfirmPassword}");
+            Console.WriteLine($"ProfilePic: {ProfilePic}");
+            Console.WriteLine($"OptNewsletter: {OptNewsletter}");
 
             // Check if username is at least 3 characters long
             if (Username.Length < 3)
@@ -60,6 +65,13 @@ namespace BetterFinds.Pages
             if (Username.Length > 32)
             {
                 ModelState.AddModelError(string.Empty, "Username must be 32 characters or fewer.");
+                return Page();
+            }
+
+            // Check if username contains only alphanumeric characters
+            if (!Regex.IsMatch(Username, @"^[a-zA-Z0-9]+$"))
+            {
+                ModelState.AddModelError(string.Empty, "Username must contain only alphanumeric characters.");
                 return Page();
             }
 
@@ -112,6 +124,20 @@ namespace BetterFinds.Pages
                 return Page();
             }
 
+            // Check if full name contains only alphabetical characters
+            if (!Regex.IsMatch(FullName, @"^[a-zA-Z]+$"))
+            {
+                ModelState.AddModelError(string.Empty, "Full name must contain only alphabetical characters.");
+                return Page();
+            }
+
+            // Check if profile picture is 256 characters or fewer (if not null)
+            if (ProfilePic != null && ProfilePic.Length > 256)
+            {
+                ModelState.AddModelError(string.Empty, "Profile picture must be 256 characters or fewer.");
+                return Page();
+            }
+
             string connectionString = _configuration.GetConnectionString("DefaultConnection") ?? "";
             SqlConnection con = new SqlConnection(connectionString);
 
@@ -151,7 +177,7 @@ namespace BetterFinds.Pages
                 Console.WriteLine($"Id: {id}"); // TODO: Remove this
 
                 // Insert new user into database
-                string query = "INSERT INTO Client (ClientId, FullName, Username, Email, Password, OptNewsletter) VALUES (@id, @FullName, @Username, @Email, @Password, @OptNewsletter)";
+                string query = "INSERT INTO Client (ClientId, FullName, Username, Email, Password, ProfilePic, OptNewsletter) VALUES (@id, @FullName, @Username, @Email, @Password, @ProfilePic, @OptNewsletter)";
                 SqlCommand cmd = new SqlCommand(query, con);
 
                 cmd.Parameters.AddWithValue("@id", id);
@@ -159,6 +185,7 @@ namespace BetterFinds.Pages
                 cmd.Parameters.AddWithValue("@Username", Username);
                 cmd.Parameters.AddWithValue("@Email", Email);
                 cmd.Parameters.AddWithValue("@Password", Password);
+                cmd.Parameters.AddWithValue("@ProfilePic", ProfilePic == null ? DBNull.Value : ProfilePic);
                 cmd.Parameters.AddWithValue("@OptNewsletter", OptNewsletter);
 
                 int result = cmd.ExecuteNonQuery();
