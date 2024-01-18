@@ -191,8 +191,6 @@ namespace BetterFinds.Utils
                     {
                         if (currentTime >= AuctionEndTimes[i])
                         {
-                            Console.WriteLine($"AuctionEndTimes[{i}] has ended");
-
                             int auctionId; // Retrieve auctionId from Auction table
                             int sellerId; // Retrieve sellerId from Auction table
                             int buyerId; // Retrieve buyerId from Product table
@@ -214,6 +212,8 @@ namespace BetterFinds.Utils
                                         auctionId = reader.GetInt32(reader.GetOrdinal("AuctionId"));
                                         sellerId = reader.GetInt32(reader.GetOrdinal("ClientId"));
                                         reader.Close();
+
+                                        Console.WriteLine($"AuctionEndTimes[{i}] has ended at {AuctionEndTimes[i]}, auctionId: {auctionId}, sellerId: {sellerId}");
                                     }
                                 }
 
@@ -249,6 +249,8 @@ namespace BetterFinds.Utils
                                 notificationCount = notificationUtils.GetNUnreadMessages(sellerId);
                                 Console.WriteLine($"Seller: {sellerId} - Auction: {auctionId} - notificationCount: {notificationCount}");
                                 _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, sellerId).Wait();
+                                _hubContext.Clients.All.SendAsync("UpdateAuction", sellerId, auctionId).Wait();
+                                _hubContext.Clients.All.SendAsync("UpdateNotifications", sellerId).Wait();
                             }
                             else
                             {
@@ -258,6 +260,8 @@ namespace BetterFinds.Utils
                                 notificationCount = notificationUtils.GetNUnreadMessages(sellerId);
                                 Console.WriteLine($"Seller: {sellerId} - Auction: {auctionId} - notificationCount: {notificationCount}");
                                 _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, sellerId).Wait();
+                                _hubContext.Clients.All.SendAsync("UpdateAuction", sellerId, auctionId).Wait();
+                                _hubContext.Clients.All.SendAsync("UpdateNotifications", sellerId).Wait();
 
                                 // Notify bidders except the buyer that the auction has ended
                                 message = "Auction has ended.";
@@ -269,6 +273,8 @@ namespace BetterFinds.Utils
                                         notificationCount = notificationUtils.GetNUnreadMessages(bidder);
                                         Console.WriteLine($"Bidder: {bidder} - Auction: {auctionId} - notificationCount: {notificationCount}");
                                         _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidder).Wait();
+                                        _hubContext.Clients.All.SendAsync("UpdateAuction", bidder, auctionId).Wait();
+                                        _hubContext.Clients.All.SendAsync("UpdateNotifications", bidder).Wait();
                                     }
                                 }
                                 
@@ -278,12 +284,8 @@ namespace BetterFinds.Utils
                                 notificationCount = notificationUtils.GetNUnreadMessages(buyerId);
                                 Console.WriteLine($"Buyer: {buyerId} - Auction: {auctionId} - notificationCount: {notificationCount}");
                                 _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, buyerId).Wait();
-                            }
-
-                            // Update notification count for the bidders (including the buyer)
-                            foreach (int bidder in bidders)
-                            {
-                                
+                                _hubContext.Clients.All.SendAsync("UpdateAuction", buyerId, auctionId).Wait();
+                                _hubContext.Clients.All.SendAsync("UpdateNotifications", buyerId).Wait();
                             }
 
                             // Update notification count for the seller
