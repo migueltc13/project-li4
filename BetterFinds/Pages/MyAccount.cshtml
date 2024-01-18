@@ -9,7 +9,7 @@
     <div asp-validation-summary="All" class="text-danger"></div>
     @if (ViewData["Message"] != null)
     {
-        <div class="text-info" style="text-align: left">
+        <div class="text-info" style="text-align: left; margin-bottom: 10px">
             @ViewData["Message"]
         </div>
     }
@@ -29,7 +29,7 @@
         <br />
         @if (ViewData["NumAuctions"] != null && ViewData["NumAuctions"] is int numAuctions && numAuctions != 0)
         {
-            <p><a href="/myauctions?id=@ViewData["ClientId"]">My Auctions</a> (Total: @numAuctions)</p>
+            <p><a href="/myauctions">My Auctions</a> (Total: @numAuctions)</p>
         }
         else
         {
@@ -37,7 +37,7 @@
         }
         @if (ViewData["NumBids"] != null && ViewData["NumBids"] is int numBids && numBids != 0)
         {
-            <p><a href="/mybids?id=@ViewData["ClientId"]">My Bids</a> (Total: @numBids)</p>
+            <p><a href="/mybids">My Bids</a> (Total: @numBids)</p>
         }
         else
         {
