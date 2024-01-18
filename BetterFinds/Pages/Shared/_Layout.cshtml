@@ -2,7 +2,7 @@
     // Get the page name from PageContext
     var pageName = Context.GetRouteValue("page");
     // Don't load header in /Login and /Register pages
-    bool LoadHeader = (pageName != null) ? !(pageName.ToString() == "/Login" || pageName.ToString() == "/Register") : true;
+    bool LoadAll = (pageName != null) ? !(pageName.ToString() == "/Login" || pageName.ToString() == "/Register") : true;
 
     // biddersGroup is a list of client IDs that are allowed to receive notifications only used in auction page
     List<int>? biddersGroup = ViewData["BiddersGroup"] as List<int>;
@@ -51,7 +51,7 @@
     <script src="/lib/signalr/dist/signalr.js"></script>
 </head>
 <body>
-    @if (LoadHeader) {
+    @if (LoadAll) {
         <nav>
             <a href="/" style="padding: 0 20px 0 0">
                 <img src="/img/logo.png" alt="BetterFinds" style="width: 70px" />
@@ -118,58 +118,52 @@
             });
 
         </script>
-        @if (ViewData["auctionId"] != null)
+        <script>
+            // SignalR
+            const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/notificationHub")
+            .build();
+
+            connection.start().then(() => {
+                console.log("Connected to notification hub");
+            }).catch(err => console.error(err));
+                
+            connection.on("ReceiveNotificationCount", (newCount, clientId) => {
+                // Update the notification count in the UI
+                if (clientId == @currentClientId) {
+                    document.getElementById("notificationCount").innerText = newCount;
+                }
+            });
+        </script>
+        @if (ViewData["CurrentPage"] != null && (string?)ViewData["CurrentPage"] == "Auction")
         {
             <script>
-                // SignalR
-            
-                // Refresh the page when someone bids
-                // TODO when auction page is updated also needs refresh
-                const connection = new signalR.HubConnectionBuilder()
-                .withUrl("/notificationHub")
-                .build();
-
-                connection.start().then(() => {
-                    console.log("Connected to notification hub");
-                }).catch(err => console.error(err));
-
-                connection.on("UpdatePrice", (clientId, auctionId, message) => {
+                // SignalR for auction page
+                connection.on("UpdateAuction", (clientId, auctionId) => {
                     var biddersGroup = @Html.Raw("[" + string.Join(", ", biddersGroup ?? []) + "]");
                     if (biddersGroup?.includes(clientId)) {
-                        // console.log("Send notification:", message);
-                        // TODO: Add notification logic here
-                        // document.getElementById("Notification").innerHTML = message;
-                        // alert(message);
-                        // connection.invoke("RefreshNotifications", clientId, auctionId, message).catch(err => console.error(err));
+                        // TODO: Add update auction page logic here
                     }
 
-                    currentAuctionId = @ViewData["auctionId"];
+                    currentAuctionId = @ViewData["AuctionId"];
                     if (currentAuctionId == auctionId) {
                         window.location.href = window.location.href;
                     }
                 });
             </script>
         }
-        else
+        @if (ViewData["CurrentPage"] != null && (string?)ViewData["CurrentPage"] == "Notifications")
         {
             <script>
-                // SignalR
-                const connection = new signalR.HubConnectionBuilder()
-                .withUrl("/notificationHub")
-                .build();
-
-                connection.start().then(() => {
-                    console.log("Connected to notification hub");
-                }).catch(err => console.error(err));
-                
-                connection.on("ReceiveNotificationCount", (newCount, bidderClientId) => {
-                    // Update the notification count in the UI
-                    if (bidderClientId == @currentClientId) {
-                        document.getElementById("notificationCount").innerText = newCount;
+                // SignalR for notifications page
+                connection.on("UpdateNotifications", (clientId) => {
+                    if (clientId == @currentClientId) {
+                        window.location.href = window.location.href;
                     }
                 });
             </script>
         }
+  
     }
     else {
         <style>
@@ -189,18 +183,14 @@
         </main>
     </div>
 
-    @if (LoadHeader){
+    @if (LoadAll){
         <footer class="footer">
             <div>   
                 &copy;@DateTime.Now.Year.ToString() | BetterFinds
             </div>
         </footer>
     }
-    <!--
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    -->
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
