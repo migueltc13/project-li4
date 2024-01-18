@@ -139,12 +139,12 @@ namespace BetterFinds.Pages
             else if (Username.Length < 3 || Username.Length > 32)
             {
                 ModelState.AddModelError(string.Empty, "Username must be at least 3 characters long and 32 characters or fewer.");
-                return Page();
+                return OnGet();
             }
             else if (!Regex.IsMatch(Username, @"^[a-zA-Z0-9]+$"))
             {
                 ModelState.AddModelError(string.Empty, "Username must only contain alphanumeric characters.");
-                return Page();
+                return OnGet();            
             }
             else
                 updateUsername = true;
@@ -157,12 +157,12 @@ namespace BetterFinds.Pages
             else if (FullName.Length < 3 || FullName.Length > 64)
             {
                 ModelState.AddModelError(string.Empty, "Full name must be at least 3 characters long and 64 characters or fewer.");
-                return Page();
+                return OnGet();
             }
-            else if (!Regex.IsMatch(FullName, @"^[a-zA-Z]+$"))
+            else if (!Regex.IsMatch(FullName, @"^[a-zA-Z ]+$"))
             {
                 ModelState.AddModelError(string.Empty, "Full name must only contain aplhabetic characters.");
-                return Page();
+                return OnGet();
             }
             else
                 updateFullName = true;
@@ -175,7 +175,7 @@ namespace BetterFinds.Pages
             else if (Email.Length < 5 || Email.Length > 320)
             {
                 ModelState.AddModelError(string.Empty, "Email must be at least 3 characters long and 320 characters or fewer.");
-                return Page();
+                return OnGet();
             }
             else
                 updateEmail = true;
@@ -188,7 +188,7 @@ namespace BetterFinds.Pages
             else if (Password != ConfirmPassword)
             {
                 ModelState.AddModelError(string.Empty, "Passwords do not match.");
-                return Page();
+                return OnGet();
             }
             else
                 updatePassword = true;
@@ -201,20 +201,16 @@ namespace BetterFinds.Pages
             else if (Password.Length < 8 || Password.Length > 64)
             {
                 ModelState.AddModelError(string.Empty, "Password must be at least 8 characters long and 64 characters or fewer.");
-                return Page();
+                return OnGet();
             }
             else if (!updatePassword)
                 updatePassword = true;
 
             // Check if profile picture is 256 characters or fewer (if not null)
-            if (ProfilePic == null || ProfilePic == "")
-            {
-                updateProfilePic = false;
-            }
-            else if (ProfilePic.Length > 256)
+            if (ProfilePic?.Length > 256)
             {
                 ModelState.AddModelError(string.Empty, "Profile picture must be 256 characters or fewer.");
-                return Page();
+                return OnGet();
             }
             else
                 updateProfilePic = true;
@@ -245,7 +241,7 @@ namespace BetterFinds.Pages
                         if (reader.Read())
                         {
                             ModelState.AddModelError(string.Empty, "Username already exists.");
-                            return Page();
+                            return OnGet();
                         }
                         reader.Close();
                     }
@@ -263,7 +259,7 @@ namespace BetterFinds.Pages
                         if (reader.Read())
                         {
                             ModelState.AddModelError(string.Empty, "Email already exists.");
-                            return Page();
+                            return OnGet();
                         }
                         reader.Close();
                     }
@@ -321,7 +317,7 @@ namespace BetterFinds.Pages
                     if (updatePassword)
                         cmdUpdateUser.Parameters.AddWithValue("@Password", Password);
                     if (updateProfilePic)
-                        cmdUpdateUser.Parameters.AddWithValue("@ProfilePic", ProfilePic);
+                        cmdUpdateUser.Parameters.AddWithValue("@ProfilePic", ProfilePic == null ? DBNull.Value : ProfilePic);
                     if (updateOptNewsletter)
                         cmdUpdateUser.Parameters.AddWithValue("@OptNewsletter", !currentOptNewsletter);
                     cmdUpdateUser.Parameters.AddWithValue("@ClientId", ClientId);
