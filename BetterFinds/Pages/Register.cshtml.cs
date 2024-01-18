@@ -124,8 +124,8 @@ namespace BetterFinds.Pages
                 return Page();
             }
 
-            // Check if full name contains only alphabetical characters
-            if (!Regex.IsMatch(FullName, @"^[a-zA-Z]+$"))
+            // Check if full name contains only alphabetical characters (and spaces)
+            if (!Regex.IsMatch(FullName, @"^[a-zA-Z ]+$"))
             {
                 ModelState.AddModelError(string.Empty, "Full name must contain only alphabetical characters.");
                 return Page();
