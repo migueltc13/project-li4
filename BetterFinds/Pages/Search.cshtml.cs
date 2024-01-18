@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BetterFinds.Pages
@@ -7,9 +8,11 @@ namespace BetterFinds.Pages
     public class SearchModel : PageModel
     {
         private readonly IConfiguration _configuration;
-        public SearchModel(IConfiguration configuration)
+        private readonly IHubContext<NotificationHub> _hubContext;
+        public SearchModel(IConfiguration configuration, IHubContext<NotificationHub> hubContext)
         {
             _configuration = configuration;
+            _hubContext = hubContext;
             SearchResults = new List<Dictionary<string, object>>();
         }
 
@@ -47,7 +50,7 @@ namespace BetterFinds.Pages
                 occurring = 1; // Default value: true
             }
 
-            var auctionsUtils = new Utils.Auctions(_configuration);
+            var auctionsUtils = new Utils.Auctions(_configuration, _hubContext);
 
             // Get string sort from url
             if (!Request.Query.TryGetValue("sort", out var sortVar))

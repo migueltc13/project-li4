@@ -1,13 +1,16 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
 
 namespace BetterFinds.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly IConfiguration _configuration;
-        public IndexModel(IConfiguration configuration)
+        private readonly IHubContext<NotificationHub> _hubContext;
+        public IndexModel(IConfiguration configuration, IHubContext<NotificationHub> hubcontext)
         {
             _configuration = configuration;
+            _hubContext = hubcontext;
         }
 
         public string CurrentSort { get; set; } = "";
@@ -21,7 +24,7 @@ namespace BetterFinds.Pages
             bool reversed = false;
             bool occurring = true;
 
-            var auctionsUtils = new Utils.Auctions(_configuration);
+            var auctionsUtils = new Utils.Auctions(_configuration, _hubContext);
 
             auctionsUtils.ParseAuctionsOptions(sort, ref order, ref reversed);
 

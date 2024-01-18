@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
 
 namespace BetterFinds.Pages
 {
@@ -7,9 +8,12 @@ namespace BetterFinds.Pages
     public class MyAuctionsModel : PageModel
     {
         private readonly IConfiguration _configuration;
-        public MyAuctionsModel(IConfiguration configuration)
+        private readonly IHubContext<NotificationHub> _hubContext;
+
+        public MyAuctionsModel(IConfiguration configuration, IHubContext<NotificationHub> hubContext)
         {
             _configuration = configuration;
+            _hubContext = hubContext;
         }
 
         public string CurrentSort { get; set; } = "";
@@ -32,7 +36,7 @@ namespace BetterFinds.Pages
                 occurring = 0; // Default value: false
             }
 
-            var auctionsUtils = new Utils.Auctions(_configuration);
+            var auctionsUtils = new Utils.Auctions(_configuration, _hubContext);
 
             auctionsUtils.ParseAuctionsOptions(sort, ref order, ref reversed);
 

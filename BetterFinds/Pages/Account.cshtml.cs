@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Data.SqlClient;
 
 namespace BetterFinds.Pages
@@ -7,9 +8,12 @@ namespace BetterFinds.Pages
     public class AccountModel : PageModel
     {
         private readonly IConfiguration _configuration;
-        public AccountModel(IConfiguration configuration)
+        private readonly IHubContext<NotificationHub> _hubContext;
+
+        public AccountModel(IConfiguration configuration, IHubContext<NotificationHub> hubContext)
         {
             _configuration = configuration;
+            _hubContext = hubContext;
         }
 
         public List<Dictionary<string, object>>? AuctionsList { get; set; }
@@ -69,7 +73,7 @@ namespace BetterFinds.Pages
             }
 
             // Get list of auctions
-            var auctionsUtils = new Utils.Auctions(_configuration);
+            var auctionsUtils = new Utils.Auctions(_configuration, _hubContext);
             AuctionsList = auctionsUtils.GetAuctions(clientId: clientId, order: 0, reversed: false, occurring: false);
 
             // Get number of bids

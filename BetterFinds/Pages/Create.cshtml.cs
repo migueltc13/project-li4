@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Data.SqlClient;
 
 namespace BetterFinds.Pages
@@ -27,9 +28,12 @@ namespace BetterFinds.Pages
         public string? Images { get; set; }
 
         private readonly IConfiguration _configuration;
-        public CreateModel(IConfiguration configuration)
+
+        private readonly IHubContext<NotificationHub> _hubContext;
+        public CreateModel(IConfiguration configuration, IHubContext<NotificationHub> hubContext)
         {
             _configuration = configuration;
+            _hubContext = hubContext;
         }
 
         public void OnGet()
@@ -144,7 +148,7 @@ namespace BetterFinds.Pages
                     con.Close();
 
                     // Add auction to background service to check for ending
-                    var auctionsUtils = new Utils.Auctions(_configuration);
+                    var auctionsUtils = new Utils.Auctions(_configuration, _hubContext);
                     auctionsUtils.AddAuction(DateTime.Parse(EndTime));
 
                     // Redirect to new auction page
