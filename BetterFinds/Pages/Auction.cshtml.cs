@@ -300,7 +300,10 @@ namespace BetterFinds.Pages
                 await _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, BuyerIdEarlySell);
 
                 // Refresh auction page for all clients located that page
-                await _hubContext.Clients.All.SendAsync("UpdatePrice", ClientId, auctionId, message);
+                await _hubContext.Clients.All.SendAsync("UpdateAuction", ClientId, auctionId);
+
+                // Refresh notifications page for all clients located that page
+                await _hubContext.Clients.All.SendAsync("UpdateNotifications", ClientId);
 
                 return OnGet();
             }
@@ -447,6 +450,9 @@ namespace BetterFinds.Pages
                     if (bidder != ClientId)
                     {
                         notificationUtils.CreateNotification(bidder, auctionId, message);
+
+                        // Refresh notifications page for all clients located that page
+                        await _hubContext.Clients.All.SendAsync("UpdateNotifications", bidder);
                     }
                 }
 
@@ -458,10 +464,10 @@ namespace BetterFinds.Pages
                     notificationCount = notificationUtils.GetNUnreadMessages(bidder);
                     Console.WriteLine($"Bidder: {bidder} - Auction: {auctionId} - notificationCount: {notificationCount}");
                     await _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidder);
-                }
 
-                // Refresh auction page for all clients located that page
-                await _hubContext.Clients.All.SendAsync("UpdatePrice", ClientId, auctionId, message);
+                    // Refresh auction page for all clients located that page
+                    await _hubContext.Clients.All.SendAsync("UpdateAuction", bidder, auctionId);
+                }
 
                 Console.WriteLine("Send notification to clients");
             }
@@ -474,6 +480,9 @@ namespace BetterFinds.Pages
             {
                 return NotFound();
             }
+
+            // Set current page to update auction page with SignalR
+            ViewData["CurrentPage"] = "Auction";
 
             Console.WriteLine($"Auction id requested: {auctionId}");
 
