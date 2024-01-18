@@ -19,6 +19,9 @@ namespace BetterFinds.Pages
 
         public IActionResult OnGet()
         {
+            // Set current page to update notifications page with SignalR
+            ViewData["CurrentPage"] = "Notifications";
+
             // Get ClientId
             var clientUtils = new Utils.Client(_configuration);
             int clientId = clientUtils.GetClientId(HttpContext, User);
