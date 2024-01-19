@@ -110,12 +110,12 @@ namespace BetterFinds.Pages
                     // Get AuctionId from database
                     string queryAuctionId = "SELECT MAX(AuctionId) FROM Auction";
                     SqlCommand cmdId = new SqlCommand(queryAuctionId, con);
-                    int AuctionId = Convert.ToInt32(cmdId.ExecuteScalar()) + 1;
+                    int AuctionId = cmdId.ExecuteScalar() == DBNull.Value ? 1 : Convert.ToInt32(cmdId.ExecuteScalar()) + 1;
 
                     // Get ProductId from database
                     string queryProductId = "SELECT MAX(ProductId) FROM Product";
                     SqlCommand cmdProductId = new SqlCommand(queryProductId, con);
-                    int ProductId = Convert.ToInt32(cmdProductId.ExecuteScalar()) + 1;
+                    int ProductId = cmdProductId.ExecuteScalar() == DBNull.Value ? 1 : Convert.ToInt32(cmdProductId.ExecuteScalar()) + 1;
 
                     // Insert into Auction table
                     string queryAuction = "INSERT INTO Auction (AuctionId, StartTime, EndTime, ClientId, ProductId, MinimumBid, IsCompleted) VALUES (@AuctionId, @StartTime, @EndTime, @ClientId, @ProductId, @MinimumBid, 0)";
