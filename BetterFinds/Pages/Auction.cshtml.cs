@@ -9,7 +9,7 @@ namespace BetterFinds.Pages
     public class AuctionModel(IConfiguration configuration, IHubContext<NotificationHub> hubContext) : PageModel
     {
         [BindProperty]
-        public decimal BidAmount { get; set; } = 0;
+        public decimal BidAmount { get; set; }
 
         [BindProperty]
         public string? PaymentMethod { get; set; }
@@ -17,7 +17,7 @@ namespace BetterFinds.Pages
         [BindProperty]
         public string? EarlySell { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!int.TryParse(HttpContext.Request.Query["id"], out int auctionId))
             {
@@ -53,6 +53,8 @@ namespace BetterFinds.Pages
                         }
                         else
                         {
+                            reader.Close();
+                            con.Close();
                             return NotFound();
                         }
                         reader.Close();
@@ -79,6 +81,8 @@ namespace BetterFinds.Pages
                         }
                         else
                         {
+                            reader.Close();
+                            con.Close();
                             return NotFound();
                         }
                         reader.Close();
@@ -87,7 +91,7 @@ namespace BetterFinds.Pages
                 }
 
                 // step 1 - check if auction has ended
-                if (_EndTime >= DateTime.Now)
+                if (_EndTime >= DateTime.UtcNow)
                 {
                     ModelState.AddModelError(string.Empty, "This auction has not ended yet.");
                     return OnGet();
@@ -150,24 +154,24 @@ namespace BetterFinds.Pages
                 foreach (int bidder in bidders)
                 {
                     notificationCount = notificationUtils.GetNUnreadMessages(bidder);
-                    await hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidder);
+                    hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidder).Wait();
                 }
 
                 // calculate number of unread messages for the seller
                 notificationCount = notificationUtils.GetNUnreadMessages(_SellerId);
-                await hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, _SellerId);
+                hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, _SellerId).Wait();
 
                 return OnGet();
             }
 
-            // Check if seller requested a early sell
+            // Check if seller requested an early sell
             if (EarlySell != null && EarlySell == "true")
             {
                 Console.WriteLine("Early sell requested");
 
                 // check if current user is the seller
                 int SellerIdEarlySell = 0;
-                DateTime EndTimeEarlySell = DateTime.Now;
+                DateTime EndTimeEarlySell = DateTime.UtcNow;
                 using (SqlConnection con = new(connectionString))
                 {
                     con.Open();
@@ -184,6 +188,8 @@ namespace BetterFinds.Pages
                         }
                         else
                         {
+                            reader.Close();
+                            con.Close();
                             return NotFound();
                         }
                         reader.Close();
@@ -214,6 +220,8 @@ namespace BetterFinds.Pages
                         }
                         else
                         {
+                            reader.Close();
+                            con.Close();
                             return NotFound();
                         }
                         reader.Close();
@@ -256,7 +264,7 @@ namespace BetterFinds.Pages
                     con.Open();
                     string query = "UPDATE Auction SET EndTime = @EndTime WHERE AuctionId = @AuctionId";
                     using SqlCommand cmd = new(query, con);
-                    cmd.Parameters.AddWithValue("@EndTime", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@EndTime", DateTime.UtcNow);
                     cmd.Parameters.AddWithValue("@AuctionId", auctionId);
 
                     cmd.ExecuteNonQuery();
@@ -278,7 +286,7 @@ namespace BetterFinds.Pages
                     {
                         notificationUtils.CreateNotification(bidder, auctionId, message);
                         notificationCount = notificationUtils.GetNUnreadMessages(bidder);
-                        await hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidder);
+                        hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidder).Wait();
                     }
                 }
 
@@ -286,13 +294,13 @@ namespace BetterFinds.Pages
                 message = "The seller terminated the auction and you have won! Please go to the auction page to complete the payment.";
                 notificationUtils.CreateNotification(BuyerIdEarlySell, auctionId, message);
                 notificationCount = notificationUtils.GetNUnreadMessages(BuyerIdEarlySell);
-                await hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, BuyerIdEarlySell);
+                hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, BuyerIdEarlySell).Wait();
 
                 // Refresh auction page for all clients located that page
-                await hubContext.Clients.All.SendAsync("UpdateAuction", ClientId, auctionId);
+                hubContext.Clients.All.SendAsync("UpdateAuction", ClientId, auctionId).Wait();
 
                 // Refresh notifications page for all clients located that page
-                await hubContext.Clients.All.SendAsync("UpdateNotifications", ClientId);
+                hubContext.Clients.All.SendAsync("UpdateNotifications", ClientId).Wait();
 
                 return OnGet();
             }
@@ -356,14 +364,14 @@ namespace BetterFinds.Pages
                 }
 
                 // Check if auction has ended
-                if (DateTime.Now > EndTime)
+                if (DateTime.UtcNow > EndTime)
                 {
                     ModelState.AddModelError(string.Empty, "This auction has ended.");
                     return OnGet();
                 }
 
                 // Check if user is logged in
-                if (User.Identity != null && !User.Identity.IsAuthenticated)
+                if (User.Identity != null && User.Identity.IsAuthenticated == false)
                 {
                     ModelState.AddModelError(string.Empty, "You must be logged in to bid.");
                     return OnGet();
@@ -419,7 +427,7 @@ namespace BetterFinds.Pages
                 {
                     cmd.Parameters.AddWithValue("@BidId", BidId);
                     cmd.Parameters.AddWithValue("@Value", BidAmount);
-                    cmd.Parameters.AddWithValue("@Time", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@Time", DateTime.UtcNow);
                     cmd.Parameters.AddWithValue("@ClientId", ClientId);
                     cmd.Parameters.AddWithValue("@AuctionId", auctionId);
 
@@ -443,7 +451,7 @@ namespace BetterFinds.Pages
                         notificationUtils.CreateNotification(bidder, auctionId, message);
 
                         // Refresh notifications page for all clients located that page
-                        await hubContext.Clients.All.SendAsync("UpdateNotifications", bidder);
+                        hubContext.Clients.All.SendAsync("UpdateNotifications", bidder).Wait();
                     }
                 }
 
@@ -454,19 +462,19 @@ namespace BetterFinds.Pages
                 {
                     notificationCount = notificationUtils.GetNUnreadMessages(bidder);
                     // Console.WriteLine($"Bidder: {bidder} - Auction: {auctionId} - notificationCount: {notificationCount}");
-                    await hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidder);
+                    hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidder).Wait();
 
                     // Refresh auction page for all clients located that page
-                    await hubContext.Clients.All.SendAsync("UpdateAuction", bidder, auctionId);
+                    hubContext.Clients.All.SendAsync("UpdateAuction", bidder, auctionId).Wait();
                 }
 
                 // Create a notification for the seller
                 message = $"A new bid has been placed on your auction on the amount of {Utils.Currency.FormatDecimal(BidAmount)}€";
                 notificationUtils.CreateNotification(SellerId, auctionId, message);
                 notificationCount = notificationUtils.GetNUnreadMessages(SellerId);
-                await hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, SellerId);
-                await hubContext.Clients.All.SendAsync("UpdateAuction", SellerId, auctionId);
-                await hubContext.Clients.All.SendAsync("UpdateNotifications", SellerId);
+                hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, SellerId).Wait();
+                hubContext.Clients.All.SendAsync("UpdateAuction", SellerId, auctionId).Wait();
+                hubContext.Clients.All.SendAsync("UpdateNotifications", SellerId).Wait();
 
                 Console.WriteLine("Sent notification to clients");
 
@@ -529,10 +537,10 @@ namespace BetterFinds.Pages
                     ViewData["IsCompleted"] = isCompleted;
 
                     // Check if auction has ended
-                    ViewData["AuctionEnded"] = (DateTime.Now >= endTime);
+                    ViewData["AuctionEnded"] = (DateTime.UtcNow >= endTime);
 
                     // If the current user is the seller and the auction hasn't ended yet, add edit option
-                    if (currentClientId == clientId && DateTime.Now < endTime)
+                    if (currentClientId == clientId && DateTime.UtcNow < endTime)
                         ViewData["Edit"] = true;
 
                     reader.Close();
