@@ -172,7 +172,7 @@ namespace BetterFinds.Pages
                 // Get clientId
                 string queryId = "SELECT MAX(ClientId) FROM Client";
                 SqlCommand cmdId = new SqlCommand(queryId, con);
-                int id = Convert.ToInt32(cmdId.ExecuteScalar()) + 1;
+                int id = cmdId.ExecuteScalar() == DBNull.Value ? 1 : Convert.ToInt32(cmdId.ExecuteScalar()) + 1;
 
                 Console.WriteLine($"Id: {id}"); // TODO: Remove this
 
