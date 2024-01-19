@@ -35,8 +35,7 @@ namespace BetterFinds.Pages
             // pass message to page via action parameter: success=1
             if (Request.Query.ContainsKey("success"))
             {
-                if (Request.Query["success"] == "1")
-                    ViewData["Message"] = "Account updated successfully.";
+                ViewData["Message"] = "Account updated successfully.";
             }
 
             // Get ClientId
@@ -318,7 +317,7 @@ namespace BetterFinds.Pages
             }
 
             // pass message to page via action parameter: success=1
-            return RedirectToPage("MyAccount", new { success = 1 });
+            return RedirectToPage("myaccount", new { success = 1 });
         }
 
         [GeneratedRegex(@"^[a-zA-Z0-9]+$")]
