@@ -208,10 +208,7 @@ public partial class MyAccountModel(IConfiguration configuration) : PageModel
         updateProfilePic = true;
 
         // Check if optNewsletter needs to be updated
-        if (OptNewsletter)
-            updateOptNewsletter = true;
-        else
-            updateOptNewsletter = false;
+        updateOptNewsletter = OptNewsletter;
 
         // Get ClientId
         var clientUtils = new Utils.Client(configuration);
@@ -304,7 +301,7 @@ public partial class MyAccountModel(IConfiguration configuration) : PageModel
                 if (updatePassword)
                     cmdUpdateUser.Parameters.AddWithValue("@Password", Password);
                 if (updateProfilePic)
-                    cmdUpdateUser.Parameters.AddWithValue("@ProfilePic", ProfilePic == null ? DBNull.Value : ProfilePic);
+                    cmdUpdateUser.Parameters.AddWithValue("@ProfilePic", ProfilePic != null ? ProfilePic : DBNull.Value);
                 if (updateOptNewsletter)
                     cmdUpdateUser.Parameters.AddWithValue("@OptNewsletter", !currentOptNewsletter);
                 cmdUpdateUser.Parameters.AddWithValue("@ClientId", ClientId);
