@@ -109,51 +109,53 @@
         <p>No bids were made</p>
     }
 
-    <!-- Bid form -->
-    @if ((bool?) ViewData["AuctionEnded"] == false)
+    @if (User.Identity != null && User.Identity.IsAuthenticated)
     {
-        <form method="post">
-            <div class="input-box">
-                <p style="margin-left: 20px">Bid amount:</p>
-                @{string placeholder = Utils.Currency.FormatDecimalObject(ViewData["BidPlaceholder"]);}
-                <input type="number" asp-for="BidAmount" value="@placeholder" placeholder="@($"{placeholder}€")" min="0.00" step="0.01" lang="en" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Bid</button>
-        </form>
-    }
-    else if (ViewData["BuyerId"] != null && (int?)ViewData["CurrentClientId"] == (int?)ViewData["BuyerId"])
-    {
-        <br />
-        <strong>You won the auction!</strong>
-
-        @if ((bool?)ViewData["IsCompleted"] == false)
+        @if ((bool?) ViewData["AuctionEnded"] == false)
         {
             <form method="post">
                 <div class="input-box">
-                    <p>Payment method:</p>
-                    <select asp-for="PaymentMethod" required>
-                        <option value="CreditCard">Credit Card</option>
-                        <option value="PayPal">PayPal</option>
-                        <option value="ApplePay">Apple Pay</option>
-                    </select>
+                    <p style="margin-left: 20px">Bid amount:</p>
+                    @{string placeholder = Utils.Currency.FormatDecimalObject(ViewData["BidPlaceholder"]);}
+                    <input type="number" asp-for="BidAmount" value="@placeholder" placeholder="@($"{placeholder}€")" min="0.00" step="0.01" lang="en" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Pay</button>
+                <button type="submit" class="btn btn-primary">Bid</button>
             </form>
         }
-    }
-
-    @if ((bool?) ViewData["AuctionEnded"] == false && (ViewData["SellerId"] != null && (int?)ViewData["CurrentClientId"] == (int?)ViewData["SellerId"]))
-    {
-        <br />
-        string EarlyButtonMessage = "Sell now";
-        @if (ViewData["BuyerId"] != null && (int?)ViewData["BuyerId"] == 0)
+        else if (ViewData["BuyerId"] != null && (int?)ViewData["CurrentClientId"] == (int?)ViewData["BuyerId"])
         {
-            EarlyButtonMessage = "Terminate now";
+            <br />
+            <strong>You won the auction!</strong>
+
+            @if ((bool?)ViewData["IsCompleted"] == false)
+            {
+                <form method="post">
+                    <div class="input-box">
+                        <p>Payment method:</p>
+                        <select asp-for="PaymentMethod" required>
+                            <option value="CreditCard">Credit Card</option>
+                            <option value="PayPal">PayPal</option>
+                            <option value="ApplePay">Apple Pay</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Pay</button>
+                </form>
+            }
         }
-        <form method="post">
-            <input hidden asp-for="EarlySell" value="true" />
-            <button type="submit" class="btn btn-primary">@EarlyButtonMessage</button>
-        </form>
+
+        @if ((bool?) ViewData["AuctionEnded"] == false && (ViewData["SellerId"] != null && (int?)ViewData["CurrentClientId"] == (int?)ViewData["SellerId"]))
+        {
+            <br />
+            string EarlyButtonMessage = "Sell now";
+            @if (ViewData["BuyerId"] != null && (int?)ViewData["BuyerId"] == 0)
+            {
+                EarlyButtonMessage = "Terminate now";
+            }
+            <form method="post">
+                <input hidden asp-for="EarlySell" value="true" />
+                <button type="submit" class="btn btn-primary">@EarlyButtonMessage</button>
+            </form>
+        }
     }
 </div>
 
