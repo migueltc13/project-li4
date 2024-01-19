@@ -45,8 +45,7 @@ namespace BetterFinds.Pages
             // Toggle between unread and all notifications: ?ShowAll=1 or nothing
             if (Request.Query.ContainsKey("ShowAll"))
             {
-                Notifications = notificationUtils.GetNotifications(clientId);
-                ShowAll = Request.Query["ShowAll"] == "1";
+                ShowAll = true;
             }
 
             // Get notifications
