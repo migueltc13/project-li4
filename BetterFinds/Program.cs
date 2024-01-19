@@ -76,7 +76,7 @@ public class Program
 
         // Initialize Bidder Groups
         var bids = app.Services.GetRequiredService<Bids>();
-        bids.CreateBidderGroup().Wait();
+        await bids.CreateBidderGroup();
 
         // Map SignalR hub
         app.MapHub<NotificationHub>("/notificationHub");
