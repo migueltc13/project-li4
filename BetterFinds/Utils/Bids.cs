@@ -5,7 +5,7 @@ namespace BetterFinds.Utils;
 public class Bids(IConfiguration configuration)
 {
     private static Dictionary<int, List<int>> BiddersGroup { get; set; } = [];
-    public async Task CreateBidderGroup()
+    public async Task CreateBidderGroupAsync()
     {
         string? connectionString = configuration.GetConnectionString("DefaultConnection");
         string query = "SELECT ClientId, AuctionId FROM Bid";
@@ -57,7 +57,7 @@ public class Bids(IConfiguration configuration)
         await Task.CompletedTask;
     }
 
-    public async Task AddBidderToBidderGroup(int clientId, int auctionId)
+    public async Task AddBidderToBidderGroupAsync(int clientId, int auctionId)
     {
         // Check if the auctionId already exists in the dictionary
         if (BiddersGroup.TryGetValue(auctionId, out List<int>? value))
