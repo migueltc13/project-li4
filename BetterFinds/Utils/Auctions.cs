@@ -1,19 +1,10 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Microsoft.Data.SqlClient;
-using System.Reflection;
 
 namespace BetterFinds.Utils
 {
-    public class Auctions
+    public class Auctions(IConfiguration configuration, IHubContext<NotificationHub> hubContext)
     {
-        private readonly IConfiguration _configuration;
-        private readonly IHubContext<NotificationHub> _hubContext;
-        public Auctions(IConfiguration configuration, IHubContext<NotificationHub> hubContext)
-        {
-            _configuration = configuration;
-            _hubContext = hubContext;
-        }
-
         /* Function to show auctions with the following parameters options
          * 
          * int clientId:
@@ -31,7 +22,7 @@ namespace BetterFinds.Utils
          */
         public List<Dictionary<string, object>> GetAuctions(int clientId, int order, bool reversed, bool occurring)
         {
-            List<Dictionary<string, object>> auctions = new();
+            List<Dictionary<string, object>> auctions = [];
 
             string query = "SELECT A.AuctionId, A.ProductId, A.EndTime, P.Name AS ProductName, P.Description AS ProductDescription, P.Price AS ProductPrice " +
                            "FROM Auction A " +
@@ -65,23 +56,21 @@ namespace BetterFinds.Utils
                 query += " DESC";
             }
 
-            Console.WriteLine($"{query}");
+            Console.WriteLine($"[Utils/Auctions.cs] (getAuctions) query: {query}");
 
-            string? connectionString = _configuration.GetConnectionString("DefaultConnection");
+            string? connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new(connectionString))
             {
                 con.Open();
 
-                using (SqlCommand cmd = new SqlCommand(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@ClientId", clientId);
+                using SqlCommand cmd = new(query, con);
+                cmd.Parameters.AddWithValue("@ClientId", clientId);
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            Dictionary<string, object> auctionRow = new()
+                using SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Dictionary<string, object> auctionRow = new()
                             {
                                 {"AuctionId", reader["AuctionId"]},
                                 {"EndTime", reader["EndTime"]},
@@ -90,9 +79,7 @@ namespace BetterFinds.Utils
                                 {"ProductPrice", reader["ProductPrice"]}
                             };
 
-                            auctions.Add(auctionRow);
-                        }
-                    }
+                    auctions.Add(auctionRow);
                 }
             }
             return auctions;
@@ -139,39 +126,38 @@ namespace BetterFinds.Utils
             }
         }
 
-        private static List<DateTime> AuctionEndTimes = new();
+        private static readonly List<DateTime> AuctionEndTimes = [];
 
         public void CreateAuctionsToCheck()
         {
             try
             {
-                Console.WriteLine("Creating AuctionEndTimes list to check in auction background service...");
+                Console.WriteLine("[Utils/Auctions.cs] Creating AuctionEndTimes list to check in auction background service...");
 
-                string query = "SELECT AuctionId, EndTime, IsCompleted FROM Auction";
-                string? conString = _configuration.GetConnectionString("DefaultConnection");
-                using (SqlConnection con = new SqlConnection(conString))
+                DateTime currentTime = DateTime.Now;
+
+                string query = "SELECT AuctionId, EndTime, IsCompleted FROM Auction WHERE EndTime >= @CurrentTime AND IsCheckHasEnded = 0 AND IsCompleted = 0";
+                string? conString = configuration.GetConnectionString("DefaultConnection");
+                using SqlConnection con = new(conString);
+                con.Open();
+                using (SqlCommand cmd = new(query, con))
                 {
-                    con.Open();
-                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    cmd.Parameters.AddWithValue("@CurrentTime", currentTime);
+                    using SqlDataReader readerProduct = cmd.ExecuteReader();
+                    while (readerProduct.Read())
                     {
-                        using (SqlDataReader readerProduct = cmd.ExecuteReader())
-                        {
-                            while (readerProduct.Read())
-                            {
-                                int auctionId = readerProduct.GetInt32(readerProduct.GetOrdinal("AuctionId"));
-                                DateTime endTime = readerProduct.GetDateTime(readerProduct.GetOrdinal("EndTime"));
-                                bool isCompleted = readerProduct.GetBoolean(readerProduct.GetOrdinal("IsCompleted"));
-                                if (!isCompleted)
-                                    AuctionEndTimes.Add(endTime);
-                            }
-                        }
+                        int auctionId = readerProduct.GetInt32(readerProduct.GetOrdinal("AuctionId"));
+                        DateTime endTime = readerProduct.GetDateTime(readerProduct.GetOrdinal("EndTime"));
+                        bool isCompleted = readerProduct.GetBoolean(readerProduct.GetOrdinal("IsCompleted"));
+                        if (!isCompleted)
+                            AuctionEndTimes.Add(endTime);
                     }
-                    con.Close();
                 }
+                con.Close();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error create auctions to check: {ex.Message}");
+                Console.WriteLine($"[Utils/Auctions.cs] Error create auctions to check: {ex.Message}");
             }
         }
 
@@ -179,55 +165,66 @@ namespace BetterFinds.Utils
 
         public void RemoveAuction(DateTime endTime) => AuctionEndTimes.Remove(endTime);
 
+        public void PrintAuctionsToCheck()
+        {
+            Console.WriteLine("AuctionEndTimes list to check in auction background service:");
+            foreach (DateTime endTime in AuctionEndTimes)
+            {
+                Console.WriteLine(endTime);
+            }
+        }
+
         public async Task CheckAuctionsAsync()
         {
             try
             {
                 await Task.Run(() =>
                 {
-                    DateTime currentTime = DateTime.UtcNow;
+                    DateTime currentTime = DateTime.Now;
+
+                    Console.WriteLine($"[Utils/Auctions.cs] AuctionEndTimes.Count: {AuctionEndTimes.Count}");
+                    Console.WriteLine($"[Utils/Auctions.cs] CurrentTime: {currentTime}");
+                    PrintAuctionsToCheck();
 
                     for (int i = 0; i < AuctionEndTimes.Count; i++)
                     {
+                        Console.WriteLine($"[Utils/Auctions.cs] Checking AuctionEndTimes[{i}]: {AuctionEndTimes[i]}");
+
                         if (currentTime >= AuctionEndTimes[i])
                         {
                             int auctionId; // Retrieve auctionId from Auction table
                             int sellerId; // Retrieve sellerId from Auction table
                             int buyerId; // Retrieve buyerId from Product table
-                            string? conString = _configuration.GetConnectionString("DefaultConnection");
-                            using (SqlConnection con = new SqlConnection(conString))
+                            string? conString = configuration.GetConnectionString("DefaultConnection");
+                            using (SqlConnection con = new(conString))
                             {
                                 con.Open();
                                 string query = "SELECT AuctionId, ClientId FROM Auction WHERE EndTime = @EndTime AND IsCheckHasEnded = 0";
-                                using (SqlCommand cmd = new SqlCommand(query, con))
+                                using (SqlCommand cmd = new(query, con))
                                 {
                                     cmd.Parameters.AddWithValue("@EndTime", AuctionEndTimes[i]);
-                                    using (SqlDataReader reader = cmd.ExecuteReader())
+                                    using SqlDataReader reader = cmd.ExecuteReader();
+                                    if (!reader.Read())
                                     {
-                                        if (!reader.Read())
-                                        {
-                                            break;
-                                        }
-
-                                        auctionId = reader.GetInt32(reader.GetOrdinal("AuctionId"));
-                                        sellerId = reader.GetInt32(reader.GetOrdinal("ClientId"));
-                                        reader.Close();
-
-                                        Console.WriteLine($"AuctionEndTimes[{i}] has ended at {AuctionEndTimes[i]}, auctionId: {auctionId}, sellerId: {sellerId}");
+                                        continue;
                                     }
+
+                                    auctionId = reader.GetInt32(reader.GetOrdinal("AuctionId"));
+                                    sellerId = reader.GetInt32(reader.GetOrdinal("ClientId"));
+                                    reader.Close();
+
+                                    Console.WriteLine($"[Utils/Auctions.cs] AuctionEndTimes[{i}] has ended at {AuctionEndTimes[i]}, auctionId: {auctionId}, sellerId: {sellerId}");
                                 }
 
                                 // Retrive buyerId from Product table
                                 query = "SELECT ClientId FROM Product WHERE AuctionId = @AuctionId";
-                                using (SqlCommand cmd = new SqlCommand(query, con))
+                                using (SqlCommand cmd = new(query, con))
                                 {
                                     cmd.Parameters.AddWithValue("@AuctionId", auctionId);
-                                    using (SqlDataReader reader = cmd.ExecuteReader())
-                                    {
-                                        reader.Read();
-                                        buyerId = reader.GetInt32(reader.GetOrdinal("ClientId"));
-                                        reader.Close();
-                                    }
+                                    using SqlDataReader reader = cmd.ExecuteReader();
+                                    reader.Read();
+                                    buyerId = reader.GetInt32(reader.GetOrdinal("ClientId"));
+                                    reader.Close();
                                 }
 
                                 con.Close();
@@ -235,9 +232,9 @@ namespace BetterFinds.Utils
 
                             // Notifications
                             string message;
-                            var notificationUtils = new Notification(_configuration);
+                            var notificationUtils = new Notification(configuration);
 
-                            var bidsUtils = new Bids(_configuration);
+                            var bidsUtils = new Bids(configuration);
                             List<int> bidders = bidsUtils.GetBiddersFromAuction(auctionId);
                             int notificationCount = 0;
 
@@ -247,10 +244,10 @@ namespace BetterFinds.Utils
                                 message = "Your auction has ended and no bids were made.";
                                 notificationUtils.CreateNotification(sellerId, auctionId, message);
                                 notificationCount = notificationUtils.GetNUnreadMessages(sellerId);
-                                Console.WriteLine($"Seller: {sellerId} - Auction: {auctionId} - notificationCount: {notificationCount}");
-                                _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, sellerId).Wait();
-                                _hubContext.Clients.All.SendAsync("UpdateAuction", sellerId, auctionId).Wait();
-                                _hubContext.Clients.All.SendAsync("UpdateNotifications", sellerId).Wait();
+                                // Console.WriteLine($"Seller: {sellerId} - Auction: {auctionId} - notificationCount: {notificationCount}");
+                                hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, sellerId).Wait();
+                                hubContext.Clients.All.SendAsync("UpdateAuction", sellerId, auctionId).Wait();
+                                hubContext.Clients.All.SendAsync("UpdateNotifications", sellerId).Wait();
                             }
                             else
                             {
@@ -258,10 +255,10 @@ namespace BetterFinds.Utils
                                 message = "Your auction has ended, waiting for the buyer to complete the purchase.";
                                 notificationUtils.CreateNotification(sellerId, auctionId, message);
                                 notificationCount = notificationUtils.GetNUnreadMessages(sellerId);
-                                Console.WriteLine($"Seller: {sellerId} - Auction: {auctionId} - notificationCount: {notificationCount}");
-                                _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, sellerId).Wait();
-                                _hubContext.Clients.All.SendAsync("UpdateAuction", sellerId, auctionId).Wait();
-                                _hubContext.Clients.All.SendAsync("UpdateNotifications", sellerId).Wait();
+                                // Console.WriteLine($"Seller: {sellerId} - Auction: {auctionId} - notificationCount: {notificationCount}");
+                                hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, sellerId).Wait();
+                                hubContext.Clients.All.SendAsync("UpdateAuction", sellerId, auctionId).Wait();
+                                hubContext.Clients.All.SendAsync("UpdateNotifications", sellerId).Wait();
 
                                 // Notify bidders except the buyer that the auction has ended
                                 message = "Auction has ended.";
@@ -271,10 +268,10 @@ namespace BetterFinds.Utils
                                     {
                                         notificationUtils.CreateNotification(bidder, auctionId, message);
                                         notificationCount = notificationUtils.GetNUnreadMessages(bidder);
-                                        Console.WriteLine($"Bidder: {bidder} - Auction: {auctionId} - notificationCount: {notificationCount}");
-                                        _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidder).Wait();
-                                        _hubContext.Clients.All.SendAsync("UpdateAuction", bidder, auctionId).Wait();
-                                        _hubContext.Clients.All.SendAsync("UpdateNotifications", bidder).Wait();
+                                        // Console.WriteLine($"Bidder: {bidder} - Auction: {auctionId} - notificationCount: {notificationCount}");
+                                        hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidder).Wait();
+                                        hubContext.Clients.All.SendAsync("UpdateAuction", bidder, auctionId).Wait();
+                                        hubContext.Clients.All.SendAsync("UpdateNotifications", bidder).Wait();
                                     }
                                 }
                                 
@@ -282,23 +279,23 @@ namespace BetterFinds.Utils
                                 message = "Auction has ended and you are the winner, please go to the auction page to complete the purchase.";
                                 notificationUtils.CreateNotification(buyerId, auctionId, message);
                                 notificationCount = notificationUtils.GetNUnreadMessages(buyerId);
-                                Console.WriteLine($"Buyer: {buyerId} - Auction: {auctionId} - notificationCount: {notificationCount}");
-                                _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, buyerId).Wait();
-                                _hubContext.Clients.All.SendAsync("UpdateAuction", buyerId, auctionId).Wait();
-                                _hubContext.Clients.All.SendAsync("UpdateNotifications", buyerId).Wait();
+                                // Console.WriteLine($"Buyer: {buyerId} - Auction: {auctionId} - notificationCount: {notificationCount}");
+                                hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, buyerId).Wait();
+                                hubContext.Clients.All.SendAsync("UpdateAuction", buyerId, auctionId).Wait();
+                                hubContext.Clients.All.SendAsync("UpdateNotifications", buyerId).Wait();
                             }
 
                             // Update notification count for the seller
                             notificationCount = notificationUtils.GetNUnreadMessages(sellerId);
-                            Console.WriteLine($"Seller: {sellerId} - Auction: {auctionId} - notificationCount: {notificationCount}");
-                            _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, sellerId).Wait();
+                            // Console.WriteLine($"Seller: {sellerId} - Auction: {auctionId} - notificationCount: {notificationCount}");
+                            hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, sellerId).Wait();
 
                             // Mark the auction IsCheckHasEnded as true
-                            using (SqlConnection con = new SqlConnection(conString))
+                            using (SqlConnection con = new(conString))
                             {
                                 con.Open();
                                 string query = "UPDATE Auction SET IsCheckHasEnded = 1 WHERE AuctionId = @AuctionId";
-                                using (SqlCommand cmd = new SqlCommand(query, con))
+                                using (SqlCommand cmd = new(query, con))
                                 {
                                     cmd.Parameters.AddWithValue("@AuctionId", auctionId);
                                     cmd.ExecuteNonQuery();
@@ -314,7 +311,7 @@ namespace BetterFinds.Utils
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error checking auctions: {ex.Message}");
+                Console.WriteLine($"[Utils/Auctions.cs] Error checking auctions: {ex.Message}");
             }
         }
     }
