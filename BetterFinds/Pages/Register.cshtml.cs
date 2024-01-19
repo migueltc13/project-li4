@@ -168,7 +168,7 @@ namespace BetterFinds.Pages
                 SqlCommand cmdId = new(queryId, con);
                 int id = cmdId.ExecuteScalar() == DBNull.Value ? 1 : Convert.ToInt32(cmdId.ExecuteScalar()) + 1;
 
-                Console.WriteLine($"Id: {id}"); // TODO: Remove this
+                Console.WriteLine($"Id: {id}");
 
                 // Insert new user into database
                 string query = "INSERT INTO Client (ClientId, FullName, Username, Email, Password, ProfilePic, OptNewsletter) VALUES (@id, @FullName, @Username, @Email, @Password, @ProfilePic, @OptNewsletter)";

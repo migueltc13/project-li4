@@ -30,7 +30,6 @@ html {
     min-height: 100%;
 }
 
-/* TODO change this to own rule instead of body */
 body {
     /*
     display: flex;
@@ -112,7 +111,6 @@ header {
     justify-content: center;
     align-items: center;
     width: 380px;
-    /* TODO: dynamic instead of 380px */
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(20px);
