@@ -50,6 +50,9 @@ namespace BetterFinds.Utils
                 case 2:
                     query += " ORDER BY P.Name";
                     break;
+                default:
+                    query += " ORDER BY A.EndTime";
+                    break;
             }
 
             if (reversed)
