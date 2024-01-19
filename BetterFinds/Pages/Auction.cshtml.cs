@@ -479,6 +479,14 @@ namespace BetterFinds.Pages
                     await _hubContext.Clients.All.SendAsync("UpdateAuction", bidder, auctionId);
                 }
 
+                // Create a notification for the seller
+                message = $"A new bid has been placed on your auction on the amount of {Utils.Currency.FormatDecimal(BidAmount)}€";
+                notificationUtils.CreateNotification(SellerId, auctionId, message);
+                notificationCount = notificationUtils.GetNUnreadMessages(SellerId);
+                await _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, SellerId);
+                await _hubContext.Clients.All.SendAsync("UpdateAuction", SellerId, auctionId);
+                await _hubContext.Clients.All.SendAsync("UpdateNotifications", SellerId);
+
                 Console.WriteLine("Send notification to clients");
             }
 
