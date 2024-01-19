@@ -32,7 +32,7 @@ namespace BetterFinds.Pages
         {
             // If user is already logged in, redirect to index page
             if (User.Identity != null && User.Identity.IsAuthenticated)
-                return RedirectToPage("/");
+                return RedirectToPage("index");
 
             return Page();
         }
@@ -183,24 +183,16 @@ namespace BetterFinds.Pages
                 cmd.Parameters.AddWithValue("@OptNewsletter", OptNewsletter);
 
                 int result = cmd.ExecuteNonQuery();
-                if (result == 1)
-                {
-                    Console.WriteLine("User created"); // TODO: Remove this
-                    ViewData["RegisterMessage"] = "Account created successfully.";
-                    con.Close();
-                    return Page();
-                }
-                else
-                {
-                    Console.WriteLine("User not created"); // TODO: Remove this
-                    con.Close();
-                    return RedirectToPage("/register");
-                }
+
+                Console.WriteLine("User created");
+                ViewData["RegisterMessage"] = "Account created successfully.";
+                con.Close();
+                return RedirectToPage("login", new { success = 1, username = Username });
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return RedirectToPage("/register");
+                return RedirectToPage("register");
             }
             finally
             {
