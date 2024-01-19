@@ -2,21 +2,14 @@
 
 namespace BetterFinds.Services
 {
-    public class AuctionBackgroundService : BackgroundService
+    public class AuctionBackgroundService(IServiceProvider serviceProvider) : BackgroundService
     {
-        private readonly IServiceProvider _serviceProvider;
-
-        public AuctionBackgroundService(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
-
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
             {
                 // Create a new scope to retrieve scoped services
-                using (var scope = _serviceProvider.CreateScope())
+                using (var scope = serviceProvider.CreateScope())
                 {
                     var auctions = scope.ServiceProvider.GetRequiredService<Auctions>();
                     // Check for auctions that ended notify users and update the database

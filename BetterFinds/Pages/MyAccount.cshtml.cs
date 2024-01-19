@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 namespace BetterFinds.Pages
 {
     [Authorize]
-    public class MyAccountModel : PageModel
+    public partial class MyAccountModel(IConfiguration configuration) : PageModel
     {
         [BindProperty]
         public string Username { get; set; } = "";
@@ -30,12 +30,6 @@ namespace BetterFinds.Pages
         [BindProperty]
         public bool OptNewsletter { get; set; } = false;
 
-        private readonly IConfiguration _configuration;
-        public MyAccountModel(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
         public IActionResult OnGet()
         {
             // pass message to page via action parameter: success=1
@@ -46,18 +40,18 @@ namespace BetterFinds.Pages
             }
 
             // Get ClientId
-            var clientUtils = new Utils.Client(_configuration);
+            var clientUtils = new Utils.Client(configuration);
             int ClientId = clientUtils.GetClientId(HttpContext, User);
             ViewData["ClientId"] = ClientId;
 
             // Get user info from database
-            string connectionString = _configuration.GetConnectionString("DefaultConnection") ?? "";
+            string? connectionString = configuration.GetConnectionString("DefaultConnection");
             string query = "SELECT Username, FullName, Email, ProfilePic, OptNewsletter FROM Client WHERE ClientId = @ClientId";
-            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new(connectionString))
             {
                 con.Open();
 
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (SqlCommand cmd = new(query, con))
                 {
                     cmd.Parameters.AddWithValue("@ClientId", ClientId);
 
@@ -76,11 +70,11 @@ namespace BetterFinds.Pages
 
             // Get number of auctions
             query = "SELECT COUNT(*) AS NumberOfAuctions FROM Auction WHERE ClientId = @ClientId";
-            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new(connectionString))
             {
                 con.Open();
 
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (SqlCommand cmd = new(query, con))
                 {
                     cmd.Parameters.AddWithValue("@ClientId", ClientId);
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -93,11 +87,11 @@ namespace BetterFinds.Pages
 
             // Get number of bids
             query = "SELECT COUNT(*) AS NumberOfBids FROM Bid WHERE ClientId = @ClientId";
-            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new(connectionString))
             {
                 con.Open();
 
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (SqlCommand cmd = new(query, con))
                 {
                     cmd.Parameters.AddWithValue("@ClientId", ClientId);
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -124,12 +118,12 @@ namespace BetterFinds.Pages
             ModelState.Clear();
 
             // update values status
-            bool updateUsername = false;
-            bool updateFullName = false;
-            bool updateEmail = false;
-            bool updatePassword = false;
-            bool updateProfilePic = false;
-            bool updateOptNewsletter = false;
+            bool updateUsername;
+            bool updateFullName;
+            bool updateEmail;
+            bool updatePassword;
+            bool updateProfilePic;
+            bool updateOptNewsletter;
 
             // Check if username is at least 3 characters long and 32 characters or fewer
             if (Username == null || Username == "")
@@ -141,7 +135,7 @@ namespace BetterFinds.Pages
                 ModelState.AddModelError(string.Empty, "Username must be at least 3 characters long and 32 characters or fewer.");
                 return OnGet();
             }
-            else if (!Regex.IsMatch(Username, @"^[a-zA-Z0-9]+$"))
+            else if (!UsernameRegex().IsMatch(Username))
             {
                 ModelState.AddModelError(string.Empty, "Username must only contain alphanumeric characters.");
                 return OnGet();            
@@ -159,7 +153,7 @@ namespace BetterFinds.Pages
                 ModelState.AddModelError(string.Empty, "Full name must be at least 3 characters long and 64 characters or fewer.");
                 return OnGet();
             }
-            else if (!Regex.IsMatch(FullName, @"^[a-zA-Z ]+$"))
+            else if (!FullNameRegex().IsMatch(FullName))
             {
                 ModelState.AddModelError(string.Empty, "Full name must only contain aplhabetic characters.");
                 return OnGet();
@@ -219,13 +213,15 @@ namespace BetterFinds.Pages
             // Check if optNewsletter needs to be updated
             if (OptNewsletter)
                 updateOptNewsletter = true;
+            else
+                updateOptNewsletter = false;
 
             // Get ClientId
-            var clientUtils = new Utils.Client(_configuration);
+            var clientUtils = new Utils.Client(configuration);
             int ClientId = clientUtils.GetClientId(HttpContext, User);
 
-            string connectionString = _configuration.GetConnectionString("DefaultConnection") ?? "";
-            using (SqlConnection con = new SqlConnection(connectionString))
+            string? connectionString = configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection con = new(connectionString))
             {
                 con.Open();
 
@@ -233,36 +229,32 @@ namespace BetterFinds.Pages
                 if (updateUsername)
                 {
                     string queryCheckUser = "SELECT * FROM Client WHERE Username = @Username AND ClientId != @ClientId";
-                    using (SqlCommand cmdCheckUser = new SqlCommand(queryCheckUser, con))
+                    using SqlCommand cmdCheckUser = new(queryCheckUser, con);
+                    cmdCheckUser.Parameters.AddWithValue("@Username", Username);
+                    cmdCheckUser.Parameters.AddWithValue("@ClientId", ClientId);
+                    SqlDataReader reader = cmdCheckUser.ExecuteReader();
+                    if (reader.Read())
                     {
-                        cmdCheckUser.Parameters.AddWithValue("@Username", Username);
-                        cmdCheckUser.Parameters.AddWithValue("@ClientId", ClientId);
-                        SqlDataReader reader = cmdCheckUser.ExecuteReader();
-                        if (reader.Read())
-                        {
-                            ModelState.AddModelError(string.Empty, "Username already exists.");
-                            return OnGet();
-                        }
-                        reader.Close();
+                        ModelState.AddModelError(string.Empty, "Username already exists.");
+                        return OnGet();
                     }
+                    reader.Close();
                 }
 
                 // Check if email already exists
                 if (updateEmail)
                 {
                     string queryCheckEmail = "SELECT * FROM Client WHERE Email = @Email AND ClientId != @ClientId";
-                    using (SqlCommand cmdCheckEmail = new SqlCommand(queryCheckEmail, con))
+                    using SqlCommand cmdCheckEmail = new(queryCheckEmail, con);
+                    cmdCheckEmail.Parameters.AddWithValue("@Email", Email);
+                    cmdCheckEmail.Parameters.AddWithValue("@ClientId", ClientId);
+                    SqlDataReader reader = cmdCheckEmail.ExecuteReader();
+                    if (reader.Read())
                     {
-                        cmdCheckEmail.Parameters.AddWithValue("@Email", Email);
-                        cmdCheckEmail.Parameters.AddWithValue("@ClientId", ClientId);
-                        SqlDataReader reader = cmdCheckEmail.ExecuteReader();
-                        if (reader.Read())
-                        {
-                            ModelState.AddModelError(string.Empty, "Email already exists.");
-                            return OnGet();
-                        }
-                        reader.Close();
+                        ModelState.AddModelError(string.Empty, "Email already exists.");
+                        return OnGet();
                     }
+                    reader.Close();
                 }
 
                 // Get current optNewsletter value
@@ -270,14 +262,12 @@ namespace BetterFinds.Pages
                 if (updateOptNewsletter)
                 {
                     string queryGetOptNewsletter = "SELECT OptNewsletter FROM Client WHERE ClientId = @ClientId";
-                    using (SqlCommand cmdGetOptNewsletter = new SqlCommand(queryGetOptNewsletter, con))
-                    {
-                        cmdGetOptNewsletter.Parameters.AddWithValue("@ClientId", ClientId);
-                        SqlDataReader reader = cmdGetOptNewsletter.ExecuteReader();
-                        reader.Read();
-                        currentOptNewsletter = reader.GetBoolean(reader.GetOrdinal("OptNewsletter"));
-                        reader.Close();
-                    }
+                    using SqlCommand cmdGetOptNewsletter = new(queryGetOptNewsletter, con);
+                    cmdGetOptNewsletter.Parameters.AddWithValue("@ClientId", ClientId);
+                    SqlDataReader reader = cmdGetOptNewsletter.ExecuteReader();
+                    reader.Read();
+                    currentOptNewsletter = reader.GetBoolean(reader.GetOrdinal("OptNewsletter"));
+                    reader.Close();
                 }
 
                 // Conscruct query
@@ -306,7 +296,7 @@ namespace BetterFinds.Pages
                 Console.WriteLine("updateOptNewsletter: " + updateOptNewsletter);
 
                 // Update user info
-                using (SqlCommand cmdUpdateUser = new SqlCommand(query, con))
+                using (SqlCommand cmdUpdateUser = new(query, con))
                 {
                     if (updateUsername)
                         cmdUpdateUser.Parameters.AddWithValue("@Username", Username);
@@ -330,5 +320,11 @@ namespace BetterFinds.Pages
             // pass message to page via action parameter: success=1
             return RedirectToPage("MyAccount", new { success = 1 });
         }
+
+        [GeneratedRegex(@"^[a-zA-Z0-9]+$")]
+        private static partial Regex UsernameRegex();
+
+        [GeneratedRegex(@"^[a-zA-Z ]+$")]
+        private static partial Regex FullNameRegex();
     }
 }

@@ -16,11 +16,11 @@ namespace BetterFinds.Utils
 
             // Get NotificationId
             int notificationId = 1; // Default value
-            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new(connectionString))
             {
                 con.Open();
                 string query = "SELECT MAX(NotificationId) FROM Notification";
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (SqlCommand cmd = new(query, con))
                 {
                     // Check if there are any notifications
                     if (cmd.ExecuteScalar() != DBNull.Value)
@@ -31,11 +31,11 @@ namespace BetterFinds.Utils
                 con.Close();
             }
 
-            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new(connectionString))
             {
                 con.Open();
                 string query = "INSERT INTO Notification (NotificationId, Message, Timestamp, ClientId, AuctionId) VALUES (@NotificationId, @Message, @Timestamp, @ClientId, @AuctionId)";
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (SqlCommand cmd = new(query, con))
                 {
                     cmd.Parameters.AddWithValue("@NotificationId", notificationId);
                     cmd.Parameters.AddWithValue("@Message", message);
@@ -68,7 +68,7 @@ namespace BetterFinds.Utils
 
         public List<Dictionary<string, object>> GetNotifications(int clientId)
         {
-            List<Dictionary<string, object>> notifications = new List<Dictionary<string, object>>();
+            List<Dictionary<string, object>> notifications = [];
             string? connectionString = _configuration.GetConnectionString("DefaultConnection");
             using (SqlConnection con = new(connectionString))
             {
@@ -82,12 +82,11 @@ namespace BetterFinds.Utils
                 using (SqlCommand cmd = new(query, con))
                 {
                     cmd.Parameters.AddWithValue("@ClientId", clientId);
-                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    using SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        while (reader.Read())
+                        Dictionary<string, object> notification = new()
                         {
-                            Dictionary<string, object> notification = new Dictionary<string, object>
-                            {
                                 { "NotificationId", reader.GetInt32(reader.GetOrdinal("NotificationId")) },
                                 { "Message", reader.GetString(reader.GetOrdinal("Message")) },
                                 { "Timestamp", reader.GetDateTime(reader.GetOrdinal("Timestamp")) },
@@ -96,8 +95,7 @@ namespace BetterFinds.Utils
                                 { "ProductName", reader.GetString(reader.GetOrdinal("Name")) },
                                 { "ProductPrice", reader.GetDecimal(reader.GetOrdinal("Price")) }
                             };
-                            notifications.Add(notification);
-                        }
+                        notifications.Add(notification);
                     }
                 }
                 con.Close();
@@ -127,34 +125,30 @@ namespace BetterFinds.Utils
         public void MarkAllAsRead(int clientId)
         {
             string? connectionString = _configuration.GetConnectionString("DefaultConnection");
-            using (SqlConnection con = new(connectionString))
+            using SqlConnection con = new(connectionString);
+            con.Open();
+            string query = "UPDATE Notification SET IsRead = 1 WHERE ClientId = @ClientId";
+            using (SqlCommand cmd = new(query, con))
             {
-                con.Open();
-                string query = "UPDATE Notification SET IsRead = 1 WHERE ClientId = @ClientId";
-                using (SqlCommand cmd = new(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@ClientId", clientId);
-                    cmd.ExecuteNonQuery();
-                }
-                con.Close();
+                cmd.Parameters.AddWithValue("@ClientId", clientId);
+                cmd.ExecuteNonQuery();
             }
+            con.Close();
         }
 
         public void MarkAsRead(int clientId, int notificationId)
         {
             string? connectionString = _configuration.GetConnectionString("DefaultConnection");
-            using (SqlConnection con = new(connectionString))
+            using SqlConnection con = new(connectionString);
+            con.Open();
+            string query = "UPDATE Notification SET IsRead = 1 WHERE NotificationId = @NotificationId AND ClientId = @ClientId";
+            using (SqlCommand cmd = new(query, con))
             {
-                con.Open();
-                string query = "UPDATE Notification SET IsRead = 1 WHERE NotificationId = @NotificationId AND ClientId = @ClientId";
-                using (SqlCommand cmd = new(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@NotificationId", notificationId);
-                    cmd.Parameters.AddWithValue("@ClientId", clientId);
-                    cmd.ExecuteNonQuery();
-                }
-                con.Close();
+                cmd.Parameters.AddWithValue("@NotificationId", notificationId);
+                cmd.Parameters.AddWithValue("@ClientId", clientId);
+                cmd.ExecuteNonQuery();
             }
+            con.Close();
         }
     }
 }

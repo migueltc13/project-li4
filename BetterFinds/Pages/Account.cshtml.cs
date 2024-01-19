@@ -1,3 +1,4 @@
+using BetterFinds.Hubs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.SignalR;
@@ -5,17 +6,8 @@ using Microsoft.Data.SqlClient;
 
 namespace BetterFinds.Pages
 {
-    public class AccountModel : PageModel
+    public class AccountModel(IConfiguration configuration, IHubContext<NotificationHub> hubContext) : PageModel
     {
-        private readonly IConfiguration _configuration;
-        private readonly IHubContext<NotificationHub> _hubContext;
-
-        public AccountModel(IConfiguration configuration, IHubContext<NotificationHub> hubContext)
-        {
-            _configuration = configuration;
-            _hubContext = hubContext;
-        }
-
         public List<Dictionary<string, object>>? AuctionsList { get; set; }
 
         public IActionResult OnGet()
@@ -27,18 +19,18 @@ namespace BetterFinds.Pages
 
             // Get current client id to check if the user can edit the account,
             // if so add edit option by redirecting to the current user my account page
-            var clientUtils = new Utils.Client(_configuration);
+            var clientUtils = new Utils.Client(configuration);
             int CurrentClientId = clientUtils.GetClientId(HttpContext, User);
             if (CurrentClientId == clientId)
                 ViewData["Edit"] = true;
 
             // Check if client exists
-            string? connectionString = _configuration.GetConnectionString("DefaultConnection");
+            string? connectionString = configuration.GetConnectionString("DefaultConnection");
             string query = "SELECT COUNT(*) AS NumberOfClients FROM Client WHERE ClientId = @ClientId";
-            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new(connectionString))
             {
                 con.Open();
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (SqlCommand cmd = new(query, con))
                 {
                     cmd.Parameters.AddWithValue("@ClientId", clientId);
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -54,11 +46,11 @@ namespace BetterFinds.Pages
 
             // Get client info: full name, username and profile picture
             query = "SELECT FullName, Username, ProfilePic FROM Client WHERE ClientId = @ClientId";
-            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new(connectionString))
             {
                 con.Open();
 
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (SqlCommand cmd = new(query, con))
                 {
                     cmd.Parameters.AddWithValue("@ClientId", clientId);
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -74,16 +66,16 @@ namespace BetterFinds.Pages
             }
 
             // Get list of auctions
-            var auctionsUtils = new Utils.Auctions(_configuration, _hubContext);
+            var auctionsUtils = new Utils.Auctions(configuration, hubContext);
             AuctionsList = auctionsUtils.GetAuctions(clientId: clientId, order: 0, reversed: false, occurring: false);
 
             // Get number of bids
             query = "SELECT COUNT(*) AS NumberOfBids FROM Bid WHERE ClientId = @ClientId";
-            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new(connectionString))
             {
                 con.Open();
 
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (SqlCommand cmd = new(query, con))
                 {
                     cmd.Parameters.AddWithValue("@ClientId", clientId);
                     SqlDataReader reader = cmd.ExecuteReader();

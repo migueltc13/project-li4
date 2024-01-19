@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using BetterFinds.Hubs;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Data.SqlClient;
 
 namespace BetterFinds.Utils
@@ -137,8 +138,8 @@ namespace BetterFinds.Utils
                 DateTime currentTime = DateTime.Now;
 
                 string query = "SELECT AuctionId, EndTime, IsCompleted FROM Auction WHERE EndTime >= @CurrentTime AND IsCheckHasEnded = 0 AND IsCompleted = 0";
-                string? conString = configuration.GetConnectionString("DefaultConnection");
-                using SqlConnection con = new(conString);
+                string? connectionString = configuration.GetConnectionString("DefaultConnection");
+                using SqlConnection con = new(connectionString);
                 con.Open();
                 using (SqlCommand cmd = new(query, con))
                 {
@@ -165,15 +166,6 @@ namespace BetterFinds.Utils
 
         public void RemoveAuction(DateTime endTime) => AuctionEndTimes.Remove(endTime);
 
-        public void PrintAuctionsToCheck()
-        {
-            Console.WriteLine("AuctionEndTimes list to check in auction background service:");
-            foreach (DateTime endTime in AuctionEndTimes)
-            {
-                Console.WriteLine(endTime);
-            }
-        }
-
         public async Task CheckAuctionsAsync()
         {
             try
@@ -195,8 +187,8 @@ namespace BetterFinds.Utils
                             int auctionId; // Retrieve auctionId from Auction table
                             int sellerId; // Retrieve sellerId from Auction table
                             int buyerId; // Retrieve buyerId from Product table
-                            string? conString = configuration.GetConnectionString("DefaultConnection");
-                            using (SqlConnection con = new(conString))
+                            string? connectionString = configuration.GetConnectionString("DefaultConnection");
+                            using (SqlConnection con = new(connectionString))
                             {
                                 con.Open();
                                 string query = "SELECT AuctionId, ClientId FROM Auction WHERE EndTime = @EndTime AND IsCheckHasEnded = 0";
@@ -291,7 +283,7 @@ namespace BetterFinds.Utils
                             hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, sellerId).Wait();
 
                             // Mark the auction IsCheckHasEnded as true
-                            using (SqlConnection con = new(conString))
+                            using (SqlConnection con = new(connectionString))
                             {
                                 con.Open();
                                 string query = "UPDATE Auction SET IsCheckHasEnded = 1 WHERE AuctionId = @AuctionId";
@@ -312,6 +304,15 @@ namespace BetterFinds.Utils
             catch (Exception ex)
             {
                 Console.WriteLine($"[Utils/Auctions.cs] Error checking auctions: {ex.Message}");
+            }
+        }
+
+        public void PrintAuctionsToCheck()
+        {
+            Console.WriteLine("AuctionEndTimes list to check in auction background service:");
+            foreach (DateTime endTime in AuctionEndTimes)
+            {
+                Console.WriteLine(endTime);
             }
         }
     }
