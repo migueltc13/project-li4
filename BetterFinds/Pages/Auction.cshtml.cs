@@ -239,8 +239,18 @@ namespace BetterFinds.Pages
 
                 if (BuyerIdEarlySell == 0)
                 {
-                    ModelState.AddModelError(string.Empty, "There are no bids on this auction.");
-                    return OnGet();
+                    // If there's no buyer, mark the auction as completed
+                    using (SqlConnection con = new SqlConnection(connectionString))
+                    {
+                        con.Open();
+                        string query = "UPDATE Auction SET IsCompleted = 1 WHERE AuctionId = @AuctionId";
+                        using (SqlCommand cmd = new SqlCommand(query, con))
+                        {
+                            cmd.Parameters.AddWithValue("@AuctionId", auctionId);
+
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
                 }
 
                 // Mark the auction IsCheckHasEnded as true

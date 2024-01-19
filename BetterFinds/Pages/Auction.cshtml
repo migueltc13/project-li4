@@ -142,13 +142,17 @@
         }
     }
 
-    <!-- Early sell -->
-    @if (ViewData["SellerId"] != null && (int?)ViewData["CurrentClientId"] == (int?)ViewData["SellerId"])
+    @if ((bool?) ViewData["AuctionEnded"] == false && (ViewData["SellerId"] != null && (int?)ViewData["CurrentClientId"] == (int?)ViewData["SellerId"]))
     {
         <br />
+        string EarlyButtonMessage = "Sell now";
+        @if (ViewData["BuyerId"] != null && (int?)ViewData["BuyerId"] == 0)
+        {
+            EarlyButtonMessage = "Terminate now";
+        }
         <form method="post">
             <input hidden asp-for="EarlySell" value="true" />
-            <button type="submit" class="btn btn-primary">Sell now</button>
+            <button type="submit" class="btn btn-primary">@EarlyButtonMessage</button>
         </form>
     }
 </div>
