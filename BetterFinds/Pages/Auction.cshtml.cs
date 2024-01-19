@@ -285,7 +285,7 @@ namespace BetterFinds.Pages
                 }
 
                 // Notify all bidders (except the buyer) that the auction has ended
-                string message = $"The auction has ended.";
+                string message = "The auction has ended.";
 
                 var bidsUtils = new Utils.Bids(_configuration);
                 List<int> bidders = bidsUtils.GetBiddersFromAuction(auctionId);
@@ -304,7 +304,7 @@ namespace BetterFinds.Pages
                 }
 
                 // Notify the buyer that the auction has ended and that he had won the auction
-                message = $"The seller terminated the auction and you have won! Please go to the auction page to complete the payment.";
+                message = "The seller terminated the auction and you have won! Please go to the auction page to complete the payment.";
                 notificationUtils.CreateNotification(BuyerIdEarlySell, auctionId, message);
                 notificationCount = notificationUtils.GetNUnreadMessages(BuyerIdEarlySell);
                 await _hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, BuyerIdEarlySell);
