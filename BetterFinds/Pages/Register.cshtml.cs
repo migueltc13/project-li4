@@ -183,7 +183,7 @@ public partial class RegisterModel(IConfiguration configuration) : PageModel
             cmd.Parameters.AddWithValue("@ProfilePic", ProfilePic != null ? ProfilePic : DBNull.Value);
             cmd.Parameters.AddWithValue("@OptNewsletter", OptNewsletter);
 
-            int result = cmd.ExecuteNonQuery();
+            cmd.ExecuteNonQuery();
 
             Console.WriteLine("User created");
             ViewData["RegisterMessage"] = "Account created successfully.";
