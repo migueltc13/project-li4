@@ -101,12 +101,14 @@ public class CreateModel(IConfiguration configuration, IHubContext<NotificationH
             // Get AuctionId from database
             string queryAuctionId = "SELECT MAX(AuctionId) FROM Auction";
             SqlCommand cmdId = new(queryAuctionId, con);
-            int AuctionId = cmdId.ExecuteScalar() == DBNull.Value ? 1 : Convert.ToInt32(cmdId.ExecuteScalar()) + 1;
+            var result = cmdId.ExecuteScalar();
+            int AuctionId = result != DBNull.Value ? Convert.ToInt32(result) + 1 : 1;
 
             // Get ProductId from database
             string queryProductId = "SELECT MAX(ProductId) FROM Product";
             SqlCommand cmdProductId = new(queryProductId, con);
-            int ProductId = cmdProductId.ExecuteScalar() == DBNull.Value ? 1 : Convert.ToInt32(cmdProductId.ExecuteScalar()) + 1;
+            result = cmdProductId.ExecuteScalar();
+            int ProductId = result != DBNull.Value ? Convert.ToInt32(result) + 1 : 1;
 
             // Insert into Auction table
             string queryAuction = "INSERT INTO Auction (AuctionId, StartTime, EndTime, ClientId, ProductId, MinimumBid) VALUES (@AuctionId, @StartTime, @EndTime, @ClientId, @ProductId, @MinimumBid)";

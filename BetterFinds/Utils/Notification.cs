@@ -17,10 +17,8 @@ public class Notification(IConfiguration configuration)
             using (SqlCommand cmd = new(query, con))
             {
                 // Check if there are any notifications
-                if (cmd.ExecuteScalar() != DBNull.Value)
-                    notificationId = Convert.ToInt32(cmd.ExecuteScalar()) + 1;
-                else
-                    notificationId = 1;
+                var result = cmd.ExecuteScalar();
+                notificationId = result != DBNull.Value ? Convert.ToInt32(result) + 1 : 1;
             }
             con.Close();
         }

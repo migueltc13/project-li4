@@ -152,7 +152,7 @@ public class EditModel(IConfiguration configuration) : PageModel
             {
                 cmd.Parameters.AddWithValue("@Name", Title);
                 cmd.Parameters.AddWithValue("@Description", Description);
-                cmd.Parameters.AddWithValue("@Images", (Images != null || Images != "") ? Images : DBNull.Value);
+                cmd.Parameters.AddWithValue("@Images", (Images != null && Images != "") ? Images : DBNull.Value);
                 cmd.Parameters.AddWithValue("@ProductId", productId);
                 cmd.ExecuteNonQuery();
             }

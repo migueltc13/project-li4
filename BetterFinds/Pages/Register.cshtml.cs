@@ -166,7 +166,8 @@ public partial class RegisterModel(IConfiguration configuration) : PageModel
             // Get clientId
             string queryId = "SELECT MAX(ClientId) FROM Client";
             SqlCommand cmdId = new(queryId, con);
-            int id = cmdId.ExecuteScalar() == DBNull.Value ? 1 : Convert.ToInt32(cmdId.ExecuteScalar()) + 1;
+            var result = cmdId.ExecuteScalar();
+            int id = result != DBNull.Value ? Convert.ToInt32(result) + 1 : 1;
 
             Console.WriteLine($"Id: {id}");
 
@@ -179,7 +180,7 @@ public partial class RegisterModel(IConfiguration configuration) : PageModel
             cmd.Parameters.AddWithValue("@Username", Username);
             cmd.Parameters.AddWithValue("@Email", Email);
             cmd.Parameters.AddWithValue("@Password", Password);
-            cmd.Parameters.AddWithValue("@ProfilePic", ProfilePic == null ? DBNull.Value : ProfilePic);
+            cmd.Parameters.AddWithValue("@ProfilePic", ProfilePic != null ? ProfilePic : DBNull.Value);
             cmd.Parameters.AddWithValue("@OptNewsletter", OptNewsletter);
 
             int result = cmd.ExecuteNonQuery();

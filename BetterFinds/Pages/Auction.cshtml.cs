@@ -414,11 +414,8 @@ public class AuctionModel(IConfiguration configuration, IHubContext<Notification
             query = "SELECT MAX(BidId) FROM Bid";
             using (SqlCommand cmd = new(query, con))
             {
-                object result = cmd.ExecuteScalar();
-                if (result != DBNull.Value && result != null)
-                    BidId = Convert.ToInt32(result) + 1;
-                else
-                    BidId = 1;
+                var result = cmd.ExecuteScalar();
+                BidId = result != DBNull.Value ? Convert.ToInt32(result) + 1 : 1;
             }
 
             // Update Bid table
@@ -436,7 +433,7 @@ public class AuctionModel(IConfiguration configuration, IHubContext<Notification
 
             // Add the bidder to the bidder group
             var bidsUtils = new Utils.Bids(configuration);
-            bidsUtils.AddBidderToBidderGroup(ClientId, auctionId).Wait();
+            bidsUtils.AddBidderToBidderGroupAsync(ClientId, auctionId).Wait();
 
             // Notification message
             string message = $"A new bid has been placed on the amount of {Utils.Currency.FormatDecimal(BidAmount)}€";
