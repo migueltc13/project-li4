@@ -39,21 +39,13 @@ public class Auctions(IConfiguration configuration, IHubContext<NotificationHub>
             query += (clientId != 0) ? " AND A.EndTime > GETDATE()" : " WHERE A.EndTime > GETDATE()";
         }
 
-        switch (order)
+        query += order switch
         {
-            case 0:
-                query += " ORDER BY A.EndTime";
-                break;
-            case 1:
-                query += " ORDER BY P.Price";
-                break;
-            case 2:
-                query += " ORDER BY P.Name";
-                break;
-            default:
-                query += " ORDER BY A.EndTime";
-                break;
-        }
+            0 => " ORDER BY A.EndTime",
+            1 => " ORDER BY P.Price",
+            2 => " ORDER BY P.Name",
+            _ => " ORDER BY A.EndTime",
+        };
 
         if (reversed)
         {
