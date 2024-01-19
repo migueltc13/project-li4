@@ -8,30 +8,30 @@ public class Client(IConfiguration configuration)
     public int GetClientId(HttpContext httpContext, ClaimsPrincipal user)
     {
         // Get ClientId from session cookie
-        int ClientId = 0;
-        try
+        if (int.TryParse(httpContext.Session.GetString("ClientId"), out int clientId))
         {
-            ClientId = int.Parse(httpContext.Session.GetString("ClientId") ?? "");
+            Console.WriteLine("Obtained ClientId from session cookie.");
+            return clientId;
         }
-        catch (FormatException)
-        {
-            string? connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            // Get ClientId from database with User.Identity.Name
-            if (user.Identity?.Name != null)
+        Console.WriteLine("Couldn't obtain ClientId from session cookie, getting it from database.");
+        string? connectionString = configuration.GetConnectionString("DefaultConnection");
+
+        // Get ClientId from database with User.Identity.Name
+        if (user.Identity?.Name != null)
+        {
+            using SqlConnection con = new(connectionString);
+            con.Open();
+            string query = "SELECT ClientId FROM Client WHERE Username = @Username";
+            using (SqlCommand cmd = new(query, con))
             {
-                using SqlConnection con = new(connectionString);
-                con.Open();
-                string query = "SELECT ClientId FROM Client WHERE Username = @Username";
-                using (SqlCommand cmd = new(query, con))
-                {
-                    cmd.Parameters.AddWithValue("@Username", user.Identity.Name);
-                    ClientId = Convert.ToInt32(cmd.ExecuteScalar());
-                }
-                con.Close();
+                cmd.Parameters.AddWithValue("@Username", user.Identity.Name);
+                clientId = Convert.ToInt32(cmd.ExecuteScalar());
             }
+            con.Close();
         }
-        return ClientId;
+
+        return clientId;
     }
 
     public List<Dictionary<string, object>> GetClients()
