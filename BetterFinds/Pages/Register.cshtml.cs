@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace BetterFinds.Pages
 {
-    public class RegisterModel : PageModel
+    public partial class RegisterModel(IConfiguration configuration) : PageModel
     {
         [BindProperty]
         public string FullName { get; set; } = "";
@@ -28,17 +28,11 @@ namespace BetterFinds.Pages
         [BindProperty]
         public bool OptNewsletter { get; set; } = false;
 
-        private readonly IConfiguration _configuration;
-        public RegisterModel(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
         public IActionResult OnGet()
         {
             // If user is already logged in, redirect to index page
             if (User.Identity != null && User.Identity.IsAuthenticated)
-                return RedirectToPage("/");
+                return RedirectToPage("index");
 
             return Page();
         }
@@ -69,7 +63,7 @@ namespace BetterFinds.Pages
             }
 
             // Check if username contains only alphanumeric characters
-            if (!Regex.IsMatch(Username, @"^[a-zA-Z0-9]+$"))
+            if (!UsernameRegex().IsMatch(Username))
             {
                 ModelState.AddModelError(string.Empty, "Username must contain only alphanumeric characters.");
                 return Page();
@@ -125,7 +119,7 @@ namespace BetterFinds.Pages
             }
 
             // Check if full name contains only alphabetical characters (and spaces)
-            if (!Regex.IsMatch(FullName, @"^[a-zA-Z ]+$"))
+            if (!FullNameRegex().IsMatch(FullName))
             {
                 ModelState.AddModelError(string.Empty, "Full name must contain only alphabetical characters.");
                 return Page();
@@ -138,16 +132,16 @@ namespace BetterFinds.Pages
                 return Page();
             }
 
-            string connectionString = _configuration.GetConnectionString("DefaultConnection") ?? "";
-            SqlConnection con = new SqlConnection(connectionString);
+            string? connectionString = configuration.GetConnectionString("DefaultConnection");
+            SqlConnection con = new(connectionString);
 
             try
-            { 
+            {
                 con.Open();
 
                 // Check if username already exists
                 string queryCheckUser = "SELECT * FROM Client WHERE Username = @Username";
-                SqlCommand cmdCheckUser = new SqlCommand(queryCheckUser, con);
+                SqlCommand cmdCheckUser = new(queryCheckUser, con);
                 cmdCheckUser.Parameters.AddWithValue("@Username", Username);
                 int usernameCount = Convert.ToInt32(cmdCheckUser.ExecuteScalar());
                 if (usernameCount > 0)
@@ -159,7 +153,7 @@ namespace BetterFinds.Pages
 
                 // Check if email already exists
                 string queryCheckEmail = "SELECT * FROM Client WHERE Email = @Email";
-                SqlCommand cmdCheckEmail = new SqlCommand(queryCheckEmail, con);
+                SqlCommand cmdCheckEmail = new(queryCheckEmail, con);
                 cmdCheckEmail.Parameters.AddWithValue("@Email", Email);
                 int emailCount = Convert.ToInt32(cmdCheckEmail.ExecuteScalar());
                 if (emailCount > 0)
@@ -171,14 +165,14 @@ namespace BetterFinds.Pages
 
                 // Get clientId
                 string queryId = "SELECT MAX(ClientId) FROM Client";
-                SqlCommand cmdId = new SqlCommand(queryId, con);
+                SqlCommand cmdId = new(queryId, con);
                 int id = cmdId.ExecuteScalar() == DBNull.Value ? 1 : Convert.ToInt32(cmdId.ExecuteScalar()) + 1;
 
-                Console.WriteLine($"Id: {id}"); // TODO: Remove this
+                Console.WriteLine($"Id: {id}");
 
                 // Insert new user into database
                 string query = "INSERT INTO Client (ClientId, FullName, Username, Email, Password, ProfilePic, OptNewsletter) VALUES (@id, @FullName, @Username, @Email, @Password, @ProfilePic, @OptNewsletter)";
-                SqlCommand cmd = new SqlCommand(query, con);
+                SqlCommand cmd = new(query, con);
 
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("@FullName", FullName);
@@ -189,29 +183,27 @@ namespace BetterFinds.Pages
                 cmd.Parameters.AddWithValue("@OptNewsletter", OptNewsletter);
 
                 int result = cmd.ExecuteNonQuery();
-                if (result == 1)
-                {
-                    Console.WriteLine("User created"); // TODO: Remove this
-                    ViewData["RegisterMessage"] = "Account created successfully.";
-                    con.Close();
-                    return Page();
-                }
-                else
-                {
-                    Console.WriteLine("User not created"); // TODO: Remove this
-                    con.Close();
-                    return RedirectToPage("/register");
-                }
+
+                Console.WriteLine("User created");
+                ViewData["RegisterMessage"] = "Account created successfully.";
+                con.Close();
+                return RedirectToPage("login", new { success = 1, username = Username });
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return RedirectToPage("/register");
+                return RedirectToPage("register");
             }
             finally
             {
                 con.Close();
-            }   
+            }
         }
+
+        [GeneratedRegex(@"^[a-zA-Z0-9]+$")]
+        private static partial Regex UsernameRegex();
+
+        [GeneratedRegex(@"^[a-zA-Z ]+$")]
+        private static partial Regex FullNameRegex();
     }
 }

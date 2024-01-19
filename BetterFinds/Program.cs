@@ -1,88 +1,116 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
+using BetterFinds.Hubs;
 using BetterFinds.Services;
 using BetterFinds.Utils;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Localization;
 
-public class Program
+namespace BetterFinds
 {
-    public static async Task Main(string[] args)
+    public class Program
     {
-        var builder = WebApplication.CreateBuilder(args);
+        public static async Task Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
-        builder.Services.AddRazorPages();
+            // Add services to the container.
+            builder.Services.AddRazorPages();
 
-        builder.Services.AddAuthentication(
-            CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(options => {
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-                options.LoginPath = "/login";
-                options.AccessDeniedPath = "/AccessDenied"; // TODO: Adjust the access denied path
+            builder.Services.AddAuthentication(
+                CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                    options.LoginPath = "/login";
+                    options.AccessDeniedPath = "/login";
+                });
+
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.HttpOnly = false;
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
             });
 
-        builder.Services.AddSession(options =>
-        {
-            options.Cookie.HttpOnly = false;
-            options.Cookie.IsEssential = true;
-            options.IdleTimeout = TimeSpan.FromMinutes(30);
-        });
+            // Add localization and configure the supported cultures
+            builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-        // Register the Auctions service
-        builder.Services.AddSingleton<Auctions>();
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                    new System.Globalization.CultureInfo("pt-PT"),
+                    new System.Globalization.CultureInfo("en-GB"),
+                    new System.Globalization.CultureInfo("en-US"),
+                    new System.Globalization.CultureInfo("es-ES"),
+                    new System.Globalization.CultureInfo("fr-FR"),
+                    // ...
+                };
 
-        // Register the AuctionBackgroundService as a hosted service
-        builder.Services.AddHostedService<AuctionBackgroundService>();
+                options.DefaultRequestCulture = new RequestCulture("pt-PT");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
 
-        // Register the Bidders groups service
-        builder.Services.AddSingleton<Bids>();
+            // Register the Auctions service
+            builder.Services.AddSingleton<Auctions>();
 
-        // Register SignalR
-        builder.Services.AddSignalR();
+            // Register the AuctionBackgroundService as a hosted service
+            builder.Services.AddHostedService<AuctionBackgroundService>();
 
-        var app = builder.Build();
+            // Register the Bidders groups service
+            builder.Services.AddSingleton<Bids>();
 
-        app.UseStatusCodePages();
-        app.UseExceptionHandler("/error");
-        // app.UseStatusCodePagesWithRedirects("/errors/{0}");
-        app.UseStatusCodePagesWithReExecute("/errors/{0}");
+            // Register SignalR
+            builder.Services.AddSignalR();
 
-        // Configure the HTTP request pipeline.
-        if (!app.Environment.IsDevelopment())
-        {
-            // Use HTTPS
+            var app = builder.Build();
+
+            app.UseStatusCodePages();
+            app.UseExceptionHandler("/error");
+            // app.UseStatusCodePagesWithRedirects("/errors/{0}");
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");
+
+            // Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
+            {
+                // Use HTTPS
+                app.UseHttpsRedirection();
+
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
-            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            app.UseHsts();
+            app.UseRouting();
+
+            app.UseAuthentication();
+
+            // app.UseCookiePolicy();
+
+            app.UseAuthorization();
+
+            app.UseSession();
+
+            app.MapRazorPages();
+
+            app.UseRequestLocalization();
+
+            // Initialize Auctions
+            var auctions = app.Services.GetRequiredService<Auctions>();
+            auctions.CreateAuctionsToCheck();
+
+            // Initialize Bidder Groups
+            var bids = app.Services.GetRequiredService<Bids>();
+            await bids.CreateBidderGroup();
+
+            // Map SignalR hub
+            app.MapHub<NotificationHub>("/notificationHub");
+
+            Console.WriteLine("Starting application...");
+
+            await app.RunAsync();
         }
-
-        app.UseHttpsRedirection();
-        app.UseStaticFiles();
-
-        app.UseRouting();
-
-        app.UseAuthentication();
-
-        // app.UseCookiePolicy();
-
-        app.UseAuthorization();
-
-        app.UseSession();
-
-        app.MapRazorPages();
-
-        // Initialize Auctions
-        var auctions = app.Services.GetRequiredService<Auctions>();
-        auctions.CreateAuctionsToCheck();
-
-        // Initialize Bidder Groups
-        var bids = app.Services.GetRequiredService<Bids>();
-        bids.CreateBidderGroup().Wait();
-
-        // Map SignalR hub
-        app.MapHub<NotificationHub>("/notificationHub");
-
-        Console.WriteLine("Application started.");
-
-        await app.RunAsync();
     }
 }

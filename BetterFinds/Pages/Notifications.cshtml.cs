@@ -5,15 +5,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace BetterFinds.Pages
 {
     [Authorize]
-    public class NotificationsModel : PageModel
+    public class NotificationsModel(IConfiguration configuration) : PageModel
     {
-        private readonly IConfiguration _configuration;
-        public NotificationsModel(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
-        public List<Dictionary<string, object>> Notifications = new();
+        public List<Dictionary<string, object>> Notifications = [];
 
         public bool ShowAll = false;
 
@@ -23,11 +17,11 @@ namespace BetterFinds.Pages
             ViewData["CurrentPage"] = "Notifications";
 
             // Get ClientId
-            var clientUtils = new Utils.Client(_configuration);
+            var clientUtils = new Utils.Client(configuration);
             int clientId = clientUtils.GetClientId(HttpContext, User);
-            
+
             // Notification utils
-            var notificationUtils = new Utils.Notification(_configuration);
+            var notificationUtils = new Utils.Notification(configuration);
 
             // Option to mark a notification as read: ?MarkAsRead=NofiticationId
             if (Request.Query.TryGetValue("MarkAsRead", out var markAsReadValue) && !string.IsNullOrEmpty(markAsReadValue))
@@ -51,8 +45,7 @@ namespace BetterFinds.Pages
             // Toggle between unread and all notifications: ?ShowAll=1 or nothing
             if (Request.Query.ContainsKey("ShowAll"))
             {
-                Notifications = notificationUtils.GetNotifications(clientId);
-                ShowAll = Request.Query["ShowAll"] == "1";
+                ShowAll = true;
             }
 
             // Get notifications

@@ -2,25 +2,18 @@
 
 namespace BetterFinds.Utils
 {
-    public class Bids
+    public class Bids(IConfiguration configuration)
     {
-        private readonly IConfiguration _configuration;
-        public Bids(IConfiguration configuration)
-        {
-            _configuration = configuration;
-            CreateBidderGroup().Wait();
-        }
-
-        public Dictionary<int, List<int>> BiddersGroup { get; set; } = new Dictionary<int, List<int>>();
+        private static Dictionary<int, List<int>> BiddersGroup { get; set; } = [];
         public async Task CreateBidderGroup()
         {
-            string connectionString = _configuration.GetConnectionString("DefaultConnection") ?? "";
+            string? connectionString = configuration.GetConnectionString("DefaultConnection");
             string query = "SELECT ClientId, AuctionId FROM Bid";
 
-            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlConnection con = new(connectionString))
             {
                 con.Open();
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (SqlCommand cmd = new(query, con))
                 {
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
@@ -48,7 +41,7 @@ namespace BetterFinds.Utils
                         else
                         {
                             // Create a new list for the auction and add the clientId
-                            auctionBidders = new List<int> { clientId };
+                            auctionBidders = [clientId];
                             BiddersGroup.Add(auctionId, auctionBidders);
                             // Console.WriteLine($"Created new list for auctionId: {auctionId} with clientId: {clientId}");
                         }
@@ -59,13 +52,7 @@ namespace BetterFinds.Utils
             }
 
             // Print the biddersGroup dictionary
-            
-            Console.WriteLine("biddersGroup contents:");
-            foreach (var entry in BiddersGroup)
-            {
-                Console.WriteLine($"AuctionId: {entry.Key}, Bidders: {string.Join(", ", entry.Value)}");
-            }
-            /**/
+            PrintBiddersGroup();
 
             await Task.CompletedTask;
         }
@@ -73,48 +60,43 @@ namespace BetterFinds.Utils
         public async Task AddBidderToBidderGroup(int clientId, int auctionId)
         {
             // Check if the auctionId already exists in the dictionary
-            if (BiddersGroup.ContainsKey(auctionId))
+            if (BiddersGroup.TryGetValue(auctionId, out List<int>? value))
             {
                 // Check if the clientId is not already in the list for this auction
-                if (BiddersGroup[auctionId].Contains(clientId))
+                if (value.Contains(clientId))
                 {
                     // Console.WriteLine($"Skipped clientId: {clientId} for auctionId: {auctionId} (already exists)");
                     return;
                 }
+
                 // Add the clientId to the existing auction
-                BiddersGroup[auctionId].Add(clientId);
+                value.Add(clientId);
             }
             else
             {
                 // Create a new list for the auction and add the clientId
-                List<int> auctionBidders = new List<int> { clientId };
+                List<int> auctionBidders = [clientId];
 
                 // Add the auction to the dictionary
                 BiddersGroup.Add(auctionId, auctionBidders);
             }
 
             // Print the biddersGroup dictionary
-            /*
-            Console.WriteLine("biddersGroup contents:");
-            foreach (var entry in BiddersGroup)
-            {
-                Console.WriteLine($"AuctionId: {entry.Key}, Bidders: {string.Join(", ", entry.Value)}");
-            }
-            */
+            PrintBiddersGroup();
 
             await Task.CompletedTask;
         }
 
         public List<int> GetBiddersFromAuction(int auctionId)
         {
-            if (BiddersGroup != null && BiddersGroup.ContainsKey(auctionId))
+            if (BiddersGroup != null && BiddersGroup.TryGetValue(auctionId, out List<int>? value))
             {
-                return BiddersGroup[auctionId];
+                return value;
             }
             else
             {
                 // Handle the case where the auctionId is not present in the dictionary or dictionary is null
-                return new List<int>();
+                return [];
             }
         }
 
@@ -123,8 +105,8 @@ namespace BetterFinds.Utils
         {
             List<Dictionary<int, List<Dictionary<string, object>>>> clientBids = [];
 
-            string connectionString = _configuration.GetConnectionString("DefaultConnection") ?? "";
-            using (SqlConnection con = new SqlConnection(connectionString))
+            string? connectionString = configuration.GetConnectionString("DefaultConnection");
+            using (SqlConnection con = new(connectionString))
             {
                 con.Open();
 
@@ -134,7 +116,7 @@ namespace BetterFinds.Utils
                                "JOIN Auction a ON b.AuctionId = a.AuctionId " +
                                "JOIN Product p ON a.ProductId = p.ProductId " +
                                "WHERE b.ClientId = @ClientId";
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (SqlCommand cmd = new(query, con))
                 {
                     cmd.Parameters.AddWithValue("@ClientId", clientId);
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -151,7 +133,7 @@ namespace BetterFinds.Utils
                         bool isCompleted = reader.GetBoolean(reader.GetOrdinal("IsCompleted"));
                         string productName = reader.GetString(reader.GetOrdinal("ProductName"));
 
-                        Dictionary<string, object> bidInfo = new Dictionary<string, object>
+                        Dictionary<string, object> bidInfo = new()
                         {
                             { "BidTime", bidTime },
                             { "BidValue", bidValue },
@@ -189,6 +171,15 @@ namespace BetterFinds.Utils
             }
 
             return clientBids;
+        }
+
+        public void PrintBiddersGroup()
+        {
+            Console.WriteLine("biddersGroup contents:");
+            foreach (var entry in BiddersGroup)
+            {
+                Console.WriteLine($"AuctionId: {entry.Key}, Bidders: {string.Join(", ", entry.Value)}");
+            }
         }
     }
 }

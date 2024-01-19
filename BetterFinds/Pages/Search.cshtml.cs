@@ -1,26 +1,17 @@
+using BetterFinds.Hubs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BetterFinds.Pages
 {
-    public class SearchModel : PageModel
+    public class SearchModel(IConfiguration configuration, IHubContext<NotificationHub> hubContext) : PageModel
     {
-        private readonly IConfiguration _configuration;
-        private readonly IHubContext<NotificationHub> _hubContext;
-        public SearchModel(IConfiguration configuration, IHubContext<NotificationHub> hubContext)
-        {
-            _configuration = configuration;
-            _hubContext = hubContext;
-            SearchResults = new List<Dictionary<string, object>>();
-        }
-
         public string Query { get; set; } = "";
         public string CurrentSort { get; set; } = "";
         public int CurrentOccurring { get; set; } = 0;
 
-        public List<Dictionary<string, object>> SearchResults { get; set; }
+        public List<Dictionary<string, object>> SearchResults { get; set; } = [];
         public IActionResult OnGet()
         {
             // get the query from the url query string
@@ -50,7 +41,7 @@ namespace BetterFinds.Pages
                 occurring = 1; // Default value: true
             }
 
-            var auctionsUtils = new Utils.Auctions(_configuration, _hubContext);
+            var auctionsUtils = new Utils.Auctions(configuration, hubContext);
 
             // Get string sort from url
             if (!Request.Query.TryGetValue("sort", out var sortVar))
@@ -70,8 +61,8 @@ namespace BetterFinds.Pages
             for (int i = 0; i < Auctions.Count; i++)
             {
                 Dictionary<string, object> auction = Auctions[i];
-                string productName = ((string) auction["ProductName"]).ToLower();
-                string productDescription = ((string) auction["ProductDescription"]).ToLower();
+                string productName = ((string)auction["ProductName"]).ToLower();
+                string productDescription = ((string)auction["ProductDescription"]).ToLower();
 
                 // Console.WriteLine(productName);
                 // Console.WriteLine(productDescription);

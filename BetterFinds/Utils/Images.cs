@@ -1,41 +1,34 @@
 ﻿using Microsoft.Data.SqlClient;
 namespace BetterFinds.Utils
 {
-    public class Images
+    public class Images(IConfiguration configuration)
     {
-        private readonly IConfiguration _configuration;
-        public Images(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
         public string GetImages(int productId)
         {
+            string images = "";
+
+            string? connectionString = configuration.GetConnectionString("DefaultConnection");
             string query = $"SELECT Images FROM Product WHERE ProductId = {productId}";
+            using SqlConnection con = new(connectionString);
+            con.Open();
 
-            using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            using SqlCommand command = new(query, con);
+            using SqlDataReader reader = command.ExecuteReader();
+            if (reader.Read())
             {
-                connection.Open();
-
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            return (string)reader["Images"];
-                        }
-                    }
-                }
+                images = (string)reader["Images"];
+                con.Close();
+                return images;
             }
 
-            return "";
+            con.Close();
+            return images;
         }
 
         public List<string> ParseImagesList(string images)
         {
             if (images == null || images == "")
-                return new List<string>();
+                return [];
 
             return new List<string>(images.Split(','));
         }
@@ -51,7 +44,7 @@ namespace BetterFinds.Utils
         {
             if (Images == null || Images == "")
                 return true;
-            
+
             // Check if images string is less than 2048 characters
             if (Images.Length > 2048)
             {

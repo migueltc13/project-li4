@@ -12,6 +12,12 @@
         <br />
         <h1>Login</h1>
         <div asp-validation-summary="All" class="text-danger"></div>
+        @if (ViewData["Message"] != null)
+        {
+            <div class="text-info">
+                @ViewData["Message"]
+            </div>
+        }
         <div class="input-box">
             <input type="text" asp-for="Username" placeholder="Username" required>
             <i class='bx bxs-user'></i>
