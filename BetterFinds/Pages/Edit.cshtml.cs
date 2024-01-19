@@ -33,8 +33,7 @@ namespace BetterFinds.Pages
             // pass message to page via action parameter: success=1
             if (Request.Query.ContainsKey("success"))
             {
-                if (Request.Query["success"] == "1")
-                    ViewData["Message"] = "Auction updated successfully.";
+                ViewData["Message"] = "Auction updated successfully.";
             }
 
             // Get clientId
