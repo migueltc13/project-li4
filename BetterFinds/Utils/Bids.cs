@@ -89,7 +89,7 @@ public class Bids(IConfiguration configuration)
 
     public List<int> GetBiddersFromAuction(int auctionId)
     {
-        if (BiddersGroup != null && BiddersGroup.TryGetValue(auctionId, out List<int>? value))
+        if (BiddersGroup.TryGetValue(auctionId, out List<int>? value))
         {
             return value;
         }

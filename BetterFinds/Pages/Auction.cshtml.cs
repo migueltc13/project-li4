@@ -371,7 +371,7 @@ public class AuctionModel(IConfiguration configuration, IHubContext<Notification
             }
 
             // Check if user is logged in
-            if (User.Identity != null && User.Identity.IsAuthenticated == false)
+            if (User.Identity?.IsAuthenticated == false)
             {
                 ModelState.AddModelError(string.Empty, "You must be logged in to bid.");
                 return OnGet();

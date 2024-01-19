@@ -126,7 +126,7 @@ public partial class RegisterModel(IConfiguration configuration) : PageModel
         }
 
         // Check if profile picture is 256 characters or fewer (if not null)
-        if (ProfilePic != null && ProfilePic.Length > 256)
+        if (ProfilePic?.Length > 256)
         {
             ModelState.AddModelError(string.Empty, "Profile picture must be 256 characters or fewer.");
             return Page();
