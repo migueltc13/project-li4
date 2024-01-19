@@ -60,9 +60,9 @@
                 <li onclick=hideSidebar()><a href="#"><strong>X</strong></a></li>
                 <li><a href="/">Home</a></li>
                 @if (User.Identity != null && User.Identity.IsAuthenticated) {
-                    <li><a href="/myaccount">My Account</a></li>
-                    <li><a href="/mybids">My Bids</a></li>
-                    <li><a href="/myauctions">My Auctions</a></li>
+                    <li><a href="/MyAccount">My Account</a></li>
+                    <li><a href="/MyBids">My Bids</a></li>
+                    <li><a href="/MyAuctions">My Auctions</a></li>
                     <li><a href="/create">Create Auction</a></li>
                     <li><a href="/logout">Logout</a></li>
                 }
