@@ -2,28 +2,27 @@ using BetterFinds.Hubs;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.SignalR;
 
-namespace BetterFinds.Pages
+namespace BetterFinds.Pages;
+
+public class IndexModel(IConfiguration configuration, IHubContext<NotificationHub> hubcontext) : PageModel
 {
-    public class IndexModel(IConfiguration configuration, IHubContext<NotificationHub> hubcontext) : PageModel
+    public string CurrentSort { get; set; } = "";
+
+    public List<Dictionary<string, object>>? Auctions { get; set; }
+
+    public void OnGet(string sort)
     {
-        public string CurrentSort { get; set; } = "";
+        // Define default values
+        int order = 0;
+        bool reversed = false;
+        bool occurring = true;
 
-        public List<Dictionary<string, object>>? Auctions { get; set; }
+        var auctionsUtils = new Utils.Auctions(configuration, hubcontext);
 
-        public void OnGet(string sort)
-        {
-            // Define default values
-            int order = 0;
-            bool reversed = false;
-            bool occurring = true;
+        auctionsUtils.ParseAuctionsOptions(sort, ref order, ref reversed);
 
-            var auctionsUtils = new Utils.Auctions(configuration, hubcontext);
+        Auctions = auctionsUtils.GetAuctions(clientId: 0, order, reversed, occurring);
 
-            auctionsUtils.ParseAuctionsOptions(sort, ref order, ref reversed);
-
-            Auctions = auctionsUtils.GetAuctions(clientId: 0, order, reversed, occurring);
-
-            CurrentSort = sort;
-        }
+        CurrentSort = sort;
     }
 }

@@ -1,19 +1,18 @@
 using BetterFinds.Utils;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BetterFinds.Pages
+namespace BetterFinds.Pages;
+
+public class MyBidsModel(IConfiguration configuration) : PageModel
 {
-    public class MyBidsModel(IConfiguration configuration) : PageModel
+    public List<Dictionary<int, List<Dictionary<string, object>>>>? ClientBids { get; set; }
+
+    public void OnGet()
     {
-        public List<Dictionary<int, List<Dictionary<string, object>>>>? ClientBids { get; set; }
+        Client clientUtils = new(configuration);
+        int clientId = clientUtils.GetClientId(HttpContext, User);
 
-        public void OnGet()
-        {
-            Client clientUtils = new(configuration);
-            int clientId = clientUtils.GetClientId(HttpContext, User);
-
-            Bids bidsUtilds = new(configuration);
-            ClientBids = bidsUtilds.GetClientBids(clientId);
-        }
+        Bids bidsUtilds = new(configuration);
+        ClientBids = bidsUtilds.GetClientBids(clientId);
     }
 }

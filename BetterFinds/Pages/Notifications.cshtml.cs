@@ -2,59 +2,58 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BetterFinds.Pages
+namespace BetterFinds.Pages;
+
+[Authorize]
+public class NotificationsModel(IConfiguration configuration) : PageModel
 {
-    [Authorize]
-    public class NotificationsModel(IConfiguration configuration) : PageModel
+    public List<Dictionary<string, object>> Notifications = [];
+
+    public bool ShowAll = false;
+
+    public IActionResult OnGet()
     {
-        public List<Dictionary<string, object>> Notifications = [];
+        // Set current page to update notifications page with SignalR
+        ViewData["CurrentPage"] = "Notifications";
 
-        public bool ShowAll = false;
+        // Get ClientId
+        var clientUtils = new Utils.Client(configuration);
+        int clientId = clientUtils.GetClientId(HttpContext, User);
 
-        public IActionResult OnGet()
+        // Notification utils
+        var notificationUtils = new Utils.Notification(configuration);
+
+        // Option to mark a notification as read: ?MarkAsRead=NofiticationId
+        if (Request.Query.TryGetValue("MarkAsRead", out var markAsReadValue) && !string.IsNullOrEmpty(markAsReadValue))
         {
-            // Set current page to update notifications page with SignalR
-            ViewData["CurrentPage"] = "Notifications";
-
-            // Get ClientId
-            var clientUtils = new Utils.Client(configuration);
-            int clientId = clientUtils.GetClientId(HttpContext, User);
-
-            // Notification utils
-            var notificationUtils = new Utils.Notification(configuration);
-
-            // Option to mark a notification as read: ?MarkAsRead=NofiticationId
-            if (Request.Query.TryGetValue("MarkAsRead", out var markAsReadValue) && !string.IsNullOrEmpty(markAsReadValue))
+            if (int.TryParse(markAsReadValue, out int notificationId))
             {
-                if (int.TryParse(markAsReadValue, out int notificationId))
-                {
-                    notificationUtils.MarkAsRead(clientId, notificationId);
-                }
-                else
-                {
-                    return NotFound();
-                }
+                notificationUtils.MarkAsRead(clientId, notificationId);
             }
-
-            // Option to mark all notifications as read: ?MarkAllAsRead=1
-            if (Request.Query.ContainsKey("MarkAllAsRead"))
+            else
             {
-                notificationUtils.MarkAllAsRead(clientId);
+                return NotFound();
             }
-
-            // Toggle between unread and all notifications: ?ShowAll=1 or nothing
-            if (Request.Query.ContainsKey("ShowAll"))
-            {
-                ShowAll = true;
-            }
-
-            // Get notifications
-            Notifications = notificationUtils.GetNotifications(clientId);
-
-            // Get number of unread messages
-            ViewData["NUnreadMessages"] = notificationUtils.GetNUnreadMessages(clientId);
-
-            return Page();
         }
+
+        // Option to mark all notifications as read: ?MarkAllAsRead=1
+        if (Request.Query.ContainsKey("MarkAllAsRead"))
+        {
+            notificationUtils.MarkAllAsRead(clientId);
+        }
+
+        // Toggle between unread and all notifications: ?ShowAll=1 or nothing
+        if (Request.Query.ContainsKey("ShowAll"))
+        {
+            ShowAll = true;
+        }
+
+        // Get notifications
+        Notifications = notificationUtils.GetNotifications(clientId);
+
+        // Get number of unread messages
+        ViewData["NUnreadMessages"] = notificationUtils.GetNUnreadMessages(clientId);
+
+        return Page();
     }
 }
