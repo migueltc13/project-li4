@@ -22,12 +22,29 @@ namespace BetterFinds.Pages
         {
             // If user is already logged in, redirect to index
             if (User.Identity != null && User.Identity.IsAuthenticated)
-                return RedirectToPage("/Index");
+                return RedirectToPage("index");
+
+            // pass message to page via action parameter: logout=1
+            if (Request.Query.ContainsKey("logout"))
+            {
+                ViewData["Message"] = "You successfully logged out.";
+            }
+
+            // pass message to page via action parameter: success=1
+            if (Request.Query.ContainsKey("success"))
+            {
+                ViewData["Message"] = "Account created successfully.";
+            }
+
+            // enter username in the page via action parameter: username=example
+            if (Request.Query.TryGetValue("username", out var username))
+            {
+                Username = (string?)username ?? "";
+            }
 
             return Page();
         }
 
-        // [HttpPost]
         public async Task<IActionResult> OnPostAsync()
         {
             Console.WriteLine($"Username: {Username}");
@@ -80,7 +97,7 @@ namespace BetterFinds.Pages
 
                     HttpContext.Session.SetString("ClientId", clientId);
 
-                    return RedirectToPage("/Index");
+                    return RedirectToPage("index");
                 }
                 else
                 {
@@ -91,7 +108,7 @@ namespace BetterFinds.Pages
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return RedirectToPage("/Login");
+                return RedirectToPage("login");
             }
             finally
             {
