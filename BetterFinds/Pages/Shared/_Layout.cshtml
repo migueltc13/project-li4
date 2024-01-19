@@ -83,7 +83,7 @@
                         <span id="notificationCount" class="icon-button__badge">@notificationCount</span>
                     </button>
                 }
-                <li onclick=showSidebar()><a href="#"><img style="width: 25px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAQ0lEQVR4nO3WoREAIAwEQfovKyksSAQimrDbwc2bXwsAOKoq6z05JSSuEAAAaD36fnNKSPQTAQDAkPebU0LiCgGAn21ViEka78Lu0AAAAABJRU5ErkJggg==" /></a></li
+                <li onclick=showSidebar()><a href="#"><img style="width: 25px" alt="<" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAQ0lEQVR4nO3WoREAIAwEQfovKyksSAQimrDbwc2bXwsAOKoq6z05JSSuEAAAaD36fnNKSPQTAQDAkPebU0LiCgGAn21ViEka78Lu0AAAAABJRU5ErkJggg==" /></a></li>
             </ul>
         </nav>
         <script>
@@ -186,7 +186,7 @@
     @if (LoadAll){
         <footer class="footer">
             <div>   
-                &copy;@DateTime.Now.Year.ToString() | BetterFinds
+                &copy;@DateTime.UtcNow.Year.ToString() | BetterFinds
             </div>
         </footer>
     }
