@@ -33,7 +33,7 @@ namespace BetterFinds.Utils
                 {
                     cmd.Parameters.AddWithValue("@NotificationId", notificationId);
                     cmd.Parameters.AddWithValue("@Message", message);
-                    cmd.Parameters.AddWithValue("@Timestamp", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@Timestamp", DateTime.UtcNow);
                     cmd.Parameters.AddWithValue("@ClientId", clientId);
                     cmd.Parameters.AddWithValue("@AuctionId", auctionId);
                     cmd.ExecuteNonQuery();

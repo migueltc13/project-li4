@@ -135,7 +135,7 @@ namespace BetterFinds.Utils
             {
                 Console.WriteLine("[Utils/Auctions.cs] Creating AuctionEndTimes list to check in auction background service...");
 
-                DateTime currentTime = DateTime.Now;
+                DateTime currentTime = DateTime.UtcNow;
 
                 string query = "SELECT AuctionId, EndTime, IsCompleted FROM Auction WHERE EndTime >= @CurrentTime AND IsCheckHasEnded = 0 AND IsCompleted = 0";
                 string? connectionString = configuration.GetConnectionString("DefaultConnection");
@@ -172,7 +172,7 @@ namespace BetterFinds.Utils
             {
                 await Task.Run(() =>
                 {
-                    DateTime currentTime = DateTime.Now;
+                    DateTime currentTime = DateTime.UtcNow;
 
                     Console.WriteLine($"[Utils/Auctions.cs] AuctionEndTimes.Count: {AuctionEndTimes.Count}");
                     Console.WriteLine($"[Utils/Auctions.cs] CurrentTime: {currentTime}");
