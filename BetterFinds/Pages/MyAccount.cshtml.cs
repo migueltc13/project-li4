@@ -205,9 +205,7 @@ public partial class MyAccountModel(IConfiguration configuration) : PageModel
             ModelState.AddModelError(string.Empty, "Profile picture must be 256 characters or fewer.");
             return OnGet();
         }
-        else
-            updateProfilePic = true;
-
+        updateProfilePic = true;
 
         // Check if optNewsletter needs to be updated
         if (OptNewsletter)

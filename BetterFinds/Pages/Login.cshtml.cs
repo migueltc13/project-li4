@@ -99,11 +99,9 @@ public class LoginModel(IConfiguration configuration) : PageModel
 
                 return RedirectToPage("index");
             }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Invalid username or password.");
-                return Page();
-            }
+
+            ModelState.AddModelError(string.Empty, "Invalid username or password.");
+            return Page();
         }
         catch (Exception ex)
         {

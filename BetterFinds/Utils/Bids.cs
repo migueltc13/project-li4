@@ -93,11 +93,9 @@ public class Bids(IConfiguration configuration)
         {
             return value;
         }
-        else
-        {
-            // Handle the case where the auctionId is not present in the dictionary or dictionary is null
-            return [];
-        }
+
+        // Handle the case where the auctionId is not present in the dictionary or dictionary is null
+        return [];
     }
 
     // Get all client bids organized by auction
