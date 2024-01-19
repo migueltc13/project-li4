@@ -8,10 +8,10 @@
 }
 
 html {
-    font-size: 14px;
+    font-size: 18px;
 }
 
-@media (min-width: 768px) {
+@media only screen and (max-width: 768px) {
     html {
         font-size: 16px;
     }
@@ -100,6 +100,7 @@ header {
 /* Media query for screens with a maximum width of 767px (typical for mobile devices) */
 @media only screen and (max-width: 767px) {
     .main-wrapper {
+        width: 95%; /* increase width in small screens */
         background: rgb(2, 66, 66); /* Solid color */
         backdrop-filter: none; /* Remove backdrop filter for solid color */
         box-shadow: none; /* Remove box shadow for solid color */
@@ -430,6 +431,20 @@ nav {
     width: 150px;
 }
 
+.banner-logo {
+    display: block;
+    margin-left: 25px;
+    padding: 0 0; /* override nav a padding rule */
+}
+
+@media only screen and (max-width: 767px) {
+    .banner-logo {
+        display: block;
+        margin-left: 10px;
+        padding: 0 0; /* override nav a padding rule */
+    }
+}
+
 .product-images img {
     display: block; /* Ensures that the image is treated as a block element */
     width: 100%;
@@ -481,6 +496,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    padding: 5px 0;
  }
 
 label {
