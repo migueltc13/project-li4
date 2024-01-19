@@ -34,11 +34,10 @@ public class AccountModel(IConfiguration configuration, IHubContext<Notification
             {
                 cmd.Parameters.AddWithValue("@ClientId", clientId);
                 SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
-                {
-                    if (reader.GetInt32(reader.GetOrdinal("NumberOfClients")) == 0)
-                        return NotFound();
-                }
+                
+                if (reader.Read() && reader.GetInt32(reader.GetOrdinal("NumberOfClients")) == 0)
+                    return NotFound();
+                
                 reader.Close();
             }
             con.Close();
