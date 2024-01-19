@@ -138,7 +138,7 @@ namespace BetterFinds.Pages
             else if (!UsernameRegex().IsMatch(Username))
             {
                 ModelState.AddModelError(string.Empty, "Username must only contain alphanumeric characters.");
-                return OnGet();            
+                return OnGet();
             }
             else
                 updateUsername = true;

@@ -1,8 +1,8 @@
+using BetterFinds.Hubs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.SignalR;
-using BetterFinds.Hubs;
+using Microsoft.Data.SqlClient;
 
 namespace BetterFinds.Pages
 {
@@ -119,7 +119,7 @@ namespace BetterFinds.Pages
                     cmd.ExecuteNonQuery();
                     con.Close();
                 }
-                
+
                 // step 5 - remove auction from AuctionEndTimes list
                 var auctionsUtils = new Utils.Auctions(configuration, hubContext);
                 auctionsUtils.RemoveAuction(_EndTime);
@@ -156,7 +156,7 @@ namespace BetterFinds.Pages
                 // calculate number of unread messages for the seller
                 notificationCount = notificationUtils.GetNUnreadMessages(_SellerId);
                 await hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, _SellerId);
-                
+
                 return OnGet();
             }
 

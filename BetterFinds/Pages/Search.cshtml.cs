@@ -61,8 +61,8 @@ namespace BetterFinds.Pages
             for (int i = 0; i < Auctions.Count; i++)
             {
                 Dictionary<string, object> auction = Auctions[i];
-                string productName = ((string) auction["ProductName"]).ToLower();
-                string productDescription = ((string) auction["ProductDescription"]).ToLower();
+                string productName = ((string)auction["ProductName"]).ToLower();
+                string productDescription = ((string)auction["ProductDescription"]).ToLower();
 
                 // Console.WriteLine(productName);
                 // Console.WriteLine(productDescription);

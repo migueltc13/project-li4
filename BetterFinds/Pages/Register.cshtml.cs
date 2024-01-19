@@ -136,7 +136,7 @@ namespace BetterFinds.Pages
             SqlConnection con = new(connectionString);
 
             try
-            { 
+            {
                 con.Open();
 
                 // Check if username already exists
@@ -205,7 +205,7 @@ namespace BetterFinds.Pages
             finally
             {
                 con.Close();
-            }   
+            }
         }
 
         [GeneratedRegex(@"^[a-zA-Z0-9]+$")]

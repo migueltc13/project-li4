@@ -64,7 +64,7 @@ namespace BetterFinds.Pages
             using (SqlConnection con = new(connectionString))
             {
                 con.Open();
-                string query = "SELECT Product.Name, Product.Description, Auction.MinimumBid, Product.Images FROM Product INNER " 
+                string query = "SELECT Product.Name, Product.Description, Auction.MinimumBid, Product.Images FROM Product INNER "
                     + "JOIN Auction ON Product.AuctionId = Auction.AuctionId WHERE Auction.AuctionId = @AuctionId";
                 using (SqlCommand cmd = new(query, con))
                 {

@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
+using BetterFinds.Hubs;
 using BetterFinds.Services;
 using BetterFinds.Utils;
-using BetterFinds.Hubs;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BetterFinds
 {

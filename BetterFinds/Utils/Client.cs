@@ -1,5 +1,4 @@
 ﻿using Microsoft.Data.SqlClient;
-using System;
 using System.Security.Claims;
 
 namespace BetterFinds.Utils

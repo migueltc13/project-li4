@@ -155,7 +155,7 @@ namespace BetterFinds.Pages
                 Console.WriteLine(e.Message);
                 ModelState.AddModelError(string.Empty, "Failed to create auction.");
             }
-            
+
             return Page();
         }
     }

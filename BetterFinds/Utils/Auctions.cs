@@ -266,7 +266,7 @@ namespace BetterFinds.Utils
                                         hubContext.Clients.All.SendAsync("UpdateNotifications", bidder).Wait();
                                     }
                                 }
-                                
+
                                 // Notify buyer that he won the auction and needs to complete the purchase
                                 message = "Auction has ended and you are the winner, please go to the auction page to complete the purchase.";
                                 notificationUtils.CreateNotification(buyerId, auctionId, message);
@@ -294,7 +294,7 @@ namespace BetterFinds.Utils
                                 }
                                 con.Close();
                             }
-                            
+
                             // Remove auction from AuctionEndTimes list
                             AuctionEndTimes.RemoveAt(i);
                         }

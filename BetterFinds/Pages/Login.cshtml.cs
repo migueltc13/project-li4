@@ -56,7 +56,7 @@ namespace BetterFinds.Pages
                     string clientId = reader["ClientId"].ToString() ?? "";
 
                     // Login successful. Manually create the cookie
-                    List <Claim> claims =
+                    List<Claim> claims =
                     [
                         new Claim(ClaimTypes.Name, Username),
                         new Claim(ClaimTypes.NameIdentifier, Username),

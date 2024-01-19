@@ -19,7 +19,7 @@ namespace BetterFinds.Pages
             // Get ClientId
             var clientUtils = new Utils.Client(configuration);
             int clientId = clientUtils.GetClientId(HttpContext, User);
-            
+
             // Notification utils
             var notificationUtils = new Utils.Notification(configuration);
 

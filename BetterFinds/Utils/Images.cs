@@ -44,7 +44,7 @@ namespace BetterFinds.Utils
         {
             if (Images == null || Images == "")
                 return true;
-            
+
             // Check if images string is less than 2048 characters
             if (Images.Length > 2048)
             {
