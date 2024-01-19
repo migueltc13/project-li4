@@ -1,88 +1,93 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using BetterFinds.Services;
 using BetterFinds.Utils;
+using BetterFinds.Hubs;
 
-public class Program
+namespace BetterFinds
 {
-    public static async Task Main(string[] args)
+    public class Program
     {
-        var builder = WebApplication.CreateBuilder(args);
+        public static async Task Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
-        builder.Services.AddRazorPages();
+            // Add services to the container.
+            builder.Services.AddRazorPages();
 
-        builder.Services.AddAuthentication(
-            CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(options => {
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-                options.LoginPath = "/login";
-                options.AccessDeniedPath = "/AccessDenied"; // TODO: Adjust the access denied path
+            builder.Services.AddAuthentication(
+                CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+                    options.LoginPath = "/login";
+                    options.AccessDeniedPath = "/AccessDenied"; // TODO: Adjust the access denied path
+                });
+
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.HttpOnly = false;
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
             });
 
-        builder.Services.AddSession(options =>
-        {
-            options.Cookie.HttpOnly = false;
-            options.Cookie.IsEssential = true;
-            options.IdleTimeout = TimeSpan.FromMinutes(30);
-        });
+            // Register the Auctions service
+            builder.Services.AddSingleton<Auctions>();
 
-        // Register the Auctions service
-        builder.Services.AddSingleton<Auctions>();
+            // Register the AuctionBackgroundService as a hosted service
+            builder.Services.AddHostedService<AuctionBackgroundService>();
 
-        // Register the AuctionBackgroundService as a hosted service
-        builder.Services.AddHostedService<AuctionBackgroundService>();
+            // Register the Bidders groups service
+            builder.Services.AddSingleton<Bids>();
 
-        // Register the Bidders groups service
-        builder.Services.AddSingleton<Bids>();
+            // Register SignalR
+            builder.Services.AddSignalR();
 
-        // Register SignalR
-        builder.Services.AddSignalR();
+            var app = builder.Build();
 
-        var app = builder.Build();
+            app.UseStatusCodePages();
+            app.UseExceptionHandler("/error");
+            // app.UseStatusCodePagesWithRedirects("/errors/{0}");
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
-        app.UseStatusCodePages();
-        app.UseExceptionHandler("/error");
-        // app.UseStatusCodePagesWithRedirects("/errors/{0}");
-        app.UseStatusCodePagesWithReExecute("/errors/{0}");
+            // Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
+            {
+                // Use HTTPS
+                app.UseHttpsRedirection();
 
-        // Configure the HTTP request pipeline.
-        if (!app.Environment.IsDevelopment())
-        {
-            // Use HTTPS
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
-            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            app.UseHsts();
+            app.UseRouting();
+
+            app.UseAuthentication();
+
+            // app.UseCookiePolicy();
+
+            app.UseAuthorization();
+
+            app.UseSession();
+
+            app.MapRazorPages();
+
+            // Initialize Auctions
+            var auctions = app.Services.GetRequiredService<Auctions>();
+            auctions.CreateAuctionsToCheck();
+
+            // Initialize Bidder Groups
+            var bids = app.Services.GetRequiredService<Bids>();
+            await bids.CreateBidderGroup();
+
+            // Map SignalR hub
+            app.MapHub<NotificationHub>("/notificationHub");
+
+            Console.WriteLine("Application started.");
+
+            await app.RunAsync();
         }
-
-        app.UseHttpsRedirection();
-        app.UseStaticFiles();
-
-        app.UseRouting();
-
-        app.UseAuthentication();
-
-        // app.UseCookiePolicy();
-
-        app.UseAuthorization();
-
-        app.UseSession();
-
-        app.MapRazorPages();
-
-        // Initialize Auctions
-        var auctions = app.Services.GetRequiredService<Auctions>();
-        auctions.CreateAuctionsToCheck();
-
-        // Initialize Bidder Groups
-        var bids = app.Services.GetRequiredService<Bids>();
-        await bids.CreateBidderGroup();
-
-        // Map SignalR hub
-        app.MapHub<NotificationHub>("/notificationHub");
-
-        Console.WriteLine("Application started.");
-
-        await app.RunAsync();
     }
 }
