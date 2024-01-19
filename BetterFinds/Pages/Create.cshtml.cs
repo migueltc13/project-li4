@@ -148,7 +148,7 @@ namespace BetterFinds.Pages
                 auctionsUtils.PrintAuctionsToCheck();
 
                 // Redirect to new auction page
-                return RedirectToPage("/Auction", new { id = AuctionId });
+                return RedirectToPage("auction", new { id = AuctionId });
             }
             catch (Exception e)
             {
