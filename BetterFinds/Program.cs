@@ -20,7 +20,7 @@ namespace BetterFinds
                 {
                     options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
                     options.LoginPath = "/login";
-                    options.AccessDeniedPath = "/AccessDenied"; // TODO: Adjust the access denied path
+                    options.AccessDeniedPath = "/login";
                 });
 
             builder.Services.AddSession(options =>
@@ -85,7 +85,7 @@ namespace BetterFinds
             // Map SignalR hub
             app.MapHub<NotificationHub>("/notificationHub");
 
-            Console.WriteLine("Application started.");
+            Console.WriteLine("Starting application...");
 
             await app.RunAsync();
         }
