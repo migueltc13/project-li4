@@ -36,7 +36,7 @@ namespace BetterFinds.Pages
         {
             // For debugging purposes
             Console.WriteLine($"Title: {Title}");
-            Console.WriteLine($"Descrition: {Description}");
+            Console.WriteLine($"Description: {Description}");
             Console.WriteLine($"Price: {Price}");
             Console.WriteLine($"MinimumBid: {MinimumBid}");
             Console.WriteLine($"EndTime: {EndTime}");
@@ -56,14 +56,14 @@ namespace BetterFinds.Pages
                 return Page();
             }
 
-            // Check if title is 64 characters or less
+            // Check if title is 64 characters or fewer
             if (Title.Length > 64)
             {
                 ModelState.AddModelError(string.Empty, "Title must be 64 characters or less.");
                 return Page();
             }
 
-            // Check if description is 2048 characters or less
+            // Check if description is 2048 characters or fewer
             if (Description.Length > 2048)
             {
                 ModelState.AddModelError(string.Empty, "Description must be 2048 characters or less.");
@@ -71,7 +71,7 @@ namespace BetterFinds.Pages
             }
 
             // Check if EndTime is greater than current time
-            if (DateTime.Parse(EndTime) < DateTime.Now)
+            if (DateTime.Parse(EndTime) < DateTime.UtcNow)
             {
                 ModelState.AddModelError(string.Empty, "End time must be greater than current time.");
                 return Page();
@@ -113,7 +113,7 @@ namespace BetterFinds.Pages
                 using (SqlCommand cmd = new(queryAuction, con))
                 {
                     cmd.Parameters.AddWithValue("@AuctionId", AuctionId);
-                    cmd.Parameters.AddWithValue("@StartTime", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@StartTime", DateTime.UtcNow);
                     cmd.Parameters.AddWithValue("@EndTime", DateTime.Parse(EndTime));
                     cmd.Parameters.AddWithValue("@ClientId", ClientId);
                     cmd.Parameters.AddWithValue("@ProductId", ProductId);
