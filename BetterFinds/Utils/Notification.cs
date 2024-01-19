@@ -2,17 +2,11 @@
 
 namespace BetterFinds.Utils
 {
-    public class Notification
+    public class Notification(IConfiguration configuration)
     {
-        private readonly IConfiguration _configuration;
-        public Notification(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
         public void CreateNotification(int clientId, int auctionId, string message)
         {
-            string? connectionString = _configuration.GetConnectionString("DefaultConnection");
+            string? connectionString = configuration.GetConnectionString("DefaultConnection");
 
             // Get NotificationId
             int notificationId = 1; // Default value
@@ -51,7 +45,7 @@ namespace BetterFinds.Utils
         public int GetNUnreadMessages(int clientId)
         {
             int nUnreadMessages = 0;
-            string? connectionString = _configuration.GetConnectionString("DefaultConnection");
+            string? connectionString = configuration.GetConnectionString("DefaultConnection");
             using (SqlConnection con = new(connectionString))
             {
                 con.Open();
@@ -69,7 +63,7 @@ namespace BetterFinds.Utils
         public List<Dictionary<string, object>> GetNotifications(int clientId)
         {
             List<Dictionary<string, object>> notifications = [];
-            string? connectionString = _configuration.GetConnectionString("DefaultConnection");
+            string? connectionString = configuration.GetConnectionString("DefaultConnection");
             using (SqlConnection con = new(connectionString))
             {
                 con.Open();
@@ -107,7 +101,7 @@ namespace BetterFinds.Utils
         public int GetNotificationsCount(int clientId)
         {
             int notificationsCount = 0;
-            string? connectionString = _configuration.GetConnectionString("DefaultConnection");
+            string? connectionString = configuration.GetConnectionString("DefaultConnection");
             using (SqlConnection con = new(connectionString))
             {
                 con.Open();
@@ -124,7 +118,7 @@ namespace BetterFinds.Utils
 
         public void MarkAllAsRead(int clientId)
         {
-            string? connectionString = _configuration.GetConnectionString("DefaultConnection");
+            string? connectionString = configuration.GetConnectionString("DefaultConnection");
             using SqlConnection con = new(connectionString);
             con.Open();
             string query = "UPDATE Notification SET IsRead = 1 WHERE ClientId = @ClientId";
@@ -138,7 +132,7 @@ namespace BetterFinds.Utils
 
         public void MarkAsRead(int clientId, int notificationId)
         {
-            string? connectionString = _configuration.GetConnectionString("DefaultConnection");
+            string? connectionString = configuration.GetConnectionString("DefaultConnection");
             using SqlConnection con = new(connectionString);
             con.Open();
             string query = "UPDATE Notification SET IsRead = 1 WHERE NotificationId = @NotificationId AND ClientId = @ClientId";

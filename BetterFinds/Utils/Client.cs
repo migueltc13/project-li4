@@ -4,14 +4,8 @@ using System.Security.Claims;
 
 namespace BetterFinds.Utils
 {
-    public class Client
+    public class Client(IConfiguration configuration)
     {
-        private readonly IConfiguration _configuration;
-        public Client(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
         public int GetClientId(HttpContext httpContext, ClaimsPrincipal user)
         {
             // Get ClientId from session cookie
@@ -22,7 +16,7 @@ namespace BetterFinds.Utils
             }
             catch (FormatException)
             {
-                string? connectionString = _configuration.GetConnectionString("DefaultConnection");
+                string? connectionString = configuration.GetConnectionString("DefaultConnection");
 
                 // Get ClientId from database with User.Identity.Name
                 if (user.Identity?.Name != null)
@@ -44,7 +38,7 @@ namespace BetterFinds.Utils
         public List<Dictionary<string, object>> GetClients()
         {
             List<Dictionary<string, object>> clients = [];
-            string? connectionString = _configuration.GetConnectionString("DefaultConnection");
+            string? connectionString = configuration.GetConnectionString("DefaultConnection");
             using (SqlConnection con = new(connectionString))
             {
                 con.Open();
