@@ -30,7 +30,7 @@
     {
         <p><strong>@@@ViewData["Username"]</strong> didn't place any bids.</p>
     }
-    @if (Model.AuctionsList != null && Model.AuctionsList.Count() > 0)
+    @if (Model.AuctionsList != null && Model.AuctionsList.Any())
     {
         string auctionsPlural = Model.AuctionsList.Count() == 1 ? "auction" : "auctions";
         <p><strong>@@@ViewData["Username"]</strong> has made @Model.AuctionsList.Count() @auctionsPlural:</p>
