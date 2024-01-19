@@ -2,6 +2,7 @@ using BetterFinds.Hubs;
 using BetterFinds.Services;
 using BetterFinds.Utils;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Localization;
 
 namespace BetterFinds
 {
@@ -28,6 +29,26 @@ namespace BetterFinds
                 options.Cookie.HttpOnly = false;
                 options.Cookie.IsEssential = true;
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
+
+            // Add localization and configure the supported cultures
+            builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                    new System.Globalization.CultureInfo("pt-PT"),
+                    new System.Globalization.CultureInfo("en-GB"),
+                    new System.Globalization.CultureInfo("en-US"),
+                    new System.Globalization.CultureInfo("es-ES"),
+                    new System.Globalization.CultureInfo("fr-FR"),
+                    // ...
+                };
+
+                options.DefaultRequestCulture = new RequestCulture("pt-PT");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
             });
 
             // Register the Auctions service
@@ -73,6 +94,8 @@ namespace BetterFinds
             app.UseSession();
 
             app.MapRazorPages();
+
+            app.UseRequestLocalization();
 
             // Initialize Auctions
             var auctions = app.Services.GetRequiredService<Auctions>();
