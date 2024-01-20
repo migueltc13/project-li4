@@ -233,7 +233,7 @@ public class Auctions(IConfiguration configuration, IHubContext<NotificationHub>
                             notificationCount = notificationUtils.GetNUnreadMessages(sellerId);
                             // Console.WriteLine($"Seller: {sellerId} - Auction: {auctionId} - notificationCount: {notificationCount}");
                             hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, sellerId).Wait();
-                            hubContext.Clients.All.SendAsync("UpdateAuction", sellerId, auctionId).Wait();
+                            hubContext.Clients.All.SendAsync("RefreshAuction", auctionId).Wait();
                             hubContext.Clients.All.SendAsync("UpdateNotifications", sellerId).Wait();
                         }
                         else
@@ -244,7 +244,7 @@ public class Auctions(IConfiguration configuration, IHubContext<NotificationHub>
                             notificationCount = notificationUtils.GetNUnreadMessages(sellerId);
                             // Console.WriteLine($"Seller: {sellerId} - Auction: {auctionId} - notificationCount: {notificationCount}");
                             hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, sellerId).Wait();
-                            hubContext.Clients.All.SendAsync("UpdateAuction", sellerId, auctionId).Wait();
+                            hubContext.Clients.All.SendAsync("RefreshAuction", auctionId).Wait();
                             hubContext.Clients.All.SendAsync("UpdateNotifications", sellerId).Wait();
 
                             // Notify bidders except the buyer that the auction has ended
@@ -257,7 +257,7 @@ public class Auctions(IConfiguration configuration, IHubContext<NotificationHub>
                                     notificationCount = notificationUtils.GetNUnreadMessages(bidder);
                                     // Console.WriteLine($"Bidder: {bidder} - Auction: {auctionId} - notificationCount: {notificationCount}");
                                     hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidder).Wait();
-                                    hubContext.Clients.All.SendAsync("UpdateAuction", bidder, auctionId).Wait();
+                                    hubContext.Clients.All.SendAsync("RefreshAuction", auctionId).Wait();
                                     hubContext.Clients.All.SendAsync("UpdateNotifications", bidder).Wait();
                                 }
                             }
@@ -268,7 +268,7 @@ public class Auctions(IConfiguration configuration, IHubContext<NotificationHub>
                             notificationCount = notificationUtils.GetNUnreadMessages(buyerId);
                             // Console.WriteLine($"Buyer: {buyerId} - Auction: {auctionId} - notificationCount: {notificationCount}");
                             hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, buyerId).Wait();
-                            hubContext.Clients.All.SendAsync("UpdateAuction", buyerId, auctionId).Wait();
+                            hubContext.Clients.All.SendAsync("RefreshAuction", auctionId).Wait();
                             hubContext.Clients.All.SendAsync("UpdateNotifications", buyerId).Wait();
                         }
 
