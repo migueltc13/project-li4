@@ -414,6 +414,7 @@ nav {
 }
 
 .search-input {
+    width: 145px;
     font-size: 15px;
     font-family: 'Lexend', sans-serif;
     font-weight: 300;
