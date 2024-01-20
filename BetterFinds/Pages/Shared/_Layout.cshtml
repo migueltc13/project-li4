@@ -43,12 +43,12 @@
     <link rel="icon" type="image/x-icon" href="/img/favicon/favicon.ico">
 
     <!-- Style css -->
-    <link rel="stylesheet" href="/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="https://unpkg.com/boxicons@@2.1.4/css/boxicons.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
     <!-- SignalR -->
-    <script src="/lib/signalr/dist/signalr.js"></script>
+    <script src="/lib/signalr/dist/browser/signalr.js"></script>
 </head>
 <body>
     @if (LoadAll) {
@@ -86,84 +86,18 @@
                 <li onclick=showSidebar()><a href="#"><img style="width: 25px" alt="<" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAQ0lEQVR4nO3WoREAIAwEQfovKyksSAQimrDbwc2bXwsAOKoq6z05JSSuEAAAaD36fnNKSPQTAQDAkPebU0LiCgGAn21ViEka78Lu0AAAAABJRU5ErkJggg==" /></a></li>
             </ul>
         </nav>
+
+        <!-- SignalR -->
+        <script src="/js/signalr/init.js"></script>
+        <script src="/js/signalr/auction.js"></script>
         <script>
-            // Sidebar functions
-            function showSidebar() {
-                const sidebar = document.querySelector('.sidebar')
-                sidebar.style.display = 'flex'
-            }
-            function hideSidebar() {
-                const sidebar = document.querySelector('.sidebar')
-                sidebar.style.display = 'none'
-            }
-            hideSidebar();
-
-            // Add an event listener to the search bar
-            document.getElementById('searchBar').addEventListener('keypress', function (e) {
-                if (e.key === 'Enter') {
-                    // Get the user-typed query
-                    var userQuery = document.getElementById('searchBar').value;
-
-                    // Redirect to the search URL with the query
-                    window.location.href = '/search?query=' + encodeURIComponent(userQuery);
-
-                    // Prevent the default form submission behavior
-                    e.preventDefault();
-                }
-            });
-
-            // Add an event listener to the notifications button
-            document.getElementById('notificationsButton').addEventListener('click', function() {
-                window.location.href = '/notifications';
-            });
-
-        </script>
-        <script>
-            // SignalR
-            const connection = new signalR.HubConnectionBuilder()
-            .withUrl("/notificationHub")
-            .build();
-
-            connection.start().then(() => {
-                console.log("Connected to notification hub");
-            }).catch(err => console.error(err));
-                
+            // Update the notification count in the UI
             connection.on("ReceiveNotificationCount", (newCount, clientId) => {
-                // Update the notification count in the UI
                 if (clientId == @currentClientId) {
                     document.getElementById("notificationCount").innerText = newCount;
                 }
             });
         </script>
-        @if (ViewData["CurrentPage"] != null && (string?)ViewData["CurrentPage"] == "Auction")
-        {
-            <script>
-                // SignalR for auction page
-                connection.on("UpdateAuction", (clientId, auctionId) => {
-                    var biddersGroup = @Html.Raw("[" + string.Join(", ", biddersGroup ?? []) + "]");
-                    if (biddersGroup?.includes(clientId)) {
-                        // TODO: Add update auction page logic here
-                    }
-
-                    currentAuctionId = @ViewData["AuctionId"];
-                    if (currentAuctionId == auctionId) {
-                        window.location.href = window.location.href;
-                    }
-                });
-            </script>
-        }
-        @if (ViewData["CurrentPage"] != null && (string?)ViewData["CurrentPage"] == "Notifications")
-        {
-            <script>
-                // SignalR for notifications page
-                connection.on("UpdateNotifications", (clientId) => {
-                    if (clientId == @currentClientId) {
-                        window.location.href = window.location.href;
-                    }
-                });
-            </script>
-        }
-  
     }
     else {
         <style>
@@ -190,6 +124,11 @@
             </div>
         </footer>
     }
+
+    <!-- js -->
+    <script src="/js/sidebar.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/notifications.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
