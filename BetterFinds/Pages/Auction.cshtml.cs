@@ -297,7 +297,7 @@ public class AuctionModel(IConfiguration configuration, IHubContext<Notification
             hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, BuyerIdEarlySell).Wait();
 
             // Refresh auction page for all clients located that page
-            hubContext.Clients.All.SendAsync("UpdateAuction", ClientId, auctionId).Wait();
+            hubContext.Clients.All.SendAsync("RefreshAuction", auctionId).Wait();
 
             // Refresh notifications page for all clients located that page
             hubContext.Clients.All.SendAsync("UpdateNotifications", ClientId).Wait();
@@ -419,12 +419,13 @@ public class AuctionModel(IConfiguration configuration, IHubContext<Notification
             }
 
             // Update Bid table
+            DateTime BidTime = DateTime.UtcNow;
             query = "INSERT INTO Bid (BidId, Value, Time, ClientId, AuctionId) VALUES (@BidId, @Value, @Time, @ClientId, @AuctionId)";
             using (SqlCommand cmd = new(query, con))
             {
                 cmd.Parameters.AddWithValue("@BidId", BidId);
                 cmd.Parameters.AddWithValue("@Value", BidAmount);
-                cmd.Parameters.AddWithValue("@Time", DateTime.UtcNow);
+                cmd.Parameters.AddWithValue("@Time", BidTime);
                 cmd.Parameters.AddWithValue("@ClientId", ClientId);
                 cmd.Parameters.AddWithValue("@AuctionId", auctionId);
 
@@ -460,9 +461,6 @@ public class AuctionModel(IConfiguration configuration, IHubContext<Notification
                 notificationCount = notificationUtils.GetNUnreadMessages(bidder);
                 // Console.WriteLine($"Bidder: {bidder} - Auction: {auctionId} - notificationCount: {notificationCount}");
                 hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidder).Wait();
-
-                // Refresh auction page for all clients located that page
-                hubContext.Clients.All.SendAsync("UpdateAuction", bidder, auctionId).Wait();
             }
 
             // Create a notification for the seller
@@ -470,8 +468,38 @@ public class AuctionModel(IConfiguration configuration, IHubContext<Notification
             notificationUtils.CreateNotification(SellerId, auctionId, message);
             notificationCount = notificationUtils.GetNUnreadMessages(SellerId);
             hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, SellerId).Wait();
-            hubContext.Clients.All.SendAsync("UpdateAuction", SellerId, auctionId).Wait();
             hubContext.Clients.All.SendAsync("UpdateNotifications", SellerId).Wait();
+
+            // Get username from database
+            string BuyerUsername = string.Empty;
+            string BuyerFullName = string.Empty;
+            query = "SELECT Username, FullName FROM Client WHERE ClientId = @ClientId";
+            using (SqlCommand cmd = new(query, con))
+            {
+                cmd.Parameters.AddWithValue("@ClientId", ClientId);
+
+                using SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    BuyerUsername = reader.GetString(reader.GetOrdinal("Username"));
+                    BuyerFullName = reader.GetString(reader.GetOrdinal("FullName"));
+                }
+                else
+                {
+                    reader.Close();
+                    con.Close();
+                    return NotFound();
+                }
+                reader.Close();
+            }
+            BuyerUsername = "@" + BuyerUsername;
+
+            // Refresh all auction page updated data for all clients located that page
+            decimal BidValue = BidAmount + MinimumBid;
+            string BidAmountFormatted = Utils.Currency.FormatDecimal(BidAmount) + "€";
+            string PlaceholderBidFormatted = Utils.Currency.FormatDecimal(Price + MinimumBid) + "€";
+            string BidTimeFormatted = BidTime.ToString("yyyy-MM-dd HH:mm:ss");
+            hubContext.Clients.All.SendAsync("UpdateAuction", auctionId, BidValue, BidAmountFormatted, PlaceholderBidFormatted, BuyerId, BuyerUsername, BuyerFullName, BidTimeFormatted).Wait();
 
             Console.WriteLine("Sent notification to clients");
 
@@ -486,9 +514,6 @@ public class AuctionModel(IConfiguration configuration, IHubContext<Notification
         {
             return NotFound();
         }
-
-        // Set current page to update auction page with SignalR
-        ViewData["CurrentPage"] = "Auction";
 
         Console.WriteLine($"Auction id requested: {auctionId}");
 
