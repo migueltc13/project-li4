@@ -7,10 +7,4 @@ name = "csharp"
 name = "shell"
 
 [[analyzers]]
-name = "html"
-
-[[analyzers]]
 name = "javascript"
-
-[[analyzers]]
-name = "css"
