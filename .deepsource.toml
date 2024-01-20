@@ -1,0 +1,16 @@
+version = 1
+
+[[analyzers]]
+name = "csharp"
+
+[[analyzers]]
+name = "shell"
+
+[[analyzers]]
+name = "html"
+
+[[analyzers]]
+name = "javascript"
+
+[[analyzers]]
+name = "css"
