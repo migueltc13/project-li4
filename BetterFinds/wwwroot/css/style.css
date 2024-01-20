@@ -101,8 +101,8 @@ header {
 @media only screen and (max-width: 767px) {
     .main-wrapper {
         width: 95%; /* increase width in small screens */
-        background: rgb(2, 66, 66); /* Solid color fallback option */
-        background: rgba(2, 66, 66, 0.9); /* Transparent color */
+        /* background: rgb(2, 66, 66); /* Solid color fallback option */
+        /* background: rgba(2, 66, 66, 0.9); /* Transparent color */
         /* backdrop-filter: none; /* Remove backdrop filter for solid color */
         box-shadow: 0 15px 50px rgb(20, 20, 20); /* fallback option */
         box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
@@ -126,8 +126,8 @@ header {
 
 @media only screen and (max-width: 767px) {
     .wrapper {
-        background: rgb(2, 66, 66); /* Solid color */
-        background: rgba(2, 66, 66, 0.9); /* Transparent color */
+        /* background: rgb(2, 66, 66); /* Solid color */
+        /* background: rgba(2, 66, 66, 0.9); /* Transparent color */
         /* backdrop-filter: none; /* Remove backdrop filter for solid color */
         box-shadow: 0 15px 50px rgb(20, 20, 20); /* fallback option */
         box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
