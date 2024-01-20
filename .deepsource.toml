@@ -5,6 +5,3 @@ name = "csharp"
 
 [[analyzers]]
 name = "shell"
-
-[[analyzers]]
-name = "javascript"
