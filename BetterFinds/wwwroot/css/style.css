@@ -501,6 +501,14 @@ nav {
     padding: 5px 0;
  }
 
+    .sort-container select {
+        width: 200px;
+        text-align: center;
+        color: white;
+        background-color: rgb(2, 66, 66);
+        background-color: rgba(2, 66, 66, 0.4);
+    }
+
 label {
     margin-left: auto;
     margin-right: 10px;

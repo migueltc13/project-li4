@@ -14,7 +14,7 @@
 
         <div class="sort-container">
             <label for="sort">Sort By: </label>
-            <select id="sort" name="sort" style="width: 200px; text-align: center">
+            <select id="sort" name="sort">
                 <option value="date" selected="@(Model.CurrentSort == "date")">Ending Time (Ascending)</option>
                 <option value="dateRev" selected="@(Model.CurrentSort == "dateRev")">Ending Time (Descending)</option>
                 <option value="name" selected="@(Model.CurrentSort == "name")">Product Name (A-Z)</option>
