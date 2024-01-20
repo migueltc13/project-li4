@@ -28,7 +28,7 @@ public class Program
         {
             options.Cookie.HttpOnly = false;
             options.Cookie.IsEssential = true;
-            options.IdleTimeout = TimeSpan.FromMinutes(30);
+            options.IdleTimeout = TimeSpan.FromDays(7);
         });
 
         // Add localization and configure the supported cultures
