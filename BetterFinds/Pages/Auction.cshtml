@@ -15,7 +15,7 @@
 
     <h2 style="padding-bottom: 10px">@ViewData["ProductName"]</h2>
 
-    <p>@($"{Utils.Currency.FormatDecimalObject(ViewData["ProductPrice"])}€")</p>
+    <p id="auctionPrice">@($"{Utils.Currency.FormatDecimalObject(ViewData["ProductPrice"])}€")</p>
     <p>Minimum bid: @($"{Utils.Currency.FormatDecimalObject(ViewData["MinimumBid"])}€")</p>
     <!-- Countdown timer -->
     <div id="countdown"></div>
@@ -31,48 +31,6 @@
         <div id="imageInfo">
            <p style="text-align: center" id="imageCounter"></p>
         </div>
-        <script>
-            // image slider
-            document.addEventListener("DOMContentLoaded", function () {
-                var images = document.querySelectorAll(".slider-image");
-                var currentIndex = 0;
-
-                function showImage(index) {
-                    images.forEach(function (image, i) {
-                        image.style.display = i === index ? "block" : "none";
-                    });
-
-                    // Update current index and total images
-                    var imageCounter = document.getElementById("imageCounter");
-                    imageCounter.textContent = "Image: " + (index + 1) + "/" + images.length;
-                }
-
-                function nextImage() {
-                    currentIndex = (currentIndex + 1) % images.length;
-                    showImage(currentIndex);
-                }
-
-                function prevImage() {
-                    currentIndex = (currentIndex - 1 + images.length) % images.length;
-                    showImage(currentIndex);
-                }
-
-                // Initial display
-                showImage(currentIndex);
-
-                // Add event listeners for navigation
-                document.querySelector(".product-images").addEventListener("click", function (e) {
-                    if (e.target.classList.contains("slider-image")) {
-                        nextImage();
-                    }
-                });
-
-                document.querySelector(".product-images").addEventListener("contextmenu", function (e) {
-                    e.preventDefault();
-                    prevImage();
-                });
-            });
-        </script>
     }
     <br />
     <p>@ViewData["ProductDesc"]</p>
@@ -83,7 +41,7 @@
     <p>Seller info: <a href="/account?id=@ViewData["SellerId"]">@@@ViewData["SellerUsername"]</a> - @ViewData["SellerFullName"]</p>
     @if (ViewData["BuyerUsername"] != null && ViewData["BuyerFullName"] != null)
     {
-        <p>Buyer info: <a href="/account?id=@ViewData["BuyerId"]">@@@ViewData["BuyerUsername"]</a> - @ViewData["BuyerFullName"]</p>
+        <p>Buyer info: <a id="buyerLink" href="/account?id=@ViewData["BuyerId"]">@@@ViewData["BuyerUsername"]</a> - <span id="buyerFullName">@ViewData["BuyerFullName"]</span></p>
         <br />
         <details>
             <summary>
@@ -91,7 +49,7 @@
             </summary>
             @if (ViewData["Bids"] is List<Dictionary<string, object>> bids && bids != null && bids.Any())
             {
-                <ul style="margin-left: 20px">
+                <ul id="bidHistory" style="margin-left: 20px">
                     @foreach (var bid in bids)
                     {
                         <li>
@@ -117,7 +75,7 @@
                 <div class="input-box">
                     <p style="margin-left: 20px">Bid amount:</p>
                     @{string placeholder = Utils.Currency.FormatDecimalObject(ViewData["BidPlaceholder"]);}
-                    <input type="number" asp-for="BidAmount" value="@placeholder" placeholder="@($"{placeholder}€")" min="0.00" step="0.01" lang="en" required>
+                    <input id="bidButton" type="number" asp-for="BidAmount" value="@placeholder" placeholder="@($"{placeholder}€")" min="0.00" step="0.01" lang="en" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Bid</button>
             </form>
@@ -159,45 +117,12 @@
     }
 </div>
 
-<!-- JavaScript for the countdown timer -->
+<!-- Countdown timer -->
 <script>
-    // Set the end time for the countdown (replace with actual end time from the server)
+    // Set the end time for the countdown
     var endTime = new Date("@ViewData["EndTime"]").getTime();
-
-    // Update the countdown every second
-    var x = setInterval(function () {
-        // Get the current time
-        var now = new Date().getTime();
-
-        // Calculate the remaining time in milliseconds
-        var distance = endTime - now;
-
-        // Calculate days, hours, minutes, and seconds
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        // Format the countdown for display
-        var countdownText = 'Ends in: ';
-        if (days > 0) {
-            countdownText += days + "d ";
-        }
-        if (hours > 0 || days > 0) {
-            countdownText += hours + "h ";
-        }
-        if (minutes > 0 || hours > 0 || days > 0) {
-            countdownText += minutes + "m ";
-        }
-        countdownText += seconds + "s";
-
-        // Display the countdown in the "countdown" div
-        document.getElementById("countdown").innerHTML = countdownText;
-
-        // If the countdown is over, display a message
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("countdown").innerHTML = "Auction has ended!";
-        }
-    }, 1000); // Update every 1000 milliseconds (1 second)
 </script>
+<script src="/js/countdown.js"></script>
+
+<!-- Image slider -->
+<script src="/js/imageSlider.js"></script>
