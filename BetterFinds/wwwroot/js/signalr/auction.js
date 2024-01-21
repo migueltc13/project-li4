@@ -56,5 +56,5 @@ connection.on("RefreshAuction", (auctionId) => {
 
 connection.on("AuctionCreated", () => {
     var updatedAuctions = document.getElementById("updatedAuctions");
-    updatedAuctions.text = "There was an update to the auctions. Please reload the page to see the changes.";
+    updatedAuctions.innerHTML = "There was an update to the auctions. Please reload the page to see the changes.";
 });
