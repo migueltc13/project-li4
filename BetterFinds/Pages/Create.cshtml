@@ -36,12 +36,12 @@
 
         <div class="input-box" style="margin-top: 10px">
             <p>Initial price:</p>
-            <input type="number" asp-for="Price" placeholder="Initial price" value="" oninput="this.value = Math.max(0, this.value);" required>
+            <input type="number" asp-for="Price" placeholder="Initial price" value="" min="0.01" step="0.01" lang="en" required>
         </div>
 
         <div class="input-box">
             <p>Minimum bid increment:</p>
-            <input type="number" asp-for="MinimumBid" placeholder="Minimum bid increment" value="" oninput="this.value = Math.max(0, this.value);" required>
+            <input type="number" asp-for="MinimumBid" placeholder="Minimum bid increment" placeholder="0.01" value="0.01" min="0.01" step="0.01" lang="en" required>
         </div>
 
         <div class="input-box">
