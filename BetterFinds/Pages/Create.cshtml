@@ -13,7 +13,7 @@
         <div asp-validation-summary="All" class="text-danger"></div>
         @if (ViewData["Success"] != null)
         {
-            <div class="text-success">
+            <div class="text-info">
                 <p>@ViewData["Success"]<a style="margin-left: 0px" href="/auction?id=@ViewData["AuctionId"]">@ViewData["AuctionTitle"]</a></p>
             </div>
         }
