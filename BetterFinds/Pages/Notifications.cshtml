@@ -24,7 +24,7 @@
                 {
                     <p class="notification notification-unread">
                         <a href="/auction?id=@notification["AuctionId"]">@notification["ProductName"]</a>
-                        <span>@notification["Message"]</span>
+                        <span>@Html.Raw(notification["Message"])</span>
                         <span>@notification["Timestamp"]</span>
                         <a href="/notifications?ShowAll=1&MarkAsRead=@notification["NotificationId"]">&#x2713;</a>
                     </p>
@@ -33,7 +33,7 @@
                 {
                     <p class="notification">
                         <a href="/auction?id=@notification["AuctionId"]">@notification["ProductName"]</a>
-                        <span>@notification["Message"]</span>
+                        <span>@Html.Raw(notification["Message"])</span>
                         <span>@notification["Timestamp"]</span>
                     </p>
                 }
@@ -54,7 +54,7 @@
                     {
                         <p class="notification notification-unread">
                             <a href="/auction?id=@notification["AuctionId"]">@notification["ProductName"]</a>
-                            <span>@notification["Message"]</span>
+                            <span>@Html.Raw(notification["Message"])</span>
                             <span>@notification["Timestamp"]</span>
                             <a href="/notifications?MarkAsRead=@notification["NotificationId"]">&#x2713;</a>
                         </p>
