@@ -15,7 +15,7 @@ public class EditModel(IConfiguration configuration) : PageModel
     public string Description { get; set; } = "";
 
     [BindProperty]
-    public decimal MinimumBid { get; set; } = 0;
+    public decimal MinimumBid { get; set; } = 0.01M;
 
     [BindProperty]
     public string? Images { get; set; }
@@ -113,6 +113,52 @@ public class EditModel(IConfiguration configuration) : PageModel
                 }
             }
             con.Close();
+        }
+
+        // Validate data
+        // Check minimum bid > 0
+        if (MinimumBid <= 0)
+        {
+            ModelState.AddModelError(string.Empty, "Minimum bid must be greater than 0.");
+            return Page();
+        }
+
+        // Check if title is at least 1 character long
+        if (Title.Length < 1)
+        {
+            ModelState.AddModelError(string.Empty, "Title must be at least 1 character long.");
+            return Page();
+        }
+
+        // Check if title is 64 characters or fewer
+        if (Title.Length > 64)
+        {
+            ModelState.AddModelError(string.Empty, "Title must be 64 characters or less.");
+            return Page();
+        }
+
+        // Check if description is at least 1 character long
+        if (Description.Length < 1)
+        {
+            ModelState.AddModelError(string.Empty, "Description must be at least 1 character long.");
+            return Page();
+        }
+
+        // Check if description is 2048 characters or fewer
+        if (Description.Length > 2048)
+        {
+            ModelState.AddModelError(string.Empty, "Description must be 2048 characters or less.");
+            return Page();
+        }
+
+        // Check if images are valid
+        var imagesUtils = new Utils.Images(configuration);
+        string imagesErrorMessage = "";
+
+        if (Images != null && !imagesUtils.IsValidImages(Images: Images, errorMessage: ref imagesErrorMessage))
+        {
+            ModelState.AddModelError(string.Empty, imagesErrorMessage);
+            return Page();
         }
 
         // Update auction mimimum bid
