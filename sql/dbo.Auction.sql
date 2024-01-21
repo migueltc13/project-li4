@@ -8,6 +8,5 @@
     [IsCheckHasEnded] BIT           DEFAULT ((0)) NOT NULL,
     [IsCompleted]     BIT           DEFAULT ((0)) NOT NULL,
     [PaymentMethod]   NVARCHAR (32) NULL,
-    PRIMARY KEY CLUSTERED ([AuctionId] ASC),
-    UNIQUE NONCLUSTERED ([ProductId] ASC)
+    PRIMARY KEY CLUSTERED ([AuctionId] ASC)
 );

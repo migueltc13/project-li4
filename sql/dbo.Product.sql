@@ -6,6 +6,5 @@
     [Description] NVARCHAR (2048) NOT NULL,
     [Price]       MONEY           NOT NULL,
     [Images]      NVARCHAR (2048) NULL,
-    PRIMARY KEY CLUSTERED ([ProductId] ASC),
-    UNIQUE NONCLUSTERED ([AuctionId] ASC)
+    PRIMARY KEY CLUSTERED ([ProductId] ASC)
 );
