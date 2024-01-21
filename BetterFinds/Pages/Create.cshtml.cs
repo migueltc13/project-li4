@@ -42,17 +42,24 @@ public class CreateModel(IConfiguration configuration, IHubContext<NotificationH
         Console.WriteLine($"EndTime: {EndTime}");
         Console.WriteLine($"Images: {Images}");
 
-        // Check price >= 0
-        if (Price < 0)
+        // Check price > 0
+        if (Price <= 0)
         {
-            ModelState.AddModelError(string.Empty, "Starting price must be greater than or equal to 0.");
+            ModelState.AddModelError(string.Empty, "Starting price must be greater than 0.");
             return Page();
         }
 
-        // Check minimum bid >= 0
-        if (MinimumBid < 0)
+        // Check minimum bid > 0
+        if (MinimumBid <= 0)
         {
-            ModelState.AddModelError(string.Empty, "Minimum bid must be greater than or equal to 0.");
+            ModelState.AddModelError(string.Empty, "Minimum bid must be greater than 0.");
+            return Page();
+        }
+
+        // Check if title is at least 1 character long
+        if (Title.Length < 1)
+        {
+            ModelState.AddModelError(string.Empty, "Title must be at least 1 character long.");
             return Page();
         }
 
@@ -60,6 +67,13 @@ public class CreateModel(IConfiguration configuration, IHubContext<NotificationH
         if (Title.Length > 64)
         {
             ModelState.AddModelError(string.Empty, "Title must be 64 characters or less.");
+            return Page();
+        }
+
+        // Check if description is at least 1 character long
+        if (Description.Length < 1)
+        {
+            ModelState.AddModelError(string.Empty, "Description must be at least 1 character long.");
             return Page();
         }
 
