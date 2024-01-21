@@ -61,7 +61,13 @@ public class Program
         builder.Services.AddSingleton<Bids>();
 
         // Register SignalR
-        builder.Services.AddSignalR();
+        builder.Services.AddSignalR(options =>
+        {
+            options.EnableDetailedErrors = true;
+        }).AddHubOptions<NotificationHub>(options =>
+        {
+            options.EnableDetailedErrors = true;
+        });
 
         var app = builder.Build();
 
