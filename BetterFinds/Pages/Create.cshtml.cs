@@ -163,6 +163,9 @@ public class CreateModel(IConfiguration configuration, IHubContext<NotificationH
 
             auctionsUtils.PrintAuctionsToCheck();
 
+            // Notify users in the /Index or /Search page that there's updates
+            hubContext.Clients.All.SendAsync("AuctionCreated");
+
             // Redirect to new auction page
             return RedirectToPage("auction", new { id = AuctionId });
         }
