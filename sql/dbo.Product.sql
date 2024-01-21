@@ -7,7 +7,5 @@
     [Price]       MONEY           NOT NULL,
     [Images]      NVARCHAR (2048) NULL,
     PRIMARY KEY CLUSTERED ([ProductId] ASC),
-    CONSTRAINT [UQ_Product_AuctionId] UNIQUE NONCLUSTERED ([AuctionId] ASC),
-    CONSTRAINT [FK_Product_AuctionId] FOREIGN KEY ([AuctionId]) REFERENCES [dbo].[Auction] ([AuctionId]),
-    CONSTRAINT [FK_Product_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [dbo].[Client] ([ClientId])
+    UNIQUE NONCLUSTERED ([AuctionId] ASC)
 );

@@ -9,7 +9,5 @@
     [IsCompleted]     BIT           DEFAULT ((0)) NOT NULL,
     [PaymentMethod]   NVARCHAR (32) NULL,
     PRIMARY KEY CLUSTERED ([AuctionId] ASC),
-    CONSTRAINT [UQ_Auction_ProductId] UNIQUE NONCLUSTERED ([ProductId] ASC),
-    CONSTRAINT [FK_Auction_ClientId] FOREIGN KEY ([ClientId]) REFERENCES [dbo].[Client] ([ClientId]),
-    CONSTRAINT [FK_Auction_ProductId] FOREIGN KEY ([ProductId]) REFERENCES [dbo].[Product] ([ProductId])
+    UNIQUE NONCLUSTERED ([ProductId] ASC)
 );
