@@ -1,6 +1,7 @@
 ﻿@{
     // Get the page name from PageContext
     var pageName = Context.GetRouteValue("page");
+    Console.WriteLine(pageName);
     // Don't load header in /Login and /Register pages
     bool LoadAll = (pageName != null) ? !(pageName.ToString() == "/Login" || pageName.ToString() == "/Register") : true;
 
@@ -90,16 +91,13 @@
         </nav>
 
         <!-- SignalR -->
+        <script>
+            var currentClientId = @currentClientId;
+            var currentPageName = "@pageName";
+        </script>
         <script src="/js/signalr/init.js"></script>
         <script src="/js/signalr/auction.js"></script>
-        <script>
-            // Update the notification count in the UI
-            connection.on("ReceiveNotificationCount", (newCount, clientId) => {
-                if (clientId == @currentClientId) {
-                    document.getElementById("notificationCount").innerText = newCount;
-                }
-            });
-        </script>
+        <script src="/js/signalr/notifications.js"></script>
     }
     else {
         <style>
