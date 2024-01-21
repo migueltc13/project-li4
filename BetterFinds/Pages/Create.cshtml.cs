@@ -17,10 +17,10 @@ public class CreateModel(IConfiguration configuration, IHubContext<NotificationH
     public string Description { get; set; } = "";
 
     [BindProperty]
-    public decimal Price { get; set; } = 0;
+    public decimal Price { get; set; } = 0.01M;
 
     [BindProperty]
-    public decimal MinimumBid { get; set; } = 0;
+    public decimal MinimumBid { get; set; } = 0.01M;
 
     [BindProperty]
     public string EndTime { get; set; } = "";
