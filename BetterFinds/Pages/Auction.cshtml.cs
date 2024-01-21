@@ -154,12 +154,12 @@ public class AuctionModel(IConfiguration configuration, IHubContext<Notification
             foreach (int bidder in bidders)
             {
                 notificationCount = notificationUtils.GetNUnreadMessages(bidder);
-                hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidder).Wait();
+                hubContext.Clients.All.SendAsync("UpdateNotifications", notificationCount, bidder).Wait();
             }
 
             // calculate number of unread messages for the seller
             notificationCount = notificationUtils.GetNUnreadMessages(_SellerId);
-            hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, _SellerId).Wait();
+            hubContext.Clients.All.SendAsync("UpdateNotifications", notificationCount, _SellerId).Wait();
 
             return OnGet();
         }
@@ -286,7 +286,7 @@ public class AuctionModel(IConfiguration configuration, IHubContext<Notification
                 {
                     notificationUtils.CreateNotification(bidder, auctionId, message);
                     notificationCount = notificationUtils.GetNUnreadMessages(bidder);
-                    hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidder).Wait();
+                    hubContext.Clients.All.SendAsync("UpdateNotifications", notificationCount, bidder).Wait();
                 }
             }
 
@@ -294,13 +294,10 @@ public class AuctionModel(IConfiguration configuration, IHubContext<Notification
             message = "The seller terminated the auction and you have won! Please go to the auction page to complete the payment.";
             notificationUtils.CreateNotification(BuyerIdEarlySell, auctionId, message);
             notificationCount = notificationUtils.GetNUnreadMessages(BuyerIdEarlySell);
-            hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, BuyerIdEarlySell).Wait();
+            hubContext.Clients.All.SendAsync("UpdateNotifications", notificationCount, BuyerIdEarlySell).Wait();
 
             // Refresh auction page for all clients located that page
             hubContext.Clients.All.SendAsync("RefreshAuction", auctionId).Wait();
-
-            // Refresh notifications page for all clients located that page
-            hubContext.Clients.All.SendAsync("UpdateNotifications", ClientId).Wait();
 
             return OnGet();
         }
@@ -437,7 +434,8 @@ public class AuctionModel(IConfiguration configuration, IHubContext<Notification
             bidsUtils.AddBidderToBidderGroupAsync(ClientId, auctionId).Wait();
 
             // Notification message
-            string message = $"A new bid has been placed on the amount of {Utils.Currency.FormatDecimal(BidAmount)}€";
+            string bidAmountFormatted = Utils.Currency.FormatDecimal(BidAmount) + "&euro;";
+            string message = $"A new bid has been placed on the amount of {bidAmountFormatted}";
 
             // Create notification for each bidder except the current one
             var notificationUtils = new Utils.Notification(configuration);
@@ -447,9 +445,6 @@ public class AuctionModel(IConfiguration configuration, IHubContext<Notification
                 if (bidder != ClientId)
                 {
                     notificationUtils.CreateNotification(bidder, auctionId, message);
-
-                    // Refresh notifications page for all clients located that page
-                    hubContext.Clients.All.SendAsync("UpdateNotifications", bidder).Wait();
                 }
             }
 
@@ -460,15 +455,14 @@ public class AuctionModel(IConfiguration configuration, IHubContext<Notification
             {
                 notificationCount = notificationUtils.GetNUnreadMessages(bidder);
                 // Console.WriteLine($"Bidder: {bidder} - Auction: {auctionId} - notificationCount: {notificationCount}");
-                hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, bidder).Wait();
+                hubContext.Clients.All.SendAsync("UpdateNotifications", notificationCount, bidder).Wait();
             }
 
             // Create a notification for the seller
-            message = $"A new bid has been placed on your auction on the amount of {Utils.Currency.FormatDecimal(BidAmount)}€";
+            message = $"A new bid has been placed on your auction on the amount of {bidAmountFormatted}";
             notificationUtils.CreateNotification(SellerId, auctionId, message);
             notificationCount = notificationUtils.GetNUnreadMessages(SellerId);
-            hubContext.Clients.All.SendAsync("ReceiveNotificationCount", notificationCount, SellerId).Wait();
-            hubContext.Clients.All.SendAsync("UpdateNotifications", SellerId).Wait();
+            hubContext.Clients.All.SendAsync("UpdateNotifications", notificationCount, SellerId).Wait();
 
             // Get username from database
             string BuyerUsername = string.Empty;
@@ -499,7 +493,17 @@ public class AuctionModel(IConfiguration configuration, IHubContext<Notification
             string BidAmountFormatted = Utils.Currency.FormatDecimal(BidAmount) + "€";
             string PlaceholderBidFormatted = Utils.Currency.FormatDecimal(Price + MinimumBid) + "€";
             string BidTimeFormatted = BidTime.ToString("yyyy-MM-dd HH:mm:ss");
-            hubContext.Clients.All.SendAsync("UpdateAuction", auctionId, BidValue, BidAmountFormatted, PlaceholderBidFormatted, BuyerId, BuyerUsername, BuyerFullName, BidTimeFormatted).Wait();
+            hubContext.Clients.All.SendAsync("UpdateAuction",
+                auctionId,
+                BidValue,
+                BidAmountFormatted,
+                PlaceholderBidFormatted,
+                BuyerId,
+                BuyerUsername,
+                BuyerFullName,
+                BidTimeFormatted,
+                SellerId)
+                .Wait();
 
             Console.WriteLine("Sent notification to clients");
 
