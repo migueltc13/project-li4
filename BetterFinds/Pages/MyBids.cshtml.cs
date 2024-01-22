@@ -1,8 +1,10 @@
 using BetterFinds.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BetterFinds.Pages;
 
+[Authorize]
 public class MyBidsModel(IConfiguration configuration) : PageModel
 {
     public List<Dictionary<int, List<Dictionary<string, object>>>>? ClientBids { get; set; }
