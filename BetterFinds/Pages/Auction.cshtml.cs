@@ -9,13 +9,16 @@ namespace BetterFinds.Pages;
 public class AuctionModel(IConfiguration configuration, IHubContext<NotificationHub> hubContext) : PageModel
 {
     [BindProperty]
-    public decimal BidAmount { get; set; }
+    public decimal? BidAmount { get; set; }
 
     [BindProperty]
     public string? PaymentMethod { get; set; }
 
     [BindProperty]
     public string? EarlySell { get; set; }
+
+    [BindProperty]
+    public DateTime? ExtendedEndTime { get; set; }
 
     public IActionResult OnPost()
     {
@@ -302,212 +305,341 @@ public class AuctionModel(IConfiguration configuration, IHubContext<Notification
             return OnGet();
         }
 
-        // Check if bid amount is greater than zero
-        if (BidAmount <= 0)
+        Console.WriteLine($"ExtendedEndTime: {ExtendedEndTime}");
+
+        // Check if seller requested to extend the auction
+        if (ExtendedEndTime != null)
         {
-            ModelState.AddModelError(string.Empty, "Your bid amount must be greater than zero.");
+            // Check if current user is the seller
+            // Check if auction has ended
+            // Check if there's no buyer
+            // Check if the auction is not set as completed (which means that the seller already requested the auction to end)
+            int sellerIdExtend = 0;
+            DateTime endTimeExtend = DateTime.UtcNow;
+            bool isCompletedExtend = false;
+            int buyerIdExtend = 0;
+
+            using (SqlConnection con = new(connectionString))
+            {
+                string query = "SELECT ClientId, EndTime, IsCompleted FROM Auction WHERE AuctionId = @AuctionId";
+                using (SqlCommand cmd = new(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@AuctionId", auctionId);
+
+                    con.Open();
+                    using SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        sellerIdExtend = reader.GetInt32(reader.GetOrdinal("ClientId"));
+                        endTimeExtend = reader.GetDateTime(reader.GetOrdinal("EndTime"));
+                        isCompletedExtend = reader.GetBoolean(reader.GetOrdinal("IsCompleted"));
+                    }
+                    else
+                    {
+                        reader.Close();
+                        con.Close();
+                        return NotFound();
+                    }
+                    reader.Close();
+                }
+
+                // Check if current user is the seller
+                if (ClientId != sellerIdExtend)
+                {
+                    ModelState.AddModelError(string.Empty, "You are not the seller.");
+                    return OnGet();
+                }
+
+                // Check if auction has ended
+                if (DateTime.UtcNow <= endTimeExtend)
+                {
+                    ModelState.AddModelError(string.Empty, "This auction has not ended yet.");
+                    return OnGet();
+                }
+
+                // Check if the auction is not set as completed
+                if (isCompletedExtend)
+                {
+                    ModelState.AddModelError(string.Empty, "This auction was already marked as completed.");
+                    return OnGet();
+                }
+
+                // Get buyerId
+                query = "SELECT ClientId FROM Product WHERE AuctionId = @AuctionId";
+                using (SqlCommand cmd = new(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@AuctionId", auctionId);
+
+                    using SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        buyerIdExtend = reader.GetInt32(reader.GetOrdinal("ClientId"));
+                    }
+                    else
+                    {
+                        reader.Close();
+                        con.Close();
+                        return NotFound();
+                    }
+                    reader.Close();
+                }
+
+                // Check if there's a buyer
+                if (buyerIdExtend != 0)
+                {
+                    ModelState.AddModelError(string.Empty, "This auction has already been sold.");
+                    return OnGet();
+                }
+            }
+
+            // Check if the new end time is greater than the current one
+            if (ExtendedEndTime <= endTimeExtend)
+            {
+                ModelState.AddModelError(string.Empty, "The new end time must be greater than the current one.");
+                return OnGet();
+            }
+
+            Console.WriteLine($"ExtendedEndTime: {ExtendedEndTime}");
+
+            // Update auction end time and set IsCheckHasEnded to false
+            using (SqlConnection con = new(connectionString))
+            {
+                con.Open();
+                string query = "UPDATE Auction SET EndTime = @EndTime, IsCheckHasEnded = 0 WHERE AuctionId = @AuctionId";
+                using SqlCommand cmd = new(query, con);
+                cmd.Parameters.AddWithValue("@EndTime", ExtendedEndTime);
+                cmd.Parameters.AddWithValue("@AuctionId", auctionId);
+
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+
+            Console.WriteLine("Updated auction end time and IsCheckHasEnded");
+
+            // Add new end time to AuctionEndTimes list
+            var auctionsUtils = new Utils.Auctions(configuration, hubContext);
+            auctionsUtils.AddAuction((DateTime)ExtendedEndTime);
+
+            // Notify all users that there's a new auction
+            hubContext.Clients.All.SendAsync("AuctionCreated").Wait();
+
+            // Refresh auction page for all clients located that page
+            hubContext.Clients.All.SendAsync("RefreshAuction", auctionId).Wait();
+
+            Console.WriteLine("Done");
+
             return OnGet();
         }
 
-        decimal MinimumBid = 0;
-        DateTime EndTime;
-        int SellerId = 0;
-
-        using (SqlConnection con = new(connectionString))
+        // Check if bid amount is greater than zero
+        if (BidAmount != null)
         {
-            con.Open();
-            string query = "SELECT MinimumBid, EndTime, ClientId FROM Auction WHERE AuctionId = @AuctionId";
-            using (SqlCommand cmd = new(query, con))
+            if (BidAmount <= 0)
             {
-                cmd.Parameters.AddWithValue("@AuctionId", auctionId);
+                ModelState.AddModelError(string.Empty, "Your bid amount must be greater than zero.");
+                return OnGet();
+            }
 
-                using SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+            decimal MinimumBid = 0;
+            DateTime EndTime;
+            int SellerId = 0;
+
+            using (SqlConnection con = new(connectionString))
+            {
+                con.Open();
+                string query = "SELECT MinimumBid, EndTime, ClientId FROM Auction WHERE AuctionId = @AuctionId";
+                using (SqlCommand cmd = new(query, con))
                 {
-                    MinimumBid = reader.GetDecimal(reader.GetOrdinal("MinimumBid"));
-                    EndTime = reader.GetDateTime(reader.GetOrdinal("EndTime"));
-                    SellerId = reader.GetInt32(reader.GetOrdinal("ClientId"));
-                }
-                else
-                {
+                    cmd.Parameters.AddWithValue("@AuctionId", auctionId);
+
+                    using SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        MinimumBid = reader.GetDecimal(reader.GetOrdinal("MinimumBid"));
+                        EndTime = reader.GetDateTime(reader.GetOrdinal("EndTime"));
+                        SellerId = reader.GetInt32(reader.GetOrdinal("ClientId"));
+                    }
+                    else
+                    {
+                        reader.Close();
+                        con.Close();
+                        return NotFound();
+                    }
                     reader.Close();
-                    con.Close();
-                    return NotFound();
                 }
-                reader.Close();
-            }
 
-            decimal Price = 0;
-            int BuyerId = 0;
+                decimal Price = 0;
+                int BuyerId = 0;
 
-            query = "SELECT Price, ClientId FROM Product WHERE AuctionId = @AuctionId";
-            using (SqlCommand cmd = new(query, con))
-            {
-                cmd.Parameters.AddWithValue("@AuctionId", auctionId);
-
-                using SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                query = "SELECT Price, ClientId FROM Product WHERE AuctionId = @AuctionId";
+                using (SqlCommand cmd = new(query, con))
                 {
-                    Price = reader.GetDecimal(reader.GetOrdinal("Price"));
-                    BuyerId = reader.GetInt32(reader.GetOrdinal("ClientId"));
-                }
-                else
-                {
+                    cmd.Parameters.AddWithValue("@AuctionId", auctionId);
+
+                    using SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        Price = reader.GetDecimal(reader.GetOrdinal("Price"));
+                        BuyerId = reader.GetInt32(reader.GetOrdinal("ClientId"));
+                    }
+                    else
+                    {
+                        reader.Close();
+                        con.Close();
+                        return NotFound();
+                    }
                     reader.Close();
-                    con.Close();
-                    return NotFound();
                 }
-                reader.Close();
-            }
 
-            // Check if auction has ended
-            if (DateTime.UtcNow > EndTime)
-            {
-                ModelState.AddModelError(string.Empty, "This auction has ended.");
-                return OnGet();
-            }
-
-            // Check if user is logged in
-            if (User.Identity?.IsAuthenticated == false)
-            {
-                ModelState.AddModelError(string.Empty, "You must be logged in to bid.");
-                return OnGet();
-            }
-
-            // Check if bid amount is less than current price plus minimum bid
-            if (Price + MinimumBid > BidAmount)
-            {
-                ModelState.AddModelError(string.Empty, "Your bid amount is too low.");
-                return OnGet();
-            }
-
-            // Check if current user is the seller
-            if (ClientId == SellerId)
-            {
-                ModelState.AddModelError(string.Empty, "You cannot bid on your own auction.");
-                return OnGet();
-            }
-
-            // Check if current user already is the highest bidder
-            if (ClientId == BuyerId)
-            {
-                ModelState.AddModelError(string.Empty, "You are already the highest bidder.");
-                return OnGet();
-            }
-
-            // Update Product table
-            query = "UPDATE Product SET Price = @Price, ClientId = @ClientId WHERE AuctionId = @AuctionId";
-            using (SqlCommand cmd = new(query, con))
-            {
-                cmd.Parameters.AddWithValue("@Price", BidAmount);
-                cmd.Parameters.AddWithValue("@ClientId", ClientId);
-                cmd.Parameters.AddWithValue("@AuctionId", auctionId);
-
-                cmd.ExecuteNonQuery();
-            }
-
-            // Get BidId
-            int BidId = 0;
-            query = "SELECT MAX(BidId) FROM Bid";
-            using (SqlCommand cmd = new(query, con))
-            {
-                var result = cmd.ExecuteScalar();
-                BidId = result != DBNull.Value ? Convert.ToInt32(result) + 1 : 1;
-            }
-
-            // Update Bid table
-            DateTime BidTime = DateTime.UtcNow;
-            query = "INSERT INTO Bid (BidId, Value, Time, ClientId, AuctionId) VALUES (@BidId, @Value, @Time, @ClientId, @AuctionId)";
-            using (SqlCommand cmd = new(query, con))
-            {
-                cmd.Parameters.AddWithValue("@BidId", BidId);
-                cmd.Parameters.AddWithValue("@Value", BidAmount);
-                cmd.Parameters.AddWithValue("@Time", BidTime);
-                cmd.Parameters.AddWithValue("@ClientId", ClientId);
-                cmd.Parameters.AddWithValue("@AuctionId", auctionId);
-
-                cmd.ExecuteNonQuery();
-            }
-
-            // Add the bidder to the bidder group
-            var bidsUtils = new Utils.Bids(configuration);
-            bidsUtils.AddBidderToBidderGroupAsync(ClientId, auctionId).Wait();
-
-            // Notification message
-            string bidAmountFormatted = Utils.Currency.FormatDecimal(BidAmount) + "&euro;";
-            string message = $"A new bid has been placed on the amount of {bidAmountFormatted}";
-
-            // Create notification for each bidder except the current one
-            var notificationUtils = new Utils.Notification(configuration);
-            List<int> bidders = bidsUtils.GetBiddersFromAuction(auctionId);
-            foreach (int bidder in bidders)
-            {
-                if (bidder != ClientId)
+                // Check if auction has ended
+                if (DateTime.UtcNow > EndTime)
                 {
-                    notificationUtils.CreateNotification(bidder, auctionId, message);
+                    ModelState.AddModelError(string.Empty, "This auction has ended.");
+                    return OnGet();
                 }
-            }
 
-            // Refresh notifications count for all clients
-            // calculate number of unread messages for each client that is member of the bidders group
-            int notificationCount = 0;
-            foreach (int bidder in bidders)
-            {
-                notificationCount = notificationUtils.GetNUnreadMessages(bidder);
-                // Console.WriteLine($"Bidder: {bidder} - Auction: {auctionId} - notificationCount: {notificationCount}");
-                hubContext.Clients.All.SendAsync("UpdateNotifications", notificationCount, bidder).Wait();
-            }
-
-            // Create a notification for the seller
-            message = $"A new bid has been placed on your auction on the amount of {bidAmountFormatted}";
-            notificationUtils.CreateNotification(SellerId, auctionId, message);
-            notificationCount = notificationUtils.GetNUnreadMessages(SellerId);
-            hubContext.Clients.All.SendAsync("UpdateNotifications", notificationCount, SellerId).Wait();
-
-            // Get username from database
-            string BuyerUsername = string.Empty;
-            string BuyerFullName = string.Empty;
-            query = "SELECT Username, FullName FROM Client WHERE ClientId = @ClientId";
-            using (SqlCommand cmd = new(query, con))
-            {
-                cmd.Parameters.AddWithValue("@ClientId", ClientId);
-
-                using SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                // Check if user is logged in
+                if (User.Identity?.IsAuthenticated == false)
                 {
-                    BuyerUsername = reader.GetString(reader.GetOrdinal("Username"));
-                    BuyerFullName = reader.GetString(reader.GetOrdinal("FullName"));
+                    ModelState.AddModelError(string.Empty, "You must be logged in to bid.");
+                    return OnGet();
                 }
-                else
+
+                // Check if bid amount is less than current price plus minimum bid
+                if (Price + MinimumBid > BidAmount)
                 {
+                    ModelState.AddModelError(string.Empty, "Your bid amount is too low.");
+                    return OnGet();
+                }
+
+                // Check if current user is the seller
+                if (ClientId == SellerId)
+                {
+                    ModelState.AddModelError(string.Empty, "You cannot bid on your own auction.");
+                    return OnGet();
+                }
+
+                // Check if current user already is the highest bidder
+                if (ClientId == BuyerId)
+                {
+                    ModelState.AddModelError(string.Empty, "You are already the highest bidder.");
+                    return OnGet();
+                }
+
+                // Update Product table
+                query = "UPDATE Product SET Price = @Price, ClientId = @ClientId WHERE AuctionId = @AuctionId";
+                using (SqlCommand cmd = new(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@Price", BidAmount);
+                    cmd.Parameters.AddWithValue("@ClientId", ClientId);
+                    cmd.Parameters.AddWithValue("@AuctionId", auctionId);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                // Get BidId
+                int BidId = 0;
+                query = "SELECT MAX(BidId) FROM Bid";
+                using (SqlCommand cmd = new(query, con))
+                {
+                    var result = cmd.ExecuteScalar();
+                    BidId = result != DBNull.Value ? Convert.ToInt32(result) + 1 : 1;
+                }
+
+                // Update Bid table
+                DateTime BidTime = DateTime.UtcNow;
+                query = "INSERT INTO Bid (BidId, Value, Time, ClientId, AuctionId) VALUES (@BidId, @Value, @Time, @ClientId, @AuctionId)";
+                using (SqlCommand cmd = new(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@BidId", BidId);
+                    cmd.Parameters.AddWithValue("@Value", BidAmount);
+                    cmd.Parameters.AddWithValue("@Time", BidTime);
+                    cmd.Parameters.AddWithValue("@ClientId", ClientId);
+                    cmd.Parameters.AddWithValue("@AuctionId", auctionId);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                // Add the bidder to the bidder group
+                var bidsUtils = new Utils.Bids(configuration);
+                bidsUtils.AddBidderToBidderGroupAsync(ClientId, auctionId).Wait();
+
+                // Notification message
+                string bidAmountFormatted = Utils.Currency.FormatDecimal((decimal)BidAmount) + "&euro;";
+                string message = $"A new bid has been placed on the amount of {bidAmountFormatted}";
+
+                // Create notification for each bidder except the current one
+                var notificationUtils = new Utils.Notification(configuration);
+                List<int> bidders = bidsUtils.GetBiddersFromAuction(auctionId);
+                foreach (int bidder in bidders)
+                {
+                    if (bidder != ClientId)
+                    {
+                        notificationUtils.CreateNotification(bidder, auctionId, message);
+                    }
+                }
+
+                // Refresh notifications count for all clients
+                // calculate number of unread messages for each client that is member of the bidders group
+                int notificationCount = 0;
+                foreach (int bidder in bidders)
+                {
+                    notificationCount = notificationUtils.GetNUnreadMessages(bidder);
+                    // Console.WriteLine($"Bidder: {bidder} - Auction: {auctionId} - notificationCount: {notificationCount}");
+                    hubContext.Clients.All.SendAsync("UpdateNotifications", notificationCount, bidder).Wait();
+                }
+
+                // Create a notification for the seller
+                message = $"A new bid has been placed on your auction on the amount of {bidAmountFormatted}";
+                notificationUtils.CreateNotification(SellerId, auctionId, message);
+                notificationCount = notificationUtils.GetNUnreadMessages(SellerId);
+                hubContext.Clients.All.SendAsync("UpdateNotifications", notificationCount, SellerId).Wait();
+
+                // Get username from database
+                string BuyerUsername = string.Empty;
+                string BuyerFullName = string.Empty;
+                query = "SELECT Username, FullName FROM Client WHERE ClientId = @ClientId";
+                using (SqlCommand cmd = new(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@ClientId", ClientId);
+
+                    using SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        BuyerUsername = reader.GetString(reader.GetOrdinal("Username"));
+                        BuyerFullName = reader.GetString(reader.GetOrdinal("FullName"));
+                    }
+                    else
+                    {
+                        reader.Close();
+                        con.Close();
+                        return NotFound();
+                    }
                     reader.Close();
-                    con.Close();
-                    return NotFound();
                 }
-                reader.Close();
+                BuyerUsername = "@" + BuyerUsername;
+
+                // Refresh all auction page updated data for all clients located that page
+                decimal BidValue = (decimal)BidAmount + MinimumBid;
+                string BidAmountFormatted = Utils.Currency.FormatDecimal((decimal)BidAmount) + "€";
+                string PlaceholderBidFormatted = Utils.Currency.FormatDecimal(Price + MinimumBid) + "€";
+                string BidTimeFormatted = BidTime.ToString("yyyy-MM-dd HH:mm:ss");
+                hubContext.Clients.All.SendAsync("UpdateAuction",
+                    auctionId,
+                    BidValue,
+                    BidAmountFormatted,
+                    PlaceholderBidFormatted,
+                    BuyerId,
+                    BuyerUsername,
+                    BuyerFullName,
+                    BidTimeFormatted,
+                    SellerId)
+                    .Wait();
+
+                Console.WriteLine("Sent notification to clients");
+
+                con.Close();
             }
-            BuyerUsername = "@" + BuyerUsername;
-
-            // Refresh all auction page updated data for all clients located that page
-            decimal BidValue = BidAmount + MinimumBid;
-            string BidAmountFormatted = Utils.Currency.FormatDecimal(BidAmount) + "€";
-            string PlaceholderBidFormatted = Utils.Currency.FormatDecimal(Price + MinimumBid) + "€";
-            string BidTimeFormatted = BidTime.ToString("yyyy-MM-dd HH:mm:ss");
-            hubContext.Clients.All.SendAsync("UpdateAuction",
-                auctionId,
-                BidValue,
-                BidAmountFormatted,
-                PlaceholderBidFormatted,
-                BuyerId,
-                BuyerUsername,
-                BuyerFullName,
-                BidTimeFormatted,
-                SellerId)
-                .Wait();
-
-            Console.WriteLine("Sent notification to clients");
-
-            con.Close();
         }
 
         return OnGet();
