@@ -115,6 +115,20 @@
                 <button type="submit" class="btn btn-primary">@EarlyButtonMessage</button>
             </form>
         }
+
+        @if ((bool?)ViewData["AuctionEnded"] == true
+            && (ViewData["SellerId"] != null && (int?)ViewData["CurrentClientId"] == (int?)ViewData["SellerId"])
+            && (ViewData["BuyerId"] != null && (int?)ViewData["BuyerId"] == 0)
+            && ((bool?)ViewData["IsCompleted"] == false))
+        {
+            <form method="post">
+                <div class="input-box">
+                    <p style="margin-left: 20px">Extend ending date:</p>
+                    <input type="datetime-local" asp-for="ExtendedEndTime" placeholder="Extended ending date" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Extend</button>
+            </form>
+        }
     }
 </div>
 
