@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['program_5',['Program',['../classProgram.html',1,'']]]
+  ['logoutmodel_8',['LogoutModel',['../classLogoutModel.html',1,'']]]
 ];

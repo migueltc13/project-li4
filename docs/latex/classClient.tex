@@ -1,0 +1,108 @@
+\hypertarget{classClient}{}\doxysection{Client Class Reference}
+\label{classClient}\index{Client@{Client}}
+
+
+Provides utility functions for handling client-\/related operations.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classClient_aa30ba1cc1b4b0ddd7f765c30159de800}{Client}} (IConfiguration configuration)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classClient}{Client}} class. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classClient_a87e3536608bd79842a309053f5fe2b98}{Get\+Client\+Id}} (Http\+Context http\+Context, Claims\+Principal user)
+\begin{DoxyCompactList}\small\item\em Returns the Client\+Id of the currently logged in client. \end{DoxyCompactList}\item 
+List$<$ Dictionary$<$ string, object $>$ $>$ \mbox{\hyperlink{classClient_a8442c6cef5f10d5d1232731dd72c0683}{Get\+Clients}} ()
+\begin{DoxyCompactList}\small\item\em Returns a list of all clients in the database. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides utility functions for handling client-\/related operations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classClient_aa30ba1cc1b4b0ddd7f765c30159de800}\label{classClient_aa30ba1cc1b4b0ddd7f765c30159de800}} 
+\index{Client@{Client}!Client@{Client}}
+\index{Client@{Client}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{Client()}{Client()}}
+{\footnotesize\ttfamily Client.\+Client (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration }\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{classClient}{Client}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classClient_a87e3536608bd79842a309053f5fe2b98}\label{classClient_a87e3536608bd79842a309053f5fe2b98}} 
+\index{Client@{Client}!GetClientId@{GetClientId}}
+\index{GetClientId@{GetClientId}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{GetClientId()}{GetClientId()}}
+{\footnotesize\ttfamily int Client.\+Get\+Client\+Id (\begin{DoxyParamCaption}\item[{Http\+Context}]{http\+Context,  }\item[{Claims\+Principal}]{user }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the Client\+Id of the currently logged in client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em http\+Context} & The Http\+Context instance.\\
+\hline
+{\em user} & The Claims\+Principal instance.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Client\+Id of the currently logged in client.
+\end{DoxyReturn}
+
+
+This method checks if the user is authenticated. 
+
+If the user is authenticated, it attempts to obtain the Client\+Id from the session cookie. 
+
+If that fails, it retrieves the Client\+Id from the database using the provided Http\+Context and Claims\+Principal instances, serving as a fallback. 
+
+This ensures that the Client\+Id is still obtained even if the session cookie is unavailable. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var clientUtils = \textcolor{keyword}{new} ClientUtils(configuration);}
+\DoxyCodeLine{\textcolor{keywordtype}{int} clientId = clientUtils.GetClientId(HttpContext, User);}
+
+\end{DoxyCode}
+ \mbox{\Hypertarget{classClient_a8442c6cef5f10d5d1232731dd72c0683}\label{classClient_a8442c6cef5f10d5d1232731dd72c0683}} 
+\index{Client@{Client}!GetClients@{GetClients}}
+\index{GetClients@{GetClients}!Client@{Client}}
+\doxysubsubsection{\texorpdfstring{GetClients()}{GetClients()}}
+{\footnotesize\ttfamily List$<$Dictionary$<$string, object$>$ $>$ Client.\+Get\+Clients (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a list of all clients in the database. 
+
+This method is used to populate the list of clients in the Auction page. Avoiding the multiple database calls that would be required to obtain the clients information. The dictionary returned by this method contains the following keys\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{ \textcolor{stringliteral}{"{}ClientId"{}}, \textcolor{stringliteral}{"{}FullName"{}}, \textcolor{stringliteral}{"{}Username"{}} \}}
+
+\end{DoxyCode}
+ 
+
+\begin{DoxyReturn}{Returns}
+A list of all clients in the database.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/\+Utils/Client.\+cs\end{DoxyCompactItemize}

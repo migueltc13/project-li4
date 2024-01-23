@@ -1,0 +1,108 @@
+\hypertarget{classBetterFinds_1_1Utils_1_1Client}{}\doxysection{Better\+Finds.\+Utils.\+Client Class Reference}
+\label{classBetterFinds_1_1Utils_1_1Client}\index{BetterFinds.Utils.Client@{BetterFinds.Utils.Client}}
+
+
+Provides utility functions for handling client-\/related operations.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Client_a1d26156984b0c54807580c43f5104b42}{Client}} (IConfiguration configuration)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Client}{Client}} class. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Client_afbd10c1c200cb38e219115a121fd8043}{Get\+Client\+Id}} (Http\+Context http\+Context, Claims\+Principal user)
+\begin{DoxyCompactList}\small\item\em Returns the Client\+Id of the currently logged in client. \end{DoxyCompactList}\item 
+List$<$ Dictionary$<$ string, object $>$ $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Client_ad99662a8dbe85d9d60fa8e28c9ddecee}{Get\+Clients}} ()
+\begin{DoxyCompactList}\small\item\em Returns a list of all clients in the database. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides utility functions for handling client-\/related operations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Client_a1d26156984b0c54807580c43f5104b42}\label{classBetterFinds_1_1Utils_1_1Client_a1d26156984b0c54807580c43f5104b42}} 
+\index{BetterFinds.Utils.Client@{BetterFinds.Utils.Client}!Client@{Client}}
+\index{Client@{Client}!BetterFinds.Utils.Client@{BetterFinds.Utils.Client}}
+\doxysubsubsection{\texorpdfstring{Client()}{Client()}}
+{\footnotesize\ttfamily Better\+Finds.\+Utils.\+Client.\+Client (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration }\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Client}{Client}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Client_afbd10c1c200cb38e219115a121fd8043}\label{classBetterFinds_1_1Utils_1_1Client_afbd10c1c200cb38e219115a121fd8043}} 
+\index{BetterFinds.Utils.Client@{BetterFinds.Utils.Client}!GetClientId@{GetClientId}}
+\index{GetClientId@{GetClientId}!BetterFinds.Utils.Client@{BetterFinds.Utils.Client}}
+\doxysubsubsection{\texorpdfstring{GetClientId()}{GetClientId()}}
+{\footnotesize\ttfamily int Better\+Finds.\+Utils.\+Client.\+Get\+Client\+Id (\begin{DoxyParamCaption}\item[{Http\+Context}]{http\+Context,  }\item[{Claims\+Principal}]{user }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the Client\+Id of the currently logged in client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em http\+Context} & The Http\+Context instance.\\
+\hline
+{\em user} & The Claims\+Principal instance.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Client\+Id of the currently logged in client.
+\end{DoxyReturn}
+
+
+This method checks if the user is authenticated. 
+
+If the user is authenticated, it attempts to obtain the Client\+Id from the session cookie. 
+
+If that fails, it retrieves the Client\+Id from the database using the provided Http\+Context and Claims\+Principal instances, serving as a fallback. 
+
+This ensures that the Client\+Id is still obtained even if the session cookie is unavailable. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var clientUtils = \textcolor{keyword}{new} ClientUtils(configuration);}
+\DoxyCodeLine{\textcolor{keywordtype}{int} clientId = clientUtils.GetClientId(HttpContext, User);}
+
+\end{DoxyCode}
+ \mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Client_ad99662a8dbe85d9d60fa8e28c9ddecee}\label{classBetterFinds_1_1Utils_1_1Client_ad99662a8dbe85d9d60fa8e28c9ddecee}} 
+\index{BetterFinds.Utils.Client@{BetterFinds.Utils.Client}!GetClients@{GetClients}}
+\index{GetClients@{GetClients}!BetterFinds.Utils.Client@{BetterFinds.Utils.Client}}
+\doxysubsubsection{\texorpdfstring{GetClients()}{GetClients()}}
+{\footnotesize\ttfamily List$<$Dictionary$<$string, object$>$ $>$ Better\+Finds.\+Utils.\+Client.\+Get\+Clients (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a list of all clients in the database. 
+
+This method is used to populate the list of clients in the Auction page. Avoiding the multiple database calls that would be required to obtain the clients information. The dictionary returned by this method contains the following keys\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{ \textcolor{stringliteral}{"{}ClientId"{}}, \textcolor{stringliteral}{"{}FullName"{}}, \textcolor{stringliteral}{"{}Username"{}} \}}
+
+\end{DoxyCode}
+ 
+
+\begin{DoxyReturn}{Returns}
+A list of all clients in the database.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/\+Utils/Client.\+cs\end{DoxyCompactItemize}
