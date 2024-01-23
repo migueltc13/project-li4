@@ -450,6 +450,10 @@ nav {
     }
 }
 
+.banner-logo img {
+    width: 60px;
+}
+
 .product-images img {
     display: block; /* Ensures that the image is treated as a block element */
     width: 100%;
