@@ -438,14 +438,14 @@ nav {
 
 .banner-logo {
     display: block;
-    margin-left: 25px;
+    margin: 5px 0 0 25px;
     padding: 0 0; /* override nav a padding rule */
 }
 
 @media only screen and (max-width: 767px) {
     .banner-logo {
         display: block;
-        margin-left: 10px;
+        margin: 5px 0 0 10px;
         padding: 0 0; /* override nav a padding rule */
     }
 }
