@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 		<meta name="generator" content="Doxygen 1.9.1"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>BetterFinds: Main Page</title>
+		<title>BetterFinds: BetterFinds Documentation</title>
 		<link href="tabs.css" rel="stylesheet" type="text/css"/>
 		<script type="text/javascript" src="jquery.js"></script>
 		<script type="text/javascript" src="dynsections.js"></script>
@@ -63,11 +63,77 @@ $(function() {
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">BetterFinds Documentation</div>  </div>
+<div class="title"><a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> Documentation </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p>Welcome to the <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> project documentation. <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> is an Auction house website implemented in ASP.NET within the Computer Labs IV environment in the lective year 2023/2024.</p>
+<h1><a class="anchor" id="sec_intro"></a>
+Introduction</h1>
+<p><a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> is a comprehensive online platform designed to facilitate auction-related activities. It provides a user-friendly interface for its users, making the process of buying and selling items at auctions convenient and efficient.</p>
+<p>The main goals of <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> include:</p><ul>
+<li>Streamlining the auction process.</li>
+<li>Enhancing the user experience for both buyers and sellers.</li>
+<li>Providing a secure and transparent environment for online auctions.</li>
+</ul>
+<h1><a class="anchor" id="sec_usage"></a>
+Usage</h1>
+<p>Whether you are a buyer or a seller, <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> offers a range of features to meet your auction needs. Here's a brief overview of how you can use <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a>:</p>
+<ul>
+<li><b>As a buyer:</b><ul>
+<li>Browse through a diverse range of auction listings.</li>
+<li>Search for items by name or description and sort by alphabetical order, price or ending date.</li>
+<li>Place bids on items you are interested in.</li>
+<li>Monitor auction progress with live updates and receive notifications on bid updates in auctions you are participating in.</li>
+<li>View your bidding history and track your activity, organized by auction.</li>
+<li>Successfully win and pay for items you have bid on.</li>
+</ul>
+</li>
+<li><b>As a seller:</b><ul>
+<li>Create and list items for auction, with the possibility of editing and deleting them.</li>
+<li>Set the starting price and minimum bid increments for your items.</li>
+<li>Track bidding activity with live updates and through our notifications system.</li>
+<li>Successfully close auctions and fulfill transactions with winning bidders.</li>
+</ul>
+</li>
+</ul>
+<p>Note that <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> users can be both buyers and sellers at the same time, and to take advantage of all the features it has to offer, you should create an account and log in, with most of the features being exclusive to registered users.</p>
+<p>Explore the detailed documentation for specific information on how <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> works under the hood.</p>
+<h1><a class="anchor" id="sec_architecture"></a>
+Architecture</h1>
+<p><a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> is built using the ASP.NET framework and C# programming language. It uses the Razor Pages model, which is a page-based programming model that makes building web UI easier and more productive.</p>
+<p>The <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> project is organized into the following directories:</p><ul>
+<li><b>Pages:</b> Contains the Razor Pages that make up the <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> website and their corresponding code-behind files.</li>
+<li><b>Utils:</b> Contains utility classes used throughout the <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> project.</li>
+<li><b>Hub:</b> Contains the SignalR hub used for real-time updates.</li>
+</ul>
+<h1><a class="anchor" id="sec_run"></a>
+How to Run</h1>
+<p>To run <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a>, you should use the .NET Core 8.0 runtime, but it may also work with other versions of .NET Core.</p>
+<p>You will also need to have a MSSQL database server running on your machine. The database connection string can be configured in the <code>appsettings.json</code> file, located in the root directory of the <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> project. Next you will need to configure the MSSQL server by running the T-SQL scripts located in the <code>sql</code> directory of the <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> project.</p>
+<p>There are two ways to run the <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> project:</p>
+<h3><a class="anchor" id="autotoc_md0"></a>
+Option 1: Run from Source</h3>
+<p>To run the <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> project locally from the source code, follow these steps:</p><ol type="1">
+<li>Open a terminal or command prompt.</li>
+<li>Navigate to the root directory of the <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> project.</li>
+<li>Run the following command: <div class="fragment"><div class="line">dotnet run --environment Production</div>
+</div><!-- fragment --></li>
+<li>Wait for the application to build and start. Once it's running, you can access <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> by opening a web browser and navigating to the specified address (usually <a href="http://localhost:5000">http://localhost:5000</a>).</li>
+</ol>
+<h3><a class="anchor" id="autotoc_md1"></a>
+Option 2: Run from Release</h3>
+<p>To run the <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> project from a release build, follow these steps:</p><ol type="1">
+<li>Open a terminal or command prompt.</li>
+<li>Navigate to the root directory of the <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> project.</li>
+<li>Run the following commands: <div class="fragment"><div class="line">dotnet publish --configuration Release</div>
+<div class="line">dotnet bin/Release/net8.0/<a class="code" href="namespaceBetterFinds.html">BetterFinds</a>.dll</div>
+<div class="ttc" id="anamespaceBetterFinds_html"><div class="ttname"><a href="namespaceBetterFinds.html">BetterFinds</a></div><div class="ttdoc">The namespace containing classes and components for the BetterFinds project.</div></div>
+</div><!-- fragment --></li>
+<li>Wait for the application to build and start. Once it's running, you can access <a class="el" href="namespaceBetterFinds.html" title="The namespace containing classes and components for the BetterFinds project.">BetterFinds</a> by opening a web browser and navigating to the specified address (usually <a href="http://localhost:5000">http://localhost:5000</a>). </li>
+</ol>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 		<script src="custom.js"></script>

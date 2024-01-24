@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['notificationhub_14',['NotificationHub',['../classNotificationHub.html',1,'']]]
+  ['logoutmodel_20',['LogoutModel',['../classLogoutModel.html',1,'']]]
 ];

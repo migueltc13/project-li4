@@ -1,0 +1,137 @@
+\hypertarget{classBetterFinds_1_1Utils_1_1Images}{}\doxysection{Better\+Finds.\+Utils.\+Images Class Reference}
+\label{classBetterFinds_1_1Utils_1_1Images}\index{BetterFinds.Utils.Images@{BetterFinds.Utils.Images}}
+
+
+Provides utility functions for handling images-\/related operations.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images_a672714c5c81f28b23784632500bfc4b5}{Images}} (IConfiguration configuration)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images}{Images}} class. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images_a8530a33f7840dd400d5e9244aa313b43}{Get\+Images}} (int product\+Id)
+\begin{DoxyCompactList}\small\item\em Returns the images string of the product with the specified Product\+Id. \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images_a221498e31d748a6470a910e73a46988f}{Parse\+Images\+List}} (string images)
+\begin{DoxyCompactList}\small\item\em Returns a list of images from the specified images string. \end{DoxyCompactList}\item 
+List$<$ string $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images_a90f9b2f5535032132fbaa4bee2aba1dc}{Get\+Images\+List}} (int product\+Id)
+\begin{DoxyCompactList}\small\item\em Returns a list of images from the product with the specified Product\+Id. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images_aa8f2fa6a396d83165bee82589eadbc38}{Is\+Valid\+Images}} (string \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images}{Images}}, ref string error\+Message)
+\begin{DoxyCompactList}\small\item\em Validates the specified images string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides utility functions for handling images-\/related operations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+\end{DoxyParams}
+\} 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Images_a672714c5c81f28b23784632500bfc4b5}\label{classBetterFinds_1_1Utils_1_1Images_a672714c5c81f28b23784632500bfc4b5}} 
+\index{BetterFinds.Utils.Images@{BetterFinds.Utils.Images}!Images@{Images}}
+\index{Images@{Images}!BetterFinds.Utils.Images@{BetterFinds.Utils.Images}}
+\doxysubsubsection{\texorpdfstring{Images()}{Images()}}
+{\footnotesize\ttfamily Better\+Finds.\+Utils.\+Images.\+Images (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration }\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images}{Images}} class. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Images_a8530a33f7840dd400d5e9244aa313b43}\label{classBetterFinds_1_1Utils_1_1Images_a8530a33f7840dd400d5e9244aa313b43}} 
+\index{BetterFinds.Utils.Images@{BetterFinds.Utils.Images}!GetImages@{GetImages}}
+\index{GetImages@{GetImages}!BetterFinds.Utils.Images@{BetterFinds.Utils.Images}}
+\doxysubsubsection{\texorpdfstring{GetImages()}{GetImages()}}
+{\footnotesize\ttfamily string Better\+Finds.\+Utils.\+Images.\+Get\+Images (\begin{DoxyParamCaption}\item[{int}]{product\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the images string of the product with the specified Product\+Id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em product\+Id} & The Product\+Id of the product.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The images string of the product with the specified Product\+Id.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Images_a90f9b2f5535032132fbaa4bee2aba1dc}\label{classBetterFinds_1_1Utils_1_1Images_a90f9b2f5535032132fbaa4bee2aba1dc}} 
+\index{BetterFinds.Utils.Images@{BetterFinds.Utils.Images}!GetImagesList@{GetImagesList}}
+\index{GetImagesList@{GetImagesList}!BetterFinds.Utils.Images@{BetterFinds.Utils.Images}}
+\doxysubsubsection{\texorpdfstring{GetImagesList()}{GetImagesList()}}
+{\footnotesize\ttfamily List$<$string$>$ Better\+Finds.\+Utils.\+Images.\+Get\+Images\+List (\begin{DoxyParamCaption}\item[{int}]{product\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a list of images from the product with the specified Product\+Id. 
+
+Currently not being used. 
+
+Obtains the images list using \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images_a8530a33f7840dd400d5e9244aa313b43}{Get\+Images(int)}} and parses it using \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images_a221498e31d748a6470a910e73a46988f}{Parse\+Images\+List(string)}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em product\+Id} & The Product\+Id of the product.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of images from the product with the specified Product\+Id.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Images_aa8f2fa6a396d83165bee82589eadbc38}\label{classBetterFinds_1_1Utils_1_1Images_aa8f2fa6a396d83165bee82589eadbc38}} 
+\index{BetterFinds.Utils.Images@{BetterFinds.Utils.Images}!IsValidImages@{IsValidImages}}
+\index{IsValidImages@{IsValidImages}!BetterFinds.Utils.Images@{BetterFinds.Utils.Images}}
+\doxysubsubsection{\texorpdfstring{IsValidImages()}{IsValidImages()}}
+{\footnotesize\ttfamily bool Better\+Finds.\+Utils.\+Images.\+Is\+Valid\+Images (\begin{DoxyParamCaption}\item[{string}]{Images,  }\item[{ref string}]{error\+Message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Validates the specified images string. 
+
+Both used in Pages.\+Create\+Model and Pages.\+Edit\+Model. 
+
+Checks if the images string is 2048 characters or less and if the images are 10 or less. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images}{Images}}} & \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images}{Images}} string to validate.\\
+\hline
+{\em error\+Message} & Error message to return if validation fails.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the images string is valid, false otherwise.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Images_a221498e31d748a6470a910e73a46988f}\label{classBetterFinds_1_1Utils_1_1Images_a221498e31d748a6470a910e73a46988f}} 
+\index{BetterFinds.Utils.Images@{BetterFinds.Utils.Images}!ParseImagesList@{ParseImagesList}}
+\index{ParseImagesList@{ParseImagesList}!BetterFinds.Utils.Images@{BetterFinds.Utils.Images}}
+\doxysubsubsection{\texorpdfstring{ParseImagesList()}{ParseImagesList()}}
+{\footnotesize\ttfamily List$<$string$>$ Better\+Finds.\+Utils.\+Images.\+Parse\+Images\+List (\begin{DoxyParamCaption}\item[{string}]{images }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a list of images from the specified images string. 
+
+Splits the images string by comma and returns the resulting list. 
+
+Used in Pages.\+Auction\+Model to display the images of the product. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em images} & The images string.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of images from the specified images string.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/\+Utils/Images.\+cs\end{DoxyCompactItemize}
