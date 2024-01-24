@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['notification_78',['Notification',['../classBetterFinds_1_1Utils_1_1Notification.html#a98072789e8ac5406b58447bbc5ddb158',1,'BetterFinds::Utils::Notification']]]
+  ['markallasread_88',['MarkAllAsRead',['../classBetterFinds_1_1Utils_1_1Notification.html#a6060cb0c57aec194a8f600a1b2a9e35a',1,'BetterFinds::Utils::Notification']]],
+  ['markasread_89',['MarkAsRead',['../classBetterFinds_1_1Utils_1_1Notification.html#a88e53224a081f938a4df8645f8d3c538',1,'BetterFinds::Utils::Notification']]]
 ];

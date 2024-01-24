@@ -1,0 +1,102 @@
+\hypertarget{classBetterFinds_1_1Services_1_1AuctionBackgroundService}{}\doxysection{Better\+Finds.\+Services.\+Auction\+Background\+Service Class Reference}
+\label{classBetterFinds_1_1Services_1_1AuctionBackgroundService}\index{BetterFinds.Services.AuctionBackgroundService@{BetterFinds.Services.AuctionBackgroundService}}
+
+
+Background service that checks for auctions that ended and notifies users  
+
+
+
+
+Inheritance diagram for Better\+Finds.\+Services.\+Auction\+Background\+Service\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{classBetterFinds_1_1Services_1_1AuctionBackgroundService__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Better\+Finds.\+Services.\+Auction\+Background\+Service\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{classBetterFinds_1_1Services_1_1AuctionBackgroundService__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBetterFinds_1_1Services_1_1AuctionBackgroundService_a8c5ae99cfc3a68da231011dc96708977}{Auction\+Background\+Service}} (IService\+Provider \mbox{\hyperlink{classBetterFinds_1_1Services_1_1AuctionBackgroundService_ae0c8f8b0718fc1c04d30a9538b928cce}{service\+Provider}})
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Services_1_1AuctionBackgroundService}{Auction\+Background\+Service}} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override async Task \mbox{\hyperlink{classBetterFinds_1_1Services_1_1AuctionBackgroundService_a526ffe45b1957dbca7869e216f1ed18a}{Execute\+Async}} (Cancellation\+Token stopping\+Token)
+\begin{DoxyCompactList}\small\item\em Executes the background service. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly IService\+Provider \mbox{\hyperlink{classBetterFinds_1_1Services_1_1AuctionBackgroundService_ae0c8f8b0718fc1c04d30a9538b928cce}{service\+Provider}}
+\begin{DoxyCompactList}\small\item\em The IService\+Provider instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Background service that checks for auctions that ended and notifies users 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Services_1_1AuctionBackgroundService_a8c5ae99cfc3a68da231011dc96708977}\label{classBetterFinds_1_1Services_1_1AuctionBackgroundService_a8c5ae99cfc3a68da231011dc96708977}} 
+\index{BetterFinds.Services.AuctionBackgroundService@{BetterFinds.Services.AuctionBackgroundService}!AuctionBackgroundService@{AuctionBackgroundService}}
+\index{AuctionBackgroundService@{AuctionBackgroundService}!BetterFinds.Services.AuctionBackgroundService@{BetterFinds.Services.AuctionBackgroundService}}
+\doxysubsubsection{\texorpdfstring{AuctionBackgroundService()}{AuctionBackgroundService()}}
+{\footnotesize\ttfamily Better\+Finds.\+Services.\+Auction\+Background\+Service.\+Auction\+Background\+Service (\begin{DoxyParamCaption}\item[{IService\+Provider}]{service\+Provider }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Services_1_1AuctionBackgroundService}{Auction\+Background\+Service}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em service\+Provider} & The IService\+Provider instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Services_1_1AuctionBackgroundService_a526ffe45b1957dbca7869e216f1ed18a}\label{classBetterFinds_1_1Services_1_1AuctionBackgroundService_a526ffe45b1957dbca7869e216f1ed18a}} 
+\index{BetterFinds.Services.AuctionBackgroundService@{BetterFinds.Services.AuctionBackgroundService}!ExecuteAsync@{ExecuteAsync}}
+\index{ExecuteAsync@{ExecuteAsync}!BetterFinds.Services.AuctionBackgroundService@{BetterFinds.Services.AuctionBackgroundService}}
+\doxysubsubsection{\texorpdfstring{ExecuteAsync()}{ExecuteAsync()}}
+{\footnotesize\ttfamily override async Task Better\+Finds.\+Services.\+Auction\+Background\+Service.\+Execute\+Async (\begin{DoxyParamCaption}\item[{Cancellation\+Token}]{stopping\+Token }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+Executes the background service. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stopping\+Token} & The stopping token.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A task that represents the asynchronous operation.
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Services_1_1AuctionBackgroundService_ae0c8f8b0718fc1c04d30a9538b928cce}\label{classBetterFinds_1_1Services_1_1AuctionBackgroundService_ae0c8f8b0718fc1c04d30a9538b928cce}} 
+\index{BetterFinds.Services.AuctionBackgroundService@{BetterFinds.Services.AuctionBackgroundService}!serviceProvider@{serviceProvider}}
+\index{serviceProvider@{serviceProvider}!BetterFinds.Services.AuctionBackgroundService@{BetterFinds.Services.AuctionBackgroundService}}
+\doxysubsubsection{\texorpdfstring{serviceProvider}{serviceProvider}}
+{\footnotesize\ttfamily readonly IService\+Provider Better\+Finds.\+Services.\+Auction\+Background\+Service.\+service\+Provider\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IService\+Provider instance. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/\+Services/Auction\+Background\+Service.\+cs\end{DoxyCompactItemize}

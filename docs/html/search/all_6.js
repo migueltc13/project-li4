@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['images_29',['Images',['../classBetterFinds_1_1Utils_1_1Images.html',1,'BetterFinds.Utils.Images'],['../classBetterFinds_1_1Utils_1_1Images.html#a672714c5c81f28b23784632500bfc4b5',1,'BetterFinds::Utils.Images.Images(IConfiguration configuration)']]],
-  ['isvalidimages_30',['IsValidImages',['../classBetterFinds_1_1Utils_1_1Images.html#aa8f2fa6a396d83165bee82589eadbc38',1,'BetterFinds::Utils::Images']]]
+  ['hubcontext_33',['hubContext',['../classBetterFinds_1_1Utils_1_1Auctions.html#a85977112d0681cc0f1fbeb3dbb1d2afe',1,'BetterFinds::Utils::Auctions']]]
 ];

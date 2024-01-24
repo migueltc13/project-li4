@@ -83,7 +83,7 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa519097a06ab5ff84442726936d3f7bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBetterFinds_1_1Utils_1_1Auctions.html#aa519097a06ab5ff84442726936d3f7bf">Auctions</a> (IConfiguration <a class="el" href="classBetterFinds_1_1Utils_1_1Auctions.html#a91e8d68a8d2ce80b5f8deaabd2ce905d">configuration</a>, IHubContext&lt; <a class="el" href="classNotificationHub.html">NotificationHub</a> &gt; <a class="el" href="classBetterFinds_1_1Utils_1_1Auctions.html#a85977112d0681cc0f1fbeb3dbb1d2afe">hubContext</a>)</td></tr>
+<tr class="memitem:aa519097a06ab5ff84442726936d3f7bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBetterFinds_1_1Utils_1_1Auctions.html#aa519097a06ab5ff84442726936d3f7bf">Auctions</a> (IConfiguration <a class="el" href="classBetterFinds_1_1Utils_1_1Auctions.html#a91e8d68a8d2ce80b5f8deaabd2ce905d">configuration</a>, IHubContext&lt; <a class="el" href="classBetterFinds_1_1Hubs_1_1NotificationHub.html">NotificationHub</a> &gt; <a class="el" href="classBetterFinds_1_1Utils_1_1Auctions.html#a85977112d0681cc0f1fbeb3dbb1d2afe">hubContext</a>)</td></tr>
 <tr class="memdesc:aa519097a06ab5ff84442726936d3f7bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="classBetterFinds_1_1Utils_1_1Auctions.html" title="Provides utility functions for handling auctions-related operations.">Auctions</a> class.  <a href="classBetterFinds_1_1Utils_1_1Auctions.html#aa519097a06ab5ff84442726936d3f7bf">More...</a><br /></td></tr>
 <tr class="separator:aa519097a06ab5ff84442726936d3f7bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acde4b403c1fbfbfdd442188aa3cf7033"><td class="memItemLeft" align="right" valign="top">List&lt; Dictionary&lt; string, object &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBetterFinds_1_1Utils_1_1Auctions.html#acde4b403c1fbfbfdd442188aa3cf7033">GetAuctions</a> (int clientId, int order, bool reversed, bool occurring)</td></tr>
@@ -113,7 +113,7 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a91e8d68a8d2ce80b5f8deaabd2ce905d"><td class="memItemLeft" align="right" valign="top">readonly IConfiguration&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBetterFinds_1_1Utils_1_1Auctions.html#a91e8d68a8d2ce80b5f8deaabd2ce905d">configuration</a></td></tr>
 <tr class="memdesc:a91e8d68a8d2ce80b5f8deaabd2ce905d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The IConfiguration instance.  <a href="classBetterFinds_1_1Utils_1_1Auctions.html#a91e8d68a8d2ce80b5f8deaabd2ce905d">More...</a><br /></td></tr>
 <tr class="separator:a91e8d68a8d2ce80b5f8deaabd2ce905d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85977112d0681cc0f1fbeb3dbb1d2afe"><td class="memItemLeft" align="right" valign="top">readonly IHubContext&lt; <a class="el" href="classNotificationHub.html">NotificationHub</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBetterFinds_1_1Utils_1_1Auctions.html#a85977112d0681cc0f1fbeb3dbb1d2afe">hubContext</a></td></tr>
+<tr class="memitem:a85977112d0681cc0f1fbeb3dbb1d2afe"><td class="memItemLeft" align="right" valign="top">readonly IHubContext&lt; <a class="el" href="classBetterFinds_1_1Hubs_1_1NotificationHub.html">NotificationHub</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBetterFinds_1_1Utils_1_1Auctions.html#a85977112d0681cc0f1fbeb3dbb1d2afe">hubContext</a></td></tr>
 <tr class="memdesc:a85977112d0681cc0f1fbeb3dbb1d2afe"><td class="mdescLeft">&#160;</td><td class="mdescRight">The IHubContext instance.  <a href="classBetterFinds_1_1Utils_1_1Auctions.html#a85977112d0681cc0f1fbeb3dbb1d2afe">More...</a><br /></td></tr>
 <tr class="separator:a85977112d0681cc0f1fbeb3dbb1d2afe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -144,7 +144,7 @@ Static Private Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">IHubContext&lt; <a class="el" href="classNotificationHub.html">NotificationHub</a> &gt;&#160;</td>
+          <td class="paramtype">IHubContext&lt; <a class="el" href="classBetterFinds_1_1Hubs_1_1NotificationHub.html">NotificationHub</a> &gt;&#160;</td>
           <td class="paramname"><em>hubContext</em>&#160;</td>
         </tr>
         <tr>
@@ -230,7 +230,7 @@ Pages.AuctionModel when an auction is extended by the seller. </li>
 <p>Checks for auctions that ended asynchronously, notifies users and updates the database when ended auctions are found. </p>
 <p>Referenced by: </p><ul>
 <li>
-Services.AuctionBackgroundService to check for ended auctions at the start of each minute. </li>
+<a class="el" href="classBetterFinds_1_1Services_1_1AuctionBackgroundService.html" title="Background service that checks for auctions that ended and notifies users">Services.AuctionBackgroundService</a> to check for ended auctions at the start of each minute. </li>
 </ul>
 <p>When an auction ends, the following notifications are created: </p><ul>
 <li>
@@ -565,7 +565,7 @@ Pages.AuctionModel when an auction is extended by the seller. </li>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">readonly IHubContext&lt;<a class="el" href="classNotificationHub.html">NotificationHub</a>&gt; BetterFinds.Utils.Auctions.hubContext</td>
+          <td class="memname">readonly IHubContext&lt;<a class="el" href="classBetterFinds_1_1Hubs_1_1NotificationHub.html">NotificationHub</a>&gt; BetterFinds.Utils.Auctions.hubContext</td>
         </tr>
       </table>
   </td>

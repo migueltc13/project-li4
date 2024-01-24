@@ -8,7 +8,7 @@ Provides utility functions for handling auctions-\/related operations.
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_aa519097a06ab5ff84442726936d3f7bf}{Auctions}} (IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_a91e8d68a8d2ce80b5f8deaabd2ce905d}{configuration}}, IHub\+Context$<$ \mbox{\hyperlink{classNotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_a85977112d0681cc0f1fbeb3dbb1d2afe}{hub\+Context}})
+\mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_aa519097a06ab5ff84442726936d3f7bf}{Auctions}} (IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_a91e8d68a8d2ce80b5f8deaabd2ce905d}{configuration}}, IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_a85977112d0681cc0f1fbeb3dbb1d2afe}{hub\+Context}})
 \begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions}{Auctions}} class. \end{DoxyCompactList}\item 
 List$<$ Dictionary$<$ string, object $>$ $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_acde4b403c1fbfbfdd442188aa3cf7033}{Get\+Auctions}} (int client\+Id, int order, bool reversed, bool occurring)
 \begin{DoxyCompactList}\small\item\em Returns a list of auctions based on the given parameters. \end{DoxyCompactList}\item 
@@ -29,7 +29,7 @@ void \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_a69909a605f1b0f7c3ff
 \item 
 readonly IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_a91e8d68a8d2ce80b5f8deaabd2ce905d}{configuration}}
 \begin{DoxyCompactList}\small\item\em The IConfiguration instance. \end{DoxyCompactList}\item 
-readonly IHub\+Context$<$ \mbox{\hyperlink{classNotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_a85977112d0681cc0f1fbeb3dbb1d2afe}{hub\+Context}}
+readonly IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_a85977112d0681cc0f1fbeb3dbb1d2afe}{hub\+Context}}
 \begin{DoxyCompactList}\small\item\em The IHub\+Context instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Static Private Attributes}
 \begin{DoxyCompactItemize}
@@ -48,7 +48,7 @@ Provides utility functions for handling auctions-\/related operations.
 \index{BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}!Auctions@{Auctions}}
 \index{Auctions@{Auctions}!BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}}
 \doxysubsubsection{\texorpdfstring{Auctions()}{Auctions()}}
-{\footnotesize\ttfamily Better\+Finds.\+Utils.\+Auctions.\+Auctions (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration,  }\item[{IHub\+Context$<$ \mbox{\hyperlink{classNotificationHub}{Notification\+Hub}} $>$}]{hub\+Context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily Better\+Finds.\+Utils.\+Auctions.\+Auctions (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration,  }\item[{IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$}]{hub\+Context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -95,7 +95,7 @@ Checks for auctions that ended asynchronously, notifies users and updates the da
 
 Referenced by\+: 
 \begin{DoxyItemize}
-\item Services.\+Auction\+Background\+Service to check for ended auctions at the start of each minute. 
+\item \mbox{\hyperlink{classBetterFinds_1_1Services_1_1AuctionBackgroundService}{Services.\+Auction\+Background\+Service}} to check for ended auctions at the start of each minute. 
 \end{DoxyItemize}When an auction ends, the following notifications are created\+: 
 \begin{DoxyItemize}
 \item The seller is notified that the auction has ended. 
@@ -272,7 +272,7 @@ The IConfiguration instance.
 \index{BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}!hubContext@{hubContext}}
 \index{hubContext@{hubContext}!BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}}
 \doxysubsubsection{\texorpdfstring{hubContext}{hubContext}}
-{\footnotesize\ttfamily readonly IHub\+Context$<$\mbox{\hyperlink{classNotificationHub}{Notification\+Hub}}$>$ Better\+Finds.\+Utils.\+Auctions.\+hub\+Context\hspace{0.3cm}{\ttfamily [private]}}
+{\footnotesize\ttfamily readonly IHub\+Context$<$\mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}}$>$ Better\+Finds.\+Utils.\+Auctions.\+hub\+Context\hspace{0.3cm}{\ttfamily [private]}}
 
 
 

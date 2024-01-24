@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['markallasread_76',['MarkAllAsRead',['../classBetterFinds_1_1Utils_1_1Notification.html#a6060cb0c57aec194a8f600a1b2a9e35a',1,'BetterFinds::Utils::Notification']]],
-  ['markasread_77',['MarkAsRead',['../classBetterFinds_1_1Utils_1_1Notification.html#a88e53224a081f938a4df8645f8d3c538',1,'BetterFinds::Utils::Notification']]]
+  ['images_86',['Images',['../classBetterFinds_1_1Utils_1_1Images.html#a672714c5c81f28b23784632500bfc4b5',1,'BetterFinds::Utils::Images']]],
+  ['isvalidimages_87',['IsValidImages',['../classBetterFinds_1_1Utils_1_1Images.html#aa8f2fa6a396d83165bee82589eadbc38',1,'BetterFinds::Utils::Images']]]
 ];
