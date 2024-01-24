@@ -14,17 +14,14 @@
         .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true) // Adjust the file name and path
         .Build();
 
-    // Simulate getting HttpContext (replace with actual HttpContext if possible)
+    // Get current ClientId
     HttpContext httpContext = Context.Request.HttpContext;
     var clientUtils = new Utils.Client(configuration);
-    int clientId = clientUtils.GetClientId(httpContext, User);
-
-    // Simulate getting notifications count
-    var notificationUtils = new Utils.Notification(configuration);
-    int notificationCount = notificationUtils.GetNotificationsCount(clientId);
-
-    // Get current ClientId
     int currentClientId = clientUtils.GetClientId(httpContext, User);
+
+    // Get current client notifications count
+    var notificationUtils = new Utils.Notification(configuration);
+    int notificationCount = notificationUtils.GetNotificationsCount(currentClientId);
 }
 
 <!DOCTYPE html>
