@@ -1,0 +1,285 @@
+\hypertarget{classBetterFinds_1_1Utils_1_1Auctions}{}\doxysection{Better\+Finds.\+Utils.\+Auctions Class Reference}
+\label{classBetterFinds_1_1Utils_1_1Auctions}\index{BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}}
+
+
+Provides utility functions for handling auctions-\/related operations.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_aa519097a06ab5ff84442726936d3f7bf}{Auctions}} (IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_a91e8d68a8d2ce80b5f8deaabd2ce905d}{configuration}}, IHub\+Context$<$ \mbox{\hyperlink{classNotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_a85977112d0681cc0f1fbeb3dbb1d2afe}{hub\+Context}})
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions}{Auctions}} class. \end{DoxyCompactList}\item 
+List$<$ Dictionary$<$ string, object $>$ $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_acde4b403c1fbfbfdd442188aa3cf7033}{Get\+Auctions}} (int client\+Id, int order, bool reversed, bool occurring)
+\begin{DoxyCompactList}\small\item\em Returns a list of auctions based on the given parameters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_acf7fcc8a82d54e757d235d7cac8fbea2}{Parse\+Auctions\+Options}} (string sort, ref int order, ref bool reversed)
+\begin{DoxyCompactList}\small\item\em Parses the given sort option and updates the order and reversed parameters accordingly. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_acb6d91af13a363b20567a83e3ee37bcd}{Create\+Auctions\+To\+Check}} ()
+\begin{DoxyCompactList}\small\item\em Creates a list of auctions that need to be checked by the auction background service. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_ae61a444853f8bb7ff85307e3ad967167}{Add\+Auction}} (Date\+Time end\+Time)
+\begin{DoxyCompactList}\small\item\em Adds an auction end time to the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_aa74ef64014db5e0a31069fcd063d04da}{Auction\+End\+Times}} list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_a116c39389f4271281d4ff0a4d466a3e6}{Remove\+Auction}} (Date\+Time end\+Time)
+\begin{DoxyCompactList}\small\item\em Removes an auction end time from the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_aa74ef64014db5e0a31069fcd063d04da}{Auction\+End\+Times}} list. \end{DoxyCompactList}\item 
+async Task \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_aafbcf21372256072d0033f1230fee644}{Check\+Auctions\+Async}} ()
+\begin{DoxyCompactList}\small\item\em Checks for auctions that ended asynchronously, notifies users and updates the database when ended auctions are found. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_a69909a605f1b0f7c3ff460a334952b96}{Print\+Auctions\+To\+Check}} ()
+\begin{DoxyCompactList}\small\item\em Prints the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_aa74ef64014db5e0a31069fcd063d04da}{Auction\+End\+Times}} list to the console. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_a91e8d68a8d2ce80b5f8deaabd2ce905d}{configuration}}
+\begin{DoxyCompactList}\small\item\em The IConfiguration instance. \end{DoxyCompactList}\item 
+readonly IHub\+Context$<$ \mbox{\hyperlink{classNotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_a85977112d0681cc0f1fbeb3dbb1d2afe}{hub\+Context}}
+\begin{DoxyCompactList}\small\item\em The IHub\+Context instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static readonly List$<$ Date\+Time $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_aa74ef64014db5e0a31069fcd063d04da}{Auction\+End\+Times}} = \mbox{[}$\,$\mbox{]}
+\begin{DoxyCompactList}\small\item\em The {\ttfamily Auction\+End\+Times} list contains all the auction end times that need to be checked by the auction background service, initialized at the start of the application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides utility functions for handling auctions-\/related operations. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Auctions_aa519097a06ab5ff84442726936d3f7bf}\label{classBetterFinds_1_1Utils_1_1Auctions_aa519097a06ab5ff84442726936d3f7bf}} 
+\index{BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}!Auctions@{Auctions}}
+\index{Auctions@{Auctions}!BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}}
+\doxysubsubsection{\texorpdfstring{Auctions()}{Auctions()}}
+{\footnotesize\ttfamily Better\+Finds.\+Utils.\+Auctions.\+Auctions (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration,  }\item[{IHub\+Context$<$ \mbox{\hyperlink{classNotificationHub}{Notification\+Hub}} $>$}]{hub\+Context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions}{Auctions}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+{\em hub\+Context} & The IHub\+Context instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Auctions_ae61a444853f8bb7ff85307e3ad967167}\label{classBetterFinds_1_1Utils_1_1Auctions_ae61a444853f8bb7ff85307e3ad967167}} 
+\index{BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}!AddAuction@{AddAuction}}
+\index{AddAuction@{AddAuction}!BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}}
+\doxysubsubsection{\texorpdfstring{AddAuction()}{AddAuction()}}
+{\footnotesize\ttfamily void Better\+Finds.\+Utils.\+Auctions.\+Add\+Auction (\begin{DoxyParamCaption}\item[{Date\+Time}]{end\+Time }\end{DoxyParamCaption})}
+
+
+
+Adds an auction end time to the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_aa74ef64014db5e0a31069fcd063d04da}{Auction\+End\+Times}} list. 
+
+Referenced by\+: 
+\begin{DoxyItemize}
+\item Pages.\+Create\+Model when an auction is created. 
+\item Pages.\+Auction\+Model when an auction is extended by the seller. 
+\end{DoxyItemize}
+\begin{DoxyParams}{Parameters}
+{\em end\+Time} & The auction end time to add.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Auctions_aafbcf21372256072d0033f1230fee644}\label{classBetterFinds_1_1Utils_1_1Auctions_aafbcf21372256072d0033f1230fee644}} 
+\index{BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}!CheckAuctionsAsync@{CheckAuctionsAsync}}
+\index{CheckAuctionsAsync@{CheckAuctionsAsync}!BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}}
+\doxysubsubsection{\texorpdfstring{CheckAuctionsAsync()}{CheckAuctionsAsync()}}
+{\footnotesize\ttfamily async Task Better\+Finds.\+Utils.\+Auctions.\+Check\+Auctions\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks for auctions that ended asynchronously, notifies users and updates the database when ended auctions are found. 
+
+Referenced by\+: 
+\begin{DoxyItemize}
+\item Services.\+Auction\+Background\+Service to check for ended auctions at the start of each minute. 
+\end{DoxyItemize}When an auction ends, the following notifications are created\+: 
+\begin{DoxyItemize}
+\item The seller is notified that the auction has ended. 
+\item The bidders (except the buyer) are notified that the auction has ended, if any. 
+\item The buyer is notified that he won the auction and needs to complete the purchase, if any. 
+\end{DoxyItemize}The respective notification count is updated for each user, and respective auction page is refreshed for all users that are currently viewing the auction page. 
+
+The auction is marked as checked in the database, to prevent it from being checked again, and it\textquotesingle{}s removed from the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_aa74ef64014db5e0a31069fcd063d04da}{Auction\+End\+Times}} list. \begin{DoxyReturn}{Returns}
+A task that represents the asynchronous operation.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Auctions_acb6d91af13a363b20567a83e3ee37bcd}\label{classBetterFinds_1_1Utils_1_1Auctions_acb6d91af13a363b20567a83e3ee37bcd}} 
+\index{BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}!CreateAuctionsToCheck@{CreateAuctionsToCheck}}
+\index{CreateAuctionsToCheck@{CreateAuctionsToCheck}!BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}}
+\doxysubsubsection{\texorpdfstring{CreateAuctionsToCheck()}{CreateAuctionsToCheck()}}
+{\footnotesize\ttfamily void Better\+Finds.\+Utils.\+Auctions.\+Create\+Auctions\+To\+Check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a list of auctions that need to be checked by the auction background service. 
+
+This method is called at the start of the application to populate the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_aa74ef64014db5e0a31069fcd063d04da}{Auction\+End\+Times}} list. 
+
+It selects all the auctions that have not ended yet and are not completed (or checked as ended), and adds their end time to the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_aa74ef64014db5e0a31069fcd063d04da}{Auction\+End\+Times}} list. \mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Auctions_acde4b403c1fbfbfdd442188aa3cf7033}\label{classBetterFinds_1_1Utils_1_1Auctions_acde4b403c1fbfbfdd442188aa3cf7033}} 
+\index{BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}!GetAuctions@{GetAuctions}}
+\index{GetAuctions@{GetAuctions}!BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}}
+\doxysubsubsection{\texorpdfstring{GetAuctions()}{GetAuctions()}}
+{\footnotesize\ttfamily List$<$Dictionary$<$string, object$>$ $>$ Better\+Finds.\+Utils.\+Auctions.\+Get\+Auctions (\begin{DoxyParamCaption}\item[{int}]{client\+Id,  }\item[{int}]{order,  }\item[{bool}]{reversed,  }\item[{bool}]{occurring }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a list of auctions based on the given parameters. 
+
+Referenced by\+: 
+\begin{DoxyItemize}
+\item Pages.\+Account\+Model 
+\item Pages.\+Index\+Model 
+\item Pages.\+My\+Auctions\+Model 
+\item Pages.\+Search\+Model 
+\end{DoxyItemize}The parameter {\itshape client\+Id}  retrieves auctions with the following options\+: 
+\begin{DoxyItemize}
+\item 0\+: all clients 
+\item \+\_\+\+: specific client id 
+\end{DoxyItemize}The paramater {\itshape order}  sorts the auction list, the options are\+: 
+\begin{DoxyItemize}
+\item 0\+: by ending time 
+\item 1\+: by product price 
+\item 2\+: by product name 
+\item \+\_\+\+: by ending time 
+\end{DoxyItemize}Returned dictionary format\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}AuctionId"{}}: int,}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}EndTime"{}}: DateTime,}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}ProductName"{}}: string,}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}ProductDescription"{}}: string,}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}ProductPrice"{}}: decimal}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+Id} & The client id to retrieve auctions from. If 0, all auctions are retrieved.\\
+\hline
+{\em order} & The order to sort the auctions by.\\
+\hline
+{\em reversed} & Whether to reverse the order of the auctions.\\
+\hline
+{\em occurring} & Whether to retrieve only auctions that are occurring.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of auctions based on the given parameters.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Auctions_acf7fcc8a82d54e757d235d7cac8fbea2}\label{classBetterFinds_1_1Utils_1_1Auctions_acf7fcc8a82d54e757d235d7cac8fbea2}} 
+\index{BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}!ParseAuctionsOptions@{ParseAuctionsOptions}}
+\index{ParseAuctionsOptions@{ParseAuctionsOptions}!BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}}
+\doxysubsubsection{\texorpdfstring{ParseAuctionsOptions()}{ParseAuctionsOptions()}}
+{\footnotesize\ttfamily void Better\+Finds.\+Utils.\+Auctions.\+Parse\+Auctions\+Options (\begin{DoxyParamCaption}\item[{string}]{sort,  }\item[{ref int}]{order,  }\item[{ref bool}]{reversed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parses the given sort option and updates the order and reversed parameters accordingly. 
+
+This method is used to parse the sort option selected by the user in pages that have the option to sort the auctions. 
+
+Referenced by\+: 
+\begin{DoxyItemize}
+\item Pages.\+Index\+Model 
+\item Pages.\+My\+Auctions\+Model 
+\item Pages.\+Search\+Model 
+\end{DoxyItemize}The parameter {\itshape sort}  can be one of the following\+: 
+\begin{DoxyItemize}
+\item date or date\+Rev 
+\item price or price\+Rev 
+\item name or name\+Rev 
+\end{DoxyItemize}The parameter {\itshape order}  is updated with the order to sort the auctions by. 
+
+The parameter {\itshape reversed}  is updated with whether to reverse the order of the auctions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sort} & The sort option to parse.\\
+\hline
+{\em order} & The order returned by the method.\\
+\hline
+{\em reversed} & The reversed returned by the method.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Auctions_a69909a605f1b0f7c3ff460a334952b96}\label{classBetterFinds_1_1Utils_1_1Auctions_a69909a605f1b0f7c3ff460a334952b96}} 
+\index{BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}!PrintAuctionsToCheck@{PrintAuctionsToCheck}}
+\index{PrintAuctionsToCheck@{PrintAuctionsToCheck}!BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}}
+\doxysubsubsection{\texorpdfstring{PrintAuctionsToCheck()}{PrintAuctionsToCheck()}}
+{\footnotesize\ttfamily void Better\+Finds.\+Utils.\+Auctions.\+Print\+Auctions\+To\+Check (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Prints the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_aa74ef64014db5e0a31069fcd063d04da}{Auction\+End\+Times}} list to the console. 
+
+Used for debugging purposes. 
+
+Referenced by\+: 
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_acb6d91af13a363b20567a83e3ee37bcd}{Create\+Auctions\+To\+Check}} to print the list at the start of the application. 
+\item Pages.\+Create\+Model when an auction is created. 
+\end{DoxyItemize}\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Auctions_a116c39389f4271281d4ff0a4d466a3e6}\label{classBetterFinds_1_1Utils_1_1Auctions_a116c39389f4271281d4ff0a4d466a3e6}} 
+\index{BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}!RemoveAuction@{RemoveAuction}}
+\index{RemoveAuction@{RemoveAuction}!BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}}
+\doxysubsubsection{\texorpdfstring{RemoveAuction()}{RemoveAuction()}}
+{\footnotesize\ttfamily void Better\+Finds.\+Utils.\+Auctions.\+Remove\+Auction (\begin{DoxyParamCaption}\item[{Date\+Time}]{end\+Time }\end{DoxyParamCaption})}
+
+
+
+Removes an auction end time from the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_aa74ef64014db5e0a31069fcd063d04da}{Auction\+End\+Times}} list. 
+
+Referenced by\+: 
+\begin{DoxyItemize}
+\item Pages.\+Auction\+Model when an auction is completed (winner buys the product). 
+\item Pages.\+Auction\+Model when an auction is extended by the seller. 
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em end\+Time} & The auction end time to remove.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Auctions_aa74ef64014db5e0a31069fcd063d04da}\label{classBetterFinds_1_1Utils_1_1Auctions_aa74ef64014db5e0a31069fcd063d04da}} 
+\index{BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}!AuctionEndTimes@{AuctionEndTimes}}
+\index{AuctionEndTimes@{AuctionEndTimes}!BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}}
+\doxysubsubsection{\texorpdfstring{AuctionEndTimes}{AuctionEndTimes}}
+{\footnotesize\ttfamily readonly List$<$Date\+Time$>$ Better\+Finds.\+Utils.\+Auctions.\+Auction\+End\+Times = \mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The {\ttfamily Auction\+End\+Times} list contains all the auction end times that need to be checked by the auction background service, initialized at the start of the application. 
+
+This property can only be set from within the class. 
+
+This list is populated by the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_acb6d91af13a363b20567a83e3ee37bcd}{Create\+Auctions\+To\+Check}} method. \mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Auctions_a91e8d68a8d2ce80b5f8deaabd2ce905d}\label{classBetterFinds_1_1Utils_1_1Auctions_a91e8d68a8d2ce80b5f8deaabd2ce905d}} 
+\index{BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}!configuration@{configuration}}
+\index{configuration@{configuration}!BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}}
+\doxysubsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily readonly IConfiguration Better\+Finds.\+Utils.\+Auctions.\+configuration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IConfiguration instance. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Auctions_a85977112d0681cc0f1fbeb3dbb1d2afe}\label{classBetterFinds_1_1Utils_1_1Auctions_a85977112d0681cc0f1fbeb3dbb1d2afe}} 
+\index{BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}!hubContext@{hubContext}}
+\index{hubContext@{hubContext}!BetterFinds.Utils.Auctions@{BetterFinds.Utils.Auctions}}
+\doxysubsubsection{\texorpdfstring{hubContext}{hubContext}}
+{\footnotesize\ttfamily readonly IHub\+Context$<$\mbox{\hyperlink{classNotificationHub}{Notification\+Hub}}$>$ Better\+Finds.\+Utils.\+Auctions.\+hub\+Context\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IHub\+Context instance. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/\+Utils/Auctions.\+cs\end{DoxyCompactItemize}

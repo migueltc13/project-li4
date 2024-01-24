@@ -70,6 +70,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classBetterFinds_1_1Utils_1_1Client-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">BetterFinds.Utils.Client Class Reference</div>  </div>
@@ -81,7 +82,7 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1d26156984b0c54807580c43f5104b42"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBetterFinds_1_1Utils_1_1Client.html#a1d26156984b0c54807580c43f5104b42">Client</a> (IConfiguration configuration)</td></tr>
+<tr class="memitem:a1d26156984b0c54807580c43f5104b42"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBetterFinds_1_1Utils_1_1Client.html#a1d26156984b0c54807580c43f5104b42">Client</a> (IConfiguration <a class="el" href="classBetterFinds_1_1Utils_1_1Client.html#a925bd8ccd863172e80d921590f100154">configuration</a>)</td></tr>
 <tr class="memdesc:a1d26156984b0c54807580c43f5104b42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="classBetterFinds_1_1Utils_1_1Client.html" title="Provides utility functions for handling client-related operations.">Client</a> class.  <a href="classBetterFinds_1_1Utils_1_1Client.html#a1d26156984b0c54807580c43f5104b42">More...</a><br /></td></tr>
 <tr class="separator:a1d26156984b0c54807580c43f5104b42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbd10c1c200cb38e219115a121fd8043"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBetterFinds_1_1Utils_1_1Client.html#afbd10c1c200cb38e219115a121fd8043">GetClientId</a> (HttpContext httpContext, ClaimsPrincipal user)</td></tr>
@@ -90,15 +91,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad99662a8dbe85d9d60fa8e28c9ddecee"><td class="memItemLeft" align="right" valign="top">List&lt; Dictionary&lt; string, object &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBetterFinds_1_1Utils_1_1Client.html#ad99662a8dbe85d9d60fa8e28c9ddecee">GetClients</a> ()</td></tr>
 <tr class="memdesc:ad99662a8dbe85d9d60fa8e28c9ddecee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of all clients in the database.  <a href="classBetterFinds_1_1Utils_1_1Client.html#ad99662a8dbe85d9d60fa8e28c9ddecee">More...</a><br /></td></tr>
 <tr class="separator:ad99662a8dbe85d9d60fa8e28c9ddecee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a925bd8ccd863172e80d921590f100154"><td class="memItemLeft" align="right" valign="top">readonly IConfiguration&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBetterFinds_1_1Utils_1_1Client.html#a925bd8ccd863172e80d921590f100154">configuration</a></td></tr>
+<tr class="memdesc:a925bd8ccd863172e80d921590f100154"><td class="mdescLeft">&#160;</td><td class="mdescRight">The IConfiguration instance.  <a href="classBetterFinds_1_1Utils_1_1Client.html#a925bd8ccd863172e80d921590f100154">More...</a><br /></td></tr>
+<tr class="separator:a925bd8ccd863172e80d921590f100154"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Provides utility functions for handling client-related operations. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">configuration</td><td>The IConfiguration instance.</td></tr>
-  </table>
-  </dd>
-</dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1d26156984b0c54807580c43f5104b42"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1d26156984b0c54807580c43f5104b42">&#9670;&nbsp;</a></span>Client()</h2>
@@ -170,8 +171,9 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The ClientId of the currently logged in client.</dd></dl>
-<p>Usage example: </p><div class="fragment"><div class="line">var clientUtils = <span class="keyword">new</span> ClientUtils(configuration);</div>
+<p>Usage example: </p><div class="fragment"><div class="line">var clientUtils = <span class="keyword">new</span> ClientUtils(<a class="code" href="classBetterFinds_1_1Utils_1_1Client.html#a925bd8ccd863172e80d921590f100154">configuration</a>);</div>
 <div class="line"><span class="keywordtype">int</span> clientId = clientUtils.GetClientId(HttpContext, User);</div>
+<div class="ttc" id="aclassBetterFinds_1_1Utils_1_1Client_html_a925bd8ccd863172e80d921590f100154"><div class="ttname"><a href="classBetterFinds_1_1Utils_1_1Client.html#a925bd8ccd863172e80d921590f100154">BetterFinds::Utils.Client.configuration</a></div><div class="ttdeci">readonly IConfiguration configuration</div><div class="ttdoc">The IConfiguration instance.</div><div class="ttdef"><b>Definition:</b> Client.cs:14</div></div>
 </div><!-- fragment --> <p>This method checks if the user is authenticated. </p>
 <p>If the user is authenticated, it attempts to obtain the ClientId from the session cookie. </p>
 <p>If that fails, it retrieves the ClientId from the database using the provided HttpContext and ClaimsPrincipal instances, serving as a fallback. </p>
@@ -203,8 +205,37 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns a list of all clients in the database. </p>
-<p>This method is used to populate the list of clients in the Auction page. Avoiding the multiple database calls that would be required to obtain the clients information. The dictionary returned by this method contains the following keys: </p><div class="fragment"><div class="line">{ <span class="stringliteral">&quot;ClientId&quot;</span>, <span class="stringliteral">&quot;FullName&quot;</span>, <span class="stringliteral">&quot;Username&quot;</span> }</div>
+<p>This method is used to populate the list of clients in the Auction page. Avoiding the multiple database calls that would be required to obtain the clients information. The dictionary returned by this method contains the following keys: </p><div class="fragment"><div class="line">{</div>
+<div class="line">    <span class="stringliteral">&quot;ClientId&quot;</span>: int,</div>
+<div class="line">    <span class="stringliteral">&quot;FullName&quot;</span>: string,</div>
+<div class="line">    <span class="stringliteral">&quot;Username&quot;</span>: <span class="keywordtype">string</span></div>
+<div class="line">}</div>
 </div><!-- fragment --> <dl class="section return"><dt>Returns</dt><dd>A list of all clients in the database.</dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a925bd8ccd863172e80d921590f100154"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a925bd8ccd863172e80d921590f100154">&#9670;&nbsp;</a></span>configuration</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly IConfiguration BetterFinds.Utils.Client.configuration</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The IConfiguration instance. </p>
 
 </div>
 </div>

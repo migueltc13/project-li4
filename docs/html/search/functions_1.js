@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['formatdecimal_26',['FormatDecimal',['../classBetterFinds_1_1Utils_1_1Currency.html#aba648d72430215628fc3642b3857be96',1,'BetterFinds::Utils::Currency']]],
-  ['formatdecimalobject_27',['FormatDecimalObject',['../classBetterFinds_1_1Utils_1_1Currency.html#ae2a8addbbd392f0fc6aa945ba4cbef44',1,'BetterFinds::Utils::Currency']]]
+  ['bids_56',['Bids',['../classBetterFinds_1_1Utils_1_1Bids.html#ad11415fc36bc66c40350b0e5c45bcd60',1,'BetterFinds::Utils::Bids']]]
 ];

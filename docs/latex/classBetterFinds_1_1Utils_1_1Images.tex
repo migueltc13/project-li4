@@ -8,7 +8,7 @@ Provides utility functions for handling images-\/related operations.
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images_a672714c5c81f28b23784632500bfc4b5}{Images}} (IConfiguration configuration)
+\mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images_a672714c5c81f28b23784632500bfc4b5}{Images}} (IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images_a10f43db53bdd83a2d07a6a9234813a42}{configuration}})
 \begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images}{Images}} class. \end{DoxyCompactList}\item 
 string \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images_a8530a33f7840dd400d5e9244aa313b43}{Get\+Images}} (int product\+Id)
 \begin{DoxyCompactList}\small\item\em Returns the images string of the product with the specified Product\+Id. \end{DoxyCompactList}\item 
@@ -18,17 +18,17 @@ List$<$ string $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images_a90f9b2f
 \begin{DoxyCompactList}\small\item\em Returns a list of images from the product with the specified Product\+Id. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images_aa8f2fa6a396d83165bee82589eadbc38}{Is\+Valid\+Images}} (string \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images}{Images}}, ref string error\+Message)
 \begin{DoxyCompactList}\small\item\em Validates the specified images string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images_a10f43db53bdd83a2d07a6a9234813a42}{configuration}}
+\begin{DoxyCompactList}\small\item\em The IConfiguration instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Provides utility functions for handling images-\/related operations. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em configuration} & The IConfiguration instance.\\
-\hline
-\end{DoxyParams}
-\} 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Images_a672714c5c81f28b23784632500bfc4b5}\label{classBetterFinds_1_1Utils_1_1Images_a672714c5c81f28b23784632500bfc4b5}} 
@@ -41,6 +41,11 @@ Provides utility functions for handling images-\/related operations.
 
 Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Images}{Images}} class. 
 
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+\end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
@@ -130,6 +135,19 @@ Used in Pages.\+Auction\+Model to display the images of the product.
 \begin{DoxyReturn}{Returns}
 A list of images from the specified images string.
 \end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Images_a10f43db53bdd83a2d07a6a9234813a42}\label{classBetterFinds_1_1Utils_1_1Images_a10f43db53bdd83a2d07a6a9234813a42}} 
+\index{BetterFinds.Utils.Images@{BetterFinds.Utils.Images}!configuration@{configuration}}
+\index{configuration@{configuration}!BetterFinds.Utils.Images@{BetterFinds.Utils.Images}}
+\doxysubsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily readonly IConfiguration Better\+Finds.\+Utils.\+Images.\+configuration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IConfiguration instance. 
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

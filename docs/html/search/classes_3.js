@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['notificationhub_21',['NotificationHub',['../classNotificationHub.html',1,'']]]
+  ['images_46',['Images',['../classBetterFinds_1_1Utils_1_1Images.html',1,'BetterFinds::Utils']]]
 ];

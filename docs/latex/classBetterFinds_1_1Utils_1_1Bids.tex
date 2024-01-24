@@ -1,0 +1,211 @@
+\hypertarget{classBetterFinds_1_1Utils_1_1Bids}{}\doxysection{Better\+Finds.\+Utils.\+Bids Class Reference}
+\label{classBetterFinds_1_1Utils_1_1Bids}\index{BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}}
+
+
+Provides utility functions for handling bids-\/related operations.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids_ad11415fc36bc66c40350b0e5c45bcd60}{Bids}} (IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids_ab38a39f456bb3e3bc807575a634d5945}{configuration}})
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids}{Bids}} class. \end{DoxyCompactList}\item 
+async Task \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids_ad2b6a22edd6db9abde6f7ead024a1ad5}{Create\+Bidder\+Group\+Async}} ()
+\begin{DoxyCompactList}\small\item\em Creates a dictionary of auctions and their bidders asynchonously. \end{DoxyCompactList}\item 
+async Task \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids_aee33df8efd90beba4dcc36a5e8163fcf}{Add\+Bidder\+To\+Bidder\+Group\+Async}} (int client\+Id, int auction\+Id)
+\begin{DoxyCompactList}\small\item\em Adds a bidder to the bidders\+Group dictionary asynchonously. \end{DoxyCompactList}\item 
+List$<$ int $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids_a67cfe1a9df18096f9863d0e1ed12b4fb}{Get\+Bidders\+From\+Auction}} (int auction\+Id)
+\begin{DoxyCompactList}\small\item\em Returns a list of bidders from the specified auction. \end{DoxyCompactList}\item 
+List$<$ Dictionary$<$ int, List$<$ Dictionary$<$ string, object $>$ $>$ $>$ $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids_a20bf7736f17429dcf5c0745afde012ed}{Get\+Client\+Bids}} (int client\+Id)
+\begin{DoxyCompactList}\small\item\em Returns a list of bidders organized by auction. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids_aef636a8469a845043db3b6b392e3c867}{Print\+Bidders\+Group}} ()
+\begin{DoxyCompactList}\small\item\em Prints the bidders\+Group dictionary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+static Dictionary$<$ int, List$<$ int $>$ $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids_a5ed93fb4cd2cd7e9b3cf3a9b1b035981}{Bidders\+Group}} = \mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The dictionary of auctions and their bidders. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids_ab38a39f456bb3e3bc807575a634d5945}{configuration}}
+\begin{DoxyCompactList}\small\item\em The IConfiguration instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides utility functions for handling bids-\/related operations. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Bids_ad11415fc36bc66c40350b0e5c45bcd60}\label{classBetterFinds_1_1Utils_1_1Bids_ad11415fc36bc66c40350b0e5c45bcd60}} 
+\index{BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}!Bids@{Bids}}
+\index{Bids@{Bids}!BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}}
+\doxysubsubsection{\texorpdfstring{Bids()}{Bids()}}
+{\footnotesize\ttfamily Better\+Finds.\+Utils.\+Bids.\+Bids (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration }\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids}{Bids}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Bids_aee33df8efd90beba4dcc36a5e8163fcf}\label{classBetterFinds_1_1Utils_1_1Bids_aee33df8efd90beba4dcc36a5e8163fcf}} 
+\index{BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}!AddBidderToBidderGroupAsync@{AddBidderToBidderGroupAsync}}
+\index{AddBidderToBidderGroupAsync@{AddBidderToBidderGroupAsync}!BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}}
+\doxysubsubsection{\texorpdfstring{AddBidderToBidderGroupAsync()}{AddBidderToBidderGroupAsync()}}
+{\footnotesize\ttfamily async Task Better\+Finds.\+Utils.\+Bids.\+Add\+Bidder\+To\+Bidder\+Group\+Async (\begin{DoxyParamCaption}\item[{int}]{client\+Id,  }\item[{int}]{auction\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a bidder to the bidders\+Group dictionary asynchonously. 
+
+Used to add a bidder to the bidders\+Group dictionary when a bid is placed. 
+
+The dictionary is stored in the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids_a5ed93fb4cd2cd7e9b3cf3a9b1b035981}{Bidders\+Group}} property. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+Id} & The Client\+Id of the bidder.\\
+\hline
+{\em auction\+Id} & The Auction\+Id related to the bid.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A task that represents the asynchronous operation.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Bids_ad2b6a22edd6db9abde6f7ead024a1ad5}\label{classBetterFinds_1_1Utils_1_1Bids_ad2b6a22edd6db9abde6f7ead024a1ad5}} 
+\index{BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}!CreateBidderGroupAsync@{CreateBidderGroupAsync}}
+\index{CreateBidderGroupAsync@{CreateBidderGroupAsync}!BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}}
+\doxysubsubsection{\texorpdfstring{CreateBidderGroupAsync()}{CreateBidderGroupAsync()}}
+{\footnotesize\ttfamily async Task Better\+Finds.\+Utils.\+Bids.\+Create\+Bidder\+Group\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a dictionary of auctions and their bidders asynchonously. 
+
+This method is called from \mbox{\hyperlink{classProgram}{Program}} when the application starts. 
+
+It retrieves all bids from the database and creates a dictionary of auctions and their bidders. 
+
+The dictionary is stored in the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids_a5ed93fb4cd2cd7e9b3cf3a9b1b035981}{Bidders\+Group}} property. 
+
+\begin{DoxyReturn}{Returns}
+A task that represents the asynchronous operation.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Bids_a67cfe1a9df18096f9863d0e1ed12b4fb}\label{classBetterFinds_1_1Utils_1_1Bids_a67cfe1a9df18096f9863d0e1ed12b4fb}} 
+\index{BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}!GetBiddersFromAuction@{GetBiddersFromAuction}}
+\index{GetBiddersFromAuction@{GetBiddersFromAuction}!BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}}
+\doxysubsubsection{\texorpdfstring{GetBiddersFromAuction()}{GetBiddersFromAuction()}}
+{\footnotesize\ttfamily List$<$int$>$ Better\+Finds.\+Utils.\+Bids.\+Get\+Bidders\+From\+Auction (\begin{DoxyParamCaption}\item[{int}]{auction\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a list of bidders from the specified auction. 
+
+Used to get a list of bidders to notify from the specified auction. 
+
+If the auction\+Id is not present in the dictionary, it returns an empty list. 
+
+The dictionary is stored in the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids_a5ed93fb4cd2cd7e9b3cf3a9b1b035981}{Bidders\+Group}} property. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em auction\+Id} & The Auction\+Id to get bidders from.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of bidders from the specified auction.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Bids_a20bf7736f17429dcf5c0745afde012ed}\label{classBetterFinds_1_1Utils_1_1Bids_a20bf7736f17429dcf5c0745afde012ed}} 
+\index{BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}!GetClientBids@{GetClientBids}}
+\index{GetClientBids@{GetClientBids}!BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}}
+\doxysubsubsection{\texorpdfstring{GetClientBids()}{GetClientBids()}}
+{\footnotesize\ttfamily List$<$Dictionary$<$int, List$<$Dictionary$<$string, object$>$ $>$ $>$ $>$ Better\+Finds.\+Utils.\+Bids.\+Get\+Client\+Bids (\begin{DoxyParamCaption}\item[{int}]{client\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a list of bidders organized by auction. 
+
+Used to get a list of bidders organized by auction in the Pages.\+My\+Bids\+Model page. 
+
+The list is structured as follows\+: 
+\begin{DoxyItemize}
+\item Key\+: Auction\+Id 
+\item Value\+: List of dictionaries containing the bid information 
+\end{DoxyItemize}
+
+The dictionaries containing the bid information are structured as follows\+: 
+\begin{DoxyItemize}
+\item Bid\+Time\+: The time the bid was placed 
+\item Bid\+Value\+: The value of the bid 
+\item Product\+Name\+: The name of the product 
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+Id} & The Client\+Id of the client to get bids organized by auction from.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A list of bids organized by auction.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Bids_aef636a8469a845043db3b6b392e3c867}\label{classBetterFinds_1_1Utils_1_1Bids_aef636a8469a845043db3b6b392e3c867}} 
+\index{BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}!PrintBiddersGroup@{PrintBiddersGroup}}
+\index{PrintBiddersGroup@{PrintBiddersGroup}!BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}}
+\doxysubsubsection{\texorpdfstring{PrintBiddersGroup()}{PrintBiddersGroup()}}
+{\footnotesize\ttfamily void Better\+Finds.\+Utils.\+Bids.\+Print\+Bidders\+Group (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Prints the bidders\+Group dictionary. 
+
+Used for debugging purposes. 
+
+Prints the contents of the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids_a5ed93fb4cd2cd7e9b3cf3a9b1b035981}{Bidders\+Group}} dictionary. 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Bids_ab38a39f456bb3e3bc807575a634d5945}\label{classBetterFinds_1_1Utils_1_1Bids_ab38a39f456bb3e3bc807575a634d5945}} 
+\index{BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}!configuration@{configuration}}
+\index{configuration@{configuration}!BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}}
+\doxysubsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily readonly IConfiguration Better\+Finds.\+Utils.\+Bids.\+configuration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IConfiguration instance. 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Bids_a5ed93fb4cd2cd7e9b3cf3a9b1b035981}\label{classBetterFinds_1_1Utils_1_1Bids_a5ed93fb4cd2cd7e9b3cf3a9b1b035981}} 
+\index{BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}!BiddersGroup@{BiddersGroup}}
+\index{BiddersGroup@{BiddersGroup}!BetterFinds.Utils.Bids@{BetterFinds.Utils.Bids}}
+\doxysubsubsection{\texorpdfstring{BiddersGroup}{BiddersGroup}}
+{\footnotesize\ttfamily Dictionary$<$int, List$<$int$>$ $>$ Better\+Finds.\+Utils.\+Bids.\+Bidders\+Group = \mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [get]}, {\ttfamily [set]}, {\ttfamily [private]}}
+
+
+
+The dictionary of auctions and their bidders. 
+
+This property can only be set from within the class. 
+
+This dictionary {\ttfamily Bidders\+Group} is initialized when the application starts. 
+
+Used to notify clients when a bid is placed on an auction they are participating in. 
+
+Dictionary structure\+: 
+\begin{DoxyItemize}
+\item Key\+: Auction\+Id 
+\item Value\+: List of Client\+Id\textquotesingle{}s 
+\end{DoxyItemize}
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/\+Utils/Bids.\+cs\end{DoxyCompactItemize}

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['images_32',['Images',['../classBetterFinds_1_1Utils_1_1Images.html#a672714c5c81f28b23784632500bfc4b5',1,'BetterFinds::Utils::Images']]],
-  ['isvalidimages_33',['IsValidImages',['../classBetterFinds_1_1Utils_1_1Images.html#aa8f2fa6a396d83165bee82589eadbc38',1,'BetterFinds::Utils::Images']]]
+  ['formatdecimal_62',['FormatDecimal',['../classBetterFinds_1_1Utils_1_1Currency.html#aba648d72430215628fc3642b3857be96',1,'BetterFinds::Utils::Currency']]],
+  ['formatdecimalobject_63',['FormatDecimalObject',['../classBetterFinds_1_1Utils_1_1Currency.html#ae2a8addbbd392f0fc6aa945ba4cbef44',1,'BetterFinds::Utils::Currency']]]
 ];

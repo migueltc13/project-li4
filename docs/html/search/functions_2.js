@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['getclientid_28',['GetClientId',['../classBetterFinds_1_1Utils_1_1Client.html#afbd10c1c200cb38e219115a121fd8043',1,'BetterFinds::Utils::Client']]],
-  ['getclients_29',['GetClients',['../classBetterFinds_1_1Utils_1_1Client.html#ad99662a8dbe85d9d60fa8e28c9ddecee',1,'BetterFinds::Utils::Client']]],
-  ['getimages_30',['GetImages',['../classBetterFinds_1_1Utils_1_1Images.html#a8530a33f7840dd400d5e9244aa313b43',1,'BetterFinds::Utils::Images']]],
-  ['getimageslist_31',['GetImagesList',['../classBetterFinds_1_1Utils_1_1Images.html#a90f9b2f5535032132fbaa4bee2aba1dc',1,'BetterFinds::Utils::Images']]]
+  ['checkauctionsasync_57',['CheckAuctionsAsync',['../classBetterFinds_1_1Utils_1_1Auctions.html#aafbcf21372256072d0033f1230fee644',1,'BetterFinds::Utils::Auctions']]],
+  ['client_58',['Client',['../classBetterFinds_1_1Utils_1_1Client.html#a1d26156984b0c54807580c43f5104b42',1,'BetterFinds::Utils::Client']]],
+  ['createauctionstocheck_59',['CreateAuctionsToCheck',['../classBetterFinds_1_1Utils_1_1Auctions.html#acb6d91af13a363b20567a83e3ee37bcd',1,'BetterFinds::Utils::Auctions']]],
+  ['createbiddergroupasync_60',['CreateBidderGroupAsync',['../classBetterFinds_1_1Utils_1_1Bids.html#ad2b6a22edd6db9abde6f7ead024a1ad5',1,'BetterFinds::Utils::Bids']]],
+  ['createnotification_61',['CreateNotification',['../classBetterFinds_1_1Utils_1_1Notification.html#af6161f4d7fe7049eb21b81aac92605af',1,'BetterFinds::Utils::Notification']]]
 ];

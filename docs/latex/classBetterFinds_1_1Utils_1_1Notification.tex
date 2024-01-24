@@ -1,0 +1,213 @@
+\hypertarget{classBetterFinds_1_1Utils_1_1Notification}{}\doxysection{Better\+Finds.\+Utils.\+Notification Class Reference}
+\label{classBetterFinds_1_1Utils_1_1Notification}\index{BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}}
+
+
+Provides utility functions for handling notifications-\/related operations.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Notification_a98072789e8ac5406b58447bbc5ddb158}{Notification}} (IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Notification_a4d109b1dc7148b1b9f68b25eac001e19}{configuration}})
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Notification}{Notification}} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Notification_af6161f4d7fe7049eb21b81aac92605af}{Create\+Notification}} (int client\+Id, int auction\+Id, string message)
+\begin{DoxyCompactList}\small\item\em Creates a new notification for the specified client. \end{DoxyCompactList}\item 
+List$<$ Dictionary$<$ string, object $>$ $>$ \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Notification_a050c35fce4e345c842bb7093787f11d7}{Get\+Notifications}} (int client\+Id)
+\begin{DoxyCompactList}\small\item\em Returns a dictionary list of notifications for a specific client. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Notification_a972d3ebc6fb27747d7498b7273eff62e}{Get\+Notifications\+Count}} (int client\+Id)
+\begin{DoxyCompactList}\small\item\em Returns the total number of notifications for a specific client. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Notification_aeff5351f3ef295f412ab96eeca10b7f3}{Get\+Unread\+Notifications\+Count}} (int client\+Id)
+\begin{DoxyCompactList}\small\item\em Returns the number of unread notifications for a specific client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Notification_a88e53224a081f938a4df8645f8d3c538}{Mark\+As\+Read}} (int client\+Id, int notification\+Id)
+\begin{DoxyCompactList}\small\item\em Marks a notification as read. Used in the Pages.\+Notifications\+Model page. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Notification_a6060cb0c57aec194a8f600a1b2a9e35a}{Mark\+All\+As\+Read}} (int client\+Id)
+\begin{DoxyCompactList}\small\item\em Marks all notifications as read. Used in the Pages.\+Notifications\+Model page. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Notification_a4d109b1dc7148b1b9f68b25eac001e19}{configuration}}
+\begin{DoxyCompactList}\small\item\em The IConfiguration instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides utility functions for handling notifications-\/related operations. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Notification_a98072789e8ac5406b58447bbc5ddb158}\label{classBetterFinds_1_1Utils_1_1Notification_a98072789e8ac5406b58447bbc5ddb158}} 
+\index{BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}!Notification@{Notification}}
+\index{Notification@{Notification}!BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}}
+\doxysubsubsection{\texorpdfstring{Notification()}{Notification()}}
+{\footnotesize\ttfamily Better\+Finds.\+Utils.\+Notification.\+Notification (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration }\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Notification}{Notification}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Notification_af6161f4d7fe7049eb21b81aac92605af}\label{classBetterFinds_1_1Utils_1_1Notification_af6161f4d7fe7049eb21b81aac92605af}} 
+\index{BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}!CreateNotification@{CreateNotification}}
+\index{CreateNotification@{CreateNotification}!BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}}
+\doxysubsubsection{\texorpdfstring{CreateNotification()}{CreateNotification()}}
+{\footnotesize\ttfamily void Better\+Finds.\+Utils.\+Notification.\+Create\+Notification (\begin{DoxyParamCaption}\item[{int}]{client\+Id,  }\item[{int}]{auction\+Id,  }\item[{string}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new notification for the specified client. 
+
+Creates and inserts a new notification into the database. 
+
+A notification has the following properties\+: 
+\begin{DoxyItemize}
+\item Notification\+Id\+: The unique identifier of the notification. 
+\item Message\+: The message content of the notification. 
+\item Timestamp\+: The timestamp of the notification. 
+\item Client\+Id\+: The Client\+Id of the client. 
+\item Auction\+Id\+: The Auction\+Id of the auction related to the notification. 
+\item Is\+Read\+: A boolean value indicating whether the notification has been read. Default value\+: false. 
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+Id} & Client\+Id of the client.\\
+\hline
+{\em auction\+Id} & Auction\+Id of the auction related to the notification.\\
+\hline
+{\em message} & The message content of the notification.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Notification_a050c35fce4e345c842bb7093787f11d7}\label{classBetterFinds_1_1Utils_1_1Notification_a050c35fce4e345c842bb7093787f11d7}} 
+\index{BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}!GetNotifications@{GetNotifications}}
+\index{GetNotifications@{GetNotifications}!BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}}
+\doxysubsubsection{\texorpdfstring{GetNotifications()}{GetNotifications()}}
+{\footnotesize\ttfamily List$<$Dictionary$<$string, object$>$ $>$ Better\+Finds.\+Utils.\+Notification.\+Get\+Notifications (\begin{DoxyParamCaption}\item[{int}]{client\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a dictionary list of notifications for a specific client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+Id} & The Client\+Id of the client.\\
+\hline
+\end{DoxyParams}
+
+
+This method is used to display the notifications in the Pages.\+Notifications\+Model page. 
+
+The dictionary returned by this method contains the following keys\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}NotificationId"{}}: int,}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}Message"{}}: string,}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}Timestamp"{}}: DateTime,}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}IsRead"{}}: bool,}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}AuctionId"{}}: int,}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}ProductName"{}}: string,}
+\DoxyCodeLine{    \textcolor{stringliteral}{"{}ProductPrice"{}}: decimal}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+\begin{DoxyReturn}{Returns}
+A dictionary list of notifications for a specific client.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Notification_a972d3ebc6fb27747d7498b7273eff62e}\label{classBetterFinds_1_1Utils_1_1Notification_a972d3ebc6fb27747d7498b7273eff62e}} 
+\index{BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}!GetNotificationsCount@{GetNotificationsCount}}
+\index{GetNotificationsCount@{GetNotificationsCount}!BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}}
+\doxysubsubsection{\texorpdfstring{GetNotificationsCount()}{GetNotificationsCount()}}
+{\footnotesize\ttfamily int Better\+Finds.\+Utils.\+Notification.\+Get\+Notifications\+Count (\begin{DoxyParamCaption}\item[{int}]{client\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the total number of notifications for a specific client. 
+
+Currently not being used. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+Id} & The Client\+Id of the client.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The total number of notifications for a specific client.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Notification_aeff5351f3ef295f412ab96eeca10b7f3}\label{classBetterFinds_1_1Utils_1_1Notification_aeff5351f3ef295f412ab96eeca10b7f3}} 
+\index{BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}!GetUnreadNotificationsCount@{GetUnreadNotificationsCount}}
+\index{GetUnreadNotificationsCount@{GetUnreadNotificationsCount}!BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}}
+\doxysubsubsection{\texorpdfstring{GetUnreadNotificationsCount()}{GetUnreadNotificationsCount()}}
+{\footnotesize\ttfamily int Better\+Finds.\+Utils.\+Notification.\+Get\+Unread\+Notifications\+Count (\begin{DoxyParamCaption}\item[{int}]{client\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the number of unread notifications for a specific client. 
+
+This method is used to display the number of unread notifications in the navbar. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+Id} & The Client\+Id of the client.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of unread notifications for a specific client.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Notification_a6060cb0c57aec194a8f600a1b2a9e35a}\label{classBetterFinds_1_1Utils_1_1Notification_a6060cb0c57aec194a8f600a1b2a9e35a}} 
+\index{BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}!MarkAllAsRead@{MarkAllAsRead}}
+\index{MarkAllAsRead@{MarkAllAsRead}!BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}}
+\doxysubsubsection{\texorpdfstring{MarkAllAsRead()}{MarkAllAsRead()}}
+{\footnotesize\ttfamily void Better\+Finds.\+Utils.\+Notification.\+Mark\+All\+As\+Read (\begin{DoxyParamCaption}\item[{int}]{client\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Marks all notifications as read. Used in the Pages.\+Notifications\+Model page. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+Id} & The Client\+Id of the client to mark all notifications as read.\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Notification_a88e53224a081f938a4df8645f8d3c538}\label{classBetterFinds_1_1Utils_1_1Notification_a88e53224a081f938a4df8645f8d3c538}} 
+\index{BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}!MarkAsRead@{MarkAsRead}}
+\index{MarkAsRead@{MarkAsRead}!BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}}
+\doxysubsubsection{\texorpdfstring{MarkAsRead()}{MarkAsRead()}}
+{\footnotesize\ttfamily void Better\+Finds.\+Utils.\+Notification.\+Mark\+As\+Read (\begin{DoxyParamCaption}\item[{int}]{client\+Id,  }\item[{int}]{notification\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Marks a notification as read. Used in the Pages.\+Notifications\+Model page. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+Id} & The Client\+Id of the client to mark the notification as read.\\
+\hline
+{\em notification\+Id} & The Notification\+Id of the notification to mark as read.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Notification_a4d109b1dc7148b1b9f68b25eac001e19}\label{classBetterFinds_1_1Utils_1_1Notification_a4d109b1dc7148b1b9f68b25eac001e19}} 
+\index{BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}!configuration@{configuration}}
+\index{configuration@{configuration}!BetterFinds.Utils.Notification@{BetterFinds.Utils.Notification}}
+\doxysubsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily readonly IConfiguration Better\+Finds.\+Utils.\+Notification.\+configuration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IConfiguration instance. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/\+Utils/Notification.\+cs\end{DoxyCompactItemize}
