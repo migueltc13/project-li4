@@ -48,8 +48,8 @@ public class NotificationsModel(IConfiguration configuration) : PageModel
         // Get notifications
         Notifications = notificationUtils.GetNotifications(clientId);
 
-        // Get number of unread messages
-        ViewData["NUnreadMessages"] = notificationUtils.GetNUnreadMessages(clientId);
+        // Get number of unread notifications
+        ViewData["NUnreadNotifications"] = notificationUtils.GetUnreadNotificationsCount(clientId);
 
         return Page();
     }
