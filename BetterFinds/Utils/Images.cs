@@ -5,14 +5,17 @@ namespace BetterFinds.Utils
     /// <summary>
     /// Provides utility functions for handling images-related operations.
     /// </summary>
-    /// <param name="configuration">The IConfiguration instance.</param>}
     public class Images
     {
+        /// <summary>
+        /// The IConfiguration instance.
+        /// </summary>
         private readonly IConfiguration configuration;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Images"/> class.
         /// </summary>
+        /// <param name="configuration">The IConfiguration instance.</param>
         public Images(IConfiguration configuration) =>
             this.configuration = configuration;
 
