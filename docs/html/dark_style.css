@@ -12,7 +12,6 @@
 }
 
 body {
-	/* background: #282923; */
 	background: #131516;
 	background-image: none;
 	color: #D8D8D8;
@@ -53,7 +52,7 @@ a.highlighted {
 }
 
 .sm-dox a:hover {
-	background: #282923 !important;
+	background: #232526 !important;
 }
 
 .sm-dox {
@@ -84,13 +83,27 @@ a.selectItem {
 }
 
 a.SelectItem:hover {
-	background: #282923 !important;
+	background: #232526 !important;
 }
 
 #MSearchResultsWindow {
 	border: 1px solid #000000;
 	background: #32363d;
 	color: #67d8ef !important;;
+}
+
+#MSearchBox {
+    background: #22262d;
+    color: #d2d5d6 !important;
+}
+
+#MSearchBoxActive {
+    background: #22262d;
+    color: #d2d5d6 !important;
+}
+
+.MSearchBoxActive #MSearchField {
+    color: #d2d5d6 !important;
 }
 
 /*********************************************/
@@ -222,7 +235,7 @@ dl.reflist {
 
 #docs_list ul li a:hover,
 #docs_list ul li a.docs_current {
-	background: #282923;
+	background: #232526;
 }
 
 /*********************************************/
