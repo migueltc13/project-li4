@@ -1,7 +1,4 @@
-﻿/// <summary>
-/// Provides utility functions for handling currency-related operations.
-/// </summary>
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace BetterFinds.Utils
 {
