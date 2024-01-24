@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace BetterFinds.Hubs;
-
-public class NotificationHub : Hub
+namespace BetterFinds.Hubs
 {
-
+    /// <summary>
+    /// SignalR hub for notifications
+    /// </summary>
+    /// <remarks>
+    /// This hub is used to send notifications to the client and live update the UI.
+    /// </remarks>
+    public class NotificationHub : Hub {}
 }
