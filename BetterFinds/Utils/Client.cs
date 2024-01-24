@@ -6,9 +6,11 @@ namespace BetterFinds.Utils
     /// <summary>
     /// Provides utility functions for handling client-related operations.
     /// </summary>
-    /// <param name="configuration">The IConfiguration instance.</param>
     public class Client
     {
+        /// <summary>
+        /// The IConfiguration instance.
+        /// </summary>
         private readonly IConfiguration configuration;
 
         /// <summary>
@@ -26,7 +28,7 @@ namespace BetterFinds.Utils
         /// <returns>The ClientId of the currently logged in client.</returns>
         /// <example>
         /// Usage example:
-        /// <code>
+        /// <code lang="csharp">
         /// var clientUtils = new ClientUtils(configuration);
         /// int clientId = clientUtils.GetClientId(HttpContext, User);
         /// </code>
@@ -84,8 +86,12 @@ namespace BetterFinds.Utils
         /// This method is used to populate the list of clients in the Auction page. Avoiding the
         /// multiple database calls that would be required to obtain the clients information.
         /// The dictionary returned by this method contains the following keys:
-        /// <code>
-        /// { "ClientId", "FullName", "Username" }
+        /// <code lang="json">
+        /// {
+        ///     "ClientId": int,
+        ///     "FullName": string,
+        ///     "Username": string
+        /// }
         /// </code>
         /// </remarks>
         /// <returns>A list of all clients in the database.</returns>
