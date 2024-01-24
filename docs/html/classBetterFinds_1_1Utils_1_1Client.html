@@ -170,13 +170,13 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The ClientId of the currently logged in client.</dd></dl>
-<p>This method checks if the user is authenticated. </p>
+<p>Usage example: </p><div class="fragment"><div class="line">var clientUtils = <span class="keyword">new</span> ClientUtils(configuration);</div>
+<div class="line"><span class="keywordtype">int</span> clientId = clientUtils.GetClientId(HttpContext, User);</div>
+</div><!-- fragment --> <p>This method checks if the user is authenticated. </p>
 <p>If the user is authenticated, it attempts to obtain the ClientId from the session cookie. </p>
 <p>If that fails, it retrieves the ClientId from the database using the provided HttpContext and ClaimsPrincipal instances, serving as a fallback. </p>
 <p>This ensures that the ClientId is still obtained even if the session cookie is unavailable. </p>
-<div class="fragment"><div class="line">var clientUtils = <span class="keyword">new</span> ClientUtils(configuration);</div>
-<div class="line"><span class="keywordtype">int</span> clientId = clientUtils.GetClientId(HttpContext, User);</div>
-</div><!-- fragment --> 
+
 </div>
 </div>
 <a id="ad99662a8dbe85d9d60fa8e28c9ddecee"></a>

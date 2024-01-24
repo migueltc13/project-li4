@@ -67,21 +67,21 @@ The Client\+Id of the currently logged in client.
 \end{DoxyReturn}
 
 
+Usage example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var clientUtils = \textcolor{keyword}{new} ClientUtils(configuration);}
+\DoxyCodeLine{\textcolor{keywordtype}{int} clientId = clientUtils.GetClientId(HttpContext, User);}
+
+\end{DoxyCode}
+ 
+
 This method checks if the user is authenticated. 
 
 If the user is authenticated, it attempts to obtain the Client\+Id from the session cookie. 
 
 If that fails, it retrieves the Client\+Id from the database using the provided Http\+Context and Claims\+Principal instances, serving as a fallback. 
 
-This ensures that the Client\+Id is still obtained even if the session cookie is unavailable. 
-
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{var clientUtils = \textcolor{keyword}{new} ClientUtils(configuration);}
-\DoxyCodeLine{\textcolor{keywordtype}{int} clientId = clientUtils.GetClientId(HttpContext, User);}
-
-\end{DoxyCode}
- \mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Client_ad99662a8dbe85d9d60fa8e28c9ddecee}\label{classBetterFinds_1_1Utils_1_1Client_ad99662a8dbe85d9d60fa8e28c9ddecee}} 
+This ensures that the Client\+Id is still obtained even if the session cookie is unavailable. \mbox{\Hypertarget{classBetterFinds_1_1Utils_1_1Client_ad99662a8dbe85d9d60fa8e28c9ddecee}\label{classBetterFinds_1_1Utils_1_1Client_ad99662a8dbe85d9d60fa8e28c9ddecee}} 
 \index{BetterFinds.Utils.Client@{BetterFinds.Utils.Client}!GetClients@{GetClients}}
 \index{GetClients@{GetClients}!BetterFinds.Utils.Client@{BetterFinds.Utils.Client}}
 \doxysubsubsection{\texorpdfstring{GetClients()}{GetClients()}}
