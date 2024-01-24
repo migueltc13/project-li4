@@ -1,21 +1,21 @@
 /*! @mainpage BetterFinds Documentation
  *
- * Welcome to the BetterFinds project documentation. BetterFinds is an Auction house website
+ * Welcome to the **BetterFinds** project documentation. **%BetterFinds** is an Auction house website
  * implemented in ASP.NET within the Computer Labs IV environment in the lective year 2023/2024.
  *
  * @section sec_intro Introduction
- * BetterFinds is a comprehensive online platform designed to facilitate auction-related
+ * **%BetterFinds** is a comprehensive online platform designed to facilitate auction-related
  * activities. It provides a user-friendly interface for its users, making the
  * process of buying and selling items at auctions convenient and efficient.
  *
- * The main goals of BetterFinds include:
+ * The main goals of **%BetterFinds** include:
  * - Streamlining the auction process.
  * - Enhancing the user experience for both buyers and sellers.
  * - Providing a secure and transparent environment for online auctions.
  *
  * @section sec_usage Usage
- * Whether you are a buyer or a seller, BetterFinds offers a range of features to meet your
- * auction needs. Here's a brief overview of how you can use BetterFinds:
+ * Whether you are a buyer or a seller, **%BetterFinds** offers a range of features to meet your
+ * auction needs. Here's a brief overview of how you can use **%BetterFinds**:
  *
  * - **As a buyer:**
  *   - Browse through a diverse range of auction listings.
@@ -31,72 +31,72 @@
  *   - Track bidding activity with live updates and through our notifications system.
  *   - Successfully close auctions and fulfill transactions with winning bidders.
  *
- * Note that BetterFinds users can be both buyers and sellers, and to take advantage of all
+ * Note that **%BetterFinds** users can be both buyers and sellers, and to take advantage of all
  * the features it has to offer, you should create an account and log in, with most of the features
  * being exclusive to registered users.
  *
- * Explore the detailed documentation for specific information on how BetterFinds works under the hood.
+ * Explore the detailed documentation for specific information on how **%BetterFinds** works under the hood.
  *
  * @section sec_architecture Architecture
- * BetterFinds is built using the ASP.NET framework and C# programming language.
+ * **%BetterFinds** is built using the ASP.NET framework and C# programming language.
  * It uses the Razor Pages model, which is a page-based programming model that makes building web UI easier and more productive.
 
- * The BetterFinds project is organized into the following directories:
- * - **Pages:** Contains the Razor Pages that make up the BetterFinds website and their corresponding code-behind files.
+ * The **%BetterFinds** project is organized into the following directories:
+ * - **Pages:** Contains the Razor Pages that make up the **%BetterFinds** website and their corresponding code-behind files.
  * - **Utils:** Contains utility classes used throughout the project.
  * - **Services:** Contains the asynchronous services used at the start of the application.
  * - **Hub:** Contains the SignalR hub used for real-time updates.
  *
  * @section sec_run How to Run
- * To run BetterFinds, you should use the .NET Core 8.0 runtime, but it may also work with other versions of .NET Core.
+ * To run **%BetterFinds**, you should use the .NET Core 8.0 runtime, but it may also work with other versions of .NET Core.
  *
  * You will also need to have a MSSQL database server running on your machine. The database
  * connection string can be configured in the `appsettings.json` file, located in the root
- * directory of the BetterFinds project. Next you will need to configure the MSSQL server by running the T-SQL
- * scripts located in the `sql` directory of the BetterFinds project.
+ * directory of the **%BetterFinds** project. Next you will need to configure the MSSQL server by running the T-SQL
+ * scripts located in the `sql` directory of the **%BetterFinds** project.
  *
- * There are two ways to run the BetterFinds project:
+ * There are two ways to run the **%BetterFinds** project:
  *
  * ### Option 1: Run from Source
- * To run the BetterFinds project locally from the source code, follow these steps:
+ * To run the **%BetterFinds** project locally from the source code, follow these steps:
  * 1. Open a terminal or command prompt.
- * 2. Navigate to the root directory of the `BetterFinds` project.
+ * 2. Navigate to the root directory of the `%BetterFinds` project.
  * 3. Run the following command:
- *    ```
+ *    @code{.sh}
  *    dotnet run --environment Production
- *    ```
- * 4. Wait for the application to build and start. Once it's running, you can access BetterFinds
- *    by opening a web browser and navigating to the specified address (usually http://localhost:5000).
+ *    @endcode
+ * 4. Wait for the application to build and start. Once it's running, you can access **%BetterFinds**
+ *    by navigating to the specified address (usually **%http://localhost:5000**).
  *
  * ### Option 2: Run from Release
- * To run the BetterFinds project from a release build, follow these steps:
+ * To run the **%BetterFinds** project from a release build, follow these steps:
  * 1. Open a terminal or command prompt.
- * 2. Navigate to the root directory of the `BetterFinds` project.
+ * 2. Navigate to the root directory of the `%BetterFinds` project.
  * 3. Run the following commands:
- *    ```
+ *    @code{.sh}
  *    dotnet publish --configuration Release
  *    dotnet bin/Release/net8.0/BetterFinds.dll
- *    ```
- * 4. Wait for the application to build and start. Once it's running, you can access BetterFinds
- *    by opening a web browser and navigating to the specified address (usually http://localhost:5000).
+ *    @endcode
+ * 4. Wait for the application to build and start. Once it's running, you can access **%BetterFinds**
+ *    by navigating to the specified address (usually **%http://localhost:5000**).
  *
  * @section sec_testing Testing
- * BetterFinds uses the NUnit testing framework for automated unit testing. To run the tests, follow these steps:
+ * **%BetterFinds** uses the NUnit testing framework for automated unit testing. To run the tests, follow these steps:
  * 1. Open a terminal or command prompt.
  * 2. Navigate to the root directory of the `Tests` project.
- * 3. Run BetterFinds locally using one of the methods described in the previous section.
+ * 3. Run **%BetterFinds** locally using one of the methods described in the previous section.
  * 4. Specify the ``connectionString`` simliar to the one in the ``appsettings.json`` file mentioned in the previous section.
  * 5. Specify the url variable in the ``UnitTest.cs`` file located in the ``Tests`` project.
  * 6. (Optional) Specify lt_username and lt_accesskey variables in the ``UnitTest.cs`` file if you want to load tests to LambdaTest.
  * 7. (Otherwise) Uncomment the selenium localhost driver in the ``UnitTest.cs`` file.
  * 8. Run the following command:
- * ```
+ * @code{.sh}
  * dotnet test
- * ```
+ * @endcode
  * 9. Wait for the tests to run. The results will be displayed in the terminal.
  *
  * @section sec_authors Authors
- * BetterFinds was developed by the following team of students:
+ * **%BetterFinds** was developed by the following team of students:
  * - <a href="https://github.com/flaviaraujo">Flávia Araújo</a>
  * - <a href="https://github.com/migueltc13">Miguel Carvalho</a>
  */
@@ -105,28 +105,69 @@
  *
  * @brief The namespace containing all classes and components for this project.
  *
- * This namespace encapsulates all the functionality related to the BetterFinds project,
+ * This namespace encapsulates all the functionality related to the **%BetterFinds** project,
  * including modules for auction management, user authentication, and other essential features.
  *
  * @details
- * The BetterFinds namespace serves as the root namespace for the project. It organizes the
+ * The **%BetterFinds** namespace serves as the root namespace for the project. It organizes the
  * various components and classes to maintain a clean and structured codebase.
  *
  * To explore specific modules and classes, refer to the detailed documentation for each
  * corresponding namespace and class located at the `Namespaces` tab on top of this page.
  */
 
+/*! @namespace BetterFinds.Pages
+ *
+ * @brief The namespace containing the **Razor %Pages** that make up the core of this web application.
+ *
+ * This namespace encapsulates the **Razor %Pages** that make up the **%BetterFinds** website.
+ *
+ * @details
+ * The namespace containing the **Razor %Pages** that make up the core of this web application.
+ * These pages are organized into modules that represent the different sections of the website.
+ *
+ * To explore specific pages, refer to the detailed documentation for each corresponding class located in this page.
+ */
+
 /*! @namespace BetterFinds.Utils
  *
  * @brief The namespace containing utility classes for this project.
  *
- * This namespace encapsulates all the utility classes used throughout the BetterFinds project.
+ * This namespace encapsulates all the utility classes used throughout the **%BetterFinds** project.
  *
  * @details
  * The BetterFinds.Utils namespace contains utility classes that are used throughout the
- * BetterFinds project. These classes provide useful functionality organized into modules
+ * **%BetterFinds** project. These classes provide useful functionality organized into modules
  * that can be used by other components.
  *
  * To explore specific utility classes, refer to the detailed documentation for each
  * corresponding class located in this page.
  */
+
+/*! @namespace BetterFinds.Services
+ *
+ * @brief The namespace containing the asynchronous services used at the start of the application.
+ *
+ * This namespace encapsulates all the asynchronous services used at the start of the application.
+ *
+ * @details
+ * The BetterFinds.Services namespace contains the asynchronous services used at the start of the application.
+ * The main service is used to monitor auctions endings and send notifications to the users that are participating in them.
+ *
+ * To explore specific services, refer to the detailed documentation for each corresponding class located in this page.
+ */
+
+/*! @namespace BetterFinds.Hubs
+ *
+ * @brief The namespace containing the **SignalR** hub used for real-time updates.
+ *
+ * This namespace encapsulates the **SignalR** hub used for real-time updates.
+ *
+ * @details
+ * The BetterFinds.Hubs namespace contains the **SignalR** hub used for real-time updates.
+ * The main hub is used to send notifications to the users that are participating in auctions
+ * and sending live updates to multiple pages in the **%BetterFinds** web application.
+ *
+ * To explore specific hubs, refer to the detailed documentation for each corresponding class located in this page.
+ */
+
