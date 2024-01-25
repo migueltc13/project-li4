@@ -3,7 +3,7 @@
 namespace BetterFinds.Hubs
 {
     /// <summary>
-    /// **SignalR** hub for notifications and live updates.
+    /// **SignalR** hub for notifications and real-time updates.
     /// </summary>
     /// <remarks>
     /// This hub is used to send notifications to the client and live update the UI.
