@@ -84,6 +84,14 @@ public class CreateModel(IConfiguration configuration, IHubContext<NotificationH
             return Page();
         }
 
+        // Check if EndTime is parseable
+        try { DateTime.Parse(EndTime); }
+        catch (Exception)
+        {
+            ModelState.AddModelError(string.Empty, "End time must be a valid date and time.");
+            return Page();
+        }
+
         // Check if EndTime is greater than current time
         if (DateTime.Parse(EndTime) < DateTime.UtcNow)
         {
