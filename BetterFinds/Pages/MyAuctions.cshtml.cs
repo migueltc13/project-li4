@@ -7,7 +7,7 @@ namespace BetterFinds.Pages
 {
     /// <summary>
     /// Model for the MyAuctions page.
-    /// This class is decorated with the Authorize attribute to prevent unauthorized users from accessing the page.
+    /// This class is decorated with the Authorize attribute.
     /// </summary>
     [Authorize]
     public class MyAuctionsModel : PageModel
