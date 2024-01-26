@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rememberme_183',['RememberMe',['../classBetterFinds_1_1Pages_1_1LoginModel.html#a003feb90b67ddf59cdea36a5afc57873',1,'BetterFinds::Pages::LoginModel']]]
+  ['query_189',['Query',['../classBetterFinds_1_1Pages_1_1SearchModel.html#acbd641273f9ae2210e42dd0c4527ea2c',1,'BetterFinds::Pages::SearchModel']]]
 ];

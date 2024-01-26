@@ -28,24 +28,19 @@ Collaboration diagram for Better\+Finds.\+Pages.\+Search\+Model\+:\nopagebreak
 \item 
 \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel_ad30a94de6d66af97b5d289b1ecfb0d74}{Search\+Model}} (IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel_ac992dda40604e6313f73e9345a3004d9}{configuration}}, IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel_aa5fca636ec04012d7326f8b4149f3f30}{hub\+Context}})
 \begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel}{Search\+Model}} class. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_a4385da7fad88e680f1058e985ef1dd37}\label{classBetterFinds_1_1Pages_1_1SearchModel_a4385da7fad88e680f1058e985ef1dd37}} 
-IAction\+Result {\bfseries On\+Get} ()
-\end{DoxyCompactItemize}
+IAction\+Result \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel_a4385da7fad88e680f1058e985ef1dd37}{On\+Get}} ()
+\begin{DoxyCompactList}\small\item\em Shows the search results with sort and filter options. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_acbd641273f9ae2210e42dd0c4527ea2c}\label{classBetterFinds_1_1Pages_1_1SearchModel_acbd641273f9ae2210e42dd0c4527ea2c}} 
-string {\bfseries Query} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\item 
-\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_a2486c276a7a0af2cea5fd2112b4c45c1}\label{classBetterFinds_1_1Pages_1_1SearchModel_a2486c276a7a0af2cea5fd2112b4c45c1}} 
-string {\bfseries Current\+Sort} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\item 
-\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_a0513d123f0d221d51964af0baa18fe6a}\label{classBetterFinds_1_1Pages_1_1SearchModel_a0513d123f0d221d51964af0baa18fe6a}} 
-int {\bfseries Current\+Occurring} = 0\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\item 
-\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_a8a1c99f36ae784cf4267a4c291b67476}\label{classBetterFinds_1_1Pages_1_1SearchModel_a8a1c99f36ae784cf4267a4c291b67476}} 
-List$<$ Dictionary$<$ string, object $>$ $>$ {\bfseries Search\+Results} = \mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\end{DoxyCompactItemize}
+string \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel_acbd641273f9ae2210e42dd0c4527ea2c}{Query}} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The query to search for. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel_a2486c276a7a0af2cea5fd2112b4c45c1}{Current\+Sort}} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The current sort. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel_a0513d123f0d221d51964af0baa18fe6a}{Current\+Occurring}} = 0\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The current occurring. \end{DoxyCompactList}\item 
+List$<$ Dictionary$<$ string, object $>$ $>$ \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel_a8a1c99f36ae784cf4267a4c291b67476}{Search\+Results}} = \mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The list of search results. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -80,6 +75,24 @@ Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1
 \end{DoxyParams}
 
 
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_a4385da7fad88e680f1058e985ef1dd37}\label{classBetterFinds_1_1Pages_1_1SearchModel_a4385da7fad88e680f1058e985ef1dd37}} 
+\index{BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}!OnGet@{OnGet}}
+\index{OnGet@{OnGet}!BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}}
+\doxysubsubsection{\texorpdfstring{OnGet()}{OnGet()}}
+{\footnotesize\ttfamily IAction\+Result Better\+Finds.\+Pages.\+Search\+Model.\+On\+Get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Shows the search results with sort and filter options. 
+
+This page gets the search results from the database and displays them by the specified sort order through a case insensitive query string inserted by the user. The search results are filtered by the query and can be filtered to show only auctions that are currently occurring or all auctions. To see available sort and filter options, see \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_acde4b403c1fbfbfdd442188aa3cf7033}{Utils.\+Auctions.\+Get\+Auctions}}. 
+
+\begin{DoxyReturn}{Returns}
+A task that represents the action of loading the Search page.
+\end{DoxyReturn}
+
+
 \doxysubsection{Member Data Documentation}
 \mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_ac992dda40604e6313f73e9345a3004d9}\label{classBetterFinds_1_1Pages_1_1SearchModel_ac992dda40604e6313f73e9345a3004d9}} 
 \index{BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}!configuration@{configuration}}
@@ -100,6 +113,49 @@ The IConfiguration instance.
 
 
 The IHub\+Context instance. 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_a0513d123f0d221d51964af0baa18fe6a}\label{classBetterFinds_1_1Pages_1_1SearchModel_a0513d123f0d221d51964af0baa18fe6a}} 
+\index{BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}!CurrentOccurring@{CurrentOccurring}}
+\index{CurrentOccurring@{CurrentOccurring}!BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}}
+\doxysubsubsection{\texorpdfstring{CurrentOccurring}{CurrentOccurring}}
+{\footnotesize\ttfamily int Better\+Finds.\+Pages.\+Search\+Model.\+Current\+Occurring = 0\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The current occurring. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_a2486c276a7a0af2cea5fd2112b4c45c1}\label{classBetterFinds_1_1Pages_1_1SearchModel_a2486c276a7a0af2cea5fd2112b4c45c1}} 
+\index{BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}!CurrentSort@{CurrentSort}}
+\index{CurrentSort@{CurrentSort}!BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}}
+\doxysubsubsection{\texorpdfstring{CurrentSort}{CurrentSort}}
+{\footnotesize\ttfamily string Better\+Finds.\+Pages.\+Search\+Model.\+Current\+Sort = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The current sort. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_acbd641273f9ae2210e42dd0c4527ea2c}\label{classBetterFinds_1_1Pages_1_1SearchModel_acbd641273f9ae2210e42dd0c4527ea2c}} 
+\index{BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}!Query@{Query}}
+\index{Query@{Query}!BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}}
+\doxysubsubsection{\texorpdfstring{Query}{Query}}
+{\footnotesize\ttfamily string Better\+Finds.\+Pages.\+Search\+Model.\+Query = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The query to search for. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_a8a1c99f36ae784cf4267a4c291b67476}\label{classBetterFinds_1_1Pages_1_1SearchModel_a8a1c99f36ae784cf4267a4c291b67476}} 
+\index{BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}!SearchResults@{SearchResults}}
+\index{SearchResults@{SearchResults}!BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}}
+\doxysubsubsection{\texorpdfstring{SearchResults}{SearchResults}}
+{\footnotesize\ttfamily List$<$Dictionary$<$string, object$>$ $>$ Better\+Finds.\+Pages.\+Search\+Model.\+Search\+Results = \mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The list of search results. 
 
 
 
