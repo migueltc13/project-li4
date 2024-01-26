@@ -2,7 +2,7 @@
 \label{classBetterFinds_1_1Pages_1_1EditModel}\index{BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}}
 
 
-Model for the Edit auction page. This class is decorated with the Authorize attribute to prevent unauthorized users from accessing the page.  
+Model for the Edit auction page. This class is decorated with the Authorize attribute.  
 
 
 
@@ -31,7 +31,7 @@ Collaboration diagram for Better\+Finds.\+Pages.\+Edit\+Model\+:\nopagebreak
 IAction\+Result \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1EditModel_afbd8b1d8955644b0ae4f64850b93edef}{On\+Get}} ()
 \begin{DoxyCompactList}\small\item\em Shows the edit auction page. \end{DoxyCompactList}\item 
 IAction\+Result \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1EditModel_a3d79ebbae571ab3a1f69bc48ac270b5c}{On\+Post}} ()
-\begin{DoxyCompactList}\small\item\em The action that occurs when the user submits the edit auction form. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Edits the auction if all requirements are met. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Properties}
 \begin{DoxyCompactItemize}
 \item 
@@ -51,7 +51,7 @@ readonly IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1EditModel_
 
 
 \doxysubsection{Detailed Description}
-Model for the Edit auction page. This class is decorated with the Authorize attribute to prevent unauthorized users from accessing the page. 
+Model for the Edit auction page. This class is decorated with the Authorize attribute. 
 
 
 
@@ -97,7 +97,7 @@ A task that represents the action of loading the edit auction page.
 
 
 
-The action that occurs when the user submits the edit auction form. 
+Edits the auction if all requirements are met. 
 
 Checks if the auction exists and belongs to the client. If so, updates the auction details as long as they meet the validation requirements\+: 
 \begin{DoxyItemize}
@@ -106,7 +106,7 @@ Checks if the auction exists and belongs to the client. If so, updates the aucti
 \item Description must be between 1 and 2048 characters. 
 \item Images must be valid. 
 \end{DoxyItemize}If the auction details are updated successfully, redirects to the edit auction page with a success message. Otherwise, redisplays the edit auction page with an error message. \begin{DoxyReturn}{Returns}
-A task that represents the operation of submitting the edit auction form.
+A task that represents the action of editing the auction.
 \end{DoxyReturn}
 
 

@@ -1,4 +1,4 @@
 <map id="BetterFinds.Pages.EditModel" name="BetterFinds.Pages.EditModel">
-<area shape="rect" id="node1" title="Model for the Edit auction page. This class is decorated with the Authorize attribute to prevent unau..." alt="" coords="5,80,212,107"/>
+<area shape="rect" id="node1" title="Model for the Edit auction page. This class is decorated with the Authorize attribute." alt="" coords="5,80,212,107"/>
 <area shape="rect" id="node2" title=" " alt="" coords="62,5,155,32"/>
 </map>
