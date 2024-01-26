@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['program_58',['Program',['../classProgram.html',1,'']]]
+  ['myauctionsmodel_90',['MyAuctionsModel',['../classBetterFinds_1_1Pages_1_1MyAuctionsModel.html',1,'BetterFinds::Pages']]]
 ];

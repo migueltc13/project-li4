@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['notification_56',['Notification',['../classBetterFinds_1_1Utils_1_1Notification.html',1,'BetterFinds::Utils']]],
-  ['notificationhub_57',['NotificationHub',['../classBetterFinds_1_1Hubs_1_1NotificationHub.html',1,'BetterFinds::Hubs']]]
+  ['loginmodel_88',['LoginModel',['../classBetterFinds_1_1Pages_1_1LoginModel.html',1,'BetterFinds::Pages']]],
+  ['logoutmodel_89',['LogoutModel',['../classBetterFinds_1_1Pages_1_1LogoutModel.html',1,'BetterFinds::Pages']]]
 ];

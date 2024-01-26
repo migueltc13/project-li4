@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['biddersgroup_102',['BiddersGroup',['../classBetterFinds_1_1Utils_1_1Bids.html#a5ed93fb4cd2cd7e9b3cf3a9b1b035981',1,'BetterFinds::Utils::Bids']]]
+  ['auctions_151',['Auctions',['../classBetterFinds_1_1Pages_1_1IndexModel.html#a316012661f7fbcca161e1e4364b85482',1,'BetterFinds::Pages::IndexModel']]],
+  ['auctionslist_152',['AuctionsList',['../classBetterFinds_1_1Pages_1_1AccountModel.html#a3e5120054da3ca7f941f34168ded97d1',1,'BetterFinds::Pages::AccountModel']]]
 ];

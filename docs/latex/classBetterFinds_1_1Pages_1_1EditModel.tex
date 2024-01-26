@@ -1,0 +1,171 @@
+\hypertarget{classBetterFinds_1_1Pages_1_1EditModel}{}\doxysection{Better\+Finds.\+Pages.\+Edit\+Model Class Reference}
+\label{classBetterFinds_1_1Pages_1_1EditModel}\index{BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}}
+
+
+Model for the Edit auction page. This class is decorated with the Authorize attribute to prevent unauthorized users from accessing the page.  
+
+
+
+
+Inheritance diagram for Better\+Finds.\+Pages.\+Edit\+Model\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{classBetterFinds_1_1Pages_1_1EditModel__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Better\+Finds.\+Pages.\+Edit\+Model\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{classBetterFinds_1_1Pages_1_1EditModel__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBetterFinds_1_1Pages_1_1EditModel_a29193afcb841bfb59be9e4d2881c427b}{Edit\+Model}} (IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1EditModel_a22eb88a034561c4e45704bb8bbfb047b}{configuration}})
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1EditModel}{Edit\+Model}} class. \end{DoxyCompactList}\item 
+IAction\+Result \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1EditModel_afbd8b1d8955644b0ae4f64850b93edef}{On\+Get}} ()
+\begin{DoxyCompactList}\small\item\em Shows the edit auction page. \end{DoxyCompactList}\item 
+IAction\+Result \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1EditModel_a3d79ebbae571ab3a1f69bc48ac270b5c}{On\+Post}} ()
+\begin{DoxyCompactList}\small\item\em The action that occurs when the user submits the edit auction form. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1EditModel_a5139d315ce3de39109615b0ec983c891}{Title}} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The auction title. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1EditModel_a1d5f3852e68f49e1d429177835569cf8}{Description}} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The auction description. \end{DoxyCompactList}\item 
+decimal \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1EditModel_a72fbb7581f40496d1c833e50e5e81018}{Minimum\+Bid}} = 0.\+01M\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The auction minimum bid. \end{DoxyCompactList}\item 
+string? \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1EditModel_a7da0b3d735f29645b388cf84235e38da}{Images}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The auction images. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1EditModel_a22eb88a034561c4e45704bb8bbfb047b}{configuration}}
+\begin{DoxyCompactList}\small\item\em The IConfiguration instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model for the Edit auction page. This class is decorated with the Authorize attribute to prevent unauthorized users from accessing the page. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1EditModel_a29193afcb841bfb59be9e4d2881c427b}\label{classBetterFinds_1_1Pages_1_1EditModel_a29193afcb841bfb59be9e4d2881c427b}} 
+\index{BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}!EditModel@{EditModel}}
+\index{EditModel@{EditModel}!BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}}
+\doxysubsubsection{\texorpdfstring{EditModel()}{EditModel()}}
+{\footnotesize\ttfamily Better\+Finds.\+Pages.\+Edit\+Model.\+Edit\+Model (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration }\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1EditModel}{Edit\+Model}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1EditModel_afbd8b1d8955644b0ae4f64850b93edef}\label{classBetterFinds_1_1Pages_1_1EditModel_afbd8b1d8955644b0ae4f64850b93edef}} 
+\index{BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}!OnGet@{OnGet}}
+\index{OnGet@{OnGet}!BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}}
+\doxysubsubsection{\texorpdfstring{OnGet()}{OnGet()}}
+{\footnotesize\ttfamily IAction\+Result Better\+Finds.\+Pages.\+Edit\+Model.\+On\+Get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Shows the edit auction page. 
+
+Checks if the auction exists and belongs to the client. If so, displays the auction details. Otherwise, returns a 404 Not Found error page. 
+
+\begin{DoxyReturn}{Returns}
+A task that represents the action of loading the edit auction page.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1EditModel_a3d79ebbae571ab3a1f69bc48ac270b5c}\label{classBetterFinds_1_1Pages_1_1EditModel_a3d79ebbae571ab3a1f69bc48ac270b5c}} 
+\index{BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}!OnPost@{OnPost}}
+\index{OnPost@{OnPost}!BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}}
+\doxysubsubsection{\texorpdfstring{OnPost()}{OnPost()}}
+{\footnotesize\ttfamily IAction\+Result Better\+Finds.\+Pages.\+Edit\+Model.\+On\+Post (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The action that occurs when the user submits the edit auction form. 
+
+Checks if the auction exists and belongs to the client. If so, updates the auction details as long as they meet the validation requirements\+: 
+\begin{DoxyItemize}
+\item Minimum bid must be greater than 0. 
+\item Title must be between 1 and 64 characters. 
+\item Description must be between 1 and 2048 characters. 
+\item Images must be valid. 
+\end{DoxyItemize}If the auction details are updated successfully, redirects to the edit auction page with a success message. Otherwise, redisplays the edit auction page with an error message. \begin{DoxyReturn}{Returns}
+A task that represents the operation of submitting the edit auction form.
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1EditModel_a22eb88a034561c4e45704bb8bbfb047b}\label{classBetterFinds_1_1Pages_1_1EditModel_a22eb88a034561c4e45704bb8bbfb047b}} 
+\index{BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}!configuration@{configuration}}
+\index{configuration@{configuration}!BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}}
+\doxysubsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily readonly IConfiguration Better\+Finds.\+Pages.\+Edit\+Model.\+configuration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IConfiguration instance. 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1EditModel_a1d5f3852e68f49e1d429177835569cf8}\label{classBetterFinds_1_1Pages_1_1EditModel_a1d5f3852e68f49e1d429177835569cf8}} 
+\index{BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}!Description@{Description}}
+\index{Description@{Description}!BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}}
+\doxysubsubsection{\texorpdfstring{Description}{Description}}
+{\footnotesize\ttfamily string Better\+Finds.\+Pages.\+Edit\+Model.\+Description = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The auction description. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1EditModel_a7da0b3d735f29645b388cf84235e38da}\label{classBetterFinds_1_1Pages_1_1EditModel_a7da0b3d735f29645b388cf84235e38da}} 
+\index{BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}!Images@{Images}}
+\index{Images@{Images}!BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}}
+\doxysubsubsection{\texorpdfstring{Images}{Images}}
+{\footnotesize\ttfamily string? Better\+Finds.\+Pages.\+Edit\+Model.\+Images\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The auction images. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1EditModel_a72fbb7581f40496d1c833e50e5e81018}\label{classBetterFinds_1_1Pages_1_1EditModel_a72fbb7581f40496d1c833e50e5e81018}} 
+\index{BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}!MinimumBid@{MinimumBid}}
+\index{MinimumBid@{MinimumBid}!BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}}
+\doxysubsubsection{\texorpdfstring{MinimumBid}{MinimumBid}}
+{\footnotesize\ttfamily decimal Better\+Finds.\+Pages.\+Edit\+Model.\+Minimum\+Bid = 0.\+01M\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The auction minimum bid. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1EditModel_a5139d315ce3de39109615b0ec983c891}\label{classBetterFinds_1_1Pages_1_1EditModel_a5139d315ce3de39109615b0ec983c891}} 
+\index{BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}!Title@{Title}}
+\index{Title@{Title}!BetterFinds.Pages.EditModel@{BetterFinds.Pages.EditModel}}
+\doxysubsubsection{\texorpdfstring{Title}{Title}}
+{\footnotesize\ttfamily string Better\+Finds.\+Pages.\+Edit\+Model.\+Title = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The auction title. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/\+Pages/Edit.\+cshtml.\+cs\end{DoxyCompactItemize}

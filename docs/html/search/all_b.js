@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['onget_41',['OnGet',['../classBetterFinds_1_1Pages_1_1LogoutModel.html#a88cd2bc0b6ccc98b9039c62e20a76999',1,'BetterFinds::Pages::LogoutModel']]]
+  ['notification_55',['Notification',['../classBetterFinds_1_1Utils_1_1Notification.html',1,'BetterFinds.Utils.Notification'],['../classBetterFinds_1_1Utils_1_1Notification.html#a98072789e8ac5406b58447bbc5ddb158',1,'BetterFinds::Utils.Notification.Notification()']]],
+  ['notificationhub_56',['NotificationHub',['../classBetterFinds_1_1Hubs_1_1NotificationHub.html',1,'BetterFinds::Hubs']]]
 ];

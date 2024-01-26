@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['notification_91',['Notification',['../classBetterFinds_1_1Utils_1_1Notification.html#a98072789e8ac5406b58447bbc5ddb158',1,'BetterFinds::Utils::Notification']]]
+  ['markallasread_131',['MarkAllAsRead',['../classBetterFinds_1_1Utils_1_1Notification.html#a6060cb0c57aec194a8f600a1b2a9e35a',1,'BetterFinds::Utils::Notification']]],
+  ['markasread_132',['MarkAsRead',['../classBetterFinds_1_1Utils_1_1Notification.html#a88e53224a081f938a4df8645f8d3c538',1,'BetterFinds::Utils::Notification']]],
+  ['myauctionsmodel_133',['MyAuctionsModel',['../classBetterFinds_1_1Pages_1_1MyAuctionsModel.html#a677f64fd2d385ce53e059f58137d7267',1,'BetterFinds::Pages::MyAuctionsModel']]]
 ];

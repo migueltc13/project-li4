@@ -1,13 +1,6 @@
 var searchData=
 [
-  ['getauctions_23',['GetAuctions',['../classBetterFinds_1_1Utils_1_1Auctions.html#acde4b403c1fbfbfdd442188aa3cf7033',1,'BetterFinds::Utils::Auctions']]],
-  ['getbiddersfromauction_24',['GetBiddersFromAuction',['../classBetterFinds_1_1Utils_1_1Bids.html#a67cfe1a9df18096f9863d0e1ed12b4fb',1,'BetterFinds::Utils::Bids']]],
-  ['getclientbids_25',['GetClientBids',['../classBetterFinds_1_1Utils_1_1Bids.html#a20bf7736f17429dcf5c0745afde012ed',1,'BetterFinds::Utils::Bids']]],
-  ['getclientid_26',['GetClientId',['../classBetterFinds_1_1Utils_1_1Client.html#afbd10c1c200cb38e219115a121fd8043',1,'BetterFinds::Utils::Client']]],
-  ['getclients_27',['GetClients',['../classBetterFinds_1_1Utils_1_1Client.html#ad99662a8dbe85d9d60fa8e28c9ddecee',1,'BetterFinds::Utils::Client']]],
-  ['getimages_28',['GetImages',['../classBetterFinds_1_1Utils_1_1Images.html#a8530a33f7840dd400d5e9244aa313b43',1,'BetterFinds::Utils::Images']]],
-  ['getimageslist_29',['GetImagesList',['../classBetterFinds_1_1Utils_1_1Images.html#a90f9b2f5535032132fbaa4bee2aba1dc',1,'BetterFinds::Utils::Images']]],
-  ['getnotifications_30',['GetNotifications',['../classBetterFinds_1_1Utils_1_1Notification.html#a050c35fce4e345c842bb7093787f11d7',1,'BetterFinds::Utils::Notification']]],
-  ['getnotificationscount_31',['GetNotificationsCount',['../classBetterFinds_1_1Utils_1_1Notification.html#a972d3ebc6fb27747d7498b7273eff62e',1,'BetterFinds::Utils::Notification']]],
-  ['getunreadnotificationscount_32',['GetUnreadNotificationsCount',['../classBetterFinds_1_1Utils_1_1Notification.html#aeff5351f3ef295f412ab96eeca10b7f3',1,'BetterFinds::Utils::Notification']]]
+  ['formatdecimal_31',['FormatDecimal',['../classBetterFinds_1_1Utils_1_1Currency.html#aba648d72430215628fc3642b3857be96',1,'BetterFinds::Utils::Currency']]],
+  ['formatdecimalobject_32',['FormatDecimalObject',['../classBetterFinds_1_1Utils_1_1Currency.html#ae2a8addbbd392f0fc6aa945ba4cbef44',1,'BetterFinds::Utils::Currency']]],
+  ['fullname_33',['FullName',['../classBetterFinds_1_1Pages_1_1RegisterModel.html#a7c9003768377c4c1859554601161f118',1,'BetterFinds::Pages::RegisterModel']]]
 ];

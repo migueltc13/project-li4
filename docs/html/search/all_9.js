@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['markallasread_37',['MarkAllAsRead',['../classBetterFinds_1_1Utils_1_1Notification.html#a6060cb0c57aec194a8f600a1b2a9e35a',1,'BetterFinds::Utils::Notification']]],
-  ['markasread_38',['MarkAsRead',['../classBetterFinds_1_1Utils_1_1Notification.html#a88e53224a081f938a4df8645f8d3c538',1,'BetterFinds::Utils::Notification']]]
+  ['loginmodel_48',['LoginModel',['../classBetterFinds_1_1Pages_1_1LoginModel.html',1,'BetterFinds.Pages.LoginModel'],['../classBetterFinds_1_1Pages_1_1LoginModel.html#a4cb82bce211a8a581506d1c07a9311f5',1,'BetterFinds::Pages.LoginModel.LoginModel()']]],
+  ['logoutmodel_49',['LogoutModel',['../classBetterFinds_1_1Pages_1_1LogoutModel.html',1,'BetterFinds::Pages']]]
 ];

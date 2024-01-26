@@ -1,0 +1,154 @@
+\hypertarget{classBetterFinds_1_1Pages_1_1MyAuctionsModel}{}\doxysection{Better\+Finds.\+Pages.\+My\+Auctions\+Model Class Reference}
+\label{classBetterFinds_1_1Pages_1_1MyAuctionsModel}\index{BetterFinds.Pages.MyAuctionsModel@{BetterFinds.Pages.MyAuctionsModel}}
+
+
+Model for the My\+Auctions page. This class is decorated with the Authorize attribute to prevent unauthorized users from accessing the page.  
+
+
+
+
+Inheritance diagram for Better\+Finds.\+Pages.\+My\+Auctions\+Model\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classBetterFinds_1_1Pages_1_1MyAuctionsModel__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Better\+Finds.\+Pages.\+My\+Auctions\+Model\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classBetterFinds_1_1Pages_1_1MyAuctionsModel__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAuctionsModel_a677f64fd2d385ce53e059f58137d7267}{My\+Auctions\+Model}} (IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAuctionsModel_abd888ebc8acc3f5fd6dd7cf4c72cbc0a}{configuration}}, IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAuctionsModel_ab824cd94c947d58ddc26edf48b264d06}{hub\+Context}})
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAuctionsModel}{My\+Auctions\+Model}} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAuctionsModel_a596191642a3839402cfab56433aa28f0}{On\+Get}} (string sort)
+\begin{DoxyCompactList}\small\item\em Shows the client\textquotesingle{}s auctions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAuctionsModel_a96ce0b9ab5812e2d4787f8f9d6b2f595}{Current\+Sort}} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The current sort. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAuctionsModel_ae91a241c7969a50145ca229fb4ce01e4}{Current\+Occurring}} = 0\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The current occurring. \end{DoxyCompactList}\item 
+List$<$ Dictionary$<$ string, object $>$ $>$? \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAuctionsModel_a8c5fa1de97b0afc9153a6bec05faa06b}{My\+Auctions}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The list of auctions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAuctionsModel_abd888ebc8acc3f5fd6dd7cf4c72cbc0a}{configuration}}
+\begin{DoxyCompactList}\small\item\em The IConfiguration instance. \end{DoxyCompactList}\item 
+readonly IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAuctionsModel_ab824cd94c947d58ddc26edf48b264d06}{hub\+Context}}
+\begin{DoxyCompactList}\small\item\em The IHub\+Context instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model for the My\+Auctions page. This class is decorated with the Authorize attribute to prevent unauthorized users from accessing the page. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAuctionsModel_a677f64fd2d385ce53e059f58137d7267}\label{classBetterFinds_1_1Pages_1_1MyAuctionsModel_a677f64fd2d385ce53e059f58137d7267}} 
+\index{BetterFinds.Pages.MyAuctionsModel@{BetterFinds.Pages.MyAuctionsModel}!MyAuctionsModel@{MyAuctionsModel}}
+\index{MyAuctionsModel@{MyAuctionsModel}!BetterFinds.Pages.MyAuctionsModel@{BetterFinds.Pages.MyAuctionsModel}}
+\doxysubsubsection{\texorpdfstring{MyAuctionsModel()}{MyAuctionsModel()}}
+{\footnotesize\ttfamily Better\+Finds.\+Pages.\+My\+Auctions\+Model.\+My\+Auctions\+Model (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration,  }\item[{IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$}]{hub\+Context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAuctionsModel}{My\+Auctions\+Model}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+{\em hub\+Context} & The IHub\+Context instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAuctionsModel_a596191642a3839402cfab56433aa28f0}\label{classBetterFinds_1_1Pages_1_1MyAuctionsModel_a596191642a3839402cfab56433aa28f0}} 
+\index{BetterFinds.Pages.MyAuctionsModel@{BetterFinds.Pages.MyAuctionsModel}!OnGet@{OnGet}}
+\index{OnGet@{OnGet}!BetterFinds.Pages.MyAuctionsModel@{BetterFinds.Pages.MyAuctionsModel}}
+\doxysubsubsection{\texorpdfstring{OnGet()}{OnGet()}}
+{\footnotesize\ttfamily void Better\+Finds.\+Pages.\+My\+Auctions\+Model.\+On\+Get (\begin{DoxyParamCaption}\item[{string}]{sort }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Shows the client\textquotesingle{}s auctions. 
+
+This page gets the client\textquotesingle{}s auctions from the database and displays them by the specified sort order. To see available sort options, see \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_acde4b403c1fbfbfdd442188aa3cf7033}{Utils.\+Auctions.\+Get\+Auctions}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sort} & The sort order to use.\\
+\hline
+\end{DoxyParams}
+returns$>$A task that represents the action of loading the My\+Auctions page.
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAuctionsModel_abd888ebc8acc3f5fd6dd7cf4c72cbc0a}\label{classBetterFinds_1_1Pages_1_1MyAuctionsModel_abd888ebc8acc3f5fd6dd7cf4c72cbc0a}} 
+\index{BetterFinds.Pages.MyAuctionsModel@{BetterFinds.Pages.MyAuctionsModel}!configuration@{configuration}}
+\index{configuration@{configuration}!BetterFinds.Pages.MyAuctionsModel@{BetterFinds.Pages.MyAuctionsModel}}
+\doxysubsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily readonly IConfiguration Better\+Finds.\+Pages.\+My\+Auctions\+Model.\+configuration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IConfiguration instance. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAuctionsModel_ab824cd94c947d58ddc26edf48b264d06}\label{classBetterFinds_1_1Pages_1_1MyAuctionsModel_ab824cd94c947d58ddc26edf48b264d06}} 
+\index{BetterFinds.Pages.MyAuctionsModel@{BetterFinds.Pages.MyAuctionsModel}!hubContext@{hubContext}}
+\index{hubContext@{hubContext}!BetterFinds.Pages.MyAuctionsModel@{BetterFinds.Pages.MyAuctionsModel}}
+\doxysubsubsection{\texorpdfstring{hubContext}{hubContext}}
+{\footnotesize\ttfamily readonly IHub\+Context$<$\mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}}$>$ Better\+Finds.\+Pages.\+My\+Auctions\+Model.\+hub\+Context\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IHub\+Context instance. 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAuctionsModel_ae91a241c7969a50145ca229fb4ce01e4}\label{classBetterFinds_1_1Pages_1_1MyAuctionsModel_ae91a241c7969a50145ca229fb4ce01e4}} 
+\index{BetterFinds.Pages.MyAuctionsModel@{BetterFinds.Pages.MyAuctionsModel}!CurrentOccurring@{CurrentOccurring}}
+\index{CurrentOccurring@{CurrentOccurring}!BetterFinds.Pages.MyAuctionsModel@{BetterFinds.Pages.MyAuctionsModel}}
+\doxysubsubsection{\texorpdfstring{CurrentOccurring}{CurrentOccurring}}
+{\footnotesize\ttfamily int Better\+Finds.\+Pages.\+My\+Auctions\+Model.\+Current\+Occurring = 0\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The current occurring. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAuctionsModel_a96ce0b9ab5812e2d4787f8f9d6b2f595}\label{classBetterFinds_1_1Pages_1_1MyAuctionsModel_a96ce0b9ab5812e2d4787f8f9d6b2f595}} 
+\index{BetterFinds.Pages.MyAuctionsModel@{BetterFinds.Pages.MyAuctionsModel}!CurrentSort@{CurrentSort}}
+\index{CurrentSort@{CurrentSort}!BetterFinds.Pages.MyAuctionsModel@{BetterFinds.Pages.MyAuctionsModel}}
+\doxysubsubsection{\texorpdfstring{CurrentSort}{CurrentSort}}
+{\footnotesize\ttfamily string Better\+Finds.\+Pages.\+My\+Auctions\+Model.\+Current\+Sort = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The current sort. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAuctionsModel_a8c5fa1de97b0afc9153a6bec05faa06b}\label{classBetterFinds_1_1Pages_1_1MyAuctionsModel_a8c5fa1de97b0afc9153a6bec05faa06b}} 
+\index{BetterFinds.Pages.MyAuctionsModel@{BetterFinds.Pages.MyAuctionsModel}!MyAuctions@{MyAuctions}}
+\index{MyAuctions@{MyAuctions}!BetterFinds.Pages.MyAuctionsModel@{BetterFinds.Pages.MyAuctionsModel}}
+\doxysubsubsection{\texorpdfstring{MyAuctions}{MyAuctions}}
+{\footnotesize\ttfamily List$<$Dictionary$<$string, object$>$ $>$? Better\+Finds.\+Pages.\+My\+Auctions\+Model.\+My\+Auctions\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The list of auctions. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/\+Pages/My\+Auctions.\+cshtml.\+cs\end{DoxyCompactItemize}

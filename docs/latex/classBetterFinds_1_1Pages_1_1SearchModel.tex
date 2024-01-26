@@ -1,0 +1,108 @@
+\hypertarget{classBetterFinds_1_1Pages_1_1SearchModel}{}\doxysection{Better\+Finds.\+Pages.\+Search\+Model Class Reference}
+\label{classBetterFinds_1_1Pages_1_1SearchModel}\index{BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}}
+
+
+The Model for the Search page.  
+
+
+
+
+Inheritance diagram for Better\+Finds.\+Pages.\+Search\+Model\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classBetterFinds_1_1Pages_1_1SearchModel__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Better\+Finds.\+Pages.\+Search\+Model\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=220pt]{classBetterFinds_1_1Pages_1_1SearchModel__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel_ad30a94de6d66af97b5d289b1ecfb0d74}{Search\+Model}} (IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel_ac992dda40604e6313f73e9345a3004d9}{configuration}}, IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel_aa5fca636ec04012d7326f8b4149f3f30}{hub\+Context}})
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel}{Search\+Model}} class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_a4385da7fad88e680f1058e985ef1dd37}\label{classBetterFinds_1_1Pages_1_1SearchModel_a4385da7fad88e680f1058e985ef1dd37}} 
+IAction\+Result {\bfseries On\+Get} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_acbd641273f9ae2210e42dd0c4527ea2c}\label{classBetterFinds_1_1Pages_1_1SearchModel_acbd641273f9ae2210e42dd0c4527ea2c}} 
+string {\bfseries Query} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_a2486c276a7a0af2cea5fd2112b4c45c1}\label{classBetterFinds_1_1Pages_1_1SearchModel_a2486c276a7a0af2cea5fd2112b4c45c1}} 
+string {\bfseries Current\+Sort} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_a0513d123f0d221d51964af0baa18fe6a}\label{classBetterFinds_1_1Pages_1_1SearchModel_a0513d123f0d221d51964af0baa18fe6a}} 
+int {\bfseries Current\+Occurring} = 0\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\item 
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_a8a1c99f36ae784cf4267a4c291b67476}\label{classBetterFinds_1_1Pages_1_1SearchModel_a8a1c99f36ae784cf4267a4c291b67476}} 
+List$<$ Dictionary$<$ string, object $>$ $>$ {\bfseries Search\+Results} = \mbox{[}$\,$\mbox{]}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel_ac992dda40604e6313f73e9345a3004d9}{configuration}}
+\begin{DoxyCompactList}\small\item\em The IConfiguration instance. \end{DoxyCompactList}\item 
+readonly IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel_aa5fca636ec04012d7326f8b4149f3f30}{hub\+Context}}
+\begin{DoxyCompactList}\small\item\em The IHub\+Context instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The Model for the Search page. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_ad30a94de6d66af97b5d289b1ecfb0d74}\label{classBetterFinds_1_1Pages_1_1SearchModel_ad30a94de6d66af97b5d289b1ecfb0d74}} 
+\index{BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}!SearchModel@{SearchModel}}
+\index{SearchModel@{SearchModel}!BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}}
+\doxysubsubsection{\texorpdfstring{SearchModel()}{SearchModel()}}
+{\footnotesize\ttfamily Better\+Finds.\+Pages.\+Search\+Model.\+Search\+Model (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration,  }\item[{IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$}]{hub\+Context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel}{Search\+Model}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+{\em hub\+Context} & The IHub\+Context instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_ac992dda40604e6313f73e9345a3004d9}\label{classBetterFinds_1_1Pages_1_1SearchModel_ac992dda40604e6313f73e9345a3004d9}} 
+\index{BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}!configuration@{configuration}}
+\index{configuration@{configuration}!BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}}
+\doxysubsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily readonly IConfiguration Better\+Finds.\+Pages.\+Search\+Model.\+configuration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IConfiguration instance. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1SearchModel_aa5fca636ec04012d7326f8b4149f3f30}\label{classBetterFinds_1_1Pages_1_1SearchModel_aa5fca636ec04012d7326f8b4149f3f30}} 
+\index{BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}!hubContext@{hubContext}}
+\index{hubContext@{hubContext}!BetterFinds.Pages.SearchModel@{BetterFinds.Pages.SearchModel}}
+\doxysubsubsection{\texorpdfstring{hubContext}{hubContext}}
+{\footnotesize\ttfamily readonly IHub\+Context$<$\mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}}$>$ Better\+Finds.\+Pages.\+Search\+Model.\+hub\+Context\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IHub\+Context instance. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/\+Pages/Search.\+cshtml.\+cs\end{DoxyCompactItemize}

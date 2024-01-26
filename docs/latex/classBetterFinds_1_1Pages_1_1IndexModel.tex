@@ -1,0 +1,142 @@
+\hypertarget{classBetterFinds_1_1Pages_1_1IndexModel}{}\doxysection{Better\+Finds.\+Pages.\+Index\+Model Class Reference}
+\label{classBetterFinds_1_1Pages_1_1IndexModel}\index{BetterFinds.Pages.IndexModel@{BetterFinds.Pages.IndexModel}}
+
+
+Model for the Index page.  
+
+
+
+
+Inheritance diagram for Better\+Finds.\+Pages.\+Index\+Model\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classBetterFinds_1_1Pages_1_1IndexModel__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Better\+Finds.\+Pages.\+Index\+Model\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classBetterFinds_1_1Pages_1_1IndexModel__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBetterFinds_1_1Pages_1_1IndexModel_af86ffa8055573f76a9a1e4677aff7798}{Index\+Model}} (IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1IndexModel_a064432f76e8def71813c1277911e62c8}{configuration}}, IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1IndexModel_a8f7e02900267e94cb7fef1a1617a1322}{hub\+Context}})
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1IndexModel}{Index\+Model}} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1IndexModel_ab8b89221eea2161d6a72a4d27cc3f4f1}{On\+Get}} (string sort)
+\begin{DoxyCompactList}\small\item\em The action that occurs when the user visits the index page. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1IndexModel_a60e301e9659422d04b6cbfd9288e6a88}{Current\+Sort}} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The current sort order of the auctions. \end{DoxyCompactList}\item 
+List$<$ Dictionary$<$ string, object $>$ $>$? \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1IndexModel_a316012661f7fbcca161e1e4364b85482}{Auctions}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The list of auctions to display. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1IndexModel_a064432f76e8def71813c1277911e62c8}{configuration}}
+\begin{DoxyCompactList}\small\item\em The IConfiguration instance. \end{DoxyCompactList}\item 
+readonly IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1IndexModel_a8f7e02900267e94cb7fef1a1617a1322}{hub\+Context}}
+\begin{DoxyCompactList}\small\item\em The IHub\+Context instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model for the Index page. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1IndexModel_af86ffa8055573f76a9a1e4677aff7798}\label{classBetterFinds_1_1Pages_1_1IndexModel_af86ffa8055573f76a9a1e4677aff7798}} 
+\index{BetterFinds.Pages.IndexModel@{BetterFinds.Pages.IndexModel}!IndexModel@{IndexModel}}
+\index{IndexModel@{IndexModel}!BetterFinds.Pages.IndexModel@{BetterFinds.Pages.IndexModel}}
+\doxysubsubsection{\texorpdfstring{IndexModel()}{IndexModel()}}
+{\footnotesize\ttfamily Better\+Finds.\+Pages.\+Index\+Model.\+Index\+Model (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration,  }\item[{IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$}]{hub\+Context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1IndexModel}{Index\+Model}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+{\em hub\+Context} & The IHub\+Context instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1IndexModel_ab8b89221eea2161d6a72a4d27cc3f4f1}\label{classBetterFinds_1_1Pages_1_1IndexModel_ab8b89221eea2161d6a72a4d27cc3f4f1}} 
+\index{BetterFinds.Pages.IndexModel@{BetterFinds.Pages.IndexModel}!OnGet@{OnGet}}
+\index{OnGet@{OnGet}!BetterFinds.Pages.IndexModel@{BetterFinds.Pages.IndexModel}}
+\doxysubsubsection{\texorpdfstring{OnGet()}{OnGet()}}
+{\footnotesize\ttfamily void Better\+Finds.\+Pages.\+Index\+Model.\+On\+Get (\begin{DoxyParamCaption}\item[{string}]{sort }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The action that occurs when the user visits the index page. 
+
+Displays the list of auctions sorted by the default sort order. The default sort is by the auction\textquotesingle{}s end date, in ascending order. To see available sort options, see \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Auctions_acde4b403c1fbfbfdd442188aa3cf7033}{Utils.\+Auctions.\+Get\+Auctions}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sort} & The sort order to use.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1IndexModel_a064432f76e8def71813c1277911e62c8}\label{classBetterFinds_1_1Pages_1_1IndexModel_a064432f76e8def71813c1277911e62c8}} 
+\index{BetterFinds.Pages.IndexModel@{BetterFinds.Pages.IndexModel}!configuration@{configuration}}
+\index{configuration@{configuration}!BetterFinds.Pages.IndexModel@{BetterFinds.Pages.IndexModel}}
+\doxysubsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily readonly IConfiguration Better\+Finds.\+Pages.\+Index\+Model.\+configuration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IConfiguration instance. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1IndexModel_a8f7e02900267e94cb7fef1a1617a1322}\label{classBetterFinds_1_1Pages_1_1IndexModel_a8f7e02900267e94cb7fef1a1617a1322}} 
+\index{BetterFinds.Pages.IndexModel@{BetterFinds.Pages.IndexModel}!hubContext@{hubContext}}
+\index{hubContext@{hubContext}!BetterFinds.Pages.IndexModel@{BetterFinds.Pages.IndexModel}}
+\doxysubsubsection{\texorpdfstring{hubContext}{hubContext}}
+{\footnotesize\ttfamily readonly IHub\+Context$<$\mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}}$>$ Better\+Finds.\+Pages.\+Index\+Model.\+hub\+Context\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IHub\+Context instance. 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1IndexModel_a316012661f7fbcca161e1e4364b85482}\label{classBetterFinds_1_1Pages_1_1IndexModel_a316012661f7fbcca161e1e4364b85482}} 
+\index{BetterFinds.Pages.IndexModel@{BetterFinds.Pages.IndexModel}!Auctions@{Auctions}}
+\index{Auctions@{Auctions}!BetterFinds.Pages.IndexModel@{BetterFinds.Pages.IndexModel}}
+\doxysubsubsection{\texorpdfstring{Auctions}{Auctions}}
+{\footnotesize\ttfamily List$<$Dictionary$<$string, object$>$ $>$? Better\+Finds.\+Pages.\+Index\+Model.\+Auctions\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The list of auctions to display. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1IndexModel_a60e301e9659422d04b6cbfd9288e6a88}\label{classBetterFinds_1_1Pages_1_1IndexModel_a60e301e9659422d04b6cbfd9288e6a88}} 
+\index{BetterFinds.Pages.IndexModel@{BetterFinds.Pages.IndexModel}!CurrentSort@{CurrentSort}}
+\index{CurrentSort@{CurrentSort}!BetterFinds.Pages.IndexModel@{BetterFinds.Pages.IndexModel}}
+\doxysubsubsection{\texorpdfstring{CurrentSort}{CurrentSort}}
+{\footnotesize\ttfamily string Better\+Finds.\+Pages.\+Index\+Model.\+Current\+Sort = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The current sort order of the auctions. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/\+Pages/Index.\+cshtml.\+cs\end{DoxyCompactItemize}
