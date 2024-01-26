@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['serviceprovider_48',['serviceProvider',['../classBetterFinds_1_1Services_1_1AuctionBackgroundService.html#ae0c8f8b0718fc1c04d30a9538b928cce',1,'BetterFinds::Services::AuctionBackgroundService']]]
+  ['query_75',['Query',['../classBetterFinds_1_1Pages_1_1SearchModel.html#acbd641273f9ae2210e42dd0c4527ea2c',1,'BetterFinds::Pages::SearchModel']]]
 ];

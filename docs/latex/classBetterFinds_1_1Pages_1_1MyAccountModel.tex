@@ -1,0 +1,249 @@
+\hypertarget{classBetterFinds_1_1Pages_1_1MyAccountModel}{}\doxysection{Better\+Finds.\+Pages.\+My\+Account\+Model Class Reference}
+\label{classBetterFinds_1_1Pages_1_1MyAccountModel}\index{BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}}
+
+
+Model for the My\+Account page. This class is decorated with the Authorize attribute.  
+
+
+
+
+Inheritance diagram for Better\+Finds.\+Pages.\+My\+Account\+Model\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{classBetterFinds_1_1Pages_1_1MyAccountModel__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Better\+Finds.\+Pages.\+My\+Account\+Model\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{classBetterFinds_1_1Pages_1_1MyAccountModel__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAccountModel_ad0fd945599791be427442118d4d31b06}{My\+Account\+Model}} (IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAccountModel_a50a2aefdfe3c1c0ea9e4b669af0c9782}{configuration}})
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAccountModel}{My\+Account\+Model}} class. \end{DoxyCompactList}\item 
+IAction\+Result \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAccountModel_a2af0972bf14819f2cb39baf95e4990fe}{On\+Get}} ()
+\begin{DoxyCompactList}\small\item\em The action that occurs when the user visits the My\+Account page. \end{DoxyCompactList}\item 
+IAction\+Result \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAccountModel_a010d291d0ba82d7da66f7296dc000fe7}{On\+Post}} ()
+\begin{DoxyCompactList}\small\item\em Updates the user\textquotesingle{}s information if all requirements are met. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAccountModel_a11c526dca2b2c68477c83f665279f714}{Username}} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The username entered by the user. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAccountModel_a01a8f6857a1e98b44dacd683fcaa62cf}{Full\+Name}} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The full name entered by the user. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAccountModel_ad5b3fad750e528ef82c92d3c160bd6d6}{Email}} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The email entered by the user. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAccountModel_a8048a9a03d39a92d483eb0a41ee3e2ef}{Password}} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The password entered by the user. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAccountModel_a374c92d6fcbf3fc802d10e667bd63f75}{Confirm\+Password}} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The password confirmation entered by the user. \end{DoxyCompactList}\item 
+string? \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAccountModel_a2e2efd2866e7fc283d38c37a891587ac}{Profile\+Pic}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The profile picture entered by the user. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAccountModel_a0a454211047c25cc57e149a49f561971}{Opt\+Newsletter}} = false\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Whether the user wants to subscribe to the newsletter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static partial Regex \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAccountModel_a8c9c29c907c9ce1366add1226fea3865}{Regex\+Username}} ()
+\begin{DoxyCompactList}\small\item\em Returns a regex that matches a username. \end{DoxyCompactList}\item 
+static partial Regex \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAccountModel_ad1746dcde525cc1c3634158551176107}{Regex\+Full\+Name}} ()
+\begin{DoxyCompactList}\small\item\em Returns a regex that matches a full name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAccountModel_a50a2aefdfe3c1c0ea9e4b669af0c9782}{configuration}}
+\begin{DoxyCompactList}\small\item\em The IConfiguration instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model for the My\+Account page. This class is decorated with the Authorize attribute. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAccountModel_ad0fd945599791be427442118d4d31b06}\label{classBetterFinds_1_1Pages_1_1MyAccountModel_ad0fd945599791be427442118d4d31b06}} 
+\index{BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}!MyAccountModel@{MyAccountModel}}
+\index{MyAccountModel@{MyAccountModel}!BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}}
+\doxysubsubsection{\texorpdfstring{MyAccountModel()}{MyAccountModel()}}
+{\footnotesize\ttfamily Better\+Finds.\+Pages.\+My\+Account\+Model.\+My\+Account\+Model (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration }\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1MyAccountModel}{My\+Account\+Model}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAccountModel_a2af0972bf14819f2cb39baf95e4990fe}\label{classBetterFinds_1_1Pages_1_1MyAccountModel_a2af0972bf14819f2cb39baf95e4990fe}} 
+\index{BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}!OnGet@{OnGet}}
+\index{OnGet@{OnGet}!BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}}
+\doxysubsubsection{\texorpdfstring{OnGet()}{OnGet()}}
+{\footnotesize\ttfamily IAction\+Result Better\+Finds.\+Pages.\+My\+Account\+Model.\+On\+Get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The action that occurs when the user visits the My\+Account page. 
+
+Gets the user\textquotesingle{}s information from the database and displays it, as well as the number of auctions and bids they have. If the user got redirected from updating their account, displays a success message. 
+
+\begin{DoxyReturn}{Returns}
+A task that represents the action of loading the My\+Account page.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAccountModel_a010d291d0ba82d7da66f7296dc000fe7}\label{classBetterFinds_1_1Pages_1_1MyAccountModel_a010d291d0ba82d7da66f7296dc000fe7}} 
+\index{BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}!OnPost@{OnPost}}
+\index{OnPost@{OnPost}!BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}}
+\doxysubsubsection{\texorpdfstring{OnPost()}{OnPost()}}
+{\footnotesize\ttfamily IAction\+Result Better\+Finds.\+Pages.\+My\+Account\+Model.\+On\+Post (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Updates the user\textquotesingle{}s information if all requirements are met. 
+
+
+\begin{DoxyItemize}
+\item Username must be unique and between 3 and 32 alphanumeric characters.  
+\item Full name must be between 3 and 64 alphabetic characters.  
+\item Email must unique and be between 5 and 320 characters.  
+\item Password must be between 8 and 64 characters.  
+\item Password and Confirm\+Password must match.  
+\item Profile picture must be 256 characters or fewer.  
+\item Opt\+Newsletter is an optional checkbox.  
+\end{DoxyItemize}If all requirements are met, the user\textquotesingle{}s information is updated in the database and they are redirected to the My\+Account page with a success message. 
+
+\begin{DoxyReturn}{Returns}
+A task that represents the action of updating the user\textquotesingle{}s information.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAccountModel_ad1746dcde525cc1c3634158551176107}\label{classBetterFinds_1_1Pages_1_1MyAccountModel_ad1746dcde525cc1c3634158551176107}} 
+\index{BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}!RegexFullName@{RegexFullName}}
+\index{RegexFullName@{RegexFullName}!BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}}
+\doxysubsubsection{\texorpdfstring{RegexFullName()}{RegexFullName()}}
+{\footnotesize\ttfamily static partial Regex Better\+Finds.\+Pages.\+My\+Account\+Model.\+Regex\+Full\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Returns a regex that matches a full name. 
+
+A full name contains only alphabetical characters and spaces. 
+
+\begin{DoxyReturn}{Returns}
+A regex that matches a full name.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAccountModel_a8c9c29c907c9ce1366add1226fea3865}\label{classBetterFinds_1_1Pages_1_1MyAccountModel_a8c9c29c907c9ce1366add1226fea3865}} 
+\index{BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}!RegexUsername@{RegexUsername}}
+\index{RegexUsername@{RegexUsername}!BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}}
+\doxysubsubsection{\texorpdfstring{RegexUsername()}{RegexUsername()}}
+{\footnotesize\ttfamily static partial Regex Better\+Finds.\+Pages.\+My\+Account\+Model.\+Regex\+Username (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Returns a regex that matches a username. 
+
+A username contains only alphanumeric characters. 
+
+\begin{DoxyReturn}{Returns}
+A regex that matches a username.
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAccountModel_a50a2aefdfe3c1c0ea9e4b669af0c9782}\label{classBetterFinds_1_1Pages_1_1MyAccountModel_a50a2aefdfe3c1c0ea9e4b669af0c9782}} 
+\index{BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}!configuration@{configuration}}
+\index{configuration@{configuration}!BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}}
+\doxysubsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily readonly IConfiguration Better\+Finds.\+Pages.\+My\+Account\+Model.\+configuration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IConfiguration instance. 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAccountModel_a374c92d6fcbf3fc802d10e667bd63f75}\label{classBetterFinds_1_1Pages_1_1MyAccountModel_a374c92d6fcbf3fc802d10e667bd63f75}} 
+\index{BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}!ConfirmPassword@{ConfirmPassword}}
+\index{ConfirmPassword@{ConfirmPassword}!BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}}
+\doxysubsubsection{\texorpdfstring{ConfirmPassword}{ConfirmPassword}}
+{\footnotesize\ttfamily string Better\+Finds.\+Pages.\+My\+Account\+Model.\+Confirm\+Password = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The password confirmation entered by the user. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAccountModel_ad5b3fad750e528ef82c92d3c160bd6d6}\label{classBetterFinds_1_1Pages_1_1MyAccountModel_ad5b3fad750e528ef82c92d3c160bd6d6}} 
+\index{BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}!Email@{Email}}
+\index{Email@{Email}!BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}}
+\doxysubsubsection{\texorpdfstring{Email}{Email}}
+{\footnotesize\ttfamily string Better\+Finds.\+Pages.\+My\+Account\+Model.\+Email = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The email entered by the user. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAccountModel_a01a8f6857a1e98b44dacd683fcaa62cf}\label{classBetterFinds_1_1Pages_1_1MyAccountModel_a01a8f6857a1e98b44dacd683fcaa62cf}} 
+\index{BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}!FullName@{FullName}}
+\index{FullName@{FullName}!BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}}
+\doxysubsubsection{\texorpdfstring{FullName}{FullName}}
+{\footnotesize\ttfamily string Better\+Finds.\+Pages.\+My\+Account\+Model.\+Full\+Name = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The full name entered by the user. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAccountModel_a0a454211047c25cc57e149a49f561971}\label{classBetterFinds_1_1Pages_1_1MyAccountModel_a0a454211047c25cc57e149a49f561971}} 
+\index{BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}!OptNewsletter@{OptNewsletter}}
+\index{OptNewsletter@{OptNewsletter}!BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}}
+\doxysubsubsection{\texorpdfstring{OptNewsletter}{OptNewsletter}}
+{\footnotesize\ttfamily bool Better\+Finds.\+Pages.\+My\+Account\+Model.\+Opt\+Newsletter = false\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Whether the user wants to subscribe to the newsletter. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAccountModel_a8048a9a03d39a92d483eb0a41ee3e2ef}\label{classBetterFinds_1_1Pages_1_1MyAccountModel_a8048a9a03d39a92d483eb0a41ee3e2ef}} 
+\index{BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}!Password@{Password}}
+\index{Password@{Password}!BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}}
+\doxysubsubsection{\texorpdfstring{Password}{Password}}
+{\footnotesize\ttfamily string Better\+Finds.\+Pages.\+My\+Account\+Model.\+Password = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The password entered by the user. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAccountModel_a2e2efd2866e7fc283d38c37a891587ac}\label{classBetterFinds_1_1Pages_1_1MyAccountModel_a2e2efd2866e7fc283d38c37a891587ac}} 
+\index{BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}!ProfilePic@{ProfilePic}}
+\index{ProfilePic@{ProfilePic}!BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}}
+\doxysubsubsection{\texorpdfstring{ProfilePic}{ProfilePic}}
+{\footnotesize\ttfamily string? Better\+Finds.\+Pages.\+My\+Account\+Model.\+Profile\+Pic\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The profile picture entered by the user. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1MyAccountModel_a11c526dca2b2c68477c83f665279f714}\label{classBetterFinds_1_1Pages_1_1MyAccountModel_a11c526dca2b2c68477c83f665279f714}} 
+\index{BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}!Username@{Username}}
+\index{Username@{Username}!BetterFinds.Pages.MyAccountModel@{BetterFinds.Pages.MyAccountModel}}
+\doxysubsubsection{\texorpdfstring{Username}{Username}}
+{\footnotesize\ttfamily string Better\+Finds.\+Pages.\+My\+Account\+Model.\+Username = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The username entered by the user. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/\+Pages/My\+Account.\+cshtml.\+cs\end{DoxyCompactItemize}

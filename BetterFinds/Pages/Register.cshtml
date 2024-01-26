@@ -16,12 +16,6 @@
             <h1>Register</h1>
         </div>
         <div asp-validation-summary="All" class="text-danger"></div>
-        @if (ViewData["RegisterMessage"] != null)
-        {
-            <div class="text-info">
-                @ViewData["RegisterMessage"] You can now <a href="/login">login</a>.
-            </div>
-        }
         <form method="post">
             <div>
                 <div class="input-box">

@@ -1,0 +1,210 @@
+\hypertarget{classBetterFinds_1_1Pages_1_1CreateModel}{}\doxysection{Better\+Finds.\+Pages.\+Create\+Model Class Reference}
+\label{classBetterFinds_1_1Pages_1_1CreateModel}\index{BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}}
+
+
+Model for the Create page. This class is decorated with the Authorize attribute.  
+
+
+
+
+Inheritance diagram for Better\+Finds.\+Pages.\+Create\+Model\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{classBetterFinds_1_1Pages_1_1CreateModel__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Better\+Finds.\+Pages.\+Create\+Model\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{classBetterFinds_1_1Pages_1_1CreateModel__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBetterFinds_1_1Pages_1_1CreateModel_a65f371c4b52dd0472948b02cee1e5afb}{Create\+Model}} (IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1CreateModel_a3f7b348d5acdbf4c867a78ed9190c857}{configuration}}, IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1CreateModel_a610aef5c4ba90e042c43dc20d8d5f595}{hub\+Context}})
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1CreateModel}{Create\+Model}} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1CreateModel_afd59d3ff258a285f0bc7a6a01eb3097f}{On\+Get}} ()
+\begin{DoxyCompactList}\small\item\em The On\+Get action. \end{DoxyCompactList}\item 
+IAction\+Result \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1CreateModel_aef5a541f0bb6d62606779c5fe7b5239b}{On\+Post}} ()
+\begin{DoxyCompactList}\small\item\em Creates a new auction if all requirements are met. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1CreateModel_a2003bd35462fd78aee790fe09ff6a902}{Title}} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The title of the auction. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1CreateModel_a154db8ba8ba26fc363834678e28c2527}{Description}} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The description of the auction. \end{DoxyCompactList}\item 
+decimal \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1CreateModel_a6da5df29b9396a3283238381edda250c}{Price}} = 0.\+01M\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The starting price of the auction. \end{DoxyCompactList}\item 
+decimal \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1CreateModel_aaa3eac3429fb51af79d6ad127643dc8d}{Minimum\+Bid}} = 0.\+01M\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The minimum bid of the auction. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1CreateModel_a067b129c7d47ae412300638d1fb91d1f}{End\+Time}} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The end time of the auction. \end{DoxyCompactList}\item 
+string? \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1CreateModel_a90bb34bffcc111838397c31ba2bc716c}{Images}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The images of the auction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1CreateModel_a3f7b348d5acdbf4c867a78ed9190c857}{configuration}}
+\begin{DoxyCompactList}\small\item\em The IConfiguration instance. \end{DoxyCompactList}\item 
+readonly IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1CreateModel_a610aef5c4ba90e042c43dc20d8d5f595}{hub\+Context}}
+\begin{DoxyCompactList}\small\item\em The IHub\+Context instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model for the Create page. This class is decorated with the Authorize attribute. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1CreateModel_a65f371c4b52dd0472948b02cee1e5afb}\label{classBetterFinds_1_1Pages_1_1CreateModel_a65f371c4b52dd0472948b02cee1e5afb}} 
+\index{BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}!CreateModel@{CreateModel}}
+\index{CreateModel@{CreateModel}!BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}}
+\doxysubsubsection{\texorpdfstring{CreateModel()}{CreateModel()}}
+{\footnotesize\ttfamily Better\+Finds.\+Pages.\+Create\+Model.\+Create\+Model (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration,  }\item[{IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$}]{hub\+Context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1CreateModel}{Create\+Model}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+{\em hub\+Context} & The IHub\+Context instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1CreateModel_afd59d3ff258a285f0bc7a6a01eb3097f}\label{classBetterFinds_1_1Pages_1_1CreateModel_afd59d3ff258a285f0bc7a6a01eb3097f}} 
+\index{BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}!OnGet@{OnGet}}
+\index{OnGet@{OnGet}!BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}}
+\doxysubsubsection{\texorpdfstring{OnGet()}{OnGet()}}
+{\footnotesize\ttfamily void Better\+Finds.\+Pages.\+Create\+Model.\+On\+Get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The On\+Get action. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1CreateModel_aef5a541f0bb6d62606779c5fe7b5239b}\label{classBetterFinds_1_1Pages_1_1CreateModel_aef5a541f0bb6d62606779c5fe7b5239b}} 
+\index{BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}!OnPost@{OnPost}}
+\index{OnPost@{OnPost}!BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}}
+\doxysubsubsection{\texorpdfstring{OnPost()}{OnPost()}}
+{\footnotesize\ttfamily IAction\+Result Better\+Finds.\+Pages.\+Create\+Model.\+On\+Post (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new auction if all requirements are met. 
+
+
+\begin{DoxyItemize}
+\item The starting price must be greater than 0. 
+\item The minimum bid must be greater than 0. 
+\item The title must be between 1 and 64 characters long. 
+\item The description must be between 1 and 2048 characters long. 
+\item The end time must be a valid date and time and greater than the current time. 
+\item The images must be valid, if any. 
+\end{DoxyItemize}If all requirements are met, the auction is created and the user is redirected to the new auction page. Otherwise, the user stays on the page and an error message is displayed. 
+
+The users on the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1IndexModel}{Index\+Model}} or \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1SearchModel}{Search\+Model}} pages are notified that there\textquotesingle{}s updates. The auction is added to the background service to check for its ending. 
+
+\begin{DoxyReturn}{Returns}
+A task that represents the action of creating a new auction.
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1CreateModel_a3f7b348d5acdbf4c867a78ed9190c857}\label{classBetterFinds_1_1Pages_1_1CreateModel_a3f7b348d5acdbf4c867a78ed9190c857}} 
+\index{BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}!configuration@{configuration}}
+\index{configuration@{configuration}!BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}}
+\doxysubsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily readonly IConfiguration Better\+Finds.\+Pages.\+Create\+Model.\+configuration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IConfiguration instance. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1CreateModel_a610aef5c4ba90e042c43dc20d8d5f595}\label{classBetterFinds_1_1Pages_1_1CreateModel_a610aef5c4ba90e042c43dc20d8d5f595}} 
+\index{BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}!hubContext@{hubContext}}
+\index{hubContext@{hubContext}!BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}}
+\doxysubsubsection{\texorpdfstring{hubContext}{hubContext}}
+{\footnotesize\ttfamily readonly IHub\+Context$<$\mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}}$>$ Better\+Finds.\+Pages.\+Create\+Model.\+hub\+Context\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IHub\+Context instance. 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1CreateModel_a154db8ba8ba26fc363834678e28c2527}\label{classBetterFinds_1_1Pages_1_1CreateModel_a154db8ba8ba26fc363834678e28c2527}} 
+\index{BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}!Description@{Description}}
+\index{Description@{Description}!BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}}
+\doxysubsubsection{\texorpdfstring{Description}{Description}}
+{\footnotesize\ttfamily string Better\+Finds.\+Pages.\+Create\+Model.\+Description = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The description of the auction. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1CreateModel_a067b129c7d47ae412300638d1fb91d1f}\label{classBetterFinds_1_1Pages_1_1CreateModel_a067b129c7d47ae412300638d1fb91d1f}} 
+\index{BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}!EndTime@{EndTime}}
+\index{EndTime@{EndTime}!BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}}
+\doxysubsubsection{\texorpdfstring{EndTime}{EndTime}}
+{\footnotesize\ttfamily string Better\+Finds.\+Pages.\+Create\+Model.\+End\+Time = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The end time of the auction. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1CreateModel_a90bb34bffcc111838397c31ba2bc716c}\label{classBetterFinds_1_1Pages_1_1CreateModel_a90bb34bffcc111838397c31ba2bc716c}} 
+\index{BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}!Images@{Images}}
+\index{Images@{Images}!BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}}
+\doxysubsubsection{\texorpdfstring{Images}{Images}}
+{\footnotesize\ttfamily string? Better\+Finds.\+Pages.\+Create\+Model.\+Images\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The images of the auction. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1CreateModel_aaa3eac3429fb51af79d6ad127643dc8d}\label{classBetterFinds_1_1Pages_1_1CreateModel_aaa3eac3429fb51af79d6ad127643dc8d}} 
+\index{BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}!MinimumBid@{MinimumBid}}
+\index{MinimumBid@{MinimumBid}!BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}}
+\doxysubsubsection{\texorpdfstring{MinimumBid}{MinimumBid}}
+{\footnotesize\ttfamily decimal Better\+Finds.\+Pages.\+Create\+Model.\+Minimum\+Bid = 0.\+01M\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The minimum bid of the auction. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1CreateModel_a6da5df29b9396a3283238381edda250c}\label{classBetterFinds_1_1Pages_1_1CreateModel_a6da5df29b9396a3283238381edda250c}} 
+\index{BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}!Price@{Price}}
+\index{Price@{Price}!BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}}
+\doxysubsubsection{\texorpdfstring{Price}{Price}}
+{\footnotesize\ttfamily decimal Better\+Finds.\+Pages.\+Create\+Model.\+Price = 0.\+01M\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The starting price of the auction. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1CreateModel_a2003bd35462fd78aee790fe09ff6a902}\label{classBetterFinds_1_1Pages_1_1CreateModel_a2003bd35462fd78aee790fe09ff6a902}} 
+\index{BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}!Title@{Title}}
+\index{Title@{Title}!BetterFinds.Pages.CreateModel@{BetterFinds.Pages.CreateModel}}
+\doxysubsubsection{\texorpdfstring{Title}{Title}}
+{\footnotesize\ttfamily string Better\+Finds.\+Pages.\+Create\+Model.\+Title = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The title of the auction. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/\+Pages/Create.\+cshtml.\+cs\end{DoxyCompactItemize}

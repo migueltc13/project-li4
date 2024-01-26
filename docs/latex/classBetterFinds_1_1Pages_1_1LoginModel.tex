@@ -1,0 +1,158 @@
+\hypertarget{classBetterFinds_1_1Pages_1_1LoginModel}{}\doxysection{Better\+Finds.\+Pages.\+Login\+Model Class Reference}
+\label{classBetterFinds_1_1Pages_1_1LoginModel}\index{BetterFinds.Pages.LoginModel@{BetterFinds.Pages.LoginModel}}
+
+
+Model for the Login page.  
+
+
+
+
+Inheritance diagram for Better\+Finds.\+Pages.\+Login\+Model\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{classBetterFinds_1_1Pages_1_1LoginModel__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Better\+Finds.\+Pages.\+Login\+Model\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{classBetterFinds_1_1Pages_1_1LoginModel__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBetterFinds_1_1Pages_1_1LoginModel_a4cb82bce211a8a581506d1c07a9311f5}{Login\+Model}} (IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1LoginModel_a50cd17c5a167a2fcb09b714fca061d9e}{configuration}})
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1LoginModel}{Login\+Model}} class. \end{DoxyCompactList}\item 
+IAction\+Result \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1LoginModel_a2073f15a95e991b24434c0ad8cc72964}{On\+Get}} ()
+\begin{DoxyCompactList}\small\item\em The action that occurs when the user visits the login page. \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1LoginModel_a310476d8f352264eb320b9d9b239a920}{On\+Post\+Async}} ()
+\begin{DoxyCompactList}\small\item\em The action that occurs when the user submits the login form. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1LoginModel_a9b09d0671ae74806645f486e7a8a09d9}{Username}} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The username entered by the user. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1LoginModel_af3db5e87433486eb1deb395718de0466}{Password}} = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The password entered by the user. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1LoginModel_a003feb90b67ddf59cdea36a5afc57873}{Remember\+Me}} = false\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Whether the user wants to stay logged in. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1LoginModel_a50cd17c5a167a2fcb09b714fca061d9e}{configuration}}
+\begin{DoxyCompactList}\small\item\em The IConfiguration instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model for the Login page. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1LoginModel_a4cb82bce211a8a581506d1c07a9311f5}\label{classBetterFinds_1_1Pages_1_1LoginModel_a4cb82bce211a8a581506d1c07a9311f5}} 
+\index{BetterFinds.Pages.LoginModel@{BetterFinds.Pages.LoginModel}!LoginModel@{LoginModel}}
+\index{LoginModel@{LoginModel}!BetterFinds.Pages.LoginModel@{BetterFinds.Pages.LoginModel}}
+\doxysubsubsection{\texorpdfstring{LoginModel()}{LoginModel()}}
+{\footnotesize\ttfamily Better\+Finds.\+Pages.\+Login\+Model.\+Login\+Model (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration }\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1LoginModel}{Login\+Model}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1LoginModel_a2073f15a95e991b24434c0ad8cc72964}\label{classBetterFinds_1_1Pages_1_1LoginModel_a2073f15a95e991b24434c0ad8cc72964}} 
+\index{BetterFinds.Pages.LoginModel@{BetterFinds.Pages.LoginModel}!OnGet@{OnGet}}
+\index{OnGet@{OnGet}!BetterFinds.Pages.LoginModel@{BetterFinds.Pages.LoginModel}}
+\doxysubsubsection{\texorpdfstring{OnGet()}{OnGet()}}
+{\footnotesize\ttfamily IAction\+Result Better\+Finds.\+Pages.\+Login\+Model.\+On\+Get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The action that occurs when the user visits the login page. 
+
+Checks if the user is already logged in. If so, redirects to the index page. If the user got redirected from logout, displays a success logout message. If the user got redirected from register, enters the username they just created and displays a success register message. 
+
+\begin{DoxyReturn}{Returns}
+A task that represents the action of loading the login page.\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1LoginModel_a310476d8f352264eb320b9d9b239a920}\label{classBetterFinds_1_1Pages_1_1LoginModel_a310476d8f352264eb320b9d9b239a920}} 
+\index{BetterFinds.Pages.LoginModel@{BetterFinds.Pages.LoginModel}!OnPostAsync@{OnPostAsync}}
+\index{OnPostAsync@{OnPostAsync}!BetterFinds.Pages.LoginModel@{BetterFinds.Pages.LoginModel}}
+\doxysubsubsection{\texorpdfstring{OnPostAsync()}{OnPostAsync()}}
+{\footnotesize\ttfamily async Task$<$IAction\+Result$>$ Better\+Finds.\+Pages.\+Login\+Model.\+On\+Post\+Async (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The action that occurs when the user submits the login form. 
+
+Checks if the username and password are valid. If so, logs the user in and redirects to the index page. If not, displays an error message. Manually creates the cookie to store the Client\+Id in the session. 
+
+\begin{DoxyReturn}{Returns}
+A task that represents the asynchronous operation of logging in.
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1LoginModel_a50cd17c5a167a2fcb09b714fca061d9e}\label{classBetterFinds_1_1Pages_1_1LoginModel_a50cd17c5a167a2fcb09b714fca061d9e}} 
+\index{BetterFinds.Pages.LoginModel@{BetterFinds.Pages.LoginModel}!configuration@{configuration}}
+\index{configuration@{configuration}!BetterFinds.Pages.LoginModel@{BetterFinds.Pages.LoginModel}}
+\doxysubsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily readonly IConfiguration Better\+Finds.\+Pages.\+Login\+Model.\+configuration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IConfiguration instance. 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1LoginModel_af3db5e87433486eb1deb395718de0466}\label{classBetterFinds_1_1Pages_1_1LoginModel_af3db5e87433486eb1deb395718de0466}} 
+\index{BetterFinds.Pages.LoginModel@{BetterFinds.Pages.LoginModel}!Password@{Password}}
+\index{Password@{Password}!BetterFinds.Pages.LoginModel@{BetterFinds.Pages.LoginModel}}
+\doxysubsubsection{\texorpdfstring{Password}{Password}}
+{\footnotesize\ttfamily string Better\+Finds.\+Pages.\+Login\+Model.\+Password = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The password entered by the user. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1LoginModel_a003feb90b67ddf59cdea36a5afc57873}\label{classBetterFinds_1_1Pages_1_1LoginModel_a003feb90b67ddf59cdea36a5afc57873}} 
+\index{BetterFinds.Pages.LoginModel@{BetterFinds.Pages.LoginModel}!RememberMe@{RememberMe}}
+\index{RememberMe@{RememberMe}!BetterFinds.Pages.LoginModel@{BetterFinds.Pages.LoginModel}}
+\doxysubsubsection{\texorpdfstring{RememberMe}{RememberMe}}
+{\footnotesize\ttfamily bool Better\+Finds.\+Pages.\+Login\+Model.\+Remember\+Me = false\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Whether the user wants to stay logged in. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1LoginModel_a9b09d0671ae74806645f486e7a8a09d9}\label{classBetterFinds_1_1Pages_1_1LoginModel_a9b09d0671ae74806645f486e7a8a09d9}} 
+\index{BetterFinds.Pages.LoginModel@{BetterFinds.Pages.LoginModel}!Username@{Username}}
+\index{Username@{Username}!BetterFinds.Pages.LoginModel@{BetterFinds.Pages.LoginModel}}
+\doxysubsubsection{\texorpdfstring{Username}{Username}}
+{\footnotesize\ttfamily string Better\+Finds.\+Pages.\+Login\+Model.\+Username = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The username entered by the user. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/\+Pages/Login.\+cshtml.\+cs\end{DoxyCompactItemize}

@@ -2,19 +2,45 @@ using BetterFinds.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BetterFinds.Pages;
-
-[Authorize]
-public class MyBidsModel(IConfiguration configuration) : PageModel
+namespace BetterFinds.Pages
 {
-    public List<Dictionary<int, List<Dictionary<string, object>>>>? ClientBids { get; set; }
-
-    public void OnGet()
+    /// <summary>
+    /// Model for the MyBids page.
+    /// This class is decorated with the Authorize attribute.
+    /// </summary>
+    [Authorize]
+    public class MyBidsModel : PageModel
     {
-        Client clientUtils = new(configuration);
-        int clientId = clientUtils.GetClientId(HttpContext, User);
+        /// <summary>
+        /// The IConfiguration instance.
+        /// </summary>
+        private readonly IConfiguration configuration;
 
-        Bids bidsUtilds = new(configuration);
-        ClientBids = bidsUtilds.GetClientBids(clientId);
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MyBidsModel"/> class.
+        /// </summary>
+        /// <param name="configuration">The IConfiguration instance.</param>
+        public MyBidsModel(IConfiguration configuration) =>
+            this.configuration = configuration;
+
+        /// <summary>
+        /// The list of client bids.
+        /// </summary>
+        public List<Dictionary<int, List<Dictionary<string, object>>>>? ClientBids { get; set; }
+
+        /// <summary>
+        /// Shows the client's bids.
+        /// </summary>
+        /// <remarks>
+        /// This page gets the client's bids from the database and displays them.
+        /// </remarks>
+        public void OnGet()
+        {
+            Client clientUtils = new(configuration);
+            int clientId = clientUtils.GetClientId(HttpContext, User);
+
+            Bids bidsUtilds = new(configuration);
+            ClientBids = bidsUtilds.GetClientBids(clientId);
+        }
     }
 }
