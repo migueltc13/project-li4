@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['betterfinds_20documentation_174',['BetterFinds Documentation',['../index.html',1,'']]]
+  ['betterfinds_20documentation_186',['BetterFinds Documentation',['../index.html',1,'']]]
 ];

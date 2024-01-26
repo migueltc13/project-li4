@@ -1,0 +1,125 @@
+\hypertarget{classBetterFinds_1_1Pages_1_1NotificationsModel}{}\doxysection{Better\+Finds.\+Pages.\+Notifications\+Model Class Reference}
+\label{classBetterFinds_1_1Pages_1_1NotificationsModel}\index{BetterFinds.Pages.NotificationsModel@{BetterFinds.Pages.NotificationsModel}}
+
+
+Model for the Notifications page. This class is decorated with the Authorize attribute.  
+
+
+
+
+Inheritance diagram for Better\+Finds.\+Pages.\+Notifications\+Model\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{classBetterFinds_1_1Pages_1_1NotificationsModel__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Better\+Finds.\+Pages.\+Notifications\+Model\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{classBetterFinds_1_1Pages_1_1NotificationsModel__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBetterFinds_1_1Pages_1_1NotificationsModel_a4e07d4c4c999af07950e73b3adf65e08}{Notifications\+Model}} (IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1NotificationsModel_ab69c46604163fdf5914553f25fe10dfe}{configuration}})
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1NotificationsModel}{Notifications\+Model}} class. \end{DoxyCompactList}\item 
+IAction\+Result \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1NotificationsModel_a5e3a495970edba2b9fe599b13eac1c1c}{On\+Get}} ()
+\begin{DoxyCompactList}\small\item\em Shows the client\textquotesingle{}s notifications. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ Dictionary$<$ string, object $>$ $>$ \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1NotificationsModel_afc83590edc39dd6ecfe2fdbbe5e927d8}{Notifications}} = \mbox{[}$\,$\mbox{]}
+\begin{DoxyCompactList}\small\item\em The list of notifications. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1NotificationsModel_ab0219c4d073bd1da8fcb209163a401a8}{Show\+All}} = false
+\begin{DoxyCompactList}\small\item\em Whether to show all notifications or only unread ones. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1NotificationsModel_ab69c46604163fdf5914553f25fe10dfe}{configuration}}
+\begin{DoxyCompactList}\small\item\em The IConfiguration instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model for the Notifications page. This class is decorated with the Authorize attribute. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1NotificationsModel_a4e07d4c4c999af07950e73b3adf65e08}\label{classBetterFinds_1_1Pages_1_1NotificationsModel_a4e07d4c4c999af07950e73b3adf65e08}} 
+\index{BetterFinds.Pages.NotificationsModel@{BetterFinds.Pages.NotificationsModel}!NotificationsModel@{NotificationsModel}}
+\index{NotificationsModel@{NotificationsModel}!BetterFinds.Pages.NotificationsModel@{BetterFinds.Pages.NotificationsModel}}
+\doxysubsubsection{\texorpdfstring{NotificationsModel()}{NotificationsModel()}}
+{\footnotesize\ttfamily Better\+Finds.\+Pages.\+Notifications\+Model.\+Notifications\+Model (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration }\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1NotificationsModel}{Notifications\+Model}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1NotificationsModel_a5e3a495970edba2b9fe599b13eac1c1c}\label{classBetterFinds_1_1Pages_1_1NotificationsModel_a5e3a495970edba2b9fe599b13eac1c1c}} 
+\index{BetterFinds.Pages.NotificationsModel@{BetterFinds.Pages.NotificationsModel}!OnGet@{OnGet}}
+\index{OnGet@{OnGet}!BetterFinds.Pages.NotificationsModel@{BetterFinds.Pages.NotificationsModel}}
+\doxysubsubsection{\texorpdfstring{OnGet()}{OnGet()}}
+{\footnotesize\ttfamily IAction\+Result Better\+Finds.\+Pages.\+Notifications\+Model.\+On\+Get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Shows the client\textquotesingle{}s notifications. 
+
+This page gets the client\textquotesingle{}s notifications from the database and displays them. The notifications can be filtered to show only unread notifications or all notifications, and can be marked as read individually or all at once. To see available filter options, see Utils.\+Notifications.\+Get\+Notifications. The notifications can be sorted by a specified sort order. To see available sort options, see Utils.\+Notifications.\+Get\+Notifications. 
+
+\begin{DoxyReturn}{Returns}
+A task that represents the action of loading the Notifications page.
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1NotificationsModel_ab69c46604163fdf5914553f25fe10dfe}\label{classBetterFinds_1_1Pages_1_1NotificationsModel_ab69c46604163fdf5914553f25fe10dfe}} 
+\index{BetterFinds.Pages.NotificationsModel@{BetterFinds.Pages.NotificationsModel}!configuration@{configuration}}
+\index{configuration@{configuration}!BetterFinds.Pages.NotificationsModel@{BetterFinds.Pages.NotificationsModel}}
+\doxysubsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily readonly IConfiguration Better\+Finds.\+Pages.\+Notifications\+Model.\+configuration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IConfiguration instance. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1NotificationsModel_afc83590edc39dd6ecfe2fdbbe5e927d8}\label{classBetterFinds_1_1Pages_1_1NotificationsModel_afc83590edc39dd6ecfe2fdbbe5e927d8}} 
+\index{BetterFinds.Pages.NotificationsModel@{BetterFinds.Pages.NotificationsModel}!Notifications@{Notifications}}
+\index{Notifications@{Notifications}!BetterFinds.Pages.NotificationsModel@{BetterFinds.Pages.NotificationsModel}}
+\doxysubsubsection{\texorpdfstring{Notifications}{Notifications}}
+{\footnotesize\ttfamily List$<$Dictionary$<$string, object$>$ $>$ Better\+Finds.\+Pages.\+Notifications\+Model.\+Notifications = \mbox{[}$\,$\mbox{]}}
+
+
+
+The list of notifications. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1NotificationsModel_ab0219c4d073bd1da8fcb209163a401a8}\label{classBetterFinds_1_1Pages_1_1NotificationsModel_ab0219c4d073bd1da8fcb209163a401a8}} 
+\index{BetterFinds.Pages.NotificationsModel@{BetterFinds.Pages.NotificationsModel}!ShowAll@{ShowAll}}
+\index{ShowAll@{ShowAll}!BetterFinds.Pages.NotificationsModel@{BetterFinds.Pages.NotificationsModel}}
+\doxysubsubsection{\texorpdfstring{ShowAll}{ShowAll}}
+{\footnotesize\ttfamily bool Better\+Finds.\+Pages.\+Notifications\+Model.\+Show\+All = false}
+
+
+
+Whether to show all notifications or only unread ones. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/\+Pages/Notifications.\+cshtml.\+cs\end{DoxyCompactItemize}
