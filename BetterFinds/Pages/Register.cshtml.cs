@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 namespace BetterFinds.Pages
 {
     /// <summary>
-    /// Model for the register page.
+    /// Model for the Register page.
     /// </summary>
     public partial class RegisterModel : PageModel
     {
