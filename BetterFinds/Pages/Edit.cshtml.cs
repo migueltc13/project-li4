@@ -7,7 +7,7 @@ namespace BetterFinds.Pages
 {
     /// <summary>
     /// Model for the Edit auction page.
-    /// This class is decorated with the Authorize attribute to prevent unauthorized users from accessing the page.
+    /// This class is decorated with the Authorize attribute.
     /// </summary>
     [Authorize]
     public class EditModel : PageModel
@@ -122,20 +122,20 @@ namespace BetterFinds.Pages
         }
 
         /// <summary>
-        /// The action that occurs when the user submits the edit auction form.
+        /// Edits the auction if all requirements are met.
         /// </summary>
         /// <remarks>
         /// Checks if the auction exists and belongs to the client.
         /// If so, updates the auction details as long as they meet the validation requirements:
         /// <list type="bullet">
-        /// <item> Minimum bid must be greater than 0.</item>
-        /// <item> Title must be between 1 and 64 characters.</item>
-        /// <item> Description must be between 1 and 2048 characters.</item>
-        /// <item> Images must be valid.</item>
+        ///     <item> Minimum bid must be greater than 0.</item>
+        ///     <item> Title must be between 1 and 64 characters.</item>
+        ///     <item> Description must be between 1 and 2048 characters.</item>
+        ///     <item> Images must be valid.</item>
         /// </list>
         /// If the auction details are updated successfully, redirects to the edit auction page with a success message.
         /// Otherwise, redisplays the edit auction page with an error message.
-        /// <returns>A task that represents the operation of submitting the edit auction form.</returns>
+        /// <returns>A task that represents the action of editing the auction.</returns>
         public IActionResult OnPost()
         {
             // get auction id from query string
