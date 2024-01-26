@@ -30,15 +30,38 @@ namespace BetterFinds.Pages
             this.configuration = configuration;
             this.hubContext = hubContext;
         }
-      
+
+        /// <summary>
+        /// The query to search for.
+        /// </summary>
         public string Query { get; set; } = "";
 
+        /// <summary>
+        /// The current sort.
+        /// </summary>
         public string CurrentSort { get; set; } = "";
 
+        /// <summary>
+        /// The current occurring.
+        /// </summary>
         public int CurrentOccurring { get; set; } = 0;
 
+        /// <summary>
+        /// The list of search results.
+        /// </summary>
         public List<Dictionary<string, object>> SearchResults { get; set; } = [];
 
+        /// <summary>
+        /// Shows the search results with sort and filter options.
+        /// </summary>
+        /// <remarks>
+        /// This page gets the search results from the database and displays them by
+        /// the specified sort order through a case insensitive query string inserted by the user.
+        /// The search results are filtered by the query and can be filtered to 
+        /// show only auctions that are currently occurring or all auctions.
+        /// To see available sort and filter options, see <see cref="Utils.Auctions.GetAuctions"/>.
+        /// </remarks>
+        /// <returns>A task that represents the action of loading the Search page.</returns>
         public IActionResult OnGet()
         {
             // get the query from the url query string
