@@ -1,13 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace BetterFinds.Pages
 {
     /// <summary>
-    /// Model for the logout page.
+    /// Model for the Logout page.
+    /// This class is decorated with the Authorize attribute.
     /// </summary>
+    [Authorize]
     public class LogoutModel : PageModel
     {
         /// <summary>
