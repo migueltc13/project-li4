@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.SignalR;
 namespace BetterFinds.Pages
 {
     /// <summary>
-    /// Model for the MyAuctions page.
+    /// Model for the **My Auctions** page.
     /// This class is decorated with the Authorize attribute.
     /// </summary>
     [Authorize]

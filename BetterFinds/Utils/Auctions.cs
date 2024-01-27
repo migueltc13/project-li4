@@ -5,7 +5,7 @@ using Microsoft.Data.SqlClient;
 namespace BetterFinds.Utils
 {
     /// <summary>
-    /// Provides utility functions for handling auctions-related operations.
+    /// Provides utility functions for handling **auctions-related** operations.
     /// </summary>
     public class Auctions
     {

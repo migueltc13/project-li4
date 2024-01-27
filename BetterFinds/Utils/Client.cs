@@ -4,7 +4,7 @@ using System.Security.Claims;
 namespace BetterFinds.Utils
 {
     /// <summary>
-    /// Provides utility functions for handling client-related operations.
+    /// Provides utility functions for handling **client-related** operations.
     /// </summary>
     public class Client
     {

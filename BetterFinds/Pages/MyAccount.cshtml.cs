@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 namespace BetterFinds.Pages
 {
     /// <summary>
-    /// Model for the MyAccount page.
+    /// Model for the **My Account** page.
     /// This class is decorated with the Authorize attribute.
     /// </summary>
     [Authorize]

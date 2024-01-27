@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.SignalR;
 namespace BetterFinds.Pages
 {
     /// <summary>
-    /// The Model for the Search page.
+    /// Model for the **Search** page.
     /// </summary>
     public class SearchModel : PageModel
     {
@@ -37,12 +37,12 @@ namespace BetterFinds.Pages
         public string Query { get; set; } = "";
 
         /// <summary>
-        /// The current sort.
+        /// The current sort option.
         /// </summary>
         public string CurrentSort { get; set; } = "";
 
         /// <summary>
-        /// The current occurring.
+        /// The current occurring option.
         /// </summary>
         public int CurrentOccurring { get; set; } = 0;
 

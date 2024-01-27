@@ -8,7 +8,7 @@ using System.Security.Claims;
 namespace BetterFinds.Pages
 {
     /// <summary>
-    /// Model for the Login page.
+    /// Model for the **Login** page.
     /// </summary>
     public class LoginModel : PageModel
     {

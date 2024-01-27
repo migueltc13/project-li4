@@ -8,7 +8,7 @@ using Microsoft.Data.SqlClient;
 namespace BetterFinds.Pages
 {
     /// <summary>
-    /// Model for the Create page.
+    /// Model for the **Create** page.
     /// This class is decorated with the Authorize attribute.
     /// </summary>
     [Authorize]
@@ -88,12 +88,13 @@ namespace BetterFinds.Pages
         ///     <item>The title must be between 1 and 64 characters long.</item>
         ///     <item>The description must be between 1 and 2048 characters long.</item>
         ///     <item>The end time must be a valid date and time and greater than the current time.</item>
-        ///     <item>The images must be valid, if any.</item>
+        ///     <item>The images must be valid, if any. See <see cref="Utils.Images.IsValidImages"/>.</item>
         /// </list>
         /// If all requirements are met, the auction is created and the user is redirected to the new auction page.
         /// Otherwise, the user stays on the page and an error message is displayed.
         /// <para/>
         /// The users on the <see cref="IndexModel"/> or <see cref="SearchModel"/> pages are notified that there's updates.
+        /// <para/>
         /// The auction is added to the background service to check for its ending.
         /// </remarks>
         /// <returns>A task that represents the action of creating a new auction.</returns>

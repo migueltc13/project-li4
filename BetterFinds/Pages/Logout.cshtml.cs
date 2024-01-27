@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace BetterFinds.Pages
 {
     /// <summary>
-    /// Model for the Logout page.
+    /// Model for the **Logout** page.
     /// This class is decorated with the Authorize attribute.
     /// </summary>
     [Authorize]

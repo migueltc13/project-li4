@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace BetterFinds.Pages
 {
     /// <summary>
-    /// Model for the MyBids page.
+    /// Model for the **My Bids** page.
     /// This class is decorated with the Authorize attribute.
     /// </summary>
     [Authorize]

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 namespace BetterFinds.Pages
 {
     /// <summary>
-    /// Model for the Index page.
+    /// Model for the **Index** page.
     /// </summary>
     public class IndexModel : PageModel
     {

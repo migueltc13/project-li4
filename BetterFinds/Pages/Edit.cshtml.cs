@@ -6,7 +6,7 @@ using Microsoft.Data.SqlClient;
 namespace BetterFinds.Pages
 {
     /// <summary>
-    /// Model for the Edit auction page.
+    /// Model for the **Edit Auction** page.
     /// This class is decorated with the Authorize attribute.
     /// </summary>
     [Authorize]
@@ -54,7 +54,7 @@ namespace BetterFinds.Pages
         /// <remarks>
         /// Checks if the auction exists and belongs to the client.
         /// If so, displays the auction details.
-        /// Otherwise, returns a 404 Not Found error page.
+        /// Otherwise, redirects to the not found error (404) page.
         /// </remarks>
         /// <returns>A task that represents the action of loading the edit auction page.</returns>
         public IActionResult OnGet()

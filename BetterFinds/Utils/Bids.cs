@@ -3,7 +3,7 @@
 namespace BetterFinds.Utils
 {
     /// <summary>
-    /// Provides utility functions for handling bids-related operations.
+    /// Provides utility functions for handling **bids-related** operations.
     /// </summary>
     public class Bids
     {

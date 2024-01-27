@@ -8,7 +8,7 @@ namespace BetterFinds.Pages
 {
 
     /// <summary>
-    /// Model for the Account page.
+    /// Model for the **Account** page.
     /// </summary>
     public class AccountModel : PageModel
     {
@@ -34,7 +34,7 @@ namespace BetterFinds.Pages
         }
 
         /// <summary>
-        /// The list of auctions to display.
+        /// The list of auctions of the account to display.
         /// </summary>
         public List<Dictionary<string, object>>? AuctionsList { get; set; }
 
@@ -43,7 +43,9 @@ namespace BetterFinds.Pages
         /// </summary>
         /// <remarks>
         /// Checks if the user is the owner of the account, if so add edit option by redirecting to the current user my account page.
-        /// Checks if the client exists, if not, redirects to the error page.
+        /// <para/>
+        /// Checks if the client exists, if not, redirects to the not found error (404) page.
+        /// <para/>
         /// Displays the following information about the client:
         /// <list type="bullet">
         ///     <item>Personal Information</item>

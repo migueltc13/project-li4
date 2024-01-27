@@ -3,7 +3,7 @@
 namespace BetterFinds.Utils
 {
     /// <summary>
-    /// Provides utility functions for handling notifications-related operations.
+    /// Provides utility functions for handling **notifications-related** operations.
     /// </summary>
     public class Notification
     {
