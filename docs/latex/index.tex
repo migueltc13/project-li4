@@ -1,4 +1,4 @@
-Welcome to the {\bfseries{\mbox{\hyperlink{namespaceBetterFinds}{Better\+Finds}}}} project documentation. {\bfseries{Better\+Finds}} is an Auction house website implemented in ASP.\+NET within the Computer Labs IV environment in the lective year 2023/2024.\hypertarget{index_sec_intro}{}\doxysection{Introduction}\label{index_sec_intro}
+Welcome to the {\bfseries{\mbox{\hyperlink{namespaceBetterFinds}{Better\+Finds}}}} project documentation. {\bfseries{Better\+Finds}} is an Auction house website implemented in {\bfseries{ASP.\+NET}} within the {\bfseries{Computer Labs IV}} environment in the lective year 2023/2024.\hypertarget{index_sec_intro}{}\doxysection{Introduction}\label{index_sec_intro}
 {\bfseries{Better\+Finds}} is a comprehensive online platform designed to facilitate auction-\/related activities. It provides a user-\/friendly interface for its users, making the process of buying and selling items at auctions convenient and efficient.
 
 The main goals of {\bfseries{Better\+Finds}} include\+:
@@ -31,19 +31,21 @@ Whether you are a buyer or a seller, {\bfseries{Better\+Finds}} offers a range o
 
 Note that {\bfseries{Better\+Finds}} users can be both buyers and sellers, and to take advantage of all the features it has to offer, you should create an account and log in, with most of the features being exclusive to registered users.
 
-Explore the detailed documentation for specific information on how {\bfseries{Better\+Finds}} works under the hood.\hypertarget{index_sec_architecture}{}\doxysection{Architecture}\label{index_sec_architecture}
-{\bfseries{Better\+Finds}} is built using the ASP.\+NET framework and C\# programming language. It uses the Razor Pages model, which is a page-\/based programming model that makes building web UI easier and more productive.
+Explore the detailed documentation for specific information on how {\bfseries{\mbox{\hyperlink{namespaceBetterFinds}{Better\+Finds}}}} works under the hood.\hypertarget{index_sec_architecture}{}\doxysection{Architecture}\label{index_sec_architecture}
+{\bfseries{Better\+Finds}} is built using the {\bfseries{ASP.\+NET}} framework and {\bfseries{C\#}} programming language.
+
+It uses the {\bfseries{Razor Pages}} model, which is a page-\/based programming model that makes building web UI easier and more productive.
 
 The {\bfseries{Better\+Finds}} project is organized into the following directories\+:
 \begin{DoxyItemize}
-\item {\bfseries{Pages\+:}} Contains the Razor Pages that make up the {\bfseries{Better\+Finds}} website and their corresponding code-\/behind files.
+\item {\bfseries{Pages\+:}} Contains the {\bfseries{Razor Pages}} that make up the {\bfseries{Better\+Finds}} website and their corresponding code-\/behind files.
 \item {\bfseries{Utils\+:}} Contains utility classes used throughout the project.
 \item {\bfseries{Services\+:}} Contains the asynchronous services used at the start of the application.
-\item {\bfseries{Hub\+:}} Contains the SignalR hub used for real-\/time updates.
+\item {\bfseries{Hub\+:}} Contains the {\bfseries{SignalR}} hub used for real-\/time updates.
 \end{DoxyItemize}\hypertarget{index_sec_run}{}\doxysection{How to Run}\label{index_sec_run}
-To run {\bfseries{Better\+Finds}}, you should use the .NET Core 8.\+0 runtime, but it may also work with other versions of .NET Core.
+To run {\bfseries{Better\+Finds}}, you should use the $\ast$$\ast$.NET Core 8.\+0 Runtime$\ast$$\ast$, but it may also work with other versions of $\ast$$\ast$.NET Core$\ast$$\ast$.
 
-You will also need to have a MSSQL database server running on your machine. The database connection string can be configured in the {\ttfamily appsettings.\+json} file, located in the root directory of the {\bfseries{Better\+Finds}} project. Next you will need to configure the MSSQL server by running the T-\/\+SQL scripts located in the {\ttfamily sql} directory of the {\bfseries{Better\+Finds}} project.
+You will also need to have a {\bfseries{MSSQL}} database server running on your machine. The database connection string can be configured in the {\ttfamily appsettings.\+json} file, located in the root directory of the {\bfseries{Better\+Finds}} project. Next you will need to configure the {\bfseries{MSSQL}} server by running the {\bfseries{T-\/\+SQL}} scripts located in the {\ttfamily sql} directory of the {\bfseries{Better\+Finds}} project.
 
 There are two ways to run the {\bfseries{Better\+Finds}} project\+:\hypertarget{index_autotoc_md0}{}\doxysubsubsection{Option 1\+: Run from Source}\label{index_autotoc_md0}
 To run the {\bfseries{Better\+Finds}} project locally from the source code, follow these steps\+:
@@ -71,15 +73,15 @@ To run the {\bfseries{Better\+Finds}} project from a release build, follow these
 
 \item Wait for the application to build and start. Once it\textquotesingle{}s running, you can access {\bfseries{Better\+Finds}} by navigating to the specified address (usually {\bfseries{http\+://localhost\+:5000}}).
 \end{DoxyEnumerate}\hypertarget{index_sec_testing}{}\doxysection{Testing}\label{index_sec_testing}
-{\bfseries{Better\+Finds}} uses the NUnit testing framework for automated unit testing. To run the tests, follow these steps\+:
+{\bfseries{Better\+Finds}} uses the {\bfseries{NUnit}} testing framework for automated unit testing. To run the tests, follow these steps\+:
 \begin{DoxyEnumerate}
 \item Open a terminal or command prompt.
 \item Navigate to the root directory of the {\ttfamily Tests} project.
 \item Run {\bfseries{Better\+Finds}} locally using one of the methods described in the previous section.
-\item Specify the {\ttfamily connection\+String} simliar to the one in the {\ttfamily appsettings.\+json} file mentioned in the previous section.
+\item Specify the {\ttfamily connection\+String} on the {\ttfamily Utils/\+Sql.\+cs} file, similar to the one in the {\ttfamily appsettings.\+json} file mentioned previously.
 \item Specify the url variable in the {\ttfamily Unit\+Test.\+cs} file located in the {\ttfamily Tests} project.
-\item (Optional) Specify lt\+\_\+username and lt\+\_\+accesskey variables in the {\ttfamily Unit\+Test.\+cs} file if you want to load tests to Lambda\+Test.
-\item (Otherwise) Uncomment the selenium localhost driver in the {\ttfamily Unit\+Test.\+cs} file.
+\item (Optional) Specify {\ttfamily lt\+\_\+username} and {\ttfamily lt\+\_\+accesskey} variables in the {\ttfamily Unit\+Test.\+cs} file if you want to load tests to {\bfseries{Lambda\+Test}}.
+\item (Otherwise) Uncomment the {\bfseries{Selenium}} localhost driver in the {\ttfamily Unit\+Test.\+cs} file.
 \item Run the following command\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{dotnet test}
