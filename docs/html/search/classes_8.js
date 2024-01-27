@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['program_108',['Program',['../classProgram.html',1,'']]]
+  ['program_109',['Program',['../classBetterFinds_1_1Program.html',1,'BetterFinds']]]
 ];

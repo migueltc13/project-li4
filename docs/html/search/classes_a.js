@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['searchmodel_110',['SearchModel',['../classBetterFinds_1_1Pages_1_1SearchModel.html',1,'BetterFinds::Pages']]]
+  ['searchmodel_111',['SearchModel',['../classBetterFinds_1_1Pages_1_1SearchModel.html',1,'BetterFinds::Pages']]]
 ];

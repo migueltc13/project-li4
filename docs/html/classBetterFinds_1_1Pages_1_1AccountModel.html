@@ -78,7 +78,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Model for the Account page.  
+<p>Model for the <b>Account</b> page.  
  <a href="classBetterFinds_1_1Pages_1_1AccountModel.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for BetterFinds.Pages.AccountModel:</div>
@@ -111,7 +111,7 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:a3e5120054da3ca7f941f34168ded97d1"><td class="memItemLeft" align="right" valign="top">List&lt; Dictionary&lt; string, object &gt; &gt;?&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBetterFinds_1_1Pages_1_1AccountModel.html#a3e5120054da3ca7f941f34168ded97d1">AuctionsList</a><code> [get, set]</code></td></tr>
-<tr class="memdesc:a3e5120054da3ca7f941f34168ded97d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The list of auctions to display.  <a href="classBetterFinds_1_1Pages_1_1AccountModel.html#a3e5120054da3ca7f941f34168ded97d1">More...</a><br /></td></tr>
+<tr class="memdesc:a3e5120054da3ca7f941f34168ded97d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The list of auctions of the account to display.  <a href="classBetterFinds_1_1Pages_1_1AccountModel.html#a3e5120054da3ca7f941f34168ded97d1">More...</a><br /></td></tr>
 <tr class="separator:a3e5120054da3ca7f941f34168ded97d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
@@ -124,7 +124,7 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a42fe44dc2092490e9c54baa19813355d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Model for the Account page. </p>
+<div class="textblock"><p>Model for the <b>Account</b> page. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2004c0b144e66416028f97c6ca97dc49"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2004c0b144e66416028f97c6ca97dc49">&#9670;&nbsp;</a></span>AccountModel()</h2>
@@ -196,7 +196,9 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>The action that occurs when the user visits the account page. </p>
-<p>Checks if the user is the owner of the account, if so add edit option by redirecting to the current user my account page. Checks if the client exists, if not, redirects to the error page. Displays the following information about the client: </p><ul>
+<p>Checks if the user is the owner of the account, if so add edit option by redirecting to the current user my account page. </p>
+<p>Checks if the client exists, if not, redirects to the not found error (404) page. </p>
+<p>Displays the following information about the client: </p><ul>
 <li>
 Personal Information </li>
 <li>
@@ -280,7 +282,7 @@ Number of Bids </li>
 </table>
 </div><div class="memdoc">
 
-<p>The list of auctions to display. </p>
+<p>The list of auctions of the account to display. </p>
 
 </div>
 </div>

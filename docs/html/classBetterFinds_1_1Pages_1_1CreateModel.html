@@ -78,7 +78,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Model for the Create page. This class is decorated with the Authorize attribute.  
+<p>Model for the <b>Create</b> page. This class is decorated with the Authorize attribute.  
  <a href="classBetterFinds_1_1Pages_1_1CreateModel.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for BetterFinds.Pages.CreateModel:</div>
@@ -142,7 +142,7 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a610aef5c4ba90e042c43dc20d8d5f595"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Model for the Create page. This class is decorated with the Authorize attribute. </p>
+<div class="textblock"><p>Model for the <b>Create</b> page. This class is decorated with the Authorize attribute. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a65f371c4b52dd0472948b02cee1e5afb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a65f371c4b52dd0472948b02cee1e5afb">&#9670;&nbsp;</a></span>CreateModel()</h2>
@@ -253,10 +253,11 @@ The description must be between 1 and 2048 characters long. </li>
 <li>
 The end time must be a valid date and time and greater than the current time. </li>
 <li>
-The images must be valid, if any. </li>
+The images must be valid, if any. See <a class="el" href="classBetterFinds_1_1Utils_1_1Images.html#aa8f2fa6a396d83165bee82589eadbc38" title="Validates the specified images string.">Utils.Images.IsValidImages</a>. </li>
 </ul>
 <p>If all requirements are met, the auction is created and the user is redirected to the new auction page. Otherwise, the user stays on the page and an error message is displayed. </p>
-<p>The users on the <a class="el" href="classBetterFinds_1_1Pages_1_1IndexModel.html" title="Model for the Index page.">IndexModel</a> or <a class="el" href="classBetterFinds_1_1Pages_1_1SearchModel.html" title="The Model for the Search page.">SearchModel</a> pages are notified that there's updates. The auction is added to the background service to check for its ending. </p>
+<p>The users on the <a class="el" href="classBetterFinds_1_1Pages_1_1IndexModel.html" title="Model for the Index page.">IndexModel</a> or <a class="el" href="classBetterFinds_1_1Pages_1_1SearchModel.html" title="Model for the Search page.">SearchModel</a> pages are notified that there's updates. </p>
+<p>The auction is added to the background service to check for its ending. </p>
 <dl class="section return"><dt>Returns</dt><dd>A task that represents the action of creating a new auction.</dd></dl>
 
 </div>

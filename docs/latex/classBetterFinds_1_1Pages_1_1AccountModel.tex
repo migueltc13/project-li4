@@ -2,7 +2,7 @@
 \label{classBetterFinds_1_1Pages_1_1AccountModel}\index{BetterFinds.Pages.AccountModel@{BetterFinds.Pages.AccountModel}}
 
 
-Model for the Account page.  
+Model for the {\bfseries{Account}} page.  
 
 
 
@@ -34,7 +34,7 @@ IAction\+Result \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1AccountModel_a8642
 \begin{DoxyCompactItemize}
 \item 
 List$<$ Dictionary$<$ string, object $>$ $>$? \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1AccountModel_a3e5120054da3ca7f941f34168ded97d1}{Auctions\+List}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
-\begin{DoxyCompactList}\small\item\em The list of auctions to display. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The list of auctions of the account to display. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -45,7 +45,7 @@ readonly IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1Notificat
 
 
 \doxysubsection{Detailed Description}
-Model for the Account page. 
+Model for the {\bfseries{Account}} page. 
 
 
 
@@ -80,7 +80,11 @@ Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1
 
 The action that occurs when the user visits the account page. 
 
-Checks if the user is the owner of the account, if so add edit option by redirecting to the current user my account page. Checks if the client exists, if not, redirects to the error page. Displays the following information about the client\+: 
+Checks if the user is the owner of the account, if so add edit option by redirecting to the current user my account page. 
+
+Checks if the client exists, if not, redirects to the not found error (404) page. 
+
+Displays the following information about the client\+: 
 \begin{DoxyItemize}
 \item Personal Information 
 \item Profile Picture 
@@ -125,7 +129,7 @@ The IHub\+Context instance.
 
 
 
-The list of auctions to display. 
+The list of auctions of the account to display. 
 
 
 

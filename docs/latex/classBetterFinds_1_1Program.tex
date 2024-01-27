@@ -1,0 +1,59 @@
+\hypertarget{classBetterFinds_1_1Program}{}\doxysection{Better\+Finds.\+Program Class Reference}
+\label{classBetterFinds_1_1Program}\index{BetterFinds.Program@{BetterFinds.Program}}
+
+
+The main entry point of the application.  
+
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static async Task \mbox{\hyperlink{classBetterFinds_1_1Program_a0030a0d3240da096a8868d2479c928ab}{Main}} (string\mbox{[}$\,$\mbox{]} args)
+\begin{DoxyCompactList}\small\item\em The main entry point of the application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The main entry point of the application. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Program_a0030a0d3240da096a8868d2479c928ab}\label{classBetterFinds_1_1Program_a0030a0d3240da096a8868d2479c928ab}} 
+\index{BetterFinds.Program@{BetterFinds.Program}!Main@{Main}}
+\index{Main@{Main}!BetterFinds.Program@{BetterFinds.Program}}
+\doxysubsubsection{\texorpdfstring{Main()}{Main()}}
+{\footnotesize\ttfamily static async Task Better\+Finds.\+Program.\+Main (\begin{DoxyParamCaption}\item[{string\mbox{[}$\,$\mbox{]}}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+The main entry point of the application. 
+
+It\textquotesingle{}s responsible for configuring services used by the application and starting it. 
+
+Configuration includes\+: 
+\begin{DoxyItemize}
+\item Razor pages 
+\item Authentication 
+\item Session 
+\item Localization 
+\item Auctions background service 
+\item Bidders groups service 
+\item SignalR 
+\item Error handling and page redirection 
+\end{DoxyItemize}Additionally, it initializes the Auctions and Bidders groups services, and maps the SignalR hub. 
+
+The Auction background service is started by the \mbox{\hyperlink{classBetterFinds_1_1Services_1_1AuctionBackgroundService}{Services.\+Auction\+Background\+Service}} class and will run asynchronously throughout the application\textquotesingle{}s lifetime to monitor ending auctions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The command line arguments.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A task that represents the asynchronous operation of running the application.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/Program.\+cs\end{DoxyCompactItemize}
