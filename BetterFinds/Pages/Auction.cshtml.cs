@@ -104,7 +104,7 @@ namespace BetterFinds.Pages
         /// <para/>
         /// **Real-time updates**:
         /// <para/>
-        /// When a bid is placed, the following fields are updated in real-time using SignalR:
+        /// When a bid is placed, the following fields are updated in real-time using **SignalR**:
         /// <list cref="bullet"/>
         ///     <item>Current price</item>
         ///     <item>Buyer info</item>
