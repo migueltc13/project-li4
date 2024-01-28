@@ -96,6 +96,16 @@ namespace BetterFinds.Pages
         /// The users on the <see cref="IndexModel"/> or <see cref="SearchModel"/> pages are notified that there's updates.
         /// <para/>
         /// The auction is added to the background service to check for its ending.
+        /// <para/>
+        /// When a auction is created it triggers the <c>AuctionCreated</c> event in the **SignalR** hub, updating relevant pages that
+        /// there's updates to display.
+        /// <para/>
+        /// Event trigger example:
+        /// <example>
+        /// <code language="csharp">
+        /// hubContext.Clients.All.SendAsync("AuctionCreated").Wait();
+        /// </code>
+        /// </example>
         /// </remarks>
         /// <returns>A task that represents the action of creating a new auction.</returns>
         public IActionResult OnPost()
