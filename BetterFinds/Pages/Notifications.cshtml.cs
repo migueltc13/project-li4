@@ -24,7 +24,7 @@ namespace BetterFinds.Pages
             this.configuration = configuration;
 
         /// <summary>
-        /// The list of notifications.
+        /// The list of notifications to display.
         /// </summary>
         public List<Dictionary<string, object>> Notifications = [];
 
@@ -38,11 +38,13 @@ namespace BetterFinds.Pages
         /// </summary>
         /// <remarks>
         /// This page gets the client's notifications from the database and displays them.
+        /// <para/>
         /// The notifications can be filtered to show only unread notifications or all notifications, 
         /// and can be marked as read individually or all at once.
-        /// To see available filter options, see <see cref="Utils.Notifications.GetNotifications"/>.
         /// The notifications can be sorted by a specified sort order.
-        /// To see available sort options, see <see cref="Utils.Notifications.GetNotifications"/>.
+        /// To see available filter and sort options, see <see cref="Utils.Notification.GetNotifications"/>.
+        /// <para/>
+        /// This page is automatically refreshed whena new notification is received through **SignalR**.
         /// </remarks>
         /// <returns>A task that represents the action of loading the Notifications page.</returns>
         public IActionResult OnGet()
