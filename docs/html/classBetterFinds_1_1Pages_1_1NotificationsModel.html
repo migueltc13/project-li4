@@ -111,7 +111,7 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:afc83590edc39dd6ecfe2fdbbe5e927d8"><td class="memItemLeft" align="right" valign="top">List&lt; Dictionary&lt; string, object &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBetterFinds_1_1Pages_1_1NotificationsModel.html#afc83590edc39dd6ecfe2fdbbe5e927d8">Notifications</a> = []</td></tr>
-<tr class="memdesc:afc83590edc39dd6ecfe2fdbbe5e927d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The list of notifications.  <a href="classBetterFinds_1_1Pages_1_1NotificationsModel.html#afc83590edc39dd6ecfe2fdbbe5e927d8">More...</a><br /></td></tr>
+<tr class="memdesc:afc83590edc39dd6ecfe2fdbbe5e927d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The list of notifications to display.  <a href="classBetterFinds_1_1Pages_1_1NotificationsModel.html#afc83590edc39dd6ecfe2fdbbe5e927d8">More...</a><br /></td></tr>
 <tr class="separator:afc83590edc39dd6ecfe2fdbbe5e927d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0219c4d073bd1da8fcb209163a401a8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBetterFinds_1_1Pages_1_1NotificationsModel.html#ab0219c4d073bd1da8fcb209163a401a8">ShowAll</a> = false</td></tr>
 <tr class="memdesc:ab0219c4d073bd1da8fcb209163a401a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether to show all notifications or only unread ones.  <a href="classBetterFinds_1_1Pages_1_1NotificationsModel.html#ab0219c4d073bd1da8fcb209163a401a8">More...</a><br /></td></tr>
@@ -177,7 +177,9 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Shows the client's notifications. </p>
-<p>This page gets the client's notifications from the database and displays them. The notifications can be filtered to show only unread notifications or all notifications, and can be marked as read individually or all at once. To see available filter options, see Utils.Notifications.GetNotifications. The notifications can be sorted by a specified sort order. To see available sort options, see Utils.Notifications.GetNotifications. </p>
+<p>This page gets the client's notifications from the database and displays them. </p>
+<p>The notifications can be filtered to show only unread notifications or all notifications, and can be marked as read individually or all at once. The notifications can be sorted by a specified sort order. To see available filter and sort options, see <a class="el" href="classBetterFinds_1_1Utils_1_1Notification.html#a050c35fce4e345c842bb7093787f11d7" title="Returns a dictionary list of notifications for a specific client.">Utils.Notification.GetNotifications</a>. </p>
+<p>This page is automatically refreshed whena new notification is received through SignalR. </p>
 <dl class="section return"><dt>Returns</dt><dd>A task that represents the action of loading the Notifications page.</dd></dl>
 
 </div>
@@ -219,7 +221,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>The list of notifications. </p>
+<p>The list of notifications to display. </p>
 
 </div>
 </div>

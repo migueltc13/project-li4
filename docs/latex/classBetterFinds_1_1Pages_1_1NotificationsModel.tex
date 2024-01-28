@@ -34,7 +34,7 @@ IAction\+Result \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1NotificationsModel
 \begin{DoxyCompactItemize}
 \item 
 List$<$ Dictionary$<$ string, object $>$ $>$ \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1NotificationsModel_afc83590edc39dd6ecfe2fdbbe5e927d8}{Notifications}} = \mbox{[}$\,$\mbox{]}
-\begin{DoxyCompactList}\small\item\em The list of notifications. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em The list of notifications to display. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1NotificationsModel_ab0219c4d073bd1da8fcb209163a401a8}{Show\+All}} = false
 \begin{DoxyCompactList}\small\item\em Whether to show all notifications or only unread ones. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Private Attributes}
@@ -78,7 +78,11 @@ Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1
 
 Shows the client\textquotesingle{}s notifications. 
 
-This page gets the client\textquotesingle{}s notifications from the database and displays them. The notifications can be filtered to show only unread notifications or all notifications, and can be marked as read individually or all at once. To see available filter options, see Utils.\+Notifications.\+Get\+Notifications. The notifications can be sorted by a specified sort order. To see available sort options, see Utils.\+Notifications.\+Get\+Notifications. 
+This page gets the client\textquotesingle{}s notifications from the database and displays them. 
+
+The notifications can be filtered to show only unread notifications or all notifications, and can be marked as read individually or all at once. The notifications can be sorted by a specified sort order. To see available filter and sort options, see \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Notification_a050c35fce4e345c842bb7093787f11d7}{Utils.\+Notification.\+Get\+Notifications}}. 
+
+This page is automatically refreshed whena new notification is received through SignalR. 
 
 \begin{DoxyReturn}{Returns}
 A task that represents the action of loading the Notifications page.
@@ -104,7 +108,7 @@ The IConfiguration instance.
 
 
 
-The list of notifications. 
+The list of notifications to display. 
 
 \mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1NotificationsModel_ab0219c4d073bd1da8fcb209163a401a8}\label{classBetterFinds_1_1Pages_1_1NotificationsModel_ab0219c4d073bd1da8fcb209163a401a8}} 
 \index{BetterFinds.Pages.NotificationsModel@{BetterFinds.Pages.NotificationsModel}!ShowAll@{ShowAll}}

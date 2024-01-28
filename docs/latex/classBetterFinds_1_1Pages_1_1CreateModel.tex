@@ -116,6 +116,13 @@ The users on the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1IndexModel}{Index
 
 The auction is added to the background service to check for its ending. 
 
+When a auction is created it triggers the {\ttfamily Auction\+Created} event in the SignalR hub, updating relevant pages that there\textquotesingle{}s updates to display. Event trigger\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classBetterFinds_1_1Pages_1_1CreateModel_a610aef5c4ba90e042c43dc20d8d5f595}{hubContext}}.Clients.All.SendAsync(\textcolor{stringliteral}{"{}AuctionCreated"{}}).Wait();}
+
+\end{DoxyCode}
+ 
+
 \begin{DoxyReturn}{Returns}
 A task that represents the action of creating a new auction.
 \end{DoxyReturn}

@@ -1,0 +1,231 @@
+\hypertarget{classBetterFinds_1_1Pages_1_1AuctionModel}{}\doxysection{Better\+Finds.\+Pages.\+Auction\+Model Class Reference}
+\label{classBetterFinds_1_1Pages_1_1AuctionModel}\index{BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}}
+
+
+Model for the {\bfseries{Auction}} page.  
+
+
+
+
+Inheritance diagram for Better\+Finds.\+Pages.\+Auction\+Model\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{classBetterFinds_1_1Pages_1_1AuctionModel__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Better\+Finds.\+Pages.\+Auction\+Model\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{classBetterFinds_1_1Pages_1_1AuctionModel__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classBetterFinds_1_1Pages_1_1AuctionModel_aa917a8038b018d79f1384ca71e330ac9}{Auction\+Model}} (IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1AuctionModel_ad66cca033aad809a32b9b23fd1b3a74f}{configuration}}, IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1AuctionModel_a7defc33475ba4d3ae02dd8b2af4b0416}{hub\+Context}})
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1AuctionModel}{Auction\+Model}} class. \end{DoxyCompactList}\item 
+IAction\+Result \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1AuctionModel_a8b92ad2e7e061c40de8cf3ccbd6a112b}{On\+Post}} ()
+\begin{DoxyCompactList}\small\item\em The on post method, triggered when the user submits a form on the page. \end{DoxyCompactList}\item 
+IAction\+Result \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1AuctionModel_a178ff29d431c51e0eccc7b6dc7f68b12}{On\+Get}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the auction information from the database. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+decimal? \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1AuctionModel_a57a021e8144e0a0436929bf4b8b529c3}{Bid\+Amount}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The bid amount, if any. \end{DoxyCompactList}\item 
+string? \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1AuctionModel_a0fe6fc2477b34f978d93421bc8e0ed12}{Payment\+Method}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The payment method, if any. \end{DoxyCompactList}\item 
+string? \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1AuctionModel_aa9fc952c2d70d0ba191cd9c141f72c0a}{Early\+Sell}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The early sell or terminate request, if any. \end{DoxyCompactList}\item 
+Date\+Time? \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1AuctionModel_afde066b9f8dbde98d39ba9684691abf1}{Extended\+End\+Time}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em The extended end time, if any. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly IConfiguration \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1AuctionModel_ad66cca033aad809a32b9b23fd1b3a74f}{configuration}}
+\begin{DoxyCompactList}\small\item\em The IConfiguration instance. \end{DoxyCompactList}\item 
+readonly IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$ \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1AuctionModel_a7defc33475ba4d3ae02dd8b2af4b0416}{hub\+Context}}
+\begin{DoxyCompactList}\small\item\em The IHub\+Context instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model for the {\bfseries{Auction}} page. 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1AuctionModel_aa917a8038b018d79f1384ca71e330ac9}\label{classBetterFinds_1_1Pages_1_1AuctionModel_aa917a8038b018d79f1384ca71e330ac9}} 
+\index{BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}!AuctionModel@{AuctionModel}}
+\index{AuctionModel@{AuctionModel}!BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}}
+\doxysubsubsection{\texorpdfstring{AuctionModel()}{AuctionModel()}}
+{\footnotesize\ttfamily Better\+Finds.\+Pages.\+Auction\+Model.\+Auction\+Model (\begin{DoxyParamCaption}\item[{IConfiguration}]{configuration,  }\item[{IHub\+Context$<$ \mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}} $>$}]{hub\+Context }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes a new instance of the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1AuctionModel}{Auction\+Model}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em configuration} & The IConfiguration instance.\\
+\hline
+{\em hub\+Context} & The IHub\+Context instance.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1AuctionModel_a178ff29d431c51e0eccc7b6dc7f68b12}\label{classBetterFinds_1_1Pages_1_1AuctionModel_a178ff29d431c51e0eccc7b6dc7f68b12}} 
+\index{BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}!OnGet@{OnGet}}
+\index{OnGet@{OnGet}!BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}}
+\doxysubsubsection{\texorpdfstring{OnGet()}{OnGet()}}
+{\footnotesize\ttfamily IAction\+Result Better\+Finds.\+Pages.\+Auction\+Model.\+On\+Get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the auction information from the database. 
+
+Retrieves the auction information from the database and displays it on the page. It also retrieves the product information and the bids history. 
+
+It parses the auction id through the request query string. If the id is not found, it redirects to the not found error (404) page. 
+
+The auction end time is displayed in a countdown timer with javascript. The images, if any, can be iterated in right and left mouse clicks. The bid history is displayed in a collapsible table. 
+
+The seller as the option to early sell/terminate the auction, depending on the number of bids and if the auction has ended or not. 
+
+When the auction ends and there isn\textquotesingle{}t any bids, the seller has the option to extend the auction. 
+
+The buyer has the option to bid if the auction has not ended yet. 
+
+The winner of the auction will be displayed after the auction has ended, and this user will have the option to complete the payment by choosing a payment method and pressing the \char`\"{}\+Pay\char`\"{} button. 
+
+\begin{DoxyReturn}{Returns}
+A task that represents the auction on get operation.
+\end{DoxyReturn}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1AuctionModel_a8b92ad2e7e061c40de8cf3ccbd6a112b}\label{classBetterFinds_1_1Pages_1_1AuctionModel_a8b92ad2e7e061c40de8cf3ccbd6a112b}} 
+\index{BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}!OnPost@{OnPost}}
+\index{OnPost@{OnPost}!BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}}
+\doxysubsubsection{\texorpdfstring{OnPost()}{OnPost()}}
+{\footnotesize\ttfamily IAction\+Result Better\+Finds.\+Pages.\+Auction\+Model.\+On\+Post (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The on post method, triggered when the user submits a form on the page. 
+
+Similar the \mbox{\hyperlink{classBetterFinds_1_1Pages_1_1AuctionModel_a178ff29d431c51e0eccc7b6dc7f68b12}{On\+Get}} method, this method retrieves the auction id through the request query string. 
+
+Forms that can be submitted, varying on the auction state and current user role\+: 
+\begin{DoxyItemize}
+\item A new bid submitted by an user. 
+\item The payment method made by an user. 
+\item The request of a early sell/termination of the auction by the seller. 
+\item The extension datetime of the auction requested by the seller, if this ended with no bids. 
+\end{DoxyItemize}{\bfseries{Requirements}}\+: 
+
+As a requirement to submit a bid, the user must be logged in and the auction must not have ended. To a bid to be valid, the bid amount must be greater or the current price plus the minimum bid. Besides that, the user cannot bid on his own auction and cannot bid if he\textquotesingle{}s already the highest bidder. 
+
+To complete the payment, the user must be logged in and the auction must have ended. Only the highest bidder can complete the payment. Payment options\+: Credit Card, Pay\+Pal, Apple Pay or Crypto Currency. 
+
+Only the seller of the auction can perform an early sell/termination of the auction. This action depends on the number of bids, being only displayed if the auction hasn\textquotesingle{}t ended. If a auction has no bids, it\textquotesingle{}s presented the option to terminate the auction, otherwise it\textquotesingle{}s presented the option to early sell the auction. 
+
+Finally, when an auction ends and there\textquotesingle{}s no bids, the seller can extend the auction. This datetime inputted must be greater than the current time, if failed to do so, an error message is displayed. 
+
+{\bfseries{Notifications}}\+: 
+
+When a user submits a valid bid, notifications are sent to all bidders except the current one, and the seller is also notified that a new bid has been placed on his auction. The bidders are determined by the bidders group created with \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids_ad2b6a22edd6db9abde6f7ead024a1ad5}{Utils.\+Bids.\+Create\+Bidder\+Group\+Async}} and when a new bid is placed, the bidder is added to the group with \mbox{\hyperlink{classBetterFinds_1_1Utils_1_1Bids_aee33df8efd90beba4dcc36a5e8163fcf}{Utils.\+Bids.\+Add\+Bidder\+To\+Bidder\+Group\+Async}}. 
+
+Similar to the notifications described above, when the auction ends, the relevant bidders are notified that the auction has ended, and the winner is notified that he has won the auction and needs to complete the payment. If the seller didn\textquotesingle{}t request an early sell/termination of the auction, he\textquotesingle{}s also notified that his auction has ended. 
+
+When the buyer completes the payment, the seller is notified that the auction has been sold. 
+
+No notifications are sent when the seller requests an auction extension as there\textquotesingle{}s no bidders as a requirement to this action. 
+
+{\bfseries{Real-\/time updates}}\+: 
+
+When a bid is placed, the following fields are updated in real-\/time using SignalR\+: 
+\begin{DoxyItemize}
+\item Current price 
+\item Buyer info 
+\item Bid history 
+\item The bid amount placeholder 
+\end{DoxyItemize}Note\+: The bid amount placeholder is only updated if the current value is lower than the new placeholder. This prevents the placeholder from being updated when the user has a bid ready to be submitted. 
+
+Upon the conclusion of the auction, the page is refreshed for all clients located on that page. 
+
+\begin{DoxyReturn}{Returns}
+A task that represents the auction on post operation.
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1AuctionModel_ad66cca033aad809a32b9b23fd1b3a74f}\label{classBetterFinds_1_1Pages_1_1AuctionModel_ad66cca033aad809a32b9b23fd1b3a74f}} 
+\index{BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}!configuration@{configuration}}
+\index{configuration@{configuration}!BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}}
+\doxysubsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily readonly IConfiguration Better\+Finds.\+Pages.\+Auction\+Model.\+configuration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IConfiguration instance. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1AuctionModel_a7defc33475ba4d3ae02dd8b2af4b0416}\label{classBetterFinds_1_1Pages_1_1AuctionModel_a7defc33475ba4d3ae02dd8b2af4b0416}} 
+\index{BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}!hubContext@{hubContext}}
+\index{hubContext@{hubContext}!BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}}
+\doxysubsubsection{\texorpdfstring{hubContext}{hubContext}}
+{\footnotesize\ttfamily readonly IHub\+Context$<$\mbox{\hyperlink{classBetterFinds_1_1Hubs_1_1NotificationHub}{Notification\+Hub}}$>$ Better\+Finds.\+Pages.\+Auction\+Model.\+hub\+Context\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The IHub\+Context instance. 
+
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1AuctionModel_a57a021e8144e0a0436929bf4b8b529c3}\label{classBetterFinds_1_1Pages_1_1AuctionModel_a57a021e8144e0a0436929bf4b8b529c3}} 
+\index{BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}!BidAmount@{BidAmount}}
+\index{BidAmount@{BidAmount}!BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}}
+\doxysubsubsection{\texorpdfstring{BidAmount}{BidAmount}}
+{\footnotesize\ttfamily decimal? Better\+Finds.\+Pages.\+Auction\+Model.\+Bid\+Amount\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The bid amount, if any. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1AuctionModel_aa9fc952c2d70d0ba191cd9c141f72c0a}\label{classBetterFinds_1_1Pages_1_1AuctionModel_aa9fc952c2d70d0ba191cd9c141f72c0a}} 
+\index{BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}!EarlySell@{EarlySell}}
+\index{EarlySell@{EarlySell}!BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}}
+\doxysubsubsection{\texorpdfstring{EarlySell}{EarlySell}}
+{\footnotesize\ttfamily string? Better\+Finds.\+Pages.\+Auction\+Model.\+Early\+Sell\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The early sell or terminate request, if any. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1AuctionModel_afde066b9f8dbde98d39ba9684691abf1}\label{classBetterFinds_1_1Pages_1_1AuctionModel_afde066b9f8dbde98d39ba9684691abf1}} 
+\index{BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}!ExtendedEndTime@{ExtendedEndTime}}
+\index{ExtendedEndTime@{ExtendedEndTime}!BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}}
+\doxysubsubsection{\texorpdfstring{ExtendedEndTime}{ExtendedEndTime}}
+{\footnotesize\ttfamily Date\+Time? Better\+Finds.\+Pages.\+Auction\+Model.\+Extended\+End\+Time\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The extended end time, if any. 
+
+\mbox{\Hypertarget{classBetterFinds_1_1Pages_1_1AuctionModel_a0fe6fc2477b34f978d93421bc8e0ed12}\label{classBetterFinds_1_1Pages_1_1AuctionModel_a0fe6fc2477b34f978d93421bc8e0ed12}} 
+\index{BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}!PaymentMethod@{PaymentMethod}}
+\index{PaymentMethod@{PaymentMethod}!BetterFinds.Pages.AuctionModel@{BetterFinds.Pages.AuctionModel}}
+\doxysubsubsection{\texorpdfstring{PaymentMethod}{PaymentMethod}}
+{\footnotesize\ttfamily string? Better\+Finds.\+Pages.\+Auction\+Model.\+Payment\+Method\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+The payment method, if any. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Better\+Finds/\+Pages/Auction.\+cshtml.\+cs\end{DoxyCompactItemize}

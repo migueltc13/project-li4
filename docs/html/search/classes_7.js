@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['notification_106',['Notification',['../classBetterFinds_1_1Utils_1_1Notification.html',1,'BetterFinds::Utils']]],
-  ['notificationhub_107',['NotificationHub',['../classBetterFinds_1_1Hubs_1_1NotificationHub.html',1,'BetterFinds::Hubs']]],
-  ['notificationsmodel_108',['NotificationsModel',['../classBetterFinds_1_1Pages_1_1NotificationsModel.html',1,'BetterFinds::Pages']]]
+  ['notification_112',['Notification',['../classBetterFinds_1_1Utils_1_1Notification.html',1,'BetterFinds::Utils']]],
+  ['notificationhub_113',['NotificationHub',['../classBetterFinds_1_1Hubs_1_1NotificationHub.html',1,'BetterFinds::Hubs']]],
+  ['notificationsmodel_114',['NotificationsModel',['../classBetterFinds_1_1Pages_1_1NotificationsModel.html',1,'BetterFinds::Pages']]]
 ];
