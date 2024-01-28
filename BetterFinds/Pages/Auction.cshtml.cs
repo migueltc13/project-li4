@@ -718,8 +718,8 @@ namespace BetterFinds.Pages
 
                     // Refresh all auction page updated data for all clients located that page
                     decimal BidValue = (decimal)BidAmount + MinimumBid;
-                    string BidAmountFormatted = Utils.Currency.FormatDecimal((decimal)BidAmount) + "€";
-                    string PlaceholderBidFormatted = Utils.Currency.FormatDecimal(Price + MinimumBid) + "€";
+                    string BidAmountFormatted = Utils.Currency.FormatDecimal((decimal)BidAmount);
+                    string PlaceholderBidFormatted = Utils.Currency.FormatDecimal(Price + MinimumBid);
                     string BidTimeFormatted = BidTime.ToString("yyyy-MM-dd HH:mm:ss");
                     hubContext.Clients.All.SendAsync("UpdateAuction",
                         auctionId,

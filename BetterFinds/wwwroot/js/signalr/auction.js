@@ -3,7 +3,10 @@ connection.on("UpdateAuction", (auctionId, bidValue, bidAmountString, bidPlaceho
     var currentAuctionId = parseInt(new URLSearchParams(window.location.search).get("id"), 10);
     if (currentAuctionId != NaN && currentAuctionId == auctionId) {
         // Update the current price
-        document.getElementById("auctionPrice").innerText = bidAmountString;
+        document.getElementById("auctionPrice").innerHTML = bidAmountString + "&euro;";
+
+        // Replace buyer info text
+        document.getElementById("buyerInfo").innerHTML = "Buyer info: <a id=\"buyerLink\" href=\"\"></a> - <span id=\"buyerFullName\"></span>";
 
         // Update the buyer
         var buyerLink = document.getElementById("buyerLink");
@@ -14,7 +17,7 @@ connection.on("UpdateAuction", (auctionId, bidValue, bidAmountString, bidPlaceho
         buyerFullName.innerText = buyerFullName_;
 
         // Update the bid button placeholder
-        document.getElementById("bidButton").innerText = bidPlaceholderString;
+        document.getElementById("bidButton").innerHTML = bidPlaceholderString + "&euro;";
 
         // Update the bid button value if the current value is less than the new bid amount
         var bidButton = document.getElementById("bidButton");
@@ -26,7 +29,7 @@ connection.on("UpdateAuction", (auctionId, bidValue, bidAmountString, bidPlaceho
         var bidHistory = document.getElementById('bidHistory');
 
         var li = document.createElement("li");
-        li.innerHTML = "<p><a href='/account?id=" + buyerId + "'>" + buyerUsername + "</a> - " + bidAmountString + " - " + bidTime + "</p>";
+        li.innerHTML = "<p><a href='/account?id=" + buyerId + "'>" + buyerUsername + "</a> - " + bidAmountString + "&euro; - " + bidTime + "</p>";
 
         // Insert the new list item at the beginning of the bid history
         bidHistory.insertBefore(li, bidHistory.firstChild);

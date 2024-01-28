@@ -15,7 +15,7 @@
 
     <h2 style="padding-bottom: 10px">@ViewData["ProductName"]</h2>
 
-    <p id="auctionPrice">@($"{Utils.Currency.FormatDecimalObject(ViewData["ProductPrice"])}€")</p>
+    <div id="auctionPrice">@($"{Utils.Currency.FormatDecimalObject(ViewData["ProductPrice"])}€")</div>
     <p>Minimum bid: @($"{Utils.Currency.FormatDecimalObject(ViewData["MinimumBid"])}€")</p>
     <!-- Countdown timer -->
     <div id="countdown"></div>
@@ -41,7 +41,7 @@
     <p>Seller info: <a href="/account?id=@ViewData["SellerId"]">@@@ViewData["SellerUsername"]</a> - @ViewData["SellerFullName"]</p>
     @if (ViewData["BuyerUsername"] != null && ViewData["BuyerFullName"] != null)
     {
-        <p>Buyer info: <a id="buyerLink" href="/account?id=@ViewData["BuyerId"]">@@@ViewData["BuyerUsername"]</a> - <span id="buyerFullName">@ViewData["BuyerFullName"]</span></p>
+        <p id="buyerInfo">Buyer info: <a id="buyerLink" href="/account?id=@ViewData["BuyerId"]">@@@ViewData["BuyerUsername"]</a> - <span id="buyerFullName">@ViewData["BuyerFullName"]</span></p>
         <br />
         <details>
             <summary>
@@ -64,7 +64,15 @@
     }
     else
     {
-        <p>No bids were made</p>
+        <p id="buyerInfo">No bids were made.</p>
+        <br />
+        <details>
+            <summary>
+                Bid history
+            </summary>
+                <ul id="bidHistory" style="margin-left: 20px">
+                </ul>
+        </details>
     }
 
     @if (User.Identity != null && User.Identity.IsAuthenticated)
