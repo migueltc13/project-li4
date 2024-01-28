@@ -8,5 +8,5 @@ namespace BetterFinds.Hubs
     /// <remarks>
     /// This hub is used to send notifications to the client and live update the UI.
     /// </remarks>
-    public class NotificationHub : Hub {}
+    public class NotificationHub : Hub { }
 }

@@ -14,26 +14,26 @@ namespace BetterFinds.Pages
     [Authorize]
     public class CreateModel : PageModel
     {
-            /// <summary>
-            /// The IConfiguration instance.
-            /// </summary>
-            private readonly IConfiguration configuration;
+        /// <summary>
+        /// The IConfiguration instance.
+        /// </summary>
+        private readonly IConfiguration configuration;
 
-            /// <summary>
-            /// The IHubContext instance.
-            /// </summary>
-            private readonly IHubContext<NotificationHub> hubContext;
+        /// <summary>
+        /// The IHubContext instance.
+        /// </summary>
+        private readonly IHubContext<NotificationHub> hubContext;
 
-            /// <summary>
-            /// Initializes a new instance of the <see cref="CreateModel"/> class.
-            /// </summary>
-            /// <param name="configuration">The IConfiguration instance.</param>
-            /// <param name="hubContext">The IHubContext instance.</param>
-            public CreateModel(IConfiguration configuration, IHubContext<NotificationHub> hubContext)
-            {
-                this.configuration = configuration;
-                this.hubContext = hubContext;
-            }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateModel"/> class.
+        /// </summary>
+        /// <param name="configuration">The IConfiguration instance.</param>
+        /// <param name="hubContext">The IHubContext instance.</param>
+        public CreateModel(IConfiguration configuration, IHubContext<NotificationHub> hubContext)
+        {
+            this.configuration = configuration;
+            this.hubContext = hubContext;
+        }
 
         /// <summary>
         /// The title of the auction.

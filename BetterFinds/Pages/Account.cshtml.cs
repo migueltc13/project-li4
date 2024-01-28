@@ -15,7 +15,7 @@ namespace BetterFinds.Pages
         /// <summary>
         /// The IConfiguration instance.
         /// </summary>
-         private readonly IConfiguration configuration;
+        private readonly IConfiguration configuration;
 
         /// <summary>
         /// The IHubContext instance.
@@ -79,10 +79,10 @@ namespace BetterFinds.Pages
                 {
                     cmd.Parameters.AddWithValue("@ClientId", clientId);
                     SqlDataReader reader = cmd.ExecuteReader();
-                    
+
                     if (reader.Read() && reader.GetInt32(reader.GetOrdinal("NumberOfClients")) == 0)
                         return NotFound();
-                    
+
                     reader.Close();
                 }
                 con.Close();

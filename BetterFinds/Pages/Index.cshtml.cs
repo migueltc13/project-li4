@@ -12,7 +12,7 @@ namespace BetterFinds.Pages
         /// <summary>
         /// The IConfiguration instance.
         /// </summary>
-         private readonly IConfiguration configuration;
+        private readonly IConfiguration configuration;
 
         /// <summary>
         /// The IHubContext instance.

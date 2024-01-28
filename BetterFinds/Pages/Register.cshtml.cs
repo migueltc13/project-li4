@@ -45,7 +45,7 @@ namespace BetterFinds.Pages
         /// </summary>
         [BindProperty]
         public string Password { get; set; } = "";
-        
+
         /// <summary>
         /// The password confirmation of the user.
         /// </summary>
