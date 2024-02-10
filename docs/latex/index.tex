@@ -47,26 +47,21 @@ To run {\bfseries{Better\+Finds}}, you should use the $\ast$$\ast$.NET Core 8.\+
 
 You will also need to have a {\bfseries{MSSQL}} database server running on your machine. The database connection string can be configured in the {\ttfamily appsettings.\+json} file, located in the root directory of the {\bfseries{Better\+Finds}} project. Next you will need to configure the {\bfseries{MSSQL}} server by running the {\bfseries{T-\/\+SQL}} scripts located in the {\ttfamily sql} directory of the {\bfseries{Better\+Finds}} project.
 
-There are two ways to run the {\bfseries{Better\+Finds}} project\+:\hypertarget{index_autotoc_md0}{}\doxysubsubsection{Option 1\+: Run from Source}\label{index_autotoc_md0}
 To run the {\bfseries{Better\+Finds}} project locally from the source code, follow these steps\+:
+
+
 \begin{DoxyEnumerate}
 \item Open a terminal or command prompt.
 \item Navigate to the root directory of the {\ttfamily Better\+Finds} project.
 \item Run the following command\+: 
 \begin{DoxyCode}{0}
+\DoxyCodeLine{\# Run from source}
 \DoxyCodeLine{dotnet run -\/-\/environment Production}
-
-\end{DoxyCode}
-
-\item Wait for the application to build and start. Once it\textquotesingle{}s running, you can access {\bfseries{Better\+Finds}} by navigating to the specified address (usually {\bfseries{http\+://localhost\+:5000}}).
-\end{DoxyEnumerate}\hypertarget{index_autotoc_md1}{}\doxysubsubsection{Option 2\+: Run from Release}\label{index_autotoc_md1}
-To run the {\bfseries{Better\+Finds}} project from a release build, follow these steps\+:
-\begin{DoxyEnumerate}
-\item Open a terminal or command prompt.
-\item Navigate to the root directory of the {\ttfamily Better\+Finds} project.
-\item Run the following commands\+: 
-\begin{DoxyCode}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Alternatively, you can run from realease}
+\DoxyCodeLine{\# Create a release build}
 \DoxyCodeLine{dotnet publish -\/-\/configuration Release}
+\DoxyCodeLine{\# Run the release build}
 \DoxyCodeLine{dotnet bin/Release/net8.0/BetterFinds.dll}
 
 \end{DoxyCode}

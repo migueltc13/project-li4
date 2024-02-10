@@ -121,22 +121,17 @@ Architecture</h1>
 How to Run</h1>
 <p>To run <b>BetterFinds</b>, you should use the **.NET Core 8.0 Runtime**, but it may also work with other versions of **.NET Core**.</p>
 <p>You will also need to have a <b>MSSQL</b> database server running on your machine. The database connection string can be configured in the <code>appsettings.json</code> file, located in the root directory of the <b>BetterFinds</b> project. Next you will need to configure the <b>MSSQL</b> server by running the <b>T-SQL</b> scripts located in the <code>sql</code> directory of the <b>BetterFinds</b> project.</p>
-<p>There are two ways to run the <b>BetterFinds</b> project:</p>
-<h3><a class="anchor" id="autotoc_md0"></a>
-Option 1: Run from Source</h3>
-<p>To run the <b>BetterFinds</b> project locally from the source code, follow these steps:</p><ol type="1">
+<p>To run the <b>BetterFinds</b> project locally from the source code, follow these steps:</p>
+<ol type="1">
 <li>Open a terminal or command prompt.</li>
 <li>Navigate to the root directory of the <code>BetterFinds</code> project.</li>
-<li>Run the following command: <div class="fragment"><div class="line">dotnet run --environment Production</div>
-</div><!-- fragment --></li>
-<li>Wait for the application to build and start. Once it's running, you can access <b>BetterFinds</b> by navigating to the specified address (usually <b>http://localhost:5000</b>).</li>
-</ol>
-<h3><a class="anchor" id="autotoc_md1"></a>
-Option 2: Run from Release</h3>
-<p>To run the <b>BetterFinds</b> project from a release build, follow these steps:</p><ol type="1">
-<li>Open a terminal or command prompt.</li>
-<li>Navigate to the root directory of the <code>BetterFinds</code> project.</li>
-<li>Run the following commands: <div class="fragment"><div class="line">dotnet publish --configuration Release</div>
+<li>Run the following command: <div class="fragment"><div class="line"># Run from source</div>
+<div class="line">dotnet run --environment Production</div>
+<div class="line"> </div>
+<div class="line"># Alternatively, you can run from realease</div>
+<div class="line"># Create a release build</div>
+<div class="line">dotnet publish --configuration Release</div>
+<div class="line"># Run the release build</div>
 <div class="line">dotnet bin/Release/net8.0/BetterFinds.dll</div>
 </div><!-- fragment --></li>
 <li>Wait for the application to build and start. Once it's running, you can access <b>BetterFinds</b> by navigating to the specified address (usually <b>http://localhost:5000</b>).</li>
@@ -167,7 +162,7 @@ Authors</h1>
         <hr class="footer">
         <address class="footer">
             <small>
-                Generated on Sat Feb 10 2024 23:07:03 for <b>BetterFinds</b> by
+                Generated on Sat Feb 10 2024 23:19:29 for <b>BetterFinds</b> by
                 <a href="http://www.doxygen.org/index.html">
                     <img class="footer" src="doxygen.png" alt="doxygen" onerror="this.onerror=null;this.src='doxygen.svg';"/>
                 </a> 1.9.1. All rights reserved.
