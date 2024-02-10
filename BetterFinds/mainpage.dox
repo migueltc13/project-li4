@@ -49,7 +49,7 @@
  * - **Hub:** Contains the **SignalR** hub used for real-time updates.
  *
  * @section sec_run How to Run
- * To run **%BetterFinds**, you should use the **.NET Core 8.0 Runtime**, but it may also work with other versions of **.NET Core**.
+ * To run **%BetterFinds**, you should use the .NET Core 8.0 Runtime, but it may also work with other versions of .NET Core.
  *
  * You will also need to have a **MSSQL** database server running on your machine. The database
  * connection string can be configured in the `appsettings.json` file, located in the root
