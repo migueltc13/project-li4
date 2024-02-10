@@ -28,7 +28,7 @@ The main goals of **BetterFinds** include:
 </div>
 
 <details>
-    <summary>Click for more images</summary>
+    <summary><b>Click for more images</b></summary>
 
 </details>
 
