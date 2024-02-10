@@ -29,7 +29,16 @@ The main goals of **BetterFinds** include:
 
 <details>
     <summary><b>Click for more images</b></summary>
-
+    <br />
+    <div align="center">
+        <kbd>
+            <img src=".github/img/logo.png" alt="Description / legend image" />
+            <br />
+            <br />
+            <span>Description / legend</span>
+        </kbd>
+    </div>
+    <br />
 </details>
 
 <!--
