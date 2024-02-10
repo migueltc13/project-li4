@@ -238,17 +238,6 @@ To run the **BetterFinds** project locally from the source code, follow these st
     ```
 9. Wait for the tests to run. The results will be displayed in the terminal.
 
-<!--
-<div align="center">
-    <a href="https://www.youtube.com/watch?v=x7-RagEUBDU">
-        <img src="https://img.youtube.com/vi/x7-RagEUBDU/0.jpg" alt="Automated tests demo video"/>
-    </a>
-</div>
-
-View this video to witness various website features in action.
-This demonstration efficiently showcases a variety of tests, providing a clear snapshot of the platform's capabilities.
--->
-
 <div align="center">
     <kbd>
         <a href="https://www.youtube.com/watch?v=x7-RagEUBDU">
