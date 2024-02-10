@@ -18,8 +18,14 @@ body {
 }
 
 div.fragment, pre.fragment {
-	border: 1px solid #000000;
-	background: #32363d;
+    border: 1px solid #029f9f;
+    background: #32363d;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+div.line {
+    margin: 5px 5px;
 }
 
 a, a:link, a:visited {
@@ -65,10 +71,26 @@ a.highlighted {
 	background: #32363d;
 }
 
+div.directory {
+    border-top: 1px solid #32363d !important;
+    border-bottom: 1px solid #32363d !important;
+}
+
+.directory .levels span {
+    color: gold;
+}
+
 .directory tr.even {
 	background: #32363d;
 }
 
+.directory * {
+    vertical-align: middle !important;
+}
+
+.icon {
+    margin-top: 3px;
+}
 
 /*********************************************/
 /**               Top search                **/
@@ -378,10 +400,10 @@ td.memItemLeft, td.memItemRight {
 
 
 /*********************************************/
-/**                 Footer                  **/
+/**                 Header                  **/
 /*********************************************/
-.titlearea {
-	border-bottom: 1px solid #32363d;
+#titlearea {
+	border-bottom: 1px solid #029f9f !important;
 }
 
 /*********************************************/
@@ -406,6 +428,23 @@ td.memItemLeft, td.memItemRight {
 	text-shadow: none;
 }
 
+hr.footer {
+    height: 0px !important;
+    border: 1px solid #029f9f;
+}
+
+address {
+    font-style: italic;
+}
+
+address.footer {
+    color: #02cfcf;
+}
+
+address.footer small b {
+    color: gold;
+}
+
 /*********************************************/
 /**             Custom scrollbar            **/
 /*********************************************/
@@ -420,13 +459,18 @@ td.memItemLeft, td.memItemRight {
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #234567;
+	background: #029f9f;
 	border: none;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
 	background: #32363d; 
+}
+
+/* custom color */
+* {
+    scrollbar-color: #029f9f #32363d;
 }
 
 /*********************************************/
