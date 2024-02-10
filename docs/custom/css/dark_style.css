@@ -151,10 +151,12 @@ p code,
 li code,
 td code,
 dd code {
-	background-color: #000000;
-	border: 1px solid #A8B8D9;
-
+	background-color: #32363d;
+	border: 1px solid #029f9f;
 	color: #D8D8D8;
+	border-radius: 5px;
+	margin: 5px 0;
+	font-size: 13px;
 }
 
 /*********************************************/
