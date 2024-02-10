@@ -1,3 +1,6 @@
+[![.NET](https://github.com/migueltc13/project-li4/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/migueltc13/project-li4/actions/workflows/dotnet.yml)
+[![Deploy Pages](https://github.com/migueltc13/project-li4/actions/workflows/static.yml/badge.svg?branch=main)](https://github.com/migueltc13/project-li4/actions/workflows/static.yml)
+
 <div align="center">
     <img style="width: 250px;" src=".github/img/logo.png" alt="BetterFinds logo" />
 </div>
