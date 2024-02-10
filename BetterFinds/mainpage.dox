@@ -56,26 +56,19 @@
  * directory of the **%BetterFinds** project. Next you will need to configure the **MSSQL** server by running the **T-SQL**
  * scripts located in the `sql` directory of the **%BetterFinds** project.
  *
- * There are two ways to run the **%BetterFinds** project:
- *
- * ### Option 1: Run from Source
  * To run the **%BetterFinds** project locally from the source code, follow these steps:
+ *
  * 1. Open a terminal or command prompt.
  * 2. Navigate to the root directory of the `%BetterFinds` project.
  * 3. Run the following command:
  *    @code{.sh}
+ *    # Run from source
  *    dotnet run --environment Production
- *    @endcode
- * 4. Wait for the application to build and start. Once it's running, you can access **%BetterFinds**
- *    by navigating to the specified address (usually **%http://localhost:5000**).
  *
- * ### Option 2: Run from Release
- * To run the **%BetterFinds** project from a release build, follow these steps:
- * 1. Open a terminal or command prompt.
- * 2. Navigate to the root directory of the `%BetterFinds` project.
- * 3. Run the following commands:
- *    @code{.sh}
+ *    # Alternatively, you can run from realease
+ *    # Create a release build
  *    dotnet publish --configuration Release
+ *    # Run the release build
  *    dotnet bin/Release/net8.0/BetterFinds.dll
  *    @endcode
  * 4. Wait for the application to build and start. Once it's running, you can access **%BetterFinds**
