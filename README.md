@@ -1,4 +1,7 @@
-<img style="align: center; width: 100px;" src=".github/img/logo.png" alt="BetterFinds Logo" />
+<div align="center">
+    <img style="width: 250px;" src=".github/img/logo.png" alt="BetterFinds Logo" />
+</div>
+<br />
 
 **BetterFinds** is an Auction house website implemented in **ASP.NET** within the **Computer Labs IV** environment in the lective year 2023/2024.
 
