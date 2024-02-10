@@ -241,10 +241,16 @@ To run the **BetterFinds** project locally from the source code, follow these st
 View the [AutomatedTestsDemo.mp4](report/AutomatedTestsDemo.mp4) video to witness various website features in action.
 This demonstration efficiently showcases a variety of tests, providing a clear snapshot of the platform's capabilities.
 
+## Report
+
+Explore the project "backstage" details on the [report file](report/BetterFinds.pdf) for extensive details
+on all the motivation and planning behind **BetterFinds**, as well as an assortment of diagrams, use cases and testing processes
+that took place as the team built the foundations of the application.
+
 ## Documentation
 
 Explore the project documentation on the [main doc page](https://migueltc13.github.io/project-li4/) for comprehensive details and information
-regarding the structure, classes, and functions employed in BetterFinds. 
+regarding the structure, classes, and functions employed in **BetterFinds**.
 
 ## Presentation
 
