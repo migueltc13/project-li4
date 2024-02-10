@@ -22,12 +22,10 @@ The main goals of **BetterFinds** include:
 <div align="center">
     <img src=".github/img/preview/all.png" alt="All platforms preview" />
 </div>
-<br />
 
 <div align="center">
-    <img src=".github/img/preview/mobile.png" alt="Mobile preview" />
+    <img width="75%" src=".github/img/preview/mobile.png" alt="Mobile preview" />
 </div>
-<br />
 
 <details>
     <summary>Click for more images</summary>
