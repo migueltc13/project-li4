@@ -1,5 +1,5 @@
 <div align="center">
-    <img style="width: 250px;" src=".github/img/logo.png" alt="BetterFinds Logo" />
+    <img style="width: 250px;" src=".github/img/logo.png" alt="BetterFinds logo" />
 </div>
 <br />
 
@@ -19,8 +19,15 @@ The main goals of **BetterFinds** include:
 
 ## Preview
 
-<!-- pc/tablet/mobile preview -->
-<!-- mobile preview -->
+<div align="center">
+    <img src=".github/img/preview/all.png" alt="All platforms preview" />
+</div>
+<br />
+
+<div align="center">
+    <img src=".github/img/preview/mobile.png" alt="Mobile preview" />
+</div>
+<br />
 
 <details>
     <summary>Click for more images</summary>
