@@ -265,7 +265,7 @@ regarding the structure, classes, and functions employed in **BetterFinds**.
 
 ## Presentation
 
-Refer to the [report/](report/) directory for the final report, presentation and related documents.
+Refer to the [report/](report/) directory for the [final report](report/BetterFinds.pdf), [presentation](https://www.canva.com/design/DAF6uJ9BqxQ/jiXiwF7ahn7QazI3Kni-sA/view) and related files.
 
 ## Authors
 
