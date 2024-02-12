@@ -273,5 +273,5 @@ Refer to the [report/](report/) directory for the [final report](report/BetterFi
 - [Flávia Araújo](https://github.com/flaviaraujo)
 - [Miguel Carvalho](https://github.com/migueltc13)
 
-### Final Grade: 17
+#### Final Grade: 17
 
