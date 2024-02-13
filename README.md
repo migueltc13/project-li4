@@ -27,7 +27,7 @@ The main goals of **BetterFinds** include:
 </div>
 
 <div align="center">
-    <img width="75%" src=".github/img/preview/mobile.png" alt="Mobile preview" />
+    <img width="90%" src=".github/img/preview/mobile.png" alt="Mobile preview" />
 </div>
 
 <details>
