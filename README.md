@@ -1,3 +1,6 @@
+[![.NET](https://github.com/migueltc13/project-li4/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/migueltc13/project-li4/actions/workflows/dotnet.yml)
+[![Deploy Pages](https://github.com/migueltc13/project-li4/actions/workflows/static.yml/badge.svg?branch=main)](https://github.com/migueltc13/project-li4/actions/workflows/static.yml)
+
 <div align="center">
     <img style="width: 250px;" src=".github/img/logo.png" alt="BetterFinds logo" />
 </div>
@@ -24,7 +27,7 @@ The main goals of **BetterFinds** include:
 </div>
 
 <div align="center">
-    <img width="75%" src=".github/img/preview/mobile.png" alt="Mobile preview" />
+    <img width="90%" src=".github/img/preview/mobile.png" alt="Mobile preview" />
 </div>
 
 <details>
@@ -262,11 +265,13 @@ regarding the structure, classes, and functions employed in **BetterFinds**.
 
 ## Presentation
 
-Refer to the [report/](report/) directory for the final report, presentation and related documents.
+Refer to the [report/](report/) directory for the [final report](report/BetterFinds.pdf), [presentation](https://www.canva.com/design/DAF6uJ9BqxQ/jiXiwF7ahn7QazI3Kni-sA/view) and related files.
 
 ## Authors
 
 **BetterFinds** was developed by the following team of students:
 - [Flávia Araújo](https://github.com/flaviaraujo)
 - [Miguel Carvalho](https://github.com/migueltc13)
+
+#### Final Grade: 17
 
