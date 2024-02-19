@@ -153,6 +153,13 @@ The main goals of **BetterFinds** include:
         </kbd>
     </div>
     <br />
+    <div align="center">
+        <kbd>
+            <img src=".github/img/pages/404.png" alt="404 error page image" />
+            <br />
+            <span>404 error page</span>
+        </kbd>
+    </div>
 </details>
 
 ## Usage
