@@ -6,7 +6,7 @@ This document serves as a guide to understanding various aspects of our auction 
 
 ## Overview
 
-BetterFinds is an auction house platform designed to facilitate online auctions for various items. It was developed within **Informatics Laboratory IV** at the **University of Minho**.
+BetterFinds is an auction house platform designed to facilitate online auctions for various items. It was developed within **Computer Labs IV** at the **University of Minho**.
 Built on the ASP.NET framework, specifically utilizing Razor Pages for dynamic web content generation, and powered by Microsoft SQL Server for data storage.
 
 ## Learning Topics
