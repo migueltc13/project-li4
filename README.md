@@ -154,5 +154,8 @@ Refer to the [report/](report/) directory for the [final report](report/BetterFi
 - [Flávia Araújo](https://github.com/flaviaraujo)
 - [Miguel Carvalho](https://github.com/migueltc13)
 
-#### Final Grade: 17
+<a href="https://github.com/migueltc13/project-li4/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=migueltc13/project-li4" />
+</a>
 
+#### Final Grade: 17
